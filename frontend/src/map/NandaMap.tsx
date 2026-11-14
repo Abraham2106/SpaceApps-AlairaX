@@ -59,7 +59,7 @@ function buildStyle(): StyleSpecification {
         type: "hillshade",
         source: "dem",
         paint: {
-          "hillshade-exaggeration": 0.55,
+          "hillshade-exaggeration": 0.22,
           "hillshade-illumination-direction": 315,
           "hillshade-shadow-color": "#1a120c",
           "hillshade-highlight-color": "#fff3d4",
@@ -260,28 +260,18 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     const map = new maplibregl.Map({
       container: container.current,
       style: buildStyle(),
-      center: [-85.4, 10.05],
+      center: [-85.45, 10.45],
       zoom: 8.05,
-      pitch: 58,
-      bearing: -28,
-      maxPitch: 68,
+      pitch: 0,
+      bearing: 0,
+      maxPitch: 0,
       attributionControl: false,
       fadeDuration: reducedMotion() ? 0 : 280,
     });
     mapRef.current = map;
     map.on("load", () => {
       ready.current = true;
-      map.setTerrain({ source: "dem", exaggeration: 1.35 });
-      map.jumpTo({ center: [-85.4, 10.05], zoom: 8.05, pitch: 58, bearing: -28 });
-      map.setLight({ anchor: "map", position: [1.15, 315, 28], color: "#fff1d6", intensity: 0.7 });
-      map.setSky({
-        "sky-color": "#163038",
-        "horizon-color": "#e6c7a0",
-        "fog-color": "#0d1614",
-        "sky-horizon-blend": 0.55,
-        "horizon-fog-blend": 0.65,
-        "atmosphere-blend": 0.3,
-      });
+      map.setTerrain(null);
       const canvas = map.getCanvas();
       canvas.setAttribute("role", "application");
       const spanish = useInstrument.getState().lang === "es";
@@ -349,12 +339,12 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
             [[bounds[0], bounds[1]], [bounds[2], bounds[3]]],
             {
               padding: narrow
-                ? { top: 56, bottom: 150, left: 16, right: 16 }
+                ? { top: 96, bottom: 210, left: 12, right: 12 }
                 : inset === "panel"
-                  ? { top: 36, bottom: 72, left: 430, right: 88 }
-                  : { top: 48, bottom: 48, left: 120, right: 48 },
-              pitch: inset === "panel" ? 40 : 26,
-              bearing: -14,
+                  ? { top: 28, bottom: 120, left: 430, right: 96 }
+                  : { top: 36, bottom: 64, left: 120, right: 56 },
+              pitch: 0,
+              bearing: 0,
               duration: reducedMotion() ? 0 : 900,
               maxZoom: 8.8,
             },
@@ -381,7 +371,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       map.setLayoutProperty("osm-roads", "visibility", overlays.osm ? "visible" : "none");
       map.setLayoutProperty("osm-places", "visibility", overlays.osm ? "visible" : "none");
       map.setLayoutProperty("hillshade", "visibility", overlays.terrain ? "visible" : "none");
-      map.setTerrain(overlays.terrain ? { source: "dem", exaggeration: window.innerWidth < 800 ? 1.15 : 1.35 } : null);
+      map.setTerrain(null);
       const zoom = map.getZoom();
       const level = zoom < 8.2 ? "coarse" : zoom < 10 ? "mid" : "fine";
       for (const res of ["coarse", "mid", "fine"]) {
@@ -413,8 +403,8 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     map.flyTo({
       center: feature.properties.center,
       zoom: 9.6,
-      pitch: narrow ? 35 : 55,
-      bearing: -16,
+      pitch: 0,
+      bearing: 0,
       duration: reducedMotion() ? 0 : 1700,
       curve: 1.35,
       essential: true,
@@ -449,11 +439,11 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !location) return;
-    const narrow = window.innerWidth < 800;
     map.flyTo({
       center: [location.longitude, location.latitude],
       zoom: Math.max(map.getZoom(), 10),
-      pitch: narrow ? 32 : 52,
+      pitch: 0,
+      bearing: 0,
       duration: reducedMotion() ? 0 : 1800,
       curve: 1.4,
       essential: true,
