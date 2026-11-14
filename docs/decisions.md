@@ -1,5 +1,9 @@
 # Decisiones de implementación
 
+## 2026-11-14 · Nombre del proyecto
+
+El usuario confirmó **NandaView** como nombre del producto. El equipo conserva el nombre AlairaX y participa en el reto Field Shift. La documentación y el identificador de las consultas HTTP usan NandaView.
+
 ## 2026-11-14 · Tres vecinos en el escenario Niño fuerte
 
 El WBS original proponía k=5 en los cuatro escenarios. El snapshot ONI de agosto–octubre (ASO) solo contiene tres años entre 1981–2025 con anomalía ≥1,5 °C: 1997, 2015 y 2023. Los tres tienen las seis variables POWER completas, aunque todavía falta calcular y revisar ET0.

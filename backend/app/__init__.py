@@ -1,1 +1,1 @@
-"""Finca Resiliente backend."""
+"""NandaView backend."""

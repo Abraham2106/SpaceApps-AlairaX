@@ -1,4 +1,4 @@
-# Finca Resiliente · AlairaX
+# NandaView · AlairaX
 
 Comparación explicable de tres rotaciones agrícolas de Guanacaste bajo el mismo clima histórico: `rice_melon`, `rice_legume` y `rice_sorghum`.
 

@@ -1,4 +1,4 @@
-# WBS con horario · Finca Resiliente (AlairaX) · Field Shift · NASA Space Apps 2026 CR
+# WBS con horario · NandaView (AlairaX) · Field Shift · NASA Space Apps 2026 CR
 
 Versión 2, sáb 14 nov 2026, ~13:00 (hora CR). **Cierre oficial: dom 15 nov, 11:59 p. m.** · **Meta interna de envío: dom 20:00** (4 h de colchón).
 
@@ -15,7 +15,7 @@ Esta versión reemplaza a la primera. Se alinea con tus dos documentos del repo:
 | Punto de la finca | Casco urbano de Liberia (10.6346, −85.4407) | **Punto agrícola fuera del casco** (prueba: 10.55, −85.50) | Tu doc encontró que en el casco urbano HLS da rojo negativo y SoilGrids devuelve `null` |
 | Despliegue | Solo JSON estático | **Contrato FastAPI + demo público estático con JSON precalculado** (FastAPI queda P1) | GitHub Pages no corre FastAPI. Ver D2 |
 | Métricas P0 | Incluía días de suelo desnudo y meses sin forraje | **Demanda hídrica, déficit modelado, días de estrés** | Tu doc: la cobertura solo se muestra si hay método verificable |
-| Nombre | Por decidir | **Finca Resiliente (AlairaX)**; el reto es *Field Shift* | Tu doc ya lo usa. Falta confirmarlo (D3) |
+| Nombre | Por decidir | **NandaView**, del equipo AlairaX; el reto es *Field Shift* | Nombre confirmado por el usuario el 14 nov 2026 (D3) |
 | Prioridades | P1/P2/P3 | **P0 / P1 / P2** | Mismo vocabulario que tu doc |
 
 ## 1. Alcance congelado
@@ -40,7 +40,7 @@ Reglas de convivencia (de tu doc): Justin **no** hace otro KNN ni ranking; Abe *
 ## 3. Árbol del WBS
 
 ```
-Finca Resiliente · Space Apps 2026
+NandaView · Space Apps 2026
 ├─ 1.0 Planificación y arquitectura   [Abe + todos]
 ├─ 2.0 Investigación y evidencia      [Ant]
 ├─ 3.0 Kernel de simulación           [Justin]
@@ -192,7 +192,7 @@ Usa los hitos M1–M5 de tu doc, con hora.
 |---|---|---|
 | D1 | Qué 3 rotaciones | `rice_melon` (actual), `rice_legume`, `rice_sorghum`. El demo viejo usa maíz + mucuna → frijol y el pitch usa otras letras: hay que alinear demo, deck y página (Ant) |
 | D2 | Cómo se publica el modelo | El **contrato** es el de FastAPI (Pydantic). El demo público lee **JSON precalculado** por escenario × rotación. FastAPI queda P1 como envoltura de los mismos casos de uso. Razón: GitHub Pages no corre Python, y tu propio doc pide no depender de APIs en el demo |
-| D3 | Nombre | **Finca Resiliente (AlairaX)**, con *Field Shift* como nombre del reto. Tagline candidato: *"We can't predict the next drought. But we can replay past ones, and test every crop rotation against them."* |
+| D3 | Nombre | **NandaView**, confirmado por el usuario el 14 nov 2026; equipo **AlairaX**, con *Field Shift* como nombre del reto. Tagline candidato: *"We can't predict the next drought. But we can replay past ones, and test every crop rotation against them."* |
 | D4 | Formato del demo | Deck ≤ 7 diapositivas en inglés. El video de 30 s no se hace |
 | D5 | Ranking | En P0 solo se **compara**, sin "ganadora". El ranking con pesos visibles es P1 y debe incluir el caso "no se puede recomendar" |
 | D6 | IMERG, SMAP y HLS | P2. Sin ellos se declara la resolución de POWER y su sesgo, y se contrasta con CHIRPS y el valor IMN. No se muestra "suelo desnudo" sin método verificable |
