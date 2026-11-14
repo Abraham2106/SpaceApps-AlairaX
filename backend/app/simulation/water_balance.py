@@ -251,6 +251,41 @@ def simulate_water_balance(
     season_year = first_day.year if first_day.month >= start_month else first_day.year - 1
 
     cycles, warnings = build_cycles(rotation, crops, season_year, assumptions)
+    return simulate_cycles(frame, soil, cycles, assumptions, mode=mode, warnings=warnings)
+
+
+def simulate_cycles(
+    climate: pd.DataFrame,
+    soil: SoilWaterProfile,
+    cycles: list[CycleWindow],
+    assumptions: KernelAssumptions | None = None,
+    *,
+    mode: Literal["rainfed", "managed"] = "rainfed",
+    irrigation_by_date: dict[date, float] | None = None,
+    warnings: list[str] | None = None,
+) -> pd.DataFrame:
+    """Balance diario (Eq. 85) sobre ciclos ya fechados; los días sin ciclo son barbecho.
+
+    ``climate`` trae ``date``, ``rain_mm`` y ``et0_mm`` sin nulos. Además de la
+    regla ``refill_at_raw`` de ``mode='managed'``, ``irrigation_by_date`` aplica
+    láminas de riego programadas (mm) en las fechas indicadas.
+    """
+    if mode not in ("rainfed", "managed"):
+        raise ValueError(f"mode inválido: {mode!r} (usar 'rainfed' o 'managed')")
+    assumptions = assumptions or KernelAssumptions()
+    frame = climate.copy()
+    frame["date"] = pd.to_datetime(frame["date"])
+    frame = frame.sort_values("date").reset_index(drop=True)
+    if frame.empty:
+        raise ValueError("La serie climática está vacía.")
+    if frame[["rain_mm", "et0_mm"]].isna().any().any():
+        raise ValueError("rain_mm y et0_mm no pueden traer nulos en el balance.")
+    cycles = sorted(cycles, key=lambda cycle: cycle.sowing)
+    for first, second in zip(cycles, cycles[1:]):
+        if first.end >= second.sowing:
+            raise ValueError(f"Ciclos solapados: '{first.crop_id}' y '{second.crop_id}'.")
+    warnings = list(warnings or [])
+    scheduled = irrigation_by_date or {}
 
     rows: list[dict[str, object]] = []
     dr: float | None = None
@@ -322,6 +357,7 @@ def simulate_water_balance(
             ks = stress_coefficient(dr, taw, p_depletion)
             eta = ks * etc
             irrigation = dr if (irrigated and dr >= raw) else 0.0
+            irrigation += float(scheduled.get(day, 0.0))
             available = infiltration + irrigation
             # El agotamiento no puede pasar de TAW: se limita ETa al agua restante.
             eta = min(eta, max(0.0, taw - dr + available))

@@ -65,6 +65,35 @@ La [inspección de escenarios](datasets/processed/readiness/scenarios.json) cuen
 
 Método implementado y revisión científica pendiente: [scientific_method.md](docs/scientific_method.md) y [method-review.md](docs/method-review.md).
 
+## Kernel FAO-56 (Justin)
+
+`backend.app.simulation.kernel:simulate_rotation` es el callback que espera `execute_comparison`. Recibe `climate`, `soil`, `rotation` y `assumptions` del contrato M1 y devuelve `metrics`, `daily_balance` (un registro por fecha de clima), `assumptions`, `source_refs`, `warnings` y `model_version`. Usa ET0 FAO-56 Penman-Monteith (Eq. 6) y el balance de agotamiento (Eq. 82–85) con estas decisiones:
+
+- D1: las métricas salen de una corrida de secano; el requerimiento de riego, de una corrida manejada aparte.
+- D2: arroz de secano, no inundado.
+- D3: escorrentía RO = 0.3·max(0, P − 60).
+- D4: Zr constante por ciclo.
+- D5: barbecho con kc 0.15, Zr 0.15 m, p 0.5.
+- D7: se simula toda la ventana de clima.
+- D8: el contrato de Abe es la única salida.
+
+- Las métricas cuentan solo días de cultivo. El barbecho entra al balance, pero `water_stress` queda `null` en esos días.
+- Huecos de clima de ≤3 días: ET0 interpolada, lluvia 0, con aviso. Si el hueco es mayor, el balance queda `null` desde ese día y las métricas también.
+- `assumptions` solo trae supuestos metodológicos, idénticos entre rotaciones del mismo año, porque `compare_runs` lo exige. Lo específico del calendario va en `warnings`.
+- `simulate_rotation_detailed` agrega `irrigation_requirement_mm` (corrida managed, D1) y `per_crop`. Estos campos están fuera del contrato v0.1.0.
+
+ET0 diaria para los análogos:
+
+```powershell
+python -m scripts.export_et0 --climate datasets/processed/climate/power_10.55_-85.5_*.json --output datasets/processed/et0/et0_10.55_-85.5.json
+```
+
+El archivo sale con `reviewed: false`; `build_analogs.py` lo rechaza hasta que Justin lo revise y ponga `reviewed: true` y `reviewed_by`. Ejecutar de punta a punta con el kernel real:
+
+```powershell
+python -m scripts.run_comparison --analogs analogs.json --scenario neutral --inputs inputs.json --kernel backend.app.simulation.kernel:simulate_rotation --output out.json --allow-mock
+```
+
 ## Límites
 
 KNN busca temporadas parecidas; 2026 sirve de seguimiento y nunca entra como análogo. Se comparan ventanas temporales completas y equivalentes. Los cuantiles representan variación entre análogos, no probabilidades de éxito ni intervalos de confianza. Se reportan métricas modeladas; no se infiere rendimiento, rentabilidad, ahorro demostrado ni una rotación ganadora.
