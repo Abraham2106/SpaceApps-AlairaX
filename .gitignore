@@ -1,0 +1,27 @@
+# Entorno y secretos
+.env
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Datos crudos (no versionados)
+datasets/raw/*
+!datasets/raw/.gitkeep
+outputs/raw/*
+!outputs/raw/.gitkeep
+
+# Frontend
+node_modules/
+dist/
+
+# Sistema
+.DS_Store
+Thumbs.db
