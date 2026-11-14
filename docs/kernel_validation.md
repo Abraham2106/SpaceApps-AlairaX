@@ -24,6 +24,27 @@ Lectura de esa corrida:
 
 `simulate_rotation_detailed` agrega `heat_stress_days` por cultivo y para la rotación. Cuenta los días con `tmax ≥ heat_threshold_c` dentro de la etapa FAO `mid`, usada como aproximación de la floración. Solo el arroz tiene umbral citado (35 °C en antesis, Jagadish et al. 2007, en `crops.yaml`). Los cultivos sin umbral quedan `null`; nunca 0. Si falta `tmax` en algún día de la etapa, el valor queda `null` con un aviso. La métrica no forma parte del contrato v0.1.0.
 
+## Backtest de los análogos (tarea 4.6)
+
+`python -m scripts.backtest --output-dir docs` corre el kernel con el clima real de 2015 y 2023 (la "verdad" del modelo) y lo compara con el ensamble de los k análogos de `find_analogs`. Solo entran como candidatos los años anteriores al objetivo. Las tablas y la gráfica están en [backtest/backtest.md](backtest/backtest.md). Esto valida el **método de análogos frente al propio modelo**; no dice nada de la precisión en campo. Es **preliminar**, porque la ET0 sigue con `reviewed: false`.
+
+- **2015 (Niño fuerte y seco):**
+  - Con k = 5, la verdad cae en el rango p10–p90 en 9 de 13 casos.
+  - El p50 de los análogos queda más cerca que la climatología en 12 de 13 casos. El error en déficit baja de unos 220–240 mm a 55 mm.
+  - Con k = 3 el rango es demasiado estrecho: la verdad solo cae dentro en 3 de 13 casos.
+- **2023 (Niño con lluvia normal):**
+  - El método falla: la verdad cae dentro en 0 de 13 casos con k = 3 y en 3 de 13 con k = 5.
+  - El déficit queda sobreestimado entre 200 y 260 mm. La climatología lo hace mejor en casi todos los casos.
+  - Los análogos (2015, 1997, 1987, 1990 y 1991) se parecen por ONI, calor y ET0, pero llovieron 280–735 mm en la ventana abril–octubre. 2023 llovió 1.019 mm.
+- **Causas probables:**
+  - Los pesos iguales hacen que la lluvia sea una de cinco features, y varias de las otras se mueven juntas con el ONI.
+  - La lluvia de POWER antes de 2005 es la mitad de la de CHIRPS ([rain_bias.md](rain_bias.md)), así que los candidatos viejos parecen más secos de lo que fueron.
+- **Qué hacer con esto:**
+  - No usar k = 3 para el rango.
+  - Mostrar la climatología junto al ensamble.
+  - Antes de dar los análogos por validados, repetir el backtest con lluvia CHIRPS o con candidatos desde 2005.
+  - La decisión del equipo sobre k (3 en Niño fuerte) merece revisarse a la luz de estos resultados.
+
 ## Comparación manual con CROPWAT
 
 Pendiente. Correr CROPWAT 8.0 con los mismos insumos y llenar una fila por caso. Cada fila usa el suelo loam FAO-56 (θfc 0,25, θwp 0,12), salvo que se indique otro.

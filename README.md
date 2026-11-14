@@ -85,6 +85,12 @@ Método implementado y revisión científica pendiente: [scientific_method.md](d
 
 Sensibilidad a Kc, Dr inicial, θfc, θwp y lluvia (±28 %): `python -m scripts.sensitivity`. Resultados preliminares y plantilla de comparación con CROPWAT en [kernel_validation.md](docs/kernel_validation.md).
 
+Validación de los análogos y de la lluvia (Fase 8, preliminar mientras la ET0 tenga `reviewed: false`):
+
+- `python -m scripts.backtest --output-dir docs` compara el kernel con el clima real de 2015 y 2023 contra el ensamble de sus análogos. Resultados en [docs/backtest/](docs/backtest/backtest.md) y lectura en [kernel_validation.md](docs/kernel_validation.md).
+- `python -m scripts.ingest_chirps` baja la lluvia mensual CHIRPS v3 en el punto (unos 10 MB, por rango HTTP), y `python -m scripts.rain_bias --output-dir docs` la compara con POWER y con IMN. La nota está en [rain_bias.md](docs/rain_bias.md): POWER da la mitad de la lluvia antes de 2005.
+- Las gráficas usan `matplotlib`.
+
 ET0 diaria para los análogos:
 
 ```powershell
