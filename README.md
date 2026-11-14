@@ -94,6 +94,27 @@ El archivo sale con `reviewed: false`; `build_analogs.py` lo rechaza hasta que J
 python -m scripts.run_comparison --analogs analogs.json --scenario neutral --inputs inputs.json --kernel backend.app.simulation.kernel:simulate_rotation --output out.json --allow-mock
 ```
 
+### Cómo correr los tests
+
+Desde la raíz del repo, con el entorno virtual activo:
+
+```powershell
+python -m pytest backend/tests -q
+python -m unittest discover -s backend/tests
+python -m pytest backend/tests -q --cov=backend/app/simulation --cov-report=term-missing
+```
+
+La cobertura de `backend/app/simulation/` está en 96 %. `test_kernel_qa.py` cubre:
+
+- Cambio de etapa y cambio de cultivo.
+- Huecos de clima.
+- Suelo `null` o poco profundo.
+- Parámetros incompletos.
+- Temporada bisiesta.
+- El snapshot de regresión de 2015 (`backend/tests/snapshots/kernel_metrics_2015.json`). Si un cambio científico es intencional, regenéralo con `UPDATE_SNAPSHOTS=1` y explica el cambio en el PR.
+
+Los 3 casos calculados a mano de Ant (`research/qa_cases.md`, tarea 2.4) quedan como `xfail` hasta que existan.
+
 ## Límites
 
 KNN busca temporadas parecidas; 2026 sirve de seguimiento y nunca entra como análogo. Se comparan ventanas temporales completas y equivalentes. Los cuantiles representan variación entre análogos, no probabilidades de éxito ni intervalos de confianza. Se reportan métricas modeladas; no se infiere rendimiento, rentabilidad, ahorro demostrado ni una rotación ganadora.
