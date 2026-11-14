@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NandaView · AlairaX</title>
+  <style>
+    :root { --bg: #f7f7f4; --fg: #1d2a24; --muted: #5b6b62; --accent: #2f6b4f; --warn-bg: #fff4d6; --warn-fg: #6b4e00; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #121815; --fg: #e6ece8; --muted: #9aaba1; --accent: #7cc4a0; --warn-bg: #3a3017; --warn-fg: #f1d68a; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 system-ui, sans-serif; }
+    main { max-width: 44rem; margin: 0 auto; padding: 2rem 16px; }
+    h1 { margin: 0 0 .25rem; font-size: 1.75rem; }
+    p.lead { margin: 0 0 1.5rem; color: var(--muted); }
+    .mock { background: var(--warn-bg); color: var(--warn-fg); padding: .75rem 1rem; border-radius: .5rem; margin-bottom: 1.5rem; }
+    ul { padding-left: 1.25rem; }
+    a { color: var(--accent); word-break: break-word; }
+    footer { margin-top: 2rem; color: var(--muted); font-size: .875rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>NandaView</h1>
+    <p class="lead">Comparación explicable de tres rotaciones agrícolas de Guanacaste bajo el mismo clima histórico. Equipo AlairaX · NASA Space Apps · Field Shift.</p>
+    <div class="mock"><strong>Página provisional.</strong> La interfaz todavía no está publicada. Los datos de abajo son sintéticos (<code>_mock: true</code>) y no representan resultados científicos.</div>
+    <h2>Datos publicados</h2>
+    <ul id="files">
+      <li><a href="data/scenarios.json">data/scenarios.json</a></li>
+      <li><a href="data/rotations.json">data/rotations.json</a></li>
+    </ul>
+    <footer>Despliegue de prueba del pipeline de GitHub Pages.</footer>
+  </main>
+  <script>
+    fetch('data/scenarios.json')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (doc) {
+        if (!doc) return;
+        var list = document.getElementById('files');
+        var text = JSON.stringify(doc);
+        var seen = {};
+        (text.match(/compare-[a-z0-9_]+\.json/g) || []).forEach(function (name) {
+          if (seen[name]) return;
+          seen[name] = true;
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.href = 'data/' + name;
+          a.textContent = 'data/' + name;
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+      })
+      .catch(function () {});
+  </script>
+</body>
+</html>

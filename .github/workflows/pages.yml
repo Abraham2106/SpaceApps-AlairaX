@@ -1,0 +1,71 @@
+# Publica el frontend en GitHub Pages en cada push a main.
+# Si frontend/ todavía no tiene package.json (la app Vite de Angelina), publica
+# una página placeholder con los JSON de frontend/public/data para probar el pipeline.
+# Requiere Settings → Pages → Source: GitHub Actions (lo activa el dueño del repo).
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detectar app Vite
+        id: detect
+        run: |
+          if [ -f frontend/package.json ]; then
+            echo "vite=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "vite=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.detect.outputs.vite == 'true'
+        with:
+          node-version: 22
+
+      # Vite debe usar base "/SpaceApps-AlairaX/" y HashRouter (decisión de Angelina).
+      - name: Build del frontend
+        if: steps.detect.outputs.vite == 'true'
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+
+      - name: Armar placeholder estático
+        if: steps.detect.outputs.vite == 'false'
+        run: |
+          mkdir -p frontend/dist
+          cp -r frontend/public/. frontend/dist/
+          cp .github/pages-placeholder/index.html frontend/dist/index.html
+          touch frontend/dist/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
