@@ -105,6 +105,27 @@ El archivo sale con `reviewed: false`; `build_analogs.py` lo rechaza hasta que J
 python -m scripts.run_comparison --analogs analogs.json --scenario neutral --inputs inputs.json --kernel backend.app.simulation.kernel:simulate_rotation --output out.json --allow-mock
 ```
 
+### API local
+
+```powershell
+python -m pip install -r requirements.txt
+python -m uvicorn backend.app.api.main:app
+```
+
+Abre `http://127.0.0.1:8000/docs` para probar `/health`, `/rotations`,
+`/scenarios`, `/sources` y `POST /compare`.
+`POST /compare` recibe el contrato `CompareRequest`. Usa la zona del
+catálogo, un `k` que no supere el número de análogos disponibles y al menos
+dos rotaciones, incluida la base. La API selecciona los primeros `k`
+análogos en el orden del catálogo y ejecuta el mismo kernel que el CLI.
+
+Por defecto carga `datasets/processed/analogs/analogos.json` y busca
+`outputs/inputs/<scenario_id>.json`, generado con
+`python -m scripts.prepare_comparison`. Se pueden configurar las rutas con
+`ALAIRAX_ANALOGS` y `ALAIRAX_INPUTS_DIR`. Los escenarios no disponibles
+devuelven HTTP 409 con el motivo. Los lotes faltantes devuelven HTTP 503.
+La app de Uvicorn rechaza catálogos e inputs sintéticos.
+
 ### Cómo correr los tests
 
 Desde la raíz del repo, con el entorno virtual activo:
