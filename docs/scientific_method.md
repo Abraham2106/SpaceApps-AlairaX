@@ -4,7 +4,7 @@ Documento de trabajo del 14 de noviembre de 2026, hora de Costa Rica. Describe e
 
 ## Pregunta y alcance
 
-Finca Resiliente compara `rice_melon`, `rice_legume` y `rice_sorghum` bajo los mismos escenarios de clima, suelo y manejo. La línea base es `rice_melon`. La pregunta es cuánto cambian la demanda hídrica, el déficit hídrico modelado y los días de estrés entre alternativas cuando se mantienen esas condiciones comunes.
+NandaView compara `rice_melon`, `rice_legume` y `rice_sorghum` bajo los mismos escenarios de clima, suelo y manejo. La línea base es `rice_melon`. La pregunta es cuánto cambian la demanda hídrica, el déficit hídrico modelado y los días de estrés entre alternativas cuando se mantienen esas condiciones comunes.
 
 La implementación de Abe cubre ingesta y procedencia, contratos, features estacionales, selección de años análogos, ejecución del callback del kernel y comparación pareada. No incluye todavía una implementación numérica revisada de ET0 ni del balance FAO-56. Las respuestas `frontend/public/data/compare-*.json` son fixtures sintéticos explícitos: no son resultados agronómicos.
 

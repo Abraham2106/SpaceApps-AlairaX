@@ -39,7 +39,7 @@ class RawCache:
             return body, metadata
         if offline:
             raise FileNotFoundError(f'No cached response for {url}')
-        request = Request(url, headers={'User-Agent': 'FincaResiliente/0.1 (NASA Space Apps climate research)'})
+        request = Request(url, headers={'User-Agent': 'NandaView/0.1 (NASA Space Apps climate research)'})
         for attempt in range(self.attempts):
             try:
                 with urlopen(request, timeout=self.timeout) as response:
