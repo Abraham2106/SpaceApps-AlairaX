@@ -292,6 +292,27 @@ def _metrics(rows: pd.DataFrame) -> dict:
 
 NULL_METRICS = {"crop_water_demand_mm": None, "modeled_water_deficit_mm": None, "water_stress_days": None}
 
+#: Etapa FAO-56 que se usa como ventana sensible al calor (3.6). Para arroz, la
+#: floración/antesis cae dentro de la etapa mid; la etapa es más larga que la antesis.
+HEAT_SENSITIVE_STAGE = "mid"
+
+
+def _heat_stress_days(rows: pd.DataFrame, threshold_c: float | None, tmax_by_date: dict,
+                      crop_id: str, warnings: list[str]) -> int | None:
+    """Días con tmax ≥ ``heat_threshold_c`` en la etapa sensible; null sin umbral o con tmax faltante."""
+    if threshold_c is None:
+        return None
+    sensitive = rows[rows["stage"] == HEAT_SENSITIVE_STAGE]["date"]
+    tmax = [tmax_by_date.get(day) for day in sensitive]
+    if not tmax:
+        return None
+    if any(value is None for value in tmax):
+        warnings.append(
+            f"{crop_id}: tmax faltante en la etapa {HEAT_SENSITIVE_STAGE}; heat_stress_days queda null."
+        )
+        return None
+    return int(sum(value >= threshold_c for value in tmax))
+
 
 def _run(climate, soil, rotation, assumptions, crops, elevation_m, latitude_deg, *, detailed):
     crops = crops or _default_crops()
@@ -345,6 +366,7 @@ def _run(climate, soil, rotation, assumptions, crops, elevation_m, latitude_deg,
     metrics = NULL_METRICS.copy() if cut is not None else _metrics(balance)
 
     per_crop = []
+    tmax_by_date = {day.date: day.tmax_c for day in climate.days}
     for cycle, window in pairs:
         entry = {"crop_id": cycle.crop_id, "sowing_date": cycle.sowing_date,
                  "harvest_date": cycle.harvest_date, "simulated": window is not None,
@@ -354,6 +376,11 @@ def _run(climate, soil, rotation, assumptions, crops, elevation_m, latitude_deg,
             if not balance.empty else balance
         complete = window is not None and len(rows) == (cycle.harvest_date - cycle.sowing_date).days + 1
         entry.update(_metrics(rows) if complete else NULL_METRICS)
+        threshold = window.params.heat_threshold_c if window is not None else None
+        entry["heat_threshold_c"] = threshold
+        entry["heat_stress_days"] = (
+            _heat_stress_days(rows, threshold, tmax_by_date, cycle.crop_id, warnings) if complete else None
+        )
         per_crop.append(entry)
         low, high = SEASONAL_ETC_RANGE_MM[cycle.crop_id]
         etc = entry["crop_water_demand_mm"]
@@ -386,6 +413,13 @@ def _run(climate, soil, rotation, assumptions, crops, elevation_m, latitude_deg,
             "regados de rotations.yaml."
         )
     result["irrigation_requirement_mm"] = irrigation_requirement
+    # 3.6: métrica opcional fuera del contrato v0.1.0 (Metrics tiene extra='forbid').
+    heat = [c["heat_stress_days"] for c in per_crop if c["heat_stress_days"] is not None]
+    result["heat_stress_days"] = sum(heat) if heat else None
+    result["assumptions"].append(
+        f"heat_stress_days: días con tmax ≥ heat_threshold_c en la etapa {HEAT_SENSITIVE_STAGE}, "
+        "solo en cultivos con umbral citado en crops.yaml; null si ningún cultivo lo trae."
+    )
     result["per_crop"] = per_crop
     return result
 

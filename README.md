@@ -80,7 +80,10 @@ Método implementado y revisión científica pendiente: [scientific_method.md](d
 - Las métricas cuentan solo días de cultivo. El barbecho entra al balance, pero `water_stress` queda `null` en esos días.
 - Huecos de clima de ≤3 días: ET0 interpolada, lluvia 0, con aviso. Si el hueco es mayor, el balance queda `null` desde ese día y las métricas también.
 - `assumptions` solo trae supuestos metodológicos, idénticos entre rotaciones del mismo año, porque `compare_runs` lo exige. Lo específico del calendario va en `warnings`.
-- `simulate_rotation_detailed` agrega `irrigation_requirement_mm` (corrida managed, D1) y `per_crop`. Estos campos están fuera del contrato v0.1.0.
+- `simulate_rotation_detailed` agrega `irrigation_requirement_mm` (corrida managed, D1), `heat_stress_days` y `per_crop`. Estos campos están fuera del contrato v0.1.0.
+- `heat_stress_days` cuenta días con `tmax ≥ heat_threshold_c` en la etapa `mid`. Solo el arroz tiene umbral citado; los demás cultivos quedan `null`.
+
+Sensibilidad a Kc, Dr inicial, θfc, θwp y lluvia (±28 %): `python -m scripts.sensitivity`. Resultados preliminares y plantilla de comparación con CROPWAT en [kernel_validation.md](docs/kernel_validation.md).
 
 ET0 diaria para los análogos:
 
