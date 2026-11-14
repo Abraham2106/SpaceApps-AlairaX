@@ -24,6 +24,9 @@ htmlcov/
 # Frontend
 node_modules/
 dist/
+frontend/test-results/
+frontend/playwright-report/
+frontend/blob-report/
 
 # Sistema
 .DS_Store
