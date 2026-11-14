@@ -17,11 +17,11 @@ Este registro separa la implementación comprobada de la aprobación científica
 - [ ] Confirmar y registrar la ubicación agrícola; demostrar que el perfil de suelo es utilizable y documentar resolución, profundidad y fuente.
 - [ ] Revisar la interpretación de SoilGrids como predicción espacial. Entregar capacidad de campo, punto de marchitez y profundidad efectiva, o el método referenciado con que se obtienen.
 - [ ] Cerrar los calendarios y la identidad del cultivo de la alternativa `rice_legume`. Mantener los IDs de rotación comunes y fechas compatibles con el clima de cada año.
-- [ ] Entregar parámetros por cultivo con referencia, unidad, etapa, duración y rango de incertidumbre. Registrar explícitamente vacíos y supuestos, incluidos los del arroz inundado.
+- [x] Entregar parámetros por cultivo con referencia, unidad, etapa, duración y rango de incertidumbre. Registrar explícitamente vacíos y supuestos, incluidos los del arroz inundado. Entregado como revisión en `research/parameters/REVIEW_I3.md` y `research/source_matrix.md`; los valores siguen `verified: false` y las decisiones de arroz, caupí y sorgo quedan pendientes.
 - [ ] Verificar cualquier referencia IMN usada para contrastar lluvia: estación, período, cobertura y comparabilidad con el píxel. Revisar el evento extremo preservado de `2020-11-03`; no eliminarlo solo por superar 500 mm/día.
 - [ ] Revisar la decisión de usar ONI como feature exploratoria mientras NOAA usa RONI para monitoreo/pronóstico oficial. Conservar cada índice y snapshot separados y registrar la versión publicada de la serie cuando se identifique.
-- [ ] Verificar en fuentes originales las cifras del pitch y distinguir datos observados, derivados del proveedor, estimados y modelados.
-- [ ] Completar fichas de evidencia, beneficios, riesgos, vacíos y viabilidad de las tres rotaciones. Aprobar el lenguaje público sin promesas de ahorro o rendimiento.
+- [ ] Verificar en fuentes originales las cifras del pitch y distinguir datos observados, derivados del proveedor, estimados y modelados. Parcial: `research/source_matrix.md` marca como no verificadas la cifra IMN de 1,652.7 mm/año y el +28 % del pitch.
+- [ ] Completar fichas de evidencia, beneficios, riesgos, vacíos y viabilidad de las tres rotaciones. Aprobar el lenguaje público sin promesas de ahorro o rendimiento. Fichas redactadas en `research/evidence/`; falta la aprobación humana del lenguaje público.
 
 ## Justin: ET0 y kernel FAO-56
 
@@ -29,7 +29,7 @@ Este registro separa la implementación comprobada de la aprobación científica
 - [ ] Entregar un artefacto ET0 con fechas, `mm/day`, zona idéntica, versión, fuentes y revisión identificada. Documentar si algún año requiere otra fuente o método por radiación faltante; 1981–1983 no tienen esa variable en el snapshot POWER.
 - [ ] Revisar el tratamiento de 2026 y sus huecos antes de elegir una ventana de seguimiento. Una ventana completa histórica debe usar los mismos meses y días.
 - [ ] Implementar balance hídrico y días de estrés con umbral documentado. Registrar cómo se tratan lluvia efectiva, inicialización de agua, raíces, riego, escorrentía/percolación y arroz inundado.
-- [ ] Verificar balance de masa, almacenamiento acotado, etapas y comportamiento ante parámetros o clima faltantes mediante pruebas físicas y casos manuales independientes.
+- [ ] Verificar balance de masa, almacenamiento acotado, etapas y comportamiento ante parámetros o clima faltantes mediante pruebas físicas y casos manuales independientes. Los 3 casos manuales de Ant coinciden con el kernel (`research/qa_cases.md`, `backend/tests/test_kernel_qa.py`); falta la aprobación escrita.
 - [ ] Contrastar resultados con un procedimiento FAO/CROPWAT o referencia equivalente bajo insumos y supuestos explícitos; registrar discrepancias antes de aceptar el kernel.
 - [ ] Publicar una sola versión revisada para toda la comparación y salidas diarias que cubran exactamente el período solicitado.
 

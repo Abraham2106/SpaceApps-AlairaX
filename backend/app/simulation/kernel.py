@@ -56,11 +56,11 @@ STAGE_SCALE_TOLERANCE = 0.10
 DEFAULT_PARAMETER_SET = {"rice": "rice", "melon": "melon", "legume": "cowpea", "sorghum": "sorghum"}
 FAO56_REF = "FAO-56 (Allen et al., 1998), https://www.fao.org/3/x0490e/x0490e00.htm"
 #: Necesidad hídrica estacional orientativa [mm] (FAO Irrigation Water Management,
-#: Training manual 3, Brouwer & Heibloem 1986, Tabla 13). Legume = "beans". Solo control.
+#: Training manual 3, Brouwer & Heibloem 1986, cap. 2). Legume = "beans". Solo control.
 SEASONAL_ETC_RANGE_MM = {"rice": (450, 700), "melon": (400, 600), "legume": (300, 500),
                          "sorghum": (450, 650)}
 SEASONAL_ETC_REF = ("FAO Irrigation Water Management, Training manual 3 (Brouwer & Heibloem, "
-                    "1986), Tabla 13: https://www.fao.org/3/s2022e/s2022e00.htm")
+                    "1986), cap. 2: https://www.fao.org/3/s2022e/s2022e00.htm")
 
 
 @lru_cache(maxsize=1)

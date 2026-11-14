@@ -75,7 +75,7 @@ def test_rice_is_rainfed_and_melon_irrigated(rotations) -> None:
     rice_segment, melon_segment = rice_melon.segments
 
     assert rice_segment.crop_id == "rice"
-    assert rice_segment.sowing_mmdd == "06-01"
+    assert rice_segment.sowing_mmdd == "05-15"
     assert rice_segment.irrigated is False
     assert rice_segment.regime == "upland"
     assert melon_segment.crop_id == "melon"

@@ -12,7 +12,7 @@ python -m unittest backend.tests.test_kernel_handoff -v
 
 El primer comando ejecuta el motor real con clima, suelo, manejo y vecinos sintéticos: tres rotaciones y dos temporadas, con 365 y 366 días. Escribe `datasets/examples/kernel-smoke.mock.json`, con `_mock=true`. Usa fechas de prueba explícitas para evitar traslapes y conserva las advertencias de parámetros no verificados. No es una selección KNN ni una aprobación del calendario; su finalidad es comprobar la conexión técnica y la exportación.
 
-El segundo comando inspecciona los YAML originales sin modificarlos y escribe `datasets/processed/readiness/calendars.json`. Detecta que el arroz sembrado el 1 de junio, con 150 días, termina el 28 de octubre. Se solapa con caupí (15 de octubre) y sorgo (1 de octubre). El melón del 1 de diciembre termina el 29 de marzo de 2016 para la temporada 2015; requiere clima del año siguiente. No se acortan etapas ni se desplazan fechas automáticamente.
+El segundo comando inspecciona los YAML originales sin modificarlos y escribe `datasets/processed/readiness/calendars.json`. Con las fechas actuales no hay solapes: el arroz sembrado el 15 de mayo, con 150 días, termina el 11 de octubre, antes del caupí y el sorgo (15 de octubre). Con las fechas anteriores (arroz el 1 de junio, sorgo el 1 de octubre) el arroz terminaba el 28 de octubre y se solapaba con ambos. Las fechas siguen sin validar con productores. El melón del 1 de diciembre termina el 29 de marzo de 2016 para la temporada 2015; requiere clima del año siguiente. No se acortan etapas ni se desplazan fechas automáticamente.
 
 ## Paso a resultados reales
 

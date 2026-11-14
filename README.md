@@ -23,7 +23,7 @@ Si ya tienes Python con Pydantic instalado, puedes usar `python` directamente.
 
 - **Angelina:** `frontend/public/data/scenarios.json` enumera los cuatro archivos `compare-*.json`; `rotations.json` contiene los IDs comunes. Todos los datos de estos archivos son **sintéticos**, con `_mock: true`; la UI debe mostrar el aviso mock.
 - **Justin:** modelos en `backend/app/api/schemas/contracts.py`, firma y unidades en [el contrato de integración](docs/contract-handoff.md). `execute_comparison()` en `backend/app/application/compare.py` recibe su callback `simulate_rotation(climate=..., soil=..., rotation=..., assumptions=...)`.
-- **Ant:** faltan validar el punto de finca, perfil de agua útil del suelo, parámetros por cultivo y calendarios. Las entradas reales rechazan estos campos pendientes.
+- **Ant:** entregó la revisión de parámetros, matriz de fuentes, procedencia, casos QA y fichas de evidencia en `research/`. Faltan validar el punto de finca, perfil de agua útil del suelo, calendarios y la aprobación científica escrita. Las entradas reales rechazan estos campos pendientes.
 
 Schemas JSON compartidos: `docs/contracts/`. Ejemplo de temporada sintética completa de abril a diciembre: `datasets/examples/simulation-input.mock.json`.
 
@@ -124,7 +124,7 @@ La cobertura de `backend/app/simulation/` está en 96 %. `test_kernel_qa.py` cub
 - Temporada bisiesta.
 - El snapshot de regresión de 2015 (`backend/tests/snapshots/kernel_metrics_2015.json`). Si un cambio científico es intencional, regenéralo con `UPDATE_SNAPSHOTS=1` y explica el cambio en el PR.
 
-Los 3 casos calculados a mano de Ant (`research/qa_cases.md`, tarea 2.4) quedan como `xfail` hasta que existan.
+Los 3 casos calculados a mano de Ant (`research/qa_cases.md`, tarea 2.4) pasan contra el kernel: sin estrés, estrés con percolación y reescalado de Zr al pasar a barbecho.
 
 ## Despliegue y CI
 
