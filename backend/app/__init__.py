@@ -1,1 +1,1 @@
-"""Paquete raíz del backend AlairaX."""
+"""Finca Resiliente backend."""

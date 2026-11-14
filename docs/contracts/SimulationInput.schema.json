@@ -1,0 +1,447 @@
+{
+  "$defs": {
+    "ClimateDay": {
+      "additionalProperties": false,
+      "properties": {
+        "date": {
+          "format": "date",
+          "title": "Date",
+          "type": "string"
+        },
+        "precipitation_mm": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Precipitation Mm"
+        },
+        "tmin_c": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tmin C"
+        },
+        "tmax_c": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tmax C"
+        },
+        "relative_humidity_pct": {
+          "anyOf": [
+            {
+              "maximum": 100,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Relative Humidity Pct"
+        },
+        "wind_speed_2m_m_s": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Wind Speed 2M M S"
+        },
+        "solar_radiation_mj_m2_day": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Solar Radiation Mj M2 Day"
+        },
+        "et0_mm": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Et0 Mm"
+        }
+      },
+      "required": [
+        "date",
+        "precipitation_mm",
+        "tmin_c",
+        "tmax_c",
+        "relative_humidity_pct",
+        "wind_speed_2m_m_s",
+        "solar_radiation_mj_m2_day",
+        "et0_mm"
+      ],
+      "title": "ClimateDay",
+      "type": "object"
+    },
+    "ClimateSeason": {
+      "additionalProperties": false,
+      "properties": {
+        "year": {
+          "maximum": 2026,
+          "minimum": 1981,
+          "title": "Year",
+          "type": "integer"
+        },
+        "start": {
+          "format": "date",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "format": "date",
+          "title": "End",
+          "type": "string"
+        },
+        "days": {
+          "items": {
+            "$ref": "#/$defs/ClimateDay"
+          },
+          "minItems": 1,
+          "title": "Days",
+          "type": "array"
+        }
+      },
+      "required": [
+        "year",
+        "start",
+        "end",
+        "days"
+      ],
+      "title": "ClimateSeason",
+      "type": "object"
+    },
+    "CropCycle": {
+      "additionalProperties": false,
+      "properties": {
+        "crop_id": {
+          "enum": [
+            "rice",
+            "melon",
+            "legume",
+            "sorghum"
+          ],
+          "title": "Crop Id",
+          "type": "string"
+        },
+        "sowing_date": {
+          "format": "date",
+          "title": "Sowing Date",
+          "type": "string"
+        },
+        "harvest_date": {
+          "format": "date",
+          "title": "Harvest Date",
+          "type": "string"
+        },
+        "parameter_set_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parameter Set Id"
+        }
+      },
+      "required": [
+        "crop_id",
+        "sowing_date",
+        "harvest_date",
+        "parameter_set_id"
+      ],
+      "title": "CropCycle",
+      "type": "object"
+    },
+    "ModelAssumptions": {
+      "additionalProperties": false,
+      "properties": {
+        "irrigation_mode": {
+          "enum": [
+            "rainfed",
+            "scheduled",
+            "unspecified"
+          ],
+          "title": "Irrigation Mode",
+          "type": "string"
+        },
+        "irrigation_mm_by_date": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "propertyNames": {
+            "format": "date"
+          },
+          "title": "Irrigation Mm By Date",
+          "type": "object"
+        },
+        "initial_soil_water_fraction": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Initial Soil Water Fraction"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "irrigation_mode",
+        "irrigation_mm_by_date",
+        "initial_soil_water_fraction",
+        "notes"
+      ],
+      "title": "ModelAssumptions",
+      "type": "object"
+    },
+    "RotationSchedule": {
+      "additionalProperties": false,
+      "properties": {
+        "rotation_id": {
+          "enum": [
+            "rice_melon",
+            "rice_legume",
+            "rice_sorghum"
+          ],
+          "title": "Rotation Id",
+          "type": "string"
+        },
+        "calendar_status": {
+          "enum": [
+            "provisional",
+            "confirmed"
+          ],
+          "title": "Calendar Status",
+          "type": "string"
+        },
+        "cycles": {
+          "items": {
+            "$ref": "#/$defs/CropCycle"
+          },
+          "minItems": 1,
+          "title": "Cycles",
+          "type": "array"
+        }
+      },
+      "required": [
+        "rotation_id",
+        "calendar_status",
+        "cycles"
+      ],
+      "title": "RotationSchedule",
+      "type": "object"
+    },
+    "SoilProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "field_capacity_m3_m3": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Field Capacity M3 M3"
+        },
+        "wilting_point_m3_m3": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Wilting Point M3 M3"
+        },
+        "rooting_depth_m": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rooting Depth M"
+        },
+        "source_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "field_capacity_m3_m3",
+        "wilting_point_m3_m3",
+        "rooting_depth_m",
+        "source_refs"
+      ],
+      "title": "SoilProfile",
+      "type": "object"
+    },
+    "Zone": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "latitude": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "Latitude",
+          "type": "number"
+        },
+        "longitude": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Longitude",
+          "type": "number"
+        },
+        "validated": {
+          "default": false,
+          "title": "Validated",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "latitude",
+        "longitude"
+      ],
+      "title": "Zone",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0",
+      "default": "0.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "_mock": {
+      "title": "Mock",
+      "type": "boolean"
+    },
+    "generado": {
+      "format": "date-time",
+      "title": "Generado",
+      "type": "string"
+    },
+    "zona": {
+      "$ref": "#/$defs/Zone"
+    },
+    "source_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Refs",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "scenario_id": {
+      "enum": [
+        "strong_el_nino",
+        "neutral",
+        "la_nina",
+        "like_2026"
+      ],
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "climate": {
+      "$ref": "#/$defs/ClimateSeason"
+    },
+    "soil": {
+      "$ref": "#/$defs/SoilProfile"
+    },
+    "rotation": {
+      "$ref": "#/$defs/RotationSchedule"
+    },
+    "assumptions": {
+      "$ref": "#/$defs/ModelAssumptions"
+    }
+  },
+  "required": [
+    "_mock",
+    "generado",
+    "zona",
+    "source_refs",
+    "warnings",
+    "scenario_id",
+    "climate",
+    "soil",
+    "rotation",
+    "assumptions"
+  ],
+  "title": "SimulationInput",
+  "type": "object"
+}

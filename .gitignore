@@ -1,22 +1,25 @@
-# Entorno y secretos
-.env
-.venv/
-venv/
+# Contexto local de trabajo (se mantiene fuera del repositorio)
+/contexto-local/Finca_Resiliente_AlairaX_Contexto_Completo_WBS.md
+/contexto-local/fieldshift-contexto.md
 
-# Python
+# Secrets, downloaded raw responses and Python build/cache files
+.env
+.env.*
+!.env.example
+/datasets/raw/
+/outputs/raw/
 __pycache__/
 *.py[cod]
-*.egg-info/
+.venv/
+venv/
 .pytest_cache/
 .ruff_cache/
 .coverage
 htmlcov/
+*.egg-info/
 
-# Datos crudos (no versionados)
-datasets/raw/*
-!datasets/raw/.gitkeep
-outputs/raw/*
-!outputs/raw/.gitkeep
+# Salidas locales del kernel
+/outputs/
 
 # Frontend
 node_modules/

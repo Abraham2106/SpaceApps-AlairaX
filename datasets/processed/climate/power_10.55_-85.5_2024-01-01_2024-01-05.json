@@ -1,0 +1,130 @@
+{
+  "schema_version": "0.1.0",
+  "_mock": false,
+  "generado": "2026-11-14T18:34:20.497147+00:00",
+  "zona": {
+    "id": "provisional-point",
+    "name": "Provisional agricultural point, Guanacaste",
+    "latitude": 10.55,
+    "longitude": -85.5,
+    "validated": false
+  },
+  "source_refs": [
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20240101&end=20240105&format=JSON&time-standard=LST&units=metric"
+  ],
+  "provenance": {
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20240101&end=20240105&format=JSON&time-standard=LST&units=metric",
+    "fetched_at": "2026-11-14T18:34:20.497147+00:00",
+    "sha256": "ee2358938f9ec8844cae330265882ed7a2bdcacc75842f746df850467ed4afd2",
+    "status": 200,
+    "content_type": "application/json",
+    "etag": null,
+    "last_modified": null
+  },
+  "warnings": [
+    "Location is provisional; SoilGrids and farm suitability are not validated.",
+    "ET0 is null until the scientific kernel calculates it.",
+    "No IMN rainfall calibration is applied; bias claims require independent validation."
+  ],
+  "start": "2024-01-01",
+  "end": "2024-01-05",
+  "days": [
+    {
+      "date": "2024-01-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 23.86,
+      "tmax_c": 31.7,
+      "relative_humidity_pct": 77.72,
+      "wind_speed_2m_m_s": 3.77,
+      "solar_radiation_mj_m2_day": 18.53
+    },
+    {
+      "date": "2024-01-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.98,
+      "tmax_c": 32.26,
+      "relative_humidity_pct": 77.28,
+      "wind_speed_2m_m_s": 3.83,
+      "solar_radiation_mj_m2_day": 18.27
+    },
+    {
+      "date": "2024-01-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 24.01,
+      "tmax_c": 32.64,
+      "relative_humidity_pct": 74.39,
+      "wind_speed_2m_m_s": 2.89,
+      "solar_radiation_mj_m2_day": 17.79
+    },
+    {
+      "date": "2024-01-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.16,
+      "tmin_c": 22.81,
+      "tmax_c": 32.69,
+      "relative_humidity_pct": 77.48,
+      "wind_speed_2m_m_s": 2.65,
+      "solar_radiation_mj_m2_day": 17.96
+    },
+    {
+      "date": "2024-01-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.54,
+      "tmax_c": 33.39,
+      "relative_humidity_pct": 73.24,
+      "wind_speed_2m_m_s": 2.93,
+      "solar_radiation_mj_m2_day": 20.46
+    }
+  ],
+  "units": {
+    "precipitation_mm": "mm/day",
+    "tmin_c": "C",
+    "tmax_c": "C",
+    "relative_humidity_pct": "%",
+    "wind_speed_2m_m_s": "m/s",
+    "solar_radiation_mj_m2_day": "MJ/m^2/day",
+    "et0_mm": "mm/day"
+  },
+  "quality_control": {
+    "issues": [],
+    "rain_warning_mm": 500,
+    "rain_policy": "flag_only_no_clipping",
+    "bias_correction": null
+  },
+  "provider_header": {
+    "title": "NASA/POWER Source Native Resolution Daily Data",
+    "api": {
+      "version": "v2.10.3",
+      "name": "POWER Daily API"
+    },
+    "sources": [
+      "MERRA2",
+      "SYN1DEG",
+      "POWER"
+    ],
+    "fill_value": -999.0,
+    "time_standard": "LST",
+    "start": "20240101",
+    "end": "20240105"
+  },
+  "provider_units": {
+    "PRECTOTCORR": "mm/day",
+    "T2M_MIN": "C",
+    "T2M_MAX": "C",
+    "RH2M": "%",
+    "WS2M": "m/s",
+    "ALLSKY_SFC_SW_DWN": "MJ/m^2/day"
+  },
+  "provider_geometry": {
+    "type": "Point",
+    "coordinates": [
+      -85.5,
+      10.55,
+      94.64
+    ]
+  }
+}

@@ -220,6 +220,10 @@ Usa los hitos M1–M5 de tu doc, con hora.
 
 **Orden de recortes si el tiempo aprieta** (primero se cae lo de arriba): 5.9 mapa → 5.8 móvil → 5.7 inglés/español completo (queda el inglés esencial) → 6.4 FastAPI → 4.8 CHIRPS → 3.7 comparación FAO → 5.6 sliders → 4.7 ranking → 4.6 backtest → 3.6 estrés térmico. Todo P2 queda fuera de plano. **Lo que nunca se recorta:** las 3 rotaciones, el KNN, el balance FAO-56, los avisos de límites y el envío.
 
+## Decisión de implementación registrada el 14 de noviembre
+
+Para la tarea 4.3, el usuario delegó elegir cómo resolver la escasez de temporadas de Niño fuerte. Se adopta **k=3 únicamente en `strong_el_nino`**, manteniendo k=5 en los otros escenarios y el umbral ONI ASO ≥1,5 °C. Se muestra tamaño de muestra y advertencia de evidencia limitada; no se completa con años de otras fases ni se reduce k automáticamente. Justificación y alcance en [decisions.md](decisions.md).
+
 ## 9. Checklist de cumplimiento antes de enviar
 
 - [ ] Los 4 inscritos en el mismo evento local y en la pestaña Members

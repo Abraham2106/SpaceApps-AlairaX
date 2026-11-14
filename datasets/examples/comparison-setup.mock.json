@@ -1,0 +1,95 @@
+{
+  "schema_version": "0.1.0",
+  "_mock": true,
+  "generado": "2026-11-14T18:00:00Z",
+  "zona": {
+    "id": "guanacaste_candidate",
+    "name": "Guanacaste — provisional test point",
+    "latitude": 10.55,
+    "longitude": -85.5,
+    "validated": false
+  },
+  "source_refs": [
+    "synthetic-fixture-v1"
+  ],
+  "warnings": [
+    "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+  ],
+  "reviewed_by": "synthetic-fixture-only-not-scientific-approval",
+  "soil": {
+    "field_capacity_m3_m3": null,
+    "wilting_point_m3_m3": null,
+    "rooting_depth_m": null,
+    "source_refs": []
+  },
+  "rotations_by_year": {
+    "2015": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2015-05-01",
+            "harvest_date": "2015-08-31",
+            "parameter_set_id": null
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "2015-10-01",
+            "harvest_date": "2015-12-31",
+            "parameter_set_id": null
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2015-05-01",
+            "harvest_date": "2015-08-31",
+            "parameter_set_id": null
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "2015-10-01",
+            "harvest_date": "2015-12-31",
+            "parameter_set_id": null
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2015-05-01",
+            "harvest_date": "2015-08-31",
+            "parameter_set_id": null
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "2015-10-01",
+            "harvest_date": "2015-12-31",
+            "parameter_set_id": null
+          }
+        ]
+      }
+    ]
+  },
+  "assumptions_by_year": {
+    "2015": {
+      "irrigation_mode": "unspecified",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": null,
+      "notes": [
+        "All climate, metrics and analog distances are synthetic fixtures.",
+        "Crop dates are provisional placeholders pending Ant and Justin.",
+        "No agronomic parameters, soil measurements or KNN search were used."
+      ]
+    }
+  }
+}

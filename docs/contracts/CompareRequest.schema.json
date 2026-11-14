@@ -1,0 +1,94 @@
+{
+  "$defs": {
+    "Zone": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "latitude": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "Latitude",
+          "type": "number"
+        },
+        "longitude": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Longitude",
+          "type": "number"
+        },
+        "validated": {
+          "default": false,
+          "title": "Validated",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "latitude",
+        "longitude"
+      ],
+      "title": "Zone",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "zona": {
+      "$ref": "#/$defs/Zone"
+    },
+    "scenario_id": {
+      "enum": [
+        "strong_el_nino",
+        "neutral",
+        "la_nina",
+        "like_2026"
+      ],
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "baseline_rotation_id": {
+      "default": "rice_melon",
+      "enum": [
+        "rice_melon",
+        "rice_legume",
+        "rice_sorghum"
+      ],
+      "title": "Baseline Rotation Id",
+      "type": "string"
+    },
+    "rotation_ids": {
+      "items": {
+        "enum": [
+          "rice_melon",
+          "rice_legume",
+          "rice_sorghum"
+        ],
+        "type": "string"
+      },
+      "minItems": 2,
+      "title": "Rotation Ids",
+      "type": "array"
+    },
+    "k": {
+      "default": 5,
+      "maximum": 45,
+      "minimum": 1,
+      "title": "K",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "zona",
+    "scenario_id"
+  ],
+  "title": "CompareRequest",
+  "type": "object"
+}

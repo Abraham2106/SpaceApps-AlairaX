@@ -1,0 +1,17 @@
+{
+  "zona": {
+    "id": "guanacaste_candidate",
+    "name": "Guanacaste — provisional test point",
+    "latitude": 10.55,
+    "longitude": -85.5,
+    "validated": false
+  },
+  "scenario_id": "neutral",
+  "baseline_rotation_id": "rice_melon",
+  "rotation_ids": [
+    "rice_melon",
+    "rice_legume",
+    "rice_sorghum"
+  ],
+  "k": 5
+}

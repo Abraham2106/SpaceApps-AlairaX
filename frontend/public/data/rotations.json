@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.1.0",
+  "_mock": true,
+  "generado": "2026-11-14T18:00:00+00:00",
+  "zona": {
+    "id": "guanacaste_candidate",
+    "name": "Guanacaste — provisional test point",
+    "latitude": 10.55,
+    "longitude": -85.5,
+    "validated": false
+  },
+  "source_refs": [
+    "synthetic-fixture-v1"
+  ],
+  "warnings": [
+    "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+  ],
+  "rotations": [
+    {
+      "rotation_id": "rice_melon",
+      "name": "Arroz → melón",
+      "baseline": true,
+      "crops": [
+        "rice",
+        "melon"
+      ],
+      "calendar_status": "provisional",
+      "calendar": null,
+      "parameter_set_id": null,
+      "evidence_status": "pending"
+    },
+    {
+      "rotation_id": "rice_legume",
+      "name": "Arroz → leguminosa",
+      "baseline": false,
+      "crops": [
+        "rice",
+        "legume"
+      ],
+      "calendar_status": "provisional",
+      "calendar": null,
+      "parameter_set_id": null,
+      "evidence_status": "pending"
+    },
+    {
+      "rotation_id": "rice_sorghum",
+      "name": "Arroz → sorgo",
+      "baseline": false,
+      "crops": [
+        "rice",
+        "sorghum"
+      ],
+      "calendar_status": "provisional",
+      "calendar": null,
+      "parameter_set_id": null,
+      "evidence_status": "pending"
+    }
+  ]
+}

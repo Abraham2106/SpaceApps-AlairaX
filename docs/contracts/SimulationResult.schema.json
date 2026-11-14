@@ -1,0 +1,260 @@
+{
+  "$defs": {
+    "DailyBalance": {
+      "additionalProperties": false,
+      "properties": {
+        "date": {
+          "format": "date",
+          "title": "Date",
+          "type": "string"
+        },
+        "crop_water_demand_mm": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Crop Water Demand Mm"
+        },
+        "modeled_water_deficit_mm": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Modeled Water Deficit Mm"
+        },
+        "soil_water_storage_mm": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Soil Water Storage Mm"
+        },
+        "water_stress": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Water Stress"
+        }
+      },
+      "required": [
+        "date",
+        "crop_water_demand_mm",
+        "modeled_water_deficit_mm",
+        "soil_water_storage_mm",
+        "water_stress"
+      ],
+      "title": "DailyBalance",
+      "type": "object"
+    },
+    "Metrics": {
+      "additionalProperties": false,
+      "properties": {
+        "crop_water_demand_mm": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Crop Water Demand Mm"
+        },
+        "modeled_water_deficit_mm": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Modeled Water Deficit Mm"
+        },
+        "water_stress_days": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Water Stress Days"
+        }
+      },
+      "required": [
+        "crop_water_demand_mm",
+        "modeled_water_deficit_mm",
+        "water_stress_days"
+      ],
+      "title": "Metrics",
+      "type": "object"
+    },
+    "Zone": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "latitude": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "Latitude",
+          "type": "number"
+        },
+        "longitude": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Longitude",
+          "type": "number"
+        },
+        "validated": {
+          "default": false,
+          "title": "Validated",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "latitude",
+        "longitude"
+      ],
+      "title": "Zone",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0",
+      "default": "0.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "_mock": {
+      "title": "Mock",
+      "type": "boolean"
+    },
+    "generado": {
+      "format": "date-time",
+      "title": "Generado",
+      "type": "string"
+    },
+    "zona": {
+      "$ref": "#/$defs/Zone"
+    },
+    "source_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Refs",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "rotation_id": {
+      "enum": [
+        "rice_melon",
+        "rice_legume",
+        "rice_sorghum"
+      ],
+      "title": "Rotation Id",
+      "type": "string"
+    },
+    "scenario_id": {
+      "enum": [
+        "strong_el_nino",
+        "neutral",
+        "la_nina",
+        "like_2026"
+      ],
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "year": {
+      "maximum": 2026,
+      "minimum": 1981,
+      "title": "Year",
+      "type": "integer"
+    },
+    "environment_id": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Environment Id",
+      "type": "string"
+    },
+    "metrics": {
+      "$ref": "#/$defs/Metrics"
+    },
+    "daily_balance": {
+      "items": {
+        "$ref": "#/$defs/DailyBalance"
+      },
+      "title": "Daily Balance",
+      "type": "array"
+    },
+    "assumptions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Assumptions",
+      "type": "array"
+    },
+    "model_version": {
+      "minLength": 1,
+      "title": "Model Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "_mock",
+    "generado",
+    "zona",
+    "source_refs",
+    "warnings",
+    "rotation_id",
+    "scenario_id",
+    "year",
+    "environment_id",
+    "metrics",
+    "daily_balance",
+    "assumptions",
+    "model_version"
+  ],
+  "title": "SimulationResult",
+  "type": "object"
+}

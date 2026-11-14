@@ -1,0 +1,488 @@
+{
+  "$defs": {
+    "AnalogYear": {
+      "additionalProperties": false,
+      "properties": {
+        "year": {
+          "maximum": 2025,
+          "minimum": 1981,
+          "title": "Year",
+          "type": "integer"
+        },
+        "distance": {
+          "minimum": 0,
+          "title": "Distance",
+          "type": "number"
+        }
+      },
+      "required": [
+        "year",
+        "distance"
+      ],
+      "title": "AnalogYear",
+      "type": "object"
+    },
+    "DailyBalance": {
+      "additionalProperties": false,
+      "properties": {
+        "date": {
+          "format": "date",
+          "title": "Date",
+          "type": "string"
+        },
+        "crop_water_demand_mm": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Crop Water Demand Mm"
+        },
+        "modeled_water_deficit_mm": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Modeled Water Deficit Mm"
+        },
+        "soil_water_storage_mm": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Soil Water Storage Mm"
+        },
+        "water_stress": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Water Stress"
+        }
+      },
+      "required": [
+        "date",
+        "crop_water_demand_mm",
+        "modeled_water_deficit_mm",
+        "soil_water_storage_mm",
+        "water_stress"
+      ],
+      "title": "DailyBalance",
+      "type": "object"
+    },
+    "MetricSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "crop_water_demand_mm": {
+          "$ref": "#/$defs/Quantiles"
+        },
+        "modeled_water_deficit_mm": {
+          "$ref": "#/$defs/Quantiles"
+        },
+        "water_stress_days": {
+          "$ref": "#/$defs/Quantiles"
+        }
+      },
+      "required": [
+        "crop_water_demand_mm",
+        "modeled_water_deficit_mm",
+        "water_stress_days"
+      ],
+      "title": "MetricSummary",
+      "type": "object"
+    },
+    "Metrics": {
+      "additionalProperties": false,
+      "properties": {
+        "crop_water_demand_mm": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Crop Water Demand Mm"
+        },
+        "modeled_water_deficit_mm": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Modeled Water Deficit Mm"
+        },
+        "water_stress_days": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Water Stress Days"
+        }
+      },
+      "required": [
+        "crop_water_demand_mm",
+        "modeled_water_deficit_mm",
+        "water_stress_days"
+      ],
+      "title": "Metrics",
+      "type": "object"
+    },
+    "Quantiles": {
+      "additionalProperties": false,
+      "properties": {
+        "p10": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "P10"
+        },
+        "p50": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "P50"
+        },
+        "p90": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "P90"
+        },
+        "n": {
+          "minimum": 0,
+          "title": "N",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "p10",
+        "p50",
+        "p90",
+        "n"
+      ],
+      "title": "Quantiles",
+      "type": "object"
+    },
+    "RotationComparison": {
+      "additionalProperties": false,
+      "properties": {
+        "rotation_id": {
+          "enum": [
+            "rice_melon",
+            "rice_legume",
+            "rice_sorghum"
+          ],
+          "title": "Rotation Id",
+          "type": "string"
+        },
+        "metrics": {
+          "$ref": "#/$defs/MetricSummary"
+        },
+        "delta_vs_baseline": {
+          "$ref": "#/$defs/MetricSummary"
+        },
+        "runs": {
+          "items": {
+            "$ref": "#/$defs/SimulationResult"
+          },
+          "title": "Runs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "rotation_id",
+        "metrics",
+        "delta_vs_baseline",
+        "runs"
+      ],
+      "title": "RotationComparison",
+      "type": "object"
+    },
+    "SimulationResult": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "0.1.0",
+          "default": "0.1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "_mock": {
+          "title": "Mock",
+          "type": "boolean"
+        },
+        "generado": {
+          "format": "date-time",
+          "title": "Generado",
+          "type": "string"
+        },
+        "zona": {
+          "$ref": "#/$defs/Zone"
+        },
+        "source_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Refs",
+          "type": "array"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        },
+        "rotation_id": {
+          "enum": [
+            "rice_melon",
+            "rice_legume",
+            "rice_sorghum"
+          ],
+          "title": "Rotation Id",
+          "type": "string"
+        },
+        "scenario_id": {
+          "enum": [
+            "strong_el_nino",
+            "neutral",
+            "la_nina",
+            "like_2026"
+          ],
+          "title": "Scenario Id",
+          "type": "string"
+        },
+        "year": {
+          "maximum": 2026,
+          "minimum": 1981,
+          "title": "Year",
+          "type": "integer"
+        },
+        "environment_id": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Environment Id",
+          "type": "string"
+        },
+        "metrics": {
+          "$ref": "#/$defs/Metrics"
+        },
+        "daily_balance": {
+          "items": {
+            "$ref": "#/$defs/DailyBalance"
+          },
+          "title": "Daily Balance",
+          "type": "array"
+        },
+        "assumptions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Assumptions",
+          "type": "array"
+        },
+        "model_version": {
+          "minLength": 1,
+          "title": "Model Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "_mock",
+        "generado",
+        "zona",
+        "source_refs",
+        "warnings",
+        "rotation_id",
+        "scenario_id",
+        "year",
+        "environment_id",
+        "metrics",
+        "daily_balance",
+        "assumptions",
+        "model_version"
+      ],
+      "title": "SimulationResult",
+      "type": "object"
+    },
+    "Zone": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "latitude": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "Latitude",
+          "type": "number"
+        },
+        "longitude": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Longitude",
+          "type": "number"
+        },
+        "validated": {
+          "default": false,
+          "title": "Validated",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "latitude",
+        "longitude"
+      ],
+      "title": "Zone",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0",
+      "default": "0.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "_mock": {
+      "title": "Mock",
+      "type": "boolean"
+    },
+    "generado": {
+      "format": "date-time",
+      "title": "Generado",
+      "type": "string"
+    },
+    "zona": {
+      "$ref": "#/$defs/Zone"
+    },
+    "source_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Refs",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "scenario_id": {
+      "enum": [
+        "strong_el_nino",
+        "neutral",
+        "la_nina",
+        "like_2026"
+      ],
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "baseline_rotation_id": {
+      "enum": [
+        "rice_melon",
+        "rice_legume",
+        "rice_sorghum"
+      ],
+      "title": "Baseline Rotation Id",
+      "type": "string"
+    },
+    "analog_years": {
+      "items": {
+        "$ref": "#/$defs/AnalogYear"
+      },
+      "minItems": 1,
+      "title": "Analog Years",
+      "type": "array"
+    },
+    "rotations": {
+      "items": {
+        "$ref": "#/$defs/RotationComparison"
+      },
+      "minItems": 2,
+      "title": "Rotations",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "uncertainty_method": {
+      "const": "empirical_linear_quantiles_across_analog_years",
+      "title": "Uncertainty Method",
+      "type": "string"
+    }
+  },
+  "required": [
+    "_mock",
+    "generado",
+    "zona",
+    "source_refs",
+    "warnings",
+    "scenario_id",
+    "baseline_rotation_id",
+    "analog_years",
+    "rotations",
+    "limitations",
+    "uncertainty_method"
+  ],
+  "title": "CompareResponse",
+  "type": "object"
+}
