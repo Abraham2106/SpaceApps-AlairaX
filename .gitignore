@@ -11,5 +11,20 @@
 __pycache__/
 *.py[cod]
 .venv/
+venv/
 .pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
 *.egg-info/
+
+# Salidas locales del kernel
+/outputs/
+
+# Frontend
+node_modules/
+dist/
+
+# Sistema
+.DS_Store
+Thumbs.db

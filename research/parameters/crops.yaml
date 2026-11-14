@@ -1,0 +1,133 @@
+# Parámetros de cultivo — PROVISIONAL (I2). Revisión científica: I3 / Ant (tarea 2.2).
+# Regla del proyecto: ningún parámetro sin `source` citado. `verified: false` hasta
+# que I3 lo valide; `null` significa "sin fuente", nunca "cero".
+#
+# Fuente principal (todas las tablas): FAO-56, Allen, Pereira, Raes & Smith (1998),
+# Crop evapotranspiration, Irrigation and Drainage Paper 56.
+#   Tabla 11: duraciones de etapas — https://www.fao.org/3/x0490e/x0490e0b.htm
+#   Tabla 12: Kc único          — https://www.fao.org/3/x0490e/x0490e0b.htm
+#   Tabla 19: agua del suelo    — https://www.fao.org/3/x0490e/x0490e0c.htm
+#   Tabla 22: Zr y p            — https://www.fao.org/3/x0490e/x0490e0e.htm
+
+version: "0.1.0"
+retrieved: "2026-11-14"
+
+crops:
+
+  rice:
+    display_name: "Arroz (Oryza sativa) — secano/upland por defecto"
+    kc_ini: 1.05
+    kc_mid: 1.20
+    kc_end: 0.90
+    stage_days: [30, 30, 60, 30]
+    root_depth_max_m: 1.0
+    p_depletion: 0.20
+    heat_threshold_c: 35.0
+    source: >-
+      FAO-56 Tabla 12 (Rice: Kc ini 1.05, mid 1.20, end 0.90-0.60, h 1 m);
+      Tabla 11 (Rice, trópicos/Mediterráneo: 30/30/60/30 = 150 d);
+      Tabla 22 (Rice: Zr 0.5-1.0 m, p 0.20 "de saturación");
+      calor: Jagadish et al. (2007), >35 °C en antesis causa esterilidad
+      (citado en Shrestha et al. 2022, doi:10.3389/fpls.2022.1050599)
+    verified: false
+    notes:
+      - "Zr se toma en el extremo superior del rango (Tabla 22, nota 1: valores mayores para modelar secano)."
+      - "Tabla 12 da Kc para arroz de paddy (lámina 0.10-0.20 m); se usa como aproximación para régimen upland (D2)."
+      - "Tabla 22 expresa p = 0.20 'de saturación', no como fracción de TAW; aplicar p·TAW en secano es una extrapolación."
+      - "Kc end FAO es un rango 0.60-0.90; se tomó 0.90 (cosecha con grano en madurez fisiológica)."
+    warnings:
+      - "Kc y p de arroz provienen de arroz inundado; el régimen upland no está cubierto por FAO-56."
+      - "Umbral de calor (35 °C) no es FAO-56: aplica a antesis y no distingue duración del evento."
+
+  melon:
+    display_name: "Melón (Cucumis melo)"
+    kc_ini: 0.50
+    kc_mid: 1.05
+    kc_end: 0.75
+    stage_days: [25, 35, 40, 20]
+    root_depth_max_m: 1.5
+    p_depletion: 0.40
+    heat_threshold_c: null
+    source: >-
+      FAO-56 Tabla 12 (Sweet Melons: Kc ini 0.50 del grupo Cucurbitaceae,
+      mid 1.05, end 0.75, h 0.4 m); Tabla 11 (Sweet melons, may, Mediterráneo:
+      25/35/40/20 = 120 d); Tabla 22 (Sweet Melons: Zr 0.8-1.5 m, p 0.40)
+    verified: false
+    notes:
+      - "Etapas elegidas de la fila 'May, Mediterranean' de Tabla 11; Guanacaste no es mediterráneo."
+      - "Zr en el extremo superior del rango (Tabla 22, nota 1)."
+    warnings:
+      - "Duración de etapas no local: no hay observación fenológica de Guanacaste en el repo."
+
+  cowpea:
+    display_name: "Caupí / frijol de vaca (Vigna unguiculata) — cobertura"
+    kc_ini: 0.40
+    kc_mid: 1.05
+    kc_end: 0.60
+    stage_days: [20, 30, 30, 20]
+    root_depth_max_m: 1.0
+    p_depletion: 0.45
+    heat_threshold_c: null
+    source: >-
+      FAO-56 Tabla 12 (Green Gram and Cowpeas: Kc ini 0.40 del grupo Leguminosae,
+      mid 1.05, end 0.60-0.35, h 0.4 m); Tabla 11 (Green gram, cowpeas, march,
+      Mediterráneo: 20/30/30/20 = 110 d); Tabla 22 (Green Gram and Cowpeas:
+      Zr 0.6-1.0 m, p 0.45)
+    verified: false
+    notes:
+      - "Kc end FAO es un rango: 0.60 cosechado fresco / 0.35 grano seco. Se tomó 0.60 porque la rotación lo usa como cobertura."
+      - "Zr en el extremo superior del rango (Tabla 22, nota 1)."
+    warnings:
+      - "Kc end depende del destino del cultivo (cobertura 0.60 vs grano seco 0.35): decisión pendiente de I3."
+
+  sorghum:
+    display_name: "Sorgo (Sorghum bicolor) — grano"
+    kc_ini: 0.30
+    kc_mid: 1.05
+    kc_end: 0.55
+    stage_days: [20, 35, 40, 30]
+    root_depth_max_m: 2.0
+    p_depletion: 0.55
+    heat_threshold_c: null
+    source: >-
+      FAO-56 Tabla 12 (Sorghum grain: Kc ini 0.30 del grupo Cereals, mid 1.00-1.10,
+      end 0.55, h 1-2 m); Tabla 11 (Sorghum, may/june, USA-Pakistán-Mediterráneo:
+      20/35/40/30 = 130 d); Tabla 22 (Sorghum grain: Zr 1.0-2.0 m, p 0.55)
+    verified: false
+    notes:
+      - "Kc mid FAO es un rango 1.00-1.10; se tomó 1.05 (punto medio)."
+      - "Zr en el extremo superior del rango (Tabla 22, nota 1)."
+    warnings:
+      - "La rotación declara 'sorgo forrajero'; estos valores son de sorgo grano (forrajero FAO: Kc mid 1.20, end 1.05)."
+
+  mucuna:
+    display_name: "Mucuna (Mucuna pruriens) — cobertura"
+    kc_ini: null
+    kc_mid: null
+    kc_end: null
+    stage_days: null
+    root_depth_max_m: null
+    p_depletion: null
+    heat_threshold_c: null
+    source: null
+    verified: false
+    notes:
+      - "FAO-56 Tablas 11, 12 y 22 no listan mucuna."
+    warnings:
+      - "Sin parámetros FAO-56: no usar en simulación hasta que I3 aporte una fuente (p. ej. investigación local)."
+
+  canavalia:
+    display_name: "Canavalia (Canavalia ensiformis) — cobertura"
+    kc_ini: null
+    kc_mid: null
+    kc_end: null
+    stage_days: null
+    root_depth_max_m: null
+    p_depletion: null
+    heat_threshold_c: null
+    source: null
+    verified: false
+    notes:
+      - "FAO-56 Tablas 11, 12 y 22 no listan canavalia."
+    warnings:
+      - "Sin parámetros FAO-56: no usar en simulación hasta que I3 aporte una fuente."
