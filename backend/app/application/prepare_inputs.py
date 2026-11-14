@@ -3,7 +3,7 @@
 from datetime import date, datetime, timedelta, timezone
 from typing import Annotated
 
-from pydantic import Field
+from pydantic import Field, model_validator
 
 from backend.app.api.schemas.contracts import (
     AnalogYear, ClimateDay, ClimateSeason, Contract, Envelope, ModelAssumptions,
@@ -24,12 +24,23 @@ class ReviewedET0(Contract):
     mock: bool = Field(alias='_mock', strict=True)
     zona: dict
     reviewed: Annotated[bool, Field(strict=True)]
-    reviewed_by: str = Field(min_length=1)
+    reviewed_by: str | None = None
     model_version: str = Field(min_length=1)
     units: str
     source_refs: list[str] = Field(min_length=1)
     values: dict[date, Annotated[float, Field(ge=0)] | None]
     warnings: list[str] = Field(default_factory=list)
+    method: str | None = None
+    latitude: float | None = None
+    elevation_m: float | None = None
+    elevation_source: str | None = None
+    generated_at: datetime | None = None
+
+    @model_validator(mode='after')
+    def reviewer_required_if_reviewed(self):
+        if self.reviewed and (self.reviewed_by is None or not self.reviewed_by.strip()):
+            raise ValueError('reviewed ET0 requires a named reviewer')
+        return self
 
 
 def same_zone_identity(first: dict, second: dict) -> bool:
@@ -45,7 +56,8 @@ def same_zone_identity(first: dict, second: dict) -> bool:
 
 def prepare_inputs(analog_document: dict, scenario_id: ScenarioId,
                    climate_documents: list[dict], et0_document: dict,
-                   setup: ComparisonSetup, *, start_mmdd: str, end_mmdd: str) -> list[SimulationInput]:
+                   setup: ComparisonSetup, *, start_mmdd: str, end_mmdd: str,
+                   end_year_offset: int = 0) -> list[SimulationInput]:
     """Use the same climate, soil and management for all rotations within a year.
 
     The simulation calendar is explicit and may differ from the shorter feature
@@ -53,6 +65,8 @@ def prepare_inputs(analog_document: dict, scenario_id: ScenarioId,
     window. No sowing dates, soil values, ET0 or irrigation are guessed.
     """
     setup = ComparisonSetup.model_validate(setup.model_dump())
+    if type(end_year_offset) is not int or end_year_offset not in (0, 1):
+        raise ValueError('end_year_offset must be 0 or 1')
     et0 = ReviewedET0.model_validate(et0_document)
     scenario = analog_document['scenarios'][scenario_id]
     if scenario['status'] != 'available':
@@ -96,9 +110,11 @@ def prepare_inputs(analog_document: dict, scenario_id: ScenarioId,
             climate[validated.date] = validated
     prepared = []
     for year in years:
-        start, end = date.fromisoformat(f'{year}-{start_mmdd}'), date.fromisoformat(f'{year}-{end_mmdd}')
-        if end < start:
-            raise ValueError('simulation window must end after it starts within the same year')
+        start = date.fromisoformat(f'{year}-{start_mmdd}')
+        end = date.fromisoformat(f'{year + end_year_offset}-{end_mmdd}')
+        if end < start or (end - start).days > 366:
+            raise ValueError('simulation window must be ordered and span at most one agricultural year; '
+                             'use end_year_offset=1 for a cross-year season')
         if year not in setup.rotations_by_year or year not in setup.assumptions_by_year:
             raise ValueError(f'{year}: reviewed rotation calendars and management are required')
         rotations = setup.rotations_by_year[year]

@@ -19,6 +19,8 @@ def main():
     parser.add_argument('--setup', required=True, type=Path)
     parser.add_argument('--start-mmdd', required=True, help='Start of the historical SIMULATION window')
     parser.add_argument('--end-mmdd', required=True, help='End of the historical SIMULATION window')
+    parser.add_argument('--end-year-offset', type=int, choices=(0, 1), default=0,
+                        help='Use 1 when the simulation ends in the following calendar year')
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--allow-mock', action='store_true')
     args = parser.parse_args()
@@ -41,13 +43,16 @@ def main():
     try:
         inputs = prepare_inputs(documents[args.analogs], args.scenario,
                                 [documents[p] for p in args.climate], documents[args.et0], setup,
-                                start_mmdd=args.start_mmdd, end_mmdd=args.end_mmdd)
+                                start_mmdd=args.start_mmdd, end_mmdd=args.end_mmdd,
+                                end_year_offset=args.end_year_offset)
     except (ValueError, KeyError) as error:
         parser.error(str(error))
     values = [simulation.model_dump(mode='json', by_alias=True) for simulation in inputs]
     write_json(args.output, values)
     write_json(manifest, {
         '_mock': setup.mock, 'scenario_id': args.scenario, 'input_count': len(inputs),
+        'simulation_window': {'start_mmdd': args.start_mmdd, 'end_mmdd': args.end_mmdd,
+                              'end_year_offset': args.end_year_offset},
         'artifacts': [{'file': str(path), 'sha256': sha256(body).hexdigest()}
                       for path, body in contents.items()],
         'output_sha256': sha256(args.output.read_bytes()).hexdigest(),

@@ -1,5 +1,7 @@
 # NandaView · AlairaX
 
+La conexión con el kernel de Justin puede comprobarse con `python -m scripts.smoke_kernel`: genera un ejemplo de tres rotaciones y dos temporadas sintéticas usando el motor real. La [guía de integración](docs/kernel-integration.md) explica la prueba, las temporadas que cruzan año y la auditoría de calendarios.
+
 Comparación explicable de tres rotaciones agrícolas de Guanacaste bajo el mismo clima histórico: `rice_melon`, `rice_legume` y `rice_sorghum`.
 
 El código de Abe incluye contratos, ingesta con caché, features estacionales, búsqueda KNN, comparación pareada e incertidumbre empírica. El kernel FAO-56 y la interfaz de usuario se integran mediante estos contratos.

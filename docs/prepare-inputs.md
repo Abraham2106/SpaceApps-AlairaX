@@ -18,7 +18,7 @@ Son comandos de integración: los nombres `reviewed-et0.json` y `comparison-setu
 
 El tamaño del lote es **3 × k**, donde k procede del escenario seleccionado en `analogos.json`. No se fija un único tamaño para todos los escenarios: por ejemplo, si un escenario usa k=3 se generan 9 entradas, y si usa k=5 se generan 15. Cada año seleccionado requiere las tres rotaciones y su manejo explícito. El preparador no elige ni cambia k.
 
-`--start-mmdd` y `--end-mmdd` delimitan la ventana de **simulación histórica** dentro de cada año. Puede ser más larga que la ventana de features usada para elegir análogos; debe cubrir todas las fechas de los cultivos y disponer de clima y ET0 en cada día. No cruza de año. La selección de análogos y la simulación son pasos distintos: elegir vecinos con abril–octubre no aporta automáticamente datos para simular hasta diciembre.
+`--start-mmdd` y `--end-mmdd` delimitan la ventana de **simulación histórica**. Para terminar el año siguiente, añadir `--end-year-offset 1`, por ejemplo `--start-mmdd 05-01 --end-mmdd 04-30 --end-year-offset 1`. La ventana puede ser más larga que la usada para elegir análogos; debe cubrir los cultivos y disponer de clima y ET0 para cada día, incluidos los del año siguiente. No se inventan calendarios: los traslapes siguen pendientes de revisión del equipo.
 
 Para ensayos sintéticos se requiere `--allow-mock` tanto al preparar como al ejecutar. Los artefactos deben compartir `_mock=true`; los flags se conservan en las salidas. Añadir el flag no valida parámetros ni transforma mocks en datos reales.
 

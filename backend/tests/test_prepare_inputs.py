@@ -1,7 +1,7 @@
 """Reviewed artifacts must produce paired, reproducible kernel inputs."""
 
 from copy import deepcopy
-from datetime import date
+from datetime import date, timedelta
 from hashlib import sha256
 import json
 from pathlib import Path
@@ -17,6 +17,34 @@ from scripts.run_comparison import compare_from_analogs
 
 
 class PrepareInputTests(unittest.TestCase):
+    def test_cross_year_simulation_requires_complete_following_year(self):
+        self.setUp()
+        last_row = self.climate['days'][-1]
+        for offset in range(1, 122):
+            day = date(2015, 12, 31) + timedelta(days=offset)
+            self.climate['days'].append(dict(last_row, date=day.isoformat()))
+            self.et0['values'][day.isoformat()] = 4.0
+        for rotation in self.setup.rotations_by_year[2015]:
+            rotation.cycles[1].harvest_date = date(2016, 3, 29)
+        inputs = prepare_inputs(self.analogs, 'neutral', [self.climate], self.et0, self.setup,
+                                start_mmdd='05-01', end_mmdd='04-30', end_year_offset=1)
+        self.assertEqual(inputs[0].climate.year, 2015)
+        self.assertEqual(inputs[0].climate.end, date(2016, 4, 30))
+        self.assertEqual(len(inputs[0].climate.days), 366)
+        self.climate['days'].pop()
+        with self.assertRaisesRegex(ValueError, 'missing climate date: 2016-04-30'):
+            prepare_inputs(self.analogs, 'neutral', [self.climate], self.et0, self.setup,
+                           start_mmdd='05-01', end_mmdd='04-30', end_year_offset=1)
+
+    def test_cross_year_offset_must_be_explicit_and_bounded(self):
+        for offset in (True, -1, 2):
+            with self.subTest(offset=offset), self.assertRaisesRegex(ValueError, 'end_year_offset'):
+                prepare_inputs(self.analogs, 'neutral', [self.climate], self.et0, self.setup,
+                               start_mmdd='05-01', end_mmdd='04-30', end_year_offset=offset)
+        with self.assertRaisesRegex(ValueError, 'cross-year season'):
+            prepare_inputs(self.analogs, 'neutral', [self.climate], self.et0, self.setup,
+                           start_mmdd='05-01', end_mmdd='04-30')
+
     def setUp(self):
         fixture = make_fixture()
         self.zone = fixture.zona.model_dump(mode='json')

@@ -1,0 +1,109 @@
+{
+  "_mock": false,
+  "simulation_run": false,
+  "season_year": 2015,
+  "start": "2015-05-01",
+  "end": "2016-04-30",
+  "status": "blocked_pending_review",
+  "source_artifacts": [
+    {
+      "file": "C:/Users/solan/Documents/Personal/Startup/AlairaX/research/parameters/crops.yaml",
+      "sha256": "5eb77bbf7c976bd117e8d8563f12b46791bcdfc3c6fbdc77b28afacc24a23785"
+    },
+    {
+      "file": "C:/Users/solan/Documents/Personal/Startup/AlairaX/research/parameters/rotations.yaml",
+      "sha256": "a6f8b033627b4feb4de784b3549331c61c306abf4543af9c3fd1ff0b0eb2c51f"
+    }
+  ],
+  "rotations": [
+    {
+      "rotation_id": "rice_melon",
+      "calendar_status": "provisional",
+      "cycles": [
+        {
+          "crop_id": "rice",
+          "sowing": "2015-06-01",
+          "harvest": "2015-10-28",
+          "duration_days": 150
+        },
+        {
+          "crop_id": "melon",
+          "sowing": "2015-12-01",
+          "harvest": "2016-03-29",
+          "duration_days": 120
+        }
+      ],
+      "conflicts": [],
+      "unverified_crops": [
+        "rice",
+        "melon"
+      ]
+    },
+    {
+      "rotation_id": "rice_legume",
+      "calendar_status": "provisional",
+      "cycles": [
+        {
+          "crop_id": "rice",
+          "sowing": "2015-06-01",
+          "harvest": "2015-10-28",
+          "duration_days": 150
+        },
+        {
+          "crop_id": "cowpea",
+          "sowing": "2015-10-15",
+          "harvest": "2016-01-22",
+          "duration_days": 100
+        }
+      ],
+      "conflicts": [
+        {
+          "type": "overlap",
+          "crops": [
+            "rice",
+            "cowpea"
+          ],
+          "previous_harvest": "2015-10-28",
+          "next_sowing": "2015-10-15"
+        }
+      ],
+      "unverified_crops": [
+        "rice",
+        "cowpea"
+      ]
+    },
+    {
+      "rotation_id": "rice_sorghum",
+      "calendar_status": "provisional",
+      "cycles": [
+        {
+          "crop_id": "rice",
+          "sowing": "2015-06-01",
+          "harvest": "2015-10-28",
+          "duration_days": 150
+        },
+        {
+          "crop_id": "sorghum",
+          "sowing": "2015-10-01",
+          "harvest": "2016-02-02",
+          "duration_days": 125
+        }
+      ],
+      "conflicts": [
+        {
+          "type": "overlap",
+          "crops": [
+            "rice",
+            "sorghum"
+          ],
+          "previous_harvest": "2015-10-28",
+          "next_sowing": "2015-10-01"
+        }
+      ],
+      "unverified_crops": [
+        "rice",
+        "sorghum"
+      ]
+    }
+  ]
+}
