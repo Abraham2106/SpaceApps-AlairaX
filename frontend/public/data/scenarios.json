@@ -1,0 +1,52 @@
+{
+  "schema_version": "0.1.0",
+  "_mock": true,
+  "generado": "2026-11-14T18:00:00+00:00",
+  "zona": {
+    "id": "guanacaste_candidate",
+    "name": "Guanacaste — provisional test point",
+    "latitude": 10.55,
+    "longitude": -85.5,
+    "validated": false
+  },
+  "source_refs": [
+    "synthetic-fixture-v1"
+  ],
+  "warnings": [
+    "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "strong_el_nino",
+      "name": "Niño fuerte",
+      "result_file": "compare-strong_el_nino.json",
+      "selection_status": "synthetic_fixture_not_knn",
+      "k": 3,
+      "sample_warning": "Only 3 analog years; descriptive quantiles have limited support."
+    },
+    {
+      "scenario_id": "neutral",
+      "name": "Neutro",
+      "result_file": "compare-neutral.json",
+      "selection_status": "synthetic_fixture_not_knn",
+      "k": 5,
+      "sample_warning": null
+    },
+    {
+      "scenario_id": "la_nina",
+      "name": "Niña",
+      "result_file": "compare-la_nina.json",
+      "selection_status": "synthetic_fixture_not_knn",
+      "k": 5,
+      "sample_warning": null
+    },
+    {
+      "scenario_id": "like_2026",
+      "name": "Como 2026",
+      "result_file": "compare-like_2026.json",
+      "selection_status": "synthetic_fixture_not_knn",
+      "k": 5,
+      "sample_warning": null
+    }
+  ]
+}

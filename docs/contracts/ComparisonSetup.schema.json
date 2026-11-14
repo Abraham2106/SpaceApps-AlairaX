@@ -1,0 +1,308 @@
+{
+  "$defs": {
+    "CropCycle": {
+      "additionalProperties": false,
+      "properties": {
+        "crop_id": {
+          "enum": [
+            "rice",
+            "melon",
+            "legume",
+            "sorghum"
+          ],
+          "title": "Crop Id",
+          "type": "string"
+        },
+        "sowing_date": {
+          "format": "date",
+          "title": "Sowing Date",
+          "type": "string"
+        },
+        "harvest_date": {
+          "format": "date",
+          "title": "Harvest Date",
+          "type": "string"
+        },
+        "parameter_set_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parameter Set Id"
+        }
+      },
+      "required": [
+        "crop_id",
+        "sowing_date",
+        "harvest_date",
+        "parameter_set_id"
+      ],
+      "title": "CropCycle",
+      "type": "object"
+    },
+    "ModelAssumptions": {
+      "additionalProperties": false,
+      "properties": {
+        "irrigation_mode": {
+          "enum": [
+            "rainfed",
+            "scheduled",
+            "unspecified"
+          ],
+          "title": "Irrigation Mode",
+          "type": "string"
+        },
+        "irrigation_mm_by_date": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "propertyNames": {
+            "format": "date"
+          },
+          "title": "Irrigation Mm By Date",
+          "type": "object"
+        },
+        "initial_soil_water_fraction": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Initial Soil Water Fraction"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "irrigation_mode",
+        "irrigation_mm_by_date",
+        "initial_soil_water_fraction",
+        "notes"
+      ],
+      "title": "ModelAssumptions",
+      "type": "object"
+    },
+    "RotationSchedule": {
+      "additionalProperties": false,
+      "properties": {
+        "rotation_id": {
+          "enum": [
+            "rice_melon",
+            "rice_legume",
+            "rice_sorghum"
+          ],
+          "title": "Rotation Id",
+          "type": "string"
+        },
+        "calendar_status": {
+          "enum": [
+            "provisional",
+            "confirmed"
+          ],
+          "title": "Calendar Status",
+          "type": "string"
+        },
+        "cycles": {
+          "items": {
+            "$ref": "#/$defs/CropCycle"
+          },
+          "minItems": 1,
+          "title": "Cycles",
+          "type": "array"
+        }
+      },
+      "required": [
+        "rotation_id",
+        "calendar_status",
+        "cycles"
+      ],
+      "title": "RotationSchedule",
+      "type": "object"
+    },
+    "SoilProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "field_capacity_m3_m3": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Field Capacity M3 M3"
+        },
+        "wilting_point_m3_m3": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Wilting Point M3 M3"
+        },
+        "rooting_depth_m": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rooting Depth M"
+        },
+        "source_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "field_capacity_m3_m3",
+        "wilting_point_m3_m3",
+        "rooting_depth_m",
+        "source_refs"
+      ],
+      "title": "SoilProfile",
+      "type": "object"
+    },
+    "Zone": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "latitude": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "Latitude",
+          "type": "number"
+        },
+        "longitude": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Longitude",
+          "type": "number"
+        },
+        "validated": {
+          "default": false,
+          "title": "Validated",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "latitude",
+        "longitude"
+      ],
+      "title": "Zone",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Calendar dates and management are supplied per historical year, never inferred.",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0",
+      "default": "0.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "_mock": {
+      "title": "Mock",
+      "type": "boolean"
+    },
+    "generado": {
+      "format": "date-time",
+      "title": "Generado",
+      "type": "string"
+    },
+    "zona": {
+      "$ref": "#/$defs/Zone"
+    },
+    "source_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Refs",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "reviewed_by": {
+      "minLength": 1,
+      "title": "Reviewed By",
+      "type": "string"
+    },
+    "soil": {
+      "$ref": "#/$defs/SoilProfile"
+    },
+    "rotations_by_year": {
+      "additionalProperties": {
+        "items": {
+          "$ref": "#/$defs/RotationSchedule"
+        },
+        "type": "array"
+      },
+      "title": "Rotations By Year",
+      "type": "object"
+    },
+    "assumptions_by_year": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ModelAssumptions"
+      },
+      "title": "Assumptions By Year",
+      "type": "object"
+    }
+  },
+  "required": [
+    "_mock",
+    "generado",
+    "zona",
+    "source_refs",
+    "warnings",
+    "reviewed_by",
+    "soil",
+    "rotations_by_year",
+    "assumptions_by_year"
+  ],
+  "title": "ComparisonSetup",
+  "type": "object"
+}

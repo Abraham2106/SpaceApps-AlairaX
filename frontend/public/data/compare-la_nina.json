@@ -1,0 +1,696 @@
+{
+  "schema_version": "0.1.0",
+  "_mock": true,
+  "generado": "2026-11-14T18:00:00Z",
+  "zona": {
+    "id": "guanacaste_candidate",
+    "name": "Guanacaste — provisional test point",
+    "latitude": 10.55,
+    "longitude": -85.5,
+    "validated": false
+  },
+  "source_refs": [
+    "synthetic-fixture-v1"
+  ],
+  "warnings": [
+    "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+  ],
+  "scenario_id": "la_nina",
+  "baseline_rotation_id": "rice_melon",
+  "analog_years": [
+    {
+      "year": 1982,
+      "distance": 0.1
+    },
+    {
+      "year": 1997,
+      "distance": 0.2
+    },
+    {
+      "year": 2002,
+      "distance": 0.3
+    },
+    {
+      "year": 2015,
+      "distance": 0.4
+    },
+    {
+      "year": 2023,
+      "distance": 0.5
+    }
+  ],
+  "rotations": [
+    {
+      "rotation_id": "rice_melon",
+      "metrics": {
+        "crop_water_demand_mm": {
+          "p10": 716.0,
+          "p50": 780.0,
+          "p90": 844.0,
+          "n": 5
+        },
+        "modeled_water_deficit_mm": {
+          "p10": 108.0,
+          "p50": 140.0,
+          "p90": 172.0,
+          "n": 5
+        },
+        "water_stress_days": {
+          "p10": 10.4,
+          "p50": 12.0,
+          "p90": 13.6,
+          "n": 5
+        }
+      },
+      "delta_vs_baseline": {
+        "crop_water_demand_mm": {
+          "p10": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "n": 5
+        },
+        "modeled_water_deficit_mm": {
+          "p10": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "n": 5
+        },
+        "water_stress_days": {
+          "p10": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "n": 5
+        }
+      },
+      "runs": [
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_melon",
+          "scenario_id": "la_nina",
+          "year": 1982,
+          "environment_id": "608118c6c410f0317f94caf6d7e756d3d14a04de6c264ce512ca6692ccf5b029",
+          "metrics": {
+            "crop_water_demand_mm": 700.0,
+            "modeled_water_deficit_mm": 100.0,
+            "water_stress_days": 10
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        },
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_melon",
+          "scenario_id": "la_nina",
+          "year": 1997,
+          "environment_id": "85c0e9f46457f1b7dc251059120e1ddd00dcd544fb4de2e9c95619d5142f70f6",
+          "metrics": {
+            "crop_water_demand_mm": 740.0,
+            "modeled_water_deficit_mm": 120.0,
+            "water_stress_days": 11
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        },
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_melon",
+          "scenario_id": "la_nina",
+          "year": 2002,
+          "environment_id": "12a61d19d3f189326322c9d06e4805de9067686bb07b8bcc083ef3899077610e",
+          "metrics": {
+            "crop_water_demand_mm": 780.0,
+            "modeled_water_deficit_mm": 140.0,
+            "water_stress_days": 12
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        },
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_melon",
+          "scenario_id": "la_nina",
+          "year": 2015,
+          "environment_id": "2e7cfde0221b9e4f8bb99e8a12727eb5079f941f1cfb4fcff6b51e9833d6d938",
+          "metrics": {
+            "crop_water_demand_mm": 820.0,
+            "modeled_water_deficit_mm": 160.0,
+            "water_stress_days": 13
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        },
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_melon",
+          "scenario_id": "la_nina",
+          "year": 2023,
+          "environment_id": "5136c3932581aa05e0cc948cf6d856318a64c8a210787ac98518f3999ffe7b26",
+          "metrics": {
+            "crop_water_demand_mm": 860.0,
+            "modeled_water_deficit_mm": 180.0,
+            "water_stress_days": 14
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        }
+      ]
+    },
+    {
+      "rotation_id": "rice_legume",
+      "metrics": {
+        "crop_water_demand_mm": {
+          "p10": 736.0,
+          "p50": 800.0,
+          "p90": 864.0,
+          "n": 5
+        },
+        "modeled_water_deficit_mm": {
+          "p10": 98.0,
+          "p50": 130.0,
+          "p90": 162.0,
+          "n": 5
+        },
+        "water_stress_days": {
+          "p10": 11.4,
+          "p50": 13.0,
+          "p90": 14.6,
+          "n": 5
+        }
+      },
+      "delta_vs_baseline": {
+        "crop_water_demand_mm": {
+          "p10": 20.0,
+          "p50": 20.0,
+          "p90": 20.0,
+          "n": 5
+        },
+        "modeled_water_deficit_mm": {
+          "p10": -10.0,
+          "p50": -10.0,
+          "p90": -10.0,
+          "n": 5
+        },
+        "water_stress_days": {
+          "p10": 1.0,
+          "p50": 1.0,
+          "p90": 1.0,
+          "n": 5
+        }
+      },
+      "runs": [
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_legume",
+          "scenario_id": "la_nina",
+          "year": 1982,
+          "environment_id": "608118c6c410f0317f94caf6d7e756d3d14a04de6c264ce512ca6692ccf5b029",
+          "metrics": {
+            "crop_water_demand_mm": 720.0,
+            "modeled_water_deficit_mm": 90.0,
+            "water_stress_days": 11
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        },
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_legume",
+          "scenario_id": "la_nina",
+          "year": 1997,
+          "environment_id": "85c0e9f46457f1b7dc251059120e1ddd00dcd544fb4de2e9c95619d5142f70f6",
+          "metrics": {
+            "crop_water_demand_mm": 760.0,
+            "modeled_water_deficit_mm": 110.0,
+            "water_stress_days": 12
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        },
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_legume",
+          "scenario_id": "la_nina",
+          "year": 2002,
+          "environment_id": "12a61d19d3f189326322c9d06e4805de9067686bb07b8bcc083ef3899077610e",
+          "metrics": {
+            "crop_water_demand_mm": 800.0,
+            "modeled_water_deficit_mm": 130.0,
+            "water_stress_days": 13
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        },
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_legume",
+          "scenario_id": "la_nina",
+          "year": 2015,
+          "environment_id": "2e7cfde0221b9e4f8bb99e8a12727eb5079f941f1cfb4fcff6b51e9833d6d938",
+          "metrics": {
+            "crop_water_demand_mm": 840.0,
+            "modeled_water_deficit_mm": 150.0,
+            "water_stress_days": 14
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        },
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_legume",
+          "scenario_id": "la_nina",
+          "year": 2023,
+          "environment_id": "5136c3932581aa05e0cc948cf6d856318a64c8a210787ac98518f3999ffe7b26",
+          "metrics": {
+            "crop_water_demand_mm": 880.0,
+            "modeled_water_deficit_mm": 170.0,
+            "water_stress_days": 15
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        }
+      ]
+    },
+    {
+      "rotation_id": "rice_sorghum",
+      "metrics": {
+        "crop_water_demand_mm": {
+          "p10": 756.0,
+          "p50": 820.0,
+          "p90": 884.0,
+          "n": 5
+        },
+        "modeled_water_deficit_mm": {
+          "p10": 88.0,
+          "p50": 120.0,
+          "p90": 152.0,
+          "n": 5
+        },
+        "water_stress_days": {
+          "p10": 12.4,
+          "p50": 14.0,
+          "p90": 15.6,
+          "n": 5
+        }
+      },
+      "delta_vs_baseline": {
+        "crop_water_demand_mm": {
+          "p10": 40.0,
+          "p50": 40.0,
+          "p90": 40.0,
+          "n": 5
+        },
+        "modeled_water_deficit_mm": {
+          "p10": -20.0,
+          "p50": -20.0,
+          "p90": -20.0,
+          "n": 5
+        },
+        "water_stress_days": {
+          "p10": 2.0,
+          "p50": 2.0,
+          "p90": 2.0,
+          "n": 5
+        }
+      },
+      "runs": [
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_sorghum",
+          "scenario_id": "la_nina",
+          "year": 1982,
+          "environment_id": "608118c6c410f0317f94caf6d7e756d3d14a04de6c264ce512ca6692ccf5b029",
+          "metrics": {
+            "crop_water_demand_mm": 740.0,
+            "modeled_water_deficit_mm": 80.0,
+            "water_stress_days": 12
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        },
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_sorghum",
+          "scenario_id": "la_nina",
+          "year": 1997,
+          "environment_id": "85c0e9f46457f1b7dc251059120e1ddd00dcd544fb4de2e9c95619d5142f70f6",
+          "metrics": {
+            "crop_water_demand_mm": 780.0,
+            "modeled_water_deficit_mm": 100.0,
+            "water_stress_days": 13
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        },
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_sorghum",
+          "scenario_id": "la_nina",
+          "year": 2002,
+          "environment_id": "12a61d19d3f189326322c9d06e4805de9067686bb07b8bcc083ef3899077610e",
+          "metrics": {
+            "crop_water_demand_mm": 820.0,
+            "modeled_water_deficit_mm": 120.0,
+            "water_stress_days": 14
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        },
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_sorghum",
+          "scenario_id": "la_nina",
+          "year": 2015,
+          "environment_id": "2e7cfde0221b9e4f8bb99e8a12727eb5079f941f1cfb4fcff6b51e9833d6d938",
+          "metrics": {
+            "crop_water_demand_mm": 860.0,
+            "modeled_water_deficit_mm": 140.0,
+            "water_stress_days": 15
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        },
+        {
+          "schema_version": "0.1.0",
+          "_mock": true,
+          "generado": "2026-11-14T18:00:00Z",
+          "zona": {
+            "id": "guanacaste_candidate",
+            "name": "Guanacaste — provisional test point",
+            "latitude": 10.55,
+            "longitude": -85.5,
+            "validated": false
+          },
+          "source_refs": [
+            "synthetic-fixture-v1"
+          ],
+          "warnings": [
+            "SYNTHETIC MOCK: UI and contract testing only; not observed climate or FAO-56 results."
+          ],
+          "rotation_id": "rice_sorghum",
+          "scenario_id": "la_nina",
+          "year": 2023,
+          "environment_id": "5136c3932581aa05e0cc948cf6d856318a64c8a210787ac98518f3999ffe7b26",
+          "metrics": {
+            "crop_water_demand_mm": 900.0,
+            "modeled_water_deficit_mm": 160.0,
+            "water_stress_days": 16
+          },
+          "daily_balance": [],
+          "assumptions": [
+            "All climate, metrics and analog distances are synthetic fixtures.",
+            "Crop dates are provisional placeholders pending Ant and Justin.",
+            "No agronomic parameters, soil measurements or KNN search were used."
+          ],
+          "model_version": "synthetic-mock-v1"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Estimaciones de modelo. Requieren validación local.",
+    "Negative deltas mean lower modeled metrics, not demonstrated water savings.",
+    "p10–p90 describes variation across analogs, not a forecast or confidence interval.",
+    "No yield, profitability, causal effect or winning rotation is inferred."
+  ],
+  "uncertainty_method": "empirical_linear_quantiles_across_analog_years"
+}

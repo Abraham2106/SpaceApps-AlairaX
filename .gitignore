@@ -1,0 +1,15 @@
+# Contexto local de trabajo (se mantiene fuera del repositorio)
+/contexto-local/Finca_Resiliente_AlairaX_Contexto_Completo_WBS.md
+/contexto-local/fieldshift-contexto.md
+
+# Secrets, downloaded raw responses and Python build/cache files
+.env
+.env.*
+!.env.example
+/datasets/raw/
+/outputs/raw/
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+*.egg-info/

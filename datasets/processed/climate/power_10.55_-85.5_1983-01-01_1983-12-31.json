@@ -1,0 +1,5555 @@
+{
+  "schema_version": "0.1.0",
+  "_mock": false,
+  "generado": "2026-11-14T18:36:09.206015+00:00",
+  "zona": {
+    "id": "provisional-point",
+    "name": "Provisional agricultural point, Guanacaste",
+    "latitude": 10.55,
+    "longitude": -85.5,
+    "validated": false
+  },
+  "source_refs": [
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19830101&end=19831231&format=JSON&time-standard=LST&units=metric"
+  ],
+  "provenance": {
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19830101&end=19831231&format=JSON&time-standard=LST&units=metric",
+    "fetched_at": "2026-11-14T18:36:09.206015+00:00",
+    "sha256": "a32c933aeaac391ecee34a670c9ad22d2babe9f4c500bf5a61248a53ffa21321",
+    "status": 200,
+    "content_type": "application/json",
+    "etag": null,
+    "last_modified": null
+  },
+  "warnings": [
+    "Location is provisional; SoilGrids and farm suitability are not validated.",
+    "ET0 is null until the scientific kernel calculates it.",
+    "No IMN rainfall calibration is applied; bias claims require independent validation."
+  ],
+  "start": "1983-01-01",
+  "end": "1983-12-31",
+  "days": [
+    {
+      "date": "1983-01-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.38,
+      "tmin_c": 23.32,
+      "tmax_c": 33.67,
+      "relative_humidity_pct": 67.78,
+      "wind_speed_2m_m_s": 4.66,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.59,
+      "tmin_c": 23.69,
+      "tmax_c": 33.93,
+      "relative_humidity_pct": 66.36,
+      "wind_speed_2m_m_s": 4.63,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-03",
+      "et0_mm": null,
+      "precipitation_mm": 2.34,
+      "tmin_c": 23.27,
+      "tmax_c": 33.6,
+      "relative_humidity_pct": 70.35,
+      "wind_speed_2m_m_s": 4.73,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.34,
+      "tmin_c": 23.79,
+      "tmax_c": 32.37,
+      "relative_humidity_pct": 65.79,
+      "wind_speed_2m_m_s": 5.99,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.54,
+      "tmin_c": 23.49,
+      "tmax_c": 33.23,
+      "relative_humidity_pct": 67.05,
+      "wind_speed_2m_m_s": 5.4,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 24.43,
+      "tmax_c": 32.64,
+      "relative_humidity_pct": 67.26,
+      "wind_speed_2m_m_s": 6.04,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.18,
+      "tmin_c": 24.5,
+      "tmax_c": 34.43,
+      "relative_humidity_pct": 66.51,
+      "wind_speed_2m_m_s": 4.96,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 25.0,
+      "tmax_c": 35.38,
+      "relative_humidity_pct": 64.55,
+      "wind_speed_2m_m_s": 3.44,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 24.75,
+      "tmax_c": 34.96,
+      "relative_humidity_pct": 65.65,
+      "wind_speed_2m_m_s": 3.81,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.32,
+      "tmax_c": 34.9,
+      "relative_humidity_pct": 66.02,
+      "wind_speed_2m_m_s": 4.92,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.73,
+      "tmax_c": 33.92,
+      "relative_humidity_pct": 65.72,
+      "wind_speed_2m_m_s": 5.8,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 24.08,
+      "tmax_c": 32.48,
+      "relative_humidity_pct": 65.89,
+      "wind_speed_2m_m_s": 6.07,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.7,
+      "tmin_c": 23.7,
+      "tmax_c": 31.76,
+      "relative_humidity_pct": 69.62,
+      "wind_speed_2m_m_s": 6.44,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.07,
+      "tmin_c": 21.98,
+      "tmax_c": 30.57,
+      "relative_humidity_pct": 63.97,
+      "wind_speed_2m_m_s": 6.8,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 22.03,
+      "tmax_c": 32.32,
+      "relative_humidity_pct": 65.18,
+      "wind_speed_2m_m_s": 6.12,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.62,
+      "tmax_c": 32.03,
+      "relative_humidity_pct": 64.42,
+      "wind_speed_2m_m_s": 6.21,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.71,
+      "tmax_c": 33.47,
+      "relative_humidity_pct": 64.0,
+      "wind_speed_2m_m_s": 5.07,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.58,
+      "tmax_c": 34.46,
+      "relative_humidity_pct": 64.38,
+      "wind_speed_2m_m_s": 4.79,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.48,
+      "tmax_c": 35.55,
+      "relative_humidity_pct": 62.49,
+      "wind_speed_2m_m_s": 2.97,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.73,
+      "tmax_c": 36.96,
+      "relative_humidity_pct": 61.92,
+      "wind_speed_2m_m_s": 2.28,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.77,
+      "tmax_c": 35.67,
+      "relative_humidity_pct": 67.1,
+      "wind_speed_2m_m_s": 2.08,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.09,
+      "tmin_c": 24.72,
+      "tmax_c": 36.5,
+      "relative_humidity_pct": 61.96,
+      "wind_speed_2m_m_s": 2.01,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.95,
+      "tmax_c": 36.71,
+      "relative_humidity_pct": 59.71,
+      "wind_speed_2m_m_s": 2.31,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.7,
+      "tmax_c": 36.05,
+      "relative_humidity_pct": 60.2,
+      "wind_speed_2m_m_s": 3.12,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.16,
+      "tmax_c": 34.93,
+      "relative_humidity_pct": 61.71,
+      "wind_speed_2m_m_s": 4.46,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.5,
+      "tmax_c": 35.53,
+      "relative_humidity_pct": 60.74,
+      "wind_speed_2m_m_s": 3.88,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.93,
+      "tmax_c": 35.57,
+      "relative_humidity_pct": 59.7,
+      "wind_speed_2m_m_s": 4.07,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.53,
+      "tmax_c": 34.55,
+      "relative_humidity_pct": 63.65,
+      "wind_speed_2m_m_s": 5.4,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.73,
+      "tmax_c": 35.38,
+      "relative_humidity_pct": 61.56,
+      "wind_speed_2m_m_s": 4.13,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-30",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.72,
+      "tmax_c": 34.38,
+      "relative_humidity_pct": 62.57,
+      "wind_speed_2m_m_s": 4.99,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-01-31",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 23.5,
+      "tmax_c": 35.45,
+      "relative_humidity_pct": 60.05,
+      "wind_speed_2m_m_s": 3.74,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.19,
+      "tmin_c": 23.51,
+      "tmax_c": 36.04,
+      "relative_humidity_pct": 60.94,
+      "wind_speed_2m_m_s": 2.57,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.1,
+      "tmax_c": 36.15,
+      "relative_humidity_pct": 58.85,
+      "wind_speed_2m_m_s": 1.56,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.79,
+      "tmax_c": 35.44,
+      "relative_humidity_pct": 59.62,
+      "wind_speed_2m_m_s": 3.98,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.89,
+      "tmax_c": 34.29,
+      "relative_humidity_pct": 63.09,
+      "wind_speed_2m_m_s": 5.93,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.04,
+      "tmax_c": 35.41,
+      "relative_humidity_pct": 57.99,
+      "wind_speed_2m_m_s": 3.64,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.08,
+      "tmax_c": 35.66,
+      "relative_humidity_pct": 59.72,
+      "wind_speed_2m_m_s": 2.53,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.63,
+      "tmax_c": 36.02,
+      "relative_humidity_pct": 56.33,
+      "wind_speed_2m_m_s": 2.65,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.69,
+      "tmax_c": 34.8,
+      "relative_humidity_pct": 59.37,
+      "wind_speed_2m_m_s": 4.86,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 23.1,
+      "tmax_c": 35.14,
+      "relative_humidity_pct": 58.36,
+      "wind_speed_2m_m_s": 3.27,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.28,
+      "tmin_c": 21.92,
+      "tmax_c": 35.46,
+      "relative_humidity_pct": 54.77,
+      "wind_speed_2m_m_s": 2.05,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-11",
+      "et0_mm": null,
+      "precipitation_mm": 1.15,
+      "tmin_c": 23.07,
+      "tmax_c": 35.0,
+      "relative_humidity_pct": 53.0,
+      "wind_speed_2m_m_s": 1.31,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-12",
+      "et0_mm": null,
+      "precipitation_mm": 3.61,
+      "tmin_c": 23.7,
+      "tmax_c": 35.13,
+      "relative_humidity_pct": 54.58,
+      "wind_speed_2m_m_s": 1.95,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.27,
+      "tmin_c": 24.03,
+      "tmax_c": 35.39,
+      "relative_humidity_pct": 57.56,
+      "wind_speed_2m_m_s": 3.72,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-14",
+      "et0_mm": null,
+      "precipitation_mm": 2.08,
+      "tmin_c": 23.16,
+      "tmax_c": 34.02,
+      "relative_humidity_pct": 65.47,
+      "wind_speed_2m_m_s": 4.69,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.17,
+      "tmax_c": 36.41,
+      "relative_humidity_pct": 59.49,
+      "wind_speed_2m_m_s": 2.65,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.55,
+      "tmax_c": 35.58,
+      "relative_humidity_pct": 60.15,
+      "wind_speed_2m_m_s": 1.65,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.04,
+      "tmax_c": 35.14,
+      "relative_humidity_pct": 60.48,
+      "wind_speed_2m_m_s": 4.61,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.56,
+      "tmax_c": 35.73,
+      "relative_humidity_pct": 60.64,
+      "wind_speed_2m_m_s": 4.94,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.16,
+      "tmax_c": 34.37,
+      "relative_humidity_pct": 60.45,
+      "wind_speed_2m_m_s": 5.56,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 23.78,
+      "tmax_c": 35.06,
+      "relative_humidity_pct": 62.0,
+      "wind_speed_2m_m_s": 4.73,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.15,
+      "tmax_c": 35.33,
+      "relative_humidity_pct": 62.44,
+      "wind_speed_2m_m_s": 5.46,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 24.81,
+      "tmax_c": 35.75,
+      "relative_humidity_pct": 61.24,
+      "wind_speed_2m_m_s": 4.74,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.33,
+      "tmin_c": 26.22,
+      "tmax_c": 33.32,
+      "relative_humidity_pct": 63.97,
+      "wind_speed_2m_m_s": 4.56,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.64,
+      "tmin_c": 25.99,
+      "tmax_c": 35.15,
+      "relative_humidity_pct": 63.59,
+      "wind_speed_2m_m_s": 4.56,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.54,
+      "tmin_c": 26.2,
+      "tmax_c": 32.18,
+      "relative_humidity_pct": 64.4,
+      "wind_speed_2m_m_s": 4.23,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.24,
+      "tmin_c": 25.15,
+      "tmax_c": 36.22,
+      "relative_humidity_pct": 58.71,
+      "wind_speed_2m_m_s": 3.52,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.11,
+      "tmin_c": 26.05,
+      "tmax_c": 37.51,
+      "relative_humidity_pct": 53.03,
+      "wind_speed_2m_m_s": 3.16,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-02-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.18,
+      "tmin_c": 26.23,
+      "tmax_c": 37.93,
+      "relative_humidity_pct": 56.6,
+      "wind_speed_2m_m_s": 2.61,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.2,
+      "tmin_c": 25.95,
+      "tmax_c": 36.13,
+      "relative_humidity_pct": 59.76,
+      "wind_speed_2m_m_s": 4.74,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.62,
+      "tmax_c": 35.15,
+      "relative_humidity_pct": 59.15,
+      "wind_speed_2m_m_s": 5.93,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.28,
+      "tmax_c": 36.65,
+      "relative_humidity_pct": 58.53,
+      "wind_speed_2m_m_s": 4.19,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.45,
+      "tmax_c": 37.01,
+      "relative_humidity_pct": 57.22,
+      "wind_speed_2m_m_s": 2.55,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.43,
+      "tmax_c": 37.75,
+      "relative_humidity_pct": 55.47,
+      "wind_speed_2m_m_s": 1.88,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.41,
+      "tmax_c": 37.4,
+      "relative_humidity_pct": 54.12,
+      "wind_speed_2m_m_s": 2.06,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.25,
+      "tmax_c": 37.22,
+      "relative_humidity_pct": 54.17,
+      "wind_speed_2m_m_s": 2.61,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-08",
+      "et0_mm": null,
+      "precipitation_mm": 3.31,
+      "tmin_c": 26.01,
+      "tmax_c": 35.36,
+      "relative_humidity_pct": 65.17,
+      "wind_speed_2m_m_s": 2.32,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.12,
+      "tmin_c": 26.29,
+      "tmax_c": 36.02,
+      "relative_humidity_pct": 60.85,
+      "wind_speed_2m_m_s": 2.49,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 25.62,
+      "tmax_c": 37.73,
+      "relative_humidity_pct": 54.27,
+      "wind_speed_2m_m_s": 3.1,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.21,
+      "tmax_c": 35.79,
+      "relative_humidity_pct": 58.77,
+      "wind_speed_2m_m_s": 5.13,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 24.23,
+      "tmax_c": 34.95,
+      "relative_humidity_pct": 58.82,
+      "wind_speed_2m_m_s": 5.52,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.69,
+      "tmax_c": 35.07,
+      "relative_humidity_pct": 56.17,
+      "wind_speed_2m_m_s": 4.05,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 24.76,
+      "tmax_c": 36.38,
+      "relative_humidity_pct": 55.93,
+      "wind_speed_2m_m_s": 3.08,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.08,
+      "tmin_c": 27.06,
+      "tmax_c": 33.86,
+      "relative_humidity_pct": 64.87,
+      "wind_speed_2m_m_s": 1.93,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.73,
+      "tmin_c": 26.73,
+      "tmax_c": 33.64,
+      "relative_humidity_pct": 68.33,
+      "wind_speed_2m_m_s": 3.12,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-17",
+      "et0_mm": null,
+      "precipitation_mm": 1.51,
+      "tmin_c": 26.59,
+      "tmax_c": 32.64,
+      "relative_humidity_pct": 72.21,
+      "wind_speed_2m_m_s": 2.96,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.28,
+      "tmin_c": 26.47,
+      "tmax_c": 33.71,
+      "relative_humidity_pct": 66.16,
+      "wind_speed_2m_m_s": 2.29,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 26.14,
+      "tmax_c": 38.25,
+      "relative_humidity_pct": 58.43,
+      "wind_speed_2m_m_s": 2.29,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 27.3,
+      "tmax_c": 34.7,
+      "relative_humidity_pct": 66.8,
+      "wind_speed_2m_m_s": 2.41,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 26.62,
+      "tmax_c": 35.31,
+      "relative_humidity_pct": 60.98,
+      "wind_speed_2m_m_s": 2.36,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 26.0,
+      "tmax_c": 37.76,
+      "relative_humidity_pct": 56.06,
+      "wind_speed_2m_m_s": 3.92,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.31,
+      "tmax_c": 34.38,
+      "relative_humidity_pct": 60.33,
+      "wind_speed_2m_m_s": 3.68,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.08,
+      "tmax_c": 35.89,
+      "relative_humidity_pct": 59.3,
+      "wind_speed_2m_m_s": 1.89,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.62,
+      "tmax_c": 36.71,
+      "relative_humidity_pct": 54.34,
+      "wind_speed_2m_m_s": 3.74,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 24.71,
+      "tmax_c": 37.51,
+      "relative_humidity_pct": 55.64,
+      "wind_speed_2m_m_s": 3.33,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 25.13,
+      "tmax_c": 37.71,
+      "relative_humidity_pct": 55.33,
+      "wind_speed_2m_m_s": 2.9,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.11,
+      "tmin_c": 24.59,
+      "tmax_c": 37.38,
+      "relative_humidity_pct": 54.01,
+      "wind_speed_2m_m_s": 3.59,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 24.61,
+      "tmax_c": 36.86,
+      "relative_humidity_pct": 57.65,
+      "wind_speed_2m_m_s": 3.91,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-30",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 25.13,
+      "tmax_c": 36.27,
+      "relative_humidity_pct": 60.19,
+      "wind_speed_2m_m_s": 3.27,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-03-31",
+      "et0_mm": null,
+      "precipitation_mm": 0.1,
+      "tmin_c": 26.32,
+      "tmax_c": 35.22,
+      "relative_humidity_pct": 54.14,
+      "wind_speed_2m_m_s": 2.09,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.06,
+      "tmin_c": 26.49,
+      "tmax_c": 36.34,
+      "relative_humidity_pct": 54.88,
+      "wind_speed_2m_m_s": 1.92,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.89,
+      "tmin_c": 26.74,
+      "tmax_c": 34.68,
+      "relative_humidity_pct": 64.81,
+      "wind_speed_2m_m_s": 1.89,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.51,
+      "tmin_c": 26.32,
+      "tmax_c": 36.32,
+      "relative_humidity_pct": 56.85,
+      "wind_speed_2m_m_s": 1.54,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.06,
+      "tmin_c": 24.96,
+      "tmax_c": 37.98,
+      "relative_humidity_pct": 52.34,
+      "wind_speed_2m_m_s": 2.12,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.71,
+      "tmax_c": 38.33,
+      "relative_humidity_pct": 54.84,
+      "wind_speed_2m_m_s": 4.08,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 24.77,
+      "tmax_c": 38.17,
+      "relative_humidity_pct": 57.43,
+      "wind_speed_2m_m_s": 2.86,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.1,
+      "tmin_c": 24.08,
+      "tmax_c": 38.08,
+      "relative_humidity_pct": 50.89,
+      "wind_speed_2m_m_s": 2.38,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.06,
+      "tmin_c": 24.0,
+      "tmax_c": 37.96,
+      "relative_humidity_pct": 52.74,
+      "wind_speed_2m_m_s": 2.3,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 24.38,
+      "tmax_c": 37.79,
+      "relative_humidity_pct": 53.56,
+      "wind_speed_2m_m_s": 2.74,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 25.28,
+      "tmax_c": 37.83,
+      "relative_humidity_pct": 51.45,
+      "wind_speed_2m_m_s": 1.84,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 25.71,
+      "tmax_c": 37.81,
+      "relative_humidity_pct": 53.02,
+      "wind_speed_2m_m_s": 2.8,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.88,
+      "tmax_c": 37.73,
+      "relative_humidity_pct": 54.08,
+      "wind_speed_2m_m_s": 2.87,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.35,
+      "tmax_c": 38.1,
+      "relative_humidity_pct": 53.29,
+      "wind_speed_2m_m_s": 2.64,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.09,
+      "tmin_c": 25.95,
+      "tmax_c": 38.07,
+      "relative_humidity_pct": 52.06,
+      "wind_speed_2m_m_s": 1.98,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.08,
+      "tmin_c": 26.07,
+      "tmax_c": 38.72,
+      "relative_humidity_pct": 49.44,
+      "wind_speed_2m_m_s": 1.98,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.11,
+      "tmin_c": 26.98,
+      "tmax_c": 38.82,
+      "relative_humidity_pct": 51.75,
+      "wind_speed_2m_m_s": 2.01,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.15,
+      "tmin_c": 25.88,
+      "tmax_c": 37.64,
+      "relative_humidity_pct": 50.47,
+      "wind_speed_2m_m_s": 3.18,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 25.04,
+      "tmax_c": 37.26,
+      "relative_humidity_pct": 54.57,
+      "wind_speed_2m_m_s": 2.98,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 25.92,
+      "tmax_c": 37.6,
+      "relative_humidity_pct": 57.71,
+      "wind_speed_2m_m_s": 2.57,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 27.53,
+      "tmax_c": 36.32,
+      "relative_humidity_pct": 61.97,
+      "wind_speed_2m_m_s": 2.07,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 27.48,
+      "tmax_c": 37.62,
+      "relative_humidity_pct": 61.88,
+      "wind_speed_2m_m_s": 2.45,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 27.19,
+      "tmax_c": 36.11,
+      "relative_humidity_pct": 56.04,
+      "wind_speed_2m_m_s": 2.02,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 27.01,
+      "tmax_c": 37.33,
+      "relative_humidity_pct": 61.4,
+      "wind_speed_2m_m_s": 2.07,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 27.95,
+      "tmax_c": 32.23,
+      "relative_humidity_pct": 67.53,
+      "wind_speed_2m_m_s": 1.52,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-25",
+      "et0_mm": null,
+      "precipitation_mm": 3.55,
+      "tmin_c": 27.2,
+      "tmax_c": 37.04,
+      "relative_humidity_pct": 58.11,
+      "wind_speed_2m_m_s": 1.34,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-26",
+      "et0_mm": null,
+      "precipitation_mm": 1.15,
+      "tmin_c": 25.6,
+      "tmax_c": 33.59,
+      "relative_humidity_pct": 61.88,
+      "wind_speed_2m_m_s": 3.4,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 24.23,
+      "tmax_c": 36.65,
+      "relative_humidity_pct": 60.94,
+      "wind_speed_2m_m_s": 2.32,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-28",
+      "et0_mm": null,
+      "precipitation_mm": 2.53,
+      "tmin_c": 25.21,
+      "tmax_c": 36.43,
+      "relative_humidity_pct": 63.61,
+      "wind_speed_2m_m_s": 3.52,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-29",
+      "et0_mm": null,
+      "precipitation_mm": 1.52,
+      "tmin_c": 24.95,
+      "tmax_c": 35.91,
+      "relative_humidity_pct": 60.88,
+      "wind_speed_2m_m_s": 4.73,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-04-30",
+      "et0_mm": null,
+      "precipitation_mm": 0.08,
+      "tmin_c": 23.8,
+      "tmax_c": 35.73,
+      "relative_humidity_pct": 61.05,
+      "wind_speed_2m_m_s": 4.3,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.35,
+      "tmax_c": 37.04,
+      "relative_humidity_pct": 56.94,
+      "wind_speed_2m_m_s": 3.33,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.48,
+      "tmax_c": 37.52,
+      "relative_humidity_pct": 56.55,
+      "wind_speed_2m_m_s": 2.87,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 25.76,
+      "tmax_c": 37.6,
+      "relative_humidity_pct": 56.55,
+      "wind_speed_2m_m_s": 2.23,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.06,
+      "tmin_c": 27.0,
+      "tmax_c": 37.96,
+      "relative_humidity_pct": 57.47,
+      "wind_speed_2m_m_s": 1.86,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.26,
+      "tmin_c": 27.23,
+      "tmax_c": 37.98,
+      "relative_humidity_pct": 55.16,
+      "wind_speed_2m_m_s": 1.29,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-06",
+      "et0_mm": null,
+      "precipitation_mm": 1.02,
+      "tmin_c": 26.57,
+      "tmax_c": 34.92,
+      "relative_humidity_pct": 61.96,
+      "wind_speed_2m_m_s": 2.86,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.35,
+      "tmin_c": 26.94,
+      "tmax_c": 36.44,
+      "relative_humidity_pct": 59.81,
+      "wind_speed_2m_m_s": 3.26,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.87,
+      "tmin_c": 27.05,
+      "tmax_c": 35.0,
+      "relative_humidity_pct": 62.24,
+      "wind_speed_2m_m_s": 3.8,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-09",
+      "et0_mm": null,
+      "precipitation_mm": 1.55,
+      "tmin_c": 26.43,
+      "tmax_c": 35.17,
+      "relative_humidity_pct": 63.95,
+      "wind_speed_2m_m_s": 3.56,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.5,
+      "tmin_c": 26.94,
+      "tmax_c": 35.77,
+      "relative_humidity_pct": 62.51,
+      "wind_speed_2m_m_s": 4.45,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-11",
+      "et0_mm": null,
+      "precipitation_mm": 2.19,
+      "tmin_c": 26.53,
+      "tmax_c": 35.88,
+      "relative_humidity_pct": 64.53,
+      "wind_speed_2m_m_s": 3.7,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.22,
+      "tmin_c": 27.06,
+      "tmax_c": 34.94,
+      "relative_humidity_pct": 64.61,
+      "wind_speed_2m_m_s": 4.28,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 26.54,
+      "tmax_c": 37.33,
+      "relative_humidity_pct": 58.48,
+      "wind_speed_2m_m_s": 3.98,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.42,
+      "tmax_c": 35.77,
+      "relative_humidity_pct": 59.12,
+      "wind_speed_2m_m_s": 3.33,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 26.05,
+      "tmax_c": 36.37,
+      "relative_humidity_pct": 59.02,
+      "wind_speed_2m_m_s": 2.37,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-16",
+      "et0_mm": null,
+      "precipitation_mm": 1.86,
+      "tmin_c": 26.2,
+      "tmax_c": 37.21,
+      "relative_humidity_pct": 56.91,
+      "wind_speed_2m_m_s": 1.97,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-17",
+      "et0_mm": null,
+      "precipitation_mm": 13.01,
+      "tmin_c": 26.07,
+      "tmax_c": 33.78,
+      "relative_humidity_pct": 71.99,
+      "wind_speed_2m_m_s": 2.01,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-18",
+      "et0_mm": null,
+      "precipitation_mm": 3.82,
+      "tmin_c": 25.6,
+      "tmax_c": 35.63,
+      "relative_humidity_pct": 68.1,
+      "wind_speed_2m_m_s": 2.99,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-19",
+      "et0_mm": null,
+      "precipitation_mm": 6.49,
+      "tmin_c": 25.54,
+      "tmax_c": 34.66,
+      "relative_humidity_pct": 70.58,
+      "wind_speed_2m_m_s": 3.37,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-20",
+      "et0_mm": null,
+      "precipitation_mm": 2.64,
+      "tmin_c": 25.62,
+      "tmax_c": 33.79,
+      "relative_humidity_pct": 67.86,
+      "wind_speed_2m_m_s": 3.3,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-21",
+      "et0_mm": null,
+      "precipitation_mm": 1.33,
+      "tmin_c": 26.01,
+      "tmax_c": 34.4,
+      "relative_humidity_pct": 69.97,
+      "wind_speed_2m_m_s": 2.6,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.91,
+      "tmin_c": 25.34,
+      "tmax_c": 36.02,
+      "relative_humidity_pct": 65.8,
+      "wind_speed_2m_m_s": 2.05,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.35,
+      "tmin_c": 24.97,
+      "tmax_c": 35.43,
+      "relative_humidity_pct": 62.93,
+      "wind_speed_2m_m_s": 2.47,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.1,
+      "tmin_c": 25.19,
+      "tmax_c": 36.08,
+      "relative_humidity_pct": 62.1,
+      "wind_speed_2m_m_s": 2.51,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.2,
+      "tmin_c": 26.17,
+      "tmax_c": 36.72,
+      "relative_humidity_pct": 63.52,
+      "wind_speed_2m_m_s": 2.47,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-26",
+      "et0_mm": null,
+      "precipitation_mm": 1.83,
+      "tmin_c": 26.95,
+      "tmax_c": 35.96,
+      "relative_humidity_pct": 62.5,
+      "wind_speed_2m_m_s": 2.3,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-27",
+      "et0_mm": null,
+      "precipitation_mm": 4.82,
+      "tmin_c": 25.9,
+      "tmax_c": 34.62,
+      "relative_humidity_pct": 68.77,
+      "wind_speed_2m_m_s": 1.99,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-28",
+      "et0_mm": null,
+      "precipitation_mm": 3.1,
+      "tmin_c": 25.39,
+      "tmax_c": 35.33,
+      "relative_humidity_pct": 67.98,
+      "wind_speed_2m_m_s": 2.12,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-29",
+      "et0_mm": null,
+      "precipitation_mm": 1.38,
+      "tmin_c": 25.7,
+      "tmax_c": 35.7,
+      "relative_humidity_pct": 67.86,
+      "wind_speed_2m_m_s": 2.0,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-30",
+      "et0_mm": null,
+      "precipitation_mm": 0.94,
+      "tmin_c": 26.27,
+      "tmax_c": 29.45,
+      "relative_humidity_pct": 78.29,
+      "wind_speed_2m_m_s": 2.61,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-05-31",
+      "et0_mm": null,
+      "precipitation_mm": 1.2,
+      "tmin_c": 25.46,
+      "tmax_c": 31.13,
+      "relative_humidity_pct": 77.53,
+      "wind_speed_2m_m_s": 2.16,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.59,
+      "tmin_c": 25.9,
+      "tmax_c": 30.06,
+      "relative_humidity_pct": 75.78,
+      "wind_speed_2m_m_s": 2.46,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-02",
+      "et0_mm": null,
+      "precipitation_mm": 1.69,
+      "tmin_c": 25.25,
+      "tmax_c": 31.58,
+      "relative_humidity_pct": 76.99,
+      "wind_speed_2m_m_s": 1.51,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-03",
+      "et0_mm": null,
+      "precipitation_mm": 4.39,
+      "tmin_c": 25.56,
+      "tmax_c": 30.56,
+      "relative_humidity_pct": 78.19,
+      "wind_speed_2m_m_s": 2.01,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-04",
+      "et0_mm": null,
+      "precipitation_mm": 2.76,
+      "tmin_c": 24.93,
+      "tmax_c": 31.13,
+      "relative_humidity_pct": 78.43,
+      "wind_speed_2m_m_s": 2.17,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-05",
+      "et0_mm": null,
+      "precipitation_mm": 2.85,
+      "tmin_c": 25.73,
+      "tmax_c": 29.92,
+      "relative_humidity_pct": 79.39,
+      "wind_speed_2m_m_s": 3.16,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-06",
+      "et0_mm": null,
+      "precipitation_mm": 4.24,
+      "tmin_c": 25.27,
+      "tmax_c": 28.23,
+      "relative_humidity_pct": 85.4,
+      "wind_speed_2m_m_s": 2.56,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-07",
+      "et0_mm": null,
+      "precipitation_mm": 3.04,
+      "tmin_c": 24.9,
+      "tmax_c": 30.71,
+      "relative_humidity_pct": 78.21,
+      "wind_speed_2m_m_s": 3.02,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-08",
+      "et0_mm": null,
+      "precipitation_mm": 4.83,
+      "tmin_c": 25.09,
+      "tmax_c": 29.16,
+      "relative_humidity_pct": 83.4,
+      "wind_speed_2m_m_s": 2.01,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-09",
+      "et0_mm": null,
+      "precipitation_mm": 3.74,
+      "tmin_c": 25.13,
+      "tmax_c": 30.24,
+      "relative_humidity_pct": 76.36,
+      "wind_speed_2m_m_s": 1.21,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-10",
+      "et0_mm": null,
+      "precipitation_mm": 2.2,
+      "tmin_c": 24.6,
+      "tmax_c": 34.27,
+      "relative_humidity_pct": 65.67,
+      "wind_speed_2m_m_s": 2.87,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-11",
+      "et0_mm": null,
+      "precipitation_mm": 1.72,
+      "tmin_c": 24.15,
+      "tmax_c": 34.0,
+      "relative_humidity_pct": 66.83,
+      "wind_speed_2m_m_s": 2.95,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-12",
+      "et0_mm": null,
+      "precipitation_mm": 1.18,
+      "tmin_c": 25.09,
+      "tmax_c": 33.05,
+      "relative_humidity_pct": 72.45,
+      "wind_speed_2m_m_s": 1.75,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-13",
+      "et0_mm": null,
+      "precipitation_mm": 2.02,
+      "tmin_c": 25.34,
+      "tmax_c": 31.17,
+      "relative_humidity_pct": 76.0,
+      "wind_speed_2m_m_s": 1.52,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-14",
+      "et0_mm": null,
+      "precipitation_mm": 1.76,
+      "tmin_c": 25.77,
+      "tmax_c": 31.41,
+      "relative_humidity_pct": 75.98,
+      "wind_speed_2m_m_s": 1.57,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-15",
+      "et0_mm": null,
+      "precipitation_mm": 2.2,
+      "tmin_c": 25.83,
+      "tmax_c": 31.96,
+      "relative_humidity_pct": 75.16,
+      "wind_speed_2m_m_s": 1.87,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-16",
+      "et0_mm": null,
+      "precipitation_mm": 6.4,
+      "tmin_c": 26.3,
+      "tmax_c": 31.46,
+      "relative_humidity_pct": 76.68,
+      "wind_speed_2m_m_s": 0.94,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-17",
+      "et0_mm": null,
+      "precipitation_mm": 31.47,
+      "tmin_c": 26.04,
+      "tmax_c": 30.75,
+      "relative_humidity_pct": 80.37,
+      "wind_speed_2m_m_s": 0.97,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-18",
+      "et0_mm": null,
+      "precipitation_mm": 4.77,
+      "tmin_c": 25.33,
+      "tmax_c": 33.95,
+      "relative_humidity_pct": 70.55,
+      "wind_speed_2m_m_s": 1.61,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-19",
+      "et0_mm": null,
+      "precipitation_mm": 3.62,
+      "tmin_c": 25.54,
+      "tmax_c": 32.61,
+      "relative_humidity_pct": 74.55,
+      "wind_speed_2m_m_s": 1.39,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-20",
+      "et0_mm": null,
+      "precipitation_mm": 5.15,
+      "tmin_c": 26.02,
+      "tmax_c": 34.08,
+      "relative_humidity_pct": 71.45,
+      "wind_speed_2m_m_s": 1.14,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-21",
+      "et0_mm": null,
+      "precipitation_mm": 9.72,
+      "tmin_c": 26.16,
+      "tmax_c": 33.58,
+      "relative_humidity_pct": 75.35,
+      "wind_speed_2m_m_s": 2.73,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-22",
+      "et0_mm": null,
+      "precipitation_mm": 1.48,
+      "tmin_c": 25.75,
+      "tmax_c": 33.96,
+      "relative_humidity_pct": 69.76,
+      "wind_speed_2m_m_s": 1.57,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-23",
+      "et0_mm": null,
+      "precipitation_mm": 1.97,
+      "tmin_c": 25.54,
+      "tmax_c": 33.9,
+      "relative_humidity_pct": 70.51,
+      "wind_speed_2m_m_s": 2.46,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-24",
+      "et0_mm": null,
+      "precipitation_mm": 1.25,
+      "tmin_c": 26.41,
+      "tmax_c": 30.98,
+      "relative_humidity_pct": 78.19,
+      "wind_speed_2m_m_s": 1.31,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-25",
+      "et0_mm": null,
+      "precipitation_mm": 1.92,
+      "tmin_c": 25.9,
+      "tmax_c": 29.78,
+      "relative_humidity_pct": 77.7,
+      "wind_speed_2m_m_s": 1.97,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-26",
+      "et0_mm": null,
+      "precipitation_mm": 11.16,
+      "tmin_c": 25.48,
+      "tmax_c": 33.07,
+      "relative_humidity_pct": 73.55,
+      "wind_speed_2m_m_s": 3.16,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-27",
+      "et0_mm": null,
+      "precipitation_mm": 2.98,
+      "tmin_c": 25.11,
+      "tmax_c": 33.7,
+      "relative_humidity_pct": 71.24,
+      "wind_speed_2m_m_s": 2.81,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-28",
+      "et0_mm": null,
+      "precipitation_mm": 3.54,
+      "tmin_c": 25.66,
+      "tmax_c": 32.86,
+      "relative_humidity_pct": 72.86,
+      "wind_speed_2m_m_s": 2.51,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-29",
+      "et0_mm": null,
+      "precipitation_mm": 2.25,
+      "tmin_c": 25.09,
+      "tmax_c": 32.65,
+      "relative_humidity_pct": 74.18,
+      "wind_speed_2m_m_s": 2.69,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-06-30",
+      "et0_mm": null,
+      "precipitation_mm": 5.11,
+      "tmin_c": 25.61,
+      "tmax_c": 31.7,
+      "relative_humidity_pct": 78.54,
+      "wind_speed_2m_m_s": 2.2,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-01",
+      "et0_mm": null,
+      "precipitation_mm": 6.49,
+      "tmin_c": 24.67,
+      "tmax_c": 31.19,
+      "relative_humidity_pct": 76.46,
+      "wind_speed_2m_m_s": 2.71,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-02",
+      "et0_mm": null,
+      "precipitation_mm": 2.78,
+      "tmin_c": 25.28,
+      "tmax_c": 32.64,
+      "relative_humidity_pct": 71.5,
+      "wind_speed_2m_m_s": 2.83,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-03",
+      "et0_mm": null,
+      "precipitation_mm": 2.3,
+      "tmin_c": 24.9,
+      "tmax_c": 32.18,
+      "relative_humidity_pct": 73.31,
+      "wind_speed_2m_m_s": 3.6,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-04",
+      "et0_mm": null,
+      "precipitation_mm": 1.47,
+      "tmin_c": 25.47,
+      "tmax_c": 32.37,
+      "relative_humidity_pct": 69.09,
+      "wind_speed_2m_m_s": 5.05,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.32,
+      "tmin_c": 25.06,
+      "tmax_c": 34.38,
+      "relative_humidity_pct": 68.89,
+      "wind_speed_2m_m_s": 3.29,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-06",
+      "et0_mm": null,
+      "precipitation_mm": 1.36,
+      "tmin_c": 24.76,
+      "tmax_c": 31.88,
+      "relative_humidity_pct": 70.41,
+      "wind_speed_2m_m_s": 2.33,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-07",
+      "et0_mm": null,
+      "precipitation_mm": 2.21,
+      "tmin_c": 24.53,
+      "tmax_c": 31.76,
+      "relative_humidity_pct": 76.17,
+      "wind_speed_2m_m_s": 2.61,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.1,
+      "tmin_c": 25.03,
+      "tmax_c": 34.0,
+      "relative_humidity_pct": 70.11,
+      "wind_speed_2m_m_s": 2.71,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.51,
+      "tmin_c": 25.01,
+      "tmax_c": 33.82,
+      "relative_humidity_pct": 72.14,
+      "wind_speed_2m_m_s": 2.48,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-10",
+      "et0_mm": null,
+      "precipitation_mm": 1.96,
+      "tmin_c": 25.72,
+      "tmax_c": 32.16,
+      "relative_humidity_pct": 73.34,
+      "wind_speed_2m_m_s": 0.9,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-11",
+      "et0_mm": null,
+      "precipitation_mm": 3.36,
+      "tmin_c": 25.19,
+      "tmax_c": 31.97,
+      "relative_humidity_pct": 72.66,
+      "wind_speed_2m_m_s": 2.03,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.4,
+      "tmin_c": 24.68,
+      "tmax_c": 34.25,
+      "relative_humidity_pct": 67.02,
+      "wind_speed_2m_m_s": 3.49,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.52,
+      "tmin_c": 25.51,
+      "tmax_c": 32.66,
+      "relative_humidity_pct": 72.43,
+      "wind_speed_2m_m_s": 3.09,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-14",
+      "et0_mm": null,
+      "precipitation_mm": 2.07,
+      "tmin_c": 25.52,
+      "tmax_c": 33.04,
+      "relative_humidity_pct": 72.65,
+      "wind_speed_2m_m_s": 2.68,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-15",
+      "et0_mm": null,
+      "precipitation_mm": 4.15,
+      "tmin_c": 25.28,
+      "tmax_c": 33.68,
+      "relative_humidity_pct": 71.49,
+      "wind_speed_2m_m_s": 1.81,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-16",
+      "et0_mm": null,
+      "precipitation_mm": 3.85,
+      "tmin_c": 25.79,
+      "tmax_c": 33.08,
+      "relative_humidity_pct": 69.9,
+      "wind_speed_2m_m_s": 1.1,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-17",
+      "et0_mm": null,
+      "precipitation_mm": 3.65,
+      "tmin_c": 24.54,
+      "tmax_c": 32.24,
+      "relative_humidity_pct": 74.86,
+      "wind_speed_2m_m_s": 1.98,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-18",
+      "et0_mm": null,
+      "precipitation_mm": 1.41,
+      "tmin_c": 24.91,
+      "tmax_c": 34.26,
+      "relative_humidity_pct": 70.29,
+      "wind_speed_2m_m_s": 3.31,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-19",
+      "et0_mm": null,
+      "precipitation_mm": 2.11,
+      "tmin_c": 26.27,
+      "tmax_c": 32.97,
+      "relative_humidity_pct": 70.53,
+      "wind_speed_2m_m_s": 5.14,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-20",
+      "et0_mm": null,
+      "precipitation_mm": 4.14,
+      "tmin_c": 25.44,
+      "tmax_c": 31.89,
+      "relative_humidity_pct": 72.65,
+      "wind_speed_2m_m_s": 4.32,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-21",
+      "et0_mm": null,
+      "precipitation_mm": 3.62,
+      "tmin_c": 26.38,
+      "tmax_c": 32.96,
+      "relative_humidity_pct": 72.59,
+      "wind_speed_2m_m_s": 3.83,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-22",
+      "et0_mm": null,
+      "precipitation_mm": 5.77,
+      "tmin_c": 24.54,
+      "tmax_c": 31.8,
+      "relative_humidity_pct": 67.9,
+      "wind_speed_2m_m_s": 3.94,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-23",
+      "et0_mm": null,
+      "precipitation_mm": 3.97,
+      "tmin_c": 23.79,
+      "tmax_c": 33.5,
+      "relative_humidity_pct": 68.25,
+      "wind_speed_2m_m_s": 2.24,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-24",
+      "et0_mm": null,
+      "precipitation_mm": 3.64,
+      "tmin_c": 23.89,
+      "tmax_c": 31.81,
+      "relative_humidity_pct": 74.04,
+      "wind_speed_2m_m_s": 2.11,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.91,
+      "tmin_c": 24.41,
+      "tmax_c": 33.43,
+      "relative_humidity_pct": 69.77,
+      "wind_speed_2m_m_s": 2.68,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.13,
+      "tmin_c": 24.68,
+      "tmax_c": 33.18,
+      "relative_humidity_pct": 70.03,
+      "wind_speed_2m_m_s": 3.54,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.48,
+      "tmin_c": 25.87,
+      "tmax_c": 32.24,
+      "relative_humidity_pct": 71.75,
+      "wind_speed_2m_m_s": 4.22,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.46,
+      "tmin_c": 25.59,
+      "tmax_c": 34.27,
+      "relative_humidity_pct": 67.52,
+      "wind_speed_2m_m_s": 4.38,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.48,
+      "tmin_c": 25.07,
+      "tmax_c": 30.95,
+      "relative_humidity_pct": 70.25,
+      "wind_speed_2m_m_s": 3.72,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-30",
+      "et0_mm": null,
+      "precipitation_mm": 0.12,
+      "tmin_c": 24.83,
+      "tmax_c": 33.18,
+      "relative_humidity_pct": 66.1,
+      "wind_speed_2m_m_s": 3.17,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-07-31",
+      "et0_mm": null,
+      "precipitation_mm": 0.18,
+      "tmin_c": 24.6,
+      "tmax_c": 32.37,
+      "relative_humidity_pct": 71.22,
+      "wind_speed_2m_m_s": 2.14,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.08,
+      "tmin_c": 24.81,
+      "tmax_c": 33.68,
+      "relative_humidity_pct": 69.1,
+      "wind_speed_2m_m_s": 2.53,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.55,
+      "tmin_c": 25.17,
+      "tmax_c": 30.84,
+      "relative_humidity_pct": 72.99,
+      "wind_speed_2m_m_s": 1.34,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-03",
+      "et0_mm": null,
+      "precipitation_mm": 4.92,
+      "tmin_c": 23.87,
+      "tmax_c": 32.13,
+      "relative_humidity_pct": 73.0,
+      "wind_speed_2m_m_s": 3.16,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-04",
+      "et0_mm": null,
+      "precipitation_mm": 10.55,
+      "tmin_c": 23.25,
+      "tmax_c": 32.74,
+      "relative_humidity_pct": 73.98,
+      "wind_speed_2m_m_s": 3.46,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-05",
+      "et0_mm": null,
+      "precipitation_mm": 2.19,
+      "tmin_c": 24.58,
+      "tmax_c": 32.13,
+      "relative_humidity_pct": 75.72,
+      "wind_speed_2m_m_s": 2.84,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-06",
+      "et0_mm": null,
+      "precipitation_mm": 4.3,
+      "tmin_c": 24.44,
+      "tmax_c": 29.59,
+      "relative_humidity_pct": 78.52,
+      "wind_speed_2m_m_s": 3.1,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-07",
+      "et0_mm": null,
+      "precipitation_mm": 3.18,
+      "tmin_c": 23.64,
+      "tmax_c": 32.28,
+      "relative_humidity_pct": 73.68,
+      "wind_speed_2m_m_s": 1.99,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.47,
+      "tmin_c": 24.79,
+      "tmax_c": 34.47,
+      "relative_humidity_pct": 68.5,
+      "wind_speed_2m_m_s": 1.45,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-09",
+      "et0_mm": null,
+      "precipitation_mm": 2.73,
+      "tmin_c": 25.41,
+      "tmax_c": 34.36,
+      "relative_humidity_pct": 68.15,
+      "wind_speed_2m_m_s": 1.6,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-10",
+      "et0_mm": null,
+      "precipitation_mm": 2.56,
+      "tmin_c": 25.32,
+      "tmax_c": 32.68,
+      "relative_humidity_pct": 72.49,
+      "wind_speed_2m_m_s": 2.65,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-11",
+      "et0_mm": null,
+      "precipitation_mm": 2.74,
+      "tmin_c": 25.1,
+      "tmax_c": 33.38,
+      "relative_humidity_pct": 70.81,
+      "wind_speed_2m_m_s": 2.39,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.45,
+      "tmin_c": 25.23,
+      "tmax_c": 33.4,
+      "relative_humidity_pct": 69.16,
+      "wind_speed_2m_m_s": 4.46,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.93,
+      "tmin_c": 24.78,
+      "tmax_c": 34.66,
+      "relative_humidity_pct": 67.8,
+      "wind_speed_2m_m_s": 3.7,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.15,
+      "tmin_c": 25.7,
+      "tmax_c": 34.24,
+      "relative_humidity_pct": 67.22,
+      "wind_speed_2m_m_s": 4.36,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.1,
+      "tmin_c": 25.12,
+      "tmax_c": 34.99,
+      "relative_humidity_pct": 65.68,
+      "wind_speed_2m_m_s": 3.55,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.27,
+      "tmin_c": 24.83,
+      "tmax_c": 35.21,
+      "relative_humidity_pct": 66.46,
+      "wind_speed_2m_m_s": 2.99,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.68,
+      "tmin_c": 25.81,
+      "tmax_c": 32.77,
+      "relative_humidity_pct": 69.78,
+      "wind_speed_2m_m_s": 1.95,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-18",
+      "et0_mm": null,
+      "precipitation_mm": 1.69,
+      "tmin_c": 24.57,
+      "tmax_c": 31.32,
+      "relative_humidity_pct": 69.31,
+      "wind_speed_2m_m_s": 2.72,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-19",
+      "et0_mm": null,
+      "precipitation_mm": 1.15,
+      "tmin_c": 23.89,
+      "tmax_c": 32.99,
+      "relative_humidity_pct": 64.71,
+      "wind_speed_2m_m_s": 2.81,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-20",
+      "et0_mm": null,
+      "precipitation_mm": 3.26,
+      "tmin_c": 24.59,
+      "tmax_c": 32.95,
+      "relative_humidity_pct": 66.34,
+      "wind_speed_2m_m_s": 3.91,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-21",
+      "et0_mm": null,
+      "precipitation_mm": 2.01,
+      "tmin_c": 23.99,
+      "tmax_c": 34.77,
+      "relative_humidity_pct": 64.45,
+      "wind_speed_2m_m_s": 2.79,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-22",
+      "et0_mm": null,
+      "precipitation_mm": 5.58,
+      "tmin_c": 24.71,
+      "tmax_c": 34.76,
+      "relative_humidity_pct": 66.4,
+      "wind_speed_2m_m_s": 2.77,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-23",
+      "et0_mm": null,
+      "precipitation_mm": 7.74,
+      "tmin_c": 25.05,
+      "tmax_c": 30.53,
+      "relative_humidity_pct": 76.72,
+      "wind_speed_2m_m_s": 3.48,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-24",
+      "et0_mm": null,
+      "precipitation_mm": 2.81,
+      "tmin_c": 24.74,
+      "tmax_c": 33.32,
+      "relative_humidity_pct": 69.18,
+      "wind_speed_2m_m_s": 4.01,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-25",
+      "et0_mm": null,
+      "precipitation_mm": 1.68,
+      "tmin_c": 24.86,
+      "tmax_c": 33.49,
+      "relative_humidity_pct": 65.37,
+      "wind_speed_2m_m_s": 4.79,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.95,
+      "tmin_c": 24.37,
+      "tmax_c": 32.05,
+      "relative_humidity_pct": 67.65,
+      "wind_speed_2m_m_s": 3.4,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-27",
+      "et0_mm": null,
+      "precipitation_mm": 1.97,
+      "tmin_c": 24.31,
+      "tmax_c": 33.56,
+      "relative_humidity_pct": 63.47,
+      "wind_speed_2m_m_s": 2.65,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-28",
+      "et0_mm": null,
+      "precipitation_mm": 1.62,
+      "tmin_c": 24.17,
+      "tmax_c": 34.93,
+      "relative_humidity_pct": 66.69,
+      "wind_speed_2m_m_s": 2.32,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.87,
+      "tmin_c": 25.51,
+      "tmax_c": 35.07,
+      "relative_humidity_pct": 65.97,
+      "wind_speed_2m_m_s": 2.24,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-30",
+      "et0_mm": null,
+      "precipitation_mm": 2.21,
+      "tmin_c": 25.37,
+      "tmax_c": 35.51,
+      "relative_humidity_pct": 65.82,
+      "wind_speed_2m_m_s": 1.74,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-08-31",
+      "et0_mm": null,
+      "precipitation_mm": 2.45,
+      "tmin_c": 25.17,
+      "tmax_c": 30.39,
+      "relative_humidity_pct": 78.06,
+      "wind_speed_2m_m_s": 2.68,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-01",
+      "et0_mm": null,
+      "precipitation_mm": 2.05,
+      "tmin_c": 24.31,
+      "tmax_c": 31.75,
+      "relative_humidity_pct": 72.58,
+      "wind_speed_2m_m_s": 1.19,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-02",
+      "et0_mm": null,
+      "precipitation_mm": 4.13,
+      "tmin_c": 24.83,
+      "tmax_c": 32.62,
+      "relative_humidity_pct": 72.85,
+      "wind_speed_2m_m_s": 1.71,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-03",
+      "et0_mm": null,
+      "precipitation_mm": 2.74,
+      "tmin_c": 25.55,
+      "tmax_c": 32.17,
+      "relative_humidity_pct": 71.8,
+      "wind_speed_2m_m_s": 0.98,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-04",
+      "et0_mm": null,
+      "precipitation_mm": 4.29,
+      "tmin_c": 24.42,
+      "tmax_c": 33.05,
+      "relative_humidity_pct": 72.27,
+      "wind_speed_2m_m_s": 2.28,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-05",
+      "et0_mm": null,
+      "precipitation_mm": 4.18,
+      "tmin_c": 24.67,
+      "tmax_c": 29.12,
+      "relative_humidity_pct": 82.39,
+      "wind_speed_2m_m_s": 1.22,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-06",
+      "et0_mm": null,
+      "precipitation_mm": 1.82,
+      "tmin_c": 24.17,
+      "tmax_c": 34.45,
+      "relative_humidity_pct": 67.5,
+      "wind_speed_2m_m_s": 1.49,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-07",
+      "et0_mm": null,
+      "precipitation_mm": 8.25,
+      "tmin_c": 23.87,
+      "tmax_c": 34.01,
+      "relative_humidity_pct": 71.81,
+      "wind_speed_2m_m_s": 1.73,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-08",
+      "et0_mm": null,
+      "precipitation_mm": 15.68,
+      "tmin_c": 25.05,
+      "tmax_c": 29.6,
+      "relative_humidity_pct": 80.68,
+      "wind_speed_2m_m_s": 0.98,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-09",
+      "et0_mm": null,
+      "precipitation_mm": 7.99,
+      "tmin_c": 24.27,
+      "tmax_c": 29.13,
+      "relative_humidity_pct": 83.2,
+      "wind_speed_2m_m_s": 0.91,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-10",
+      "et0_mm": null,
+      "precipitation_mm": 8.4,
+      "tmin_c": 23.66,
+      "tmax_c": 32.67,
+      "relative_humidity_pct": 72.08,
+      "wind_speed_2m_m_s": 1.38,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-11",
+      "et0_mm": null,
+      "precipitation_mm": 10.74,
+      "tmin_c": 23.99,
+      "tmax_c": 30.65,
+      "relative_humidity_pct": 78.89,
+      "wind_speed_2m_m_s": 1.54,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-12",
+      "et0_mm": null,
+      "precipitation_mm": 6.64,
+      "tmin_c": 23.13,
+      "tmax_c": 29.6,
+      "relative_humidity_pct": 81.32,
+      "wind_speed_2m_m_s": 2.22,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-13",
+      "et0_mm": null,
+      "precipitation_mm": 3.32,
+      "tmin_c": 23.93,
+      "tmax_c": 31.33,
+      "relative_humidity_pct": 72.52,
+      "wind_speed_2m_m_s": 1.67,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.68,
+      "tmin_c": 23.94,
+      "tmax_c": 32.36,
+      "relative_humidity_pct": 73.68,
+      "wind_speed_2m_m_s": 1.78,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.86,
+      "tmin_c": 24.74,
+      "tmax_c": 30.73,
+      "relative_humidity_pct": 75.71,
+      "wind_speed_2m_m_s": 1.38,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-16",
+      "et0_mm": null,
+      "precipitation_mm": 5.27,
+      "tmin_c": 23.76,
+      "tmax_c": 33.34,
+      "relative_humidity_pct": 71.12,
+      "wind_speed_2m_m_s": 1.19,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-17",
+      "et0_mm": null,
+      "precipitation_mm": 10.71,
+      "tmin_c": 24.69,
+      "tmax_c": 30.16,
+      "relative_humidity_pct": 79.62,
+      "wind_speed_2m_m_s": 1.5,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-18",
+      "et0_mm": null,
+      "precipitation_mm": 33.65,
+      "tmin_c": 24.31,
+      "tmax_c": 29.02,
+      "relative_humidity_pct": 84.65,
+      "wind_speed_2m_m_s": 2.28,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-19",
+      "et0_mm": null,
+      "precipitation_mm": 7.13,
+      "tmin_c": 23.21,
+      "tmax_c": 31.21,
+      "relative_humidity_pct": 78.49,
+      "wind_speed_2m_m_s": 2.16,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-20",
+      "et0_mm": null,
+      "precipitation_mm": 2.42,
+      "tmin_c": 22.78,
+      "tmax_c": 32.11,
+      "relative_humidity_pct": 73.02,
+      "wind_speed_2m_m_s": 1.77,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-21",
+      "et0_mm": null,
+      "precipitation_mm": 3.62,
+      "tmin_c": 23.39,
+      "tmax_c": 32.09,
+      "relative_humidity_pct": 75.31,
+      "wind_speed_2m_m_s": 2.13,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-22",
+      "et0_mm": null,
+      "precipitation_mm": 3.7,
+      "tmin_c": 23.5,
+      "tmax_c": 32.06,
+      "relative_humidity_pct": 78.72,
+      "wind_speed_2m_m_s": 2.62,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.85,
+      "tmin_c": 24.06,
+      "tmax_c": 31.44,
+      "relative_humidity_pct": 78.91,
+      "wind_speed_2m_m_s": 1.76,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-24",
+      "et0_mm": null,
+      "precipitation_mm": 1.82,
+      "tmin_c": 24.56,
+      "tmax_c": 31.11,
+      "relative_humidity_pct": 75.95,
+      "wind_speed_2m_m_s": 2.57,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-25",
+      "et0_mm": null,
+      "precipitation_mm": 2.74,
+      "tmin_c": 24.29,
+      "tmax_c": 32.04,
+      "relative_humidity_pct": 76.07,
+      "wind_speed_2m_m_s": 2.08,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-26",
+      "et0_mm": null,
+      "precipitation_mm": 2.2,
+      "tmin_c": 23.85,
+      "tmax_c": 32.71,
+      "relative_humidity_pct": 74.43,
+      "wind_speed_2m_m_s": 2.09,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-27",
+      "et0_mm": null,
+      "precipitation_mm": 5.3,
+      "tmin_c": 24.01,
+      "tmax_c": 32.37,
+      "relative_humidity_pct": 76.01,
+      "wind_speed_2m_m_s": 1.91,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-28",
+      "et0_mm": null,
+      "precipitation_mm": 3.95,
+      "tmin_c": 24.35,
+      "tmax_c": 32.77,
+      "relative_humidity_pct": 74.78,
+      "wind_speed_2m_m_s": 1.75,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-29",
+      "et0_mm": null,
+      "precipitation_mm": 5.39,
+      "tmin_c": 23.86,
+      "tmax_c": 32.57,
+      "relative_humidity_pct": 77.32,
+      "wind_speed_2m_m_s": 1.63,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-09-30",
+      "et0_mm": null,
+      "precipitation_mm": 2.2,
+      "tmin_c": 24.58,
+      "tmax_c": 31.81,
+      "relative_humidity_pct": 76.71,
+      "wind_speed_2m_m_s": 1.31,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-01",
+      "et0_mm": null,
+      "precipitation_mm": 4.28,
+      "tmin_c": 23.94,
+      "tmax_c": 31.89,
+      "relative_humidity_pct": 77.89,
+      "wind_speed_2m_m_s": 2.34,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-02",
+      "et0_mm": null,
+      "precipitation_mm": 9.35,
+      "tmin_c": 23.78,
+      "tmax_c": 32.59,
+      "relative_humidity_pct": 73.49,
+      "wind_speed_2m_m_s": 2.34,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-03",
+      "et0_mm": null,
+      "precipitation_mm": 13.77,
+      "tmin_c": 23.64,
+      "tmax_c": 31.54,
+      "relative_humidity_pct": 78.96,
+      "wind_speed_2m_m_s": 1.81,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-04",
+      "et0_mm": null,
+      "precipitation_mm": 7.0,
+      "tmin_c": 24.53,
+      "tmax_c": 30.77,
+      "relative_humidity_pct": 82.2,
+      "wind_speed_2m_m_s": 2.0,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-05",
+      "et0_mm": null,
+      "precipitation_mm": 5.21,
+      "tmin_c": 24.28,
+      "tmax_c": 29.39,
+      "relative_humidity_pct": 83.23,
+      "wind_speed_2m_m_s": 1.99,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-06",
+      "et0_mm": null,
+      "precipitation_mm": 5.41,
+      "tmin_c": 24.07,
+      "tmax_c": 30.99,
+      "relative_humidity_pct": 78.99,
+      "wind_speed_2m_m_s": 3.78,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-07",
+      "et0_mm": null,
+      "precipitation_mm": 7.6,
+      "tmin_c": 23.58,
+      "tmax_c": 31.64,
+      "relative_humidity_pct": 77.09,
+      "wind_speed_2m_m_s": 3.45,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-08",
+      "et0_mm": null,
+      "precipitation_mm": 4.0,
+      "tmin_c": 23.22,
+      "tmax_c": 31.58,
+      "relative_humidity_pct": 78.29,
+      "wind_speed_2m_m_s": 2.83,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-09",
+      "et0_mm": null,
+      "precipitation_mm": 2.54,
+      "tmin_c": 23.29,
+      "tmax_c": 30.94,
+      "relative_humidity_pct": 76.75,
+      "wind_speed_2m_m_s": 2.72,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-10",
+      "et0_mm": null,
+      "precipitation_mm": 6.78,
+      "tmin_c": 23.08,
+      "tmax_c": 31.08,
+      "relative_humidity_pct": 78.64,
+      "wind_speed_2m_m_s": 2.88,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-11",
+      "et0_mm": null,
+      "precipitation_mm": 16.1,
+      "tmin_c": 23.59,
+      "tmax_c": 27.81,
+      "relative_humidity_pct": 86.53,
+      "wind_speed_2m_m_s": 1.98,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-12",
+      "et0_mm": null,
+      "precipitation_mm": 3.56,
+      "tmin_c": 23.94,
+      "tmax_c": 28.98,
+      "relative_humidity_pct": 86.32,
+      "wind_speed_2m_m_s": 1.6,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.54,
+      "tmin_c": 24.24,
+      "tmax_c": 29.79,
+      "relative_humidity_pct": 82.45,
+      "wind_speed_2m_m_s": 0.92,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-14",
+      "et0_mm": null,
+      "precipitation_mm": 3.95,
+      "tmin_c": 24.19,
+      "tmax_c": 29.68,
+      "relative_humidity_pct": 83.34,
+      "wind_speed_2m_m_s": 2.25,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-15",
+      "et0_mm": null,
+      "precipitation_mm": 11.06,
+      "tmin_c": 23.52,
+      "tmax_c": 28.38,
+      "relative_humidity_pct": 86.24,
+      "wind_speed_2m_m_s": 2.18,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-16",
+      "et0_mm": null,
+      "precipitation_mm": 12.15,
+      "tmin_c": 23.86,
+      "tmax_c": 28.66,
+      "relative_humidity_pct": 83.41,
+      "wind_speed_2m_m_s": 1.22,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.95,
+      "tmin_c": 23.0,
+      "tmax_c": 30.14,
+      "relative_humidity_pct": 79.05,
+      "wind_speed_2m_m_s": 2.02,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-18",
+      "et0_mm": null,
+      "precipitation_mm": 2.8,
+      "tmin_c": 21.83,
+      "tmax_c": 31.3,
+      "relative_humidity_pct": 73.72,
+      "wind_speed_2m_m_s": 1.55,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-19",
+      "et0_mm": null,
+      "precipitation_mm": 7.09,
+      "tmin_c": 22.18,
+      "tmax_c": 30.68,
+      "relative_humidity_pct": 77.49,
+      "wind_speed_2m_m_s": 1.66,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-20",
+      "et0_mm": null,
+      "precipitation_mm": 7.79,
+      "tmin_c": 23.24,
+      "tmax_c": 29.32,
+      "relative_humidity_pct": 78.72,
+      "wind_speed_2m_m_s": 1.35,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-21",
+      "et0_mm": null,
+      "precipitation_mm": 14.72,
+      "tmin_c": 23.67,
+      "tmax_c": 29.45,
+      "relative_humidity_pct": 80.92,
+      "wind_speed_2m_m_s": 1.21,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-22",
+      "et0_mm": null,
+      "precipitation_mm": 2.4,
+      "tmin_c": 24.14,
+      "tmax_c": 29.67,
+      "relative_humidity_pct": 80.56,
+      "wind_speed_2m_m_s": 1.11,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-23",
+      "et0_mm": null,
+      "precipitation_mm": 8.67,
+      "tmin_c": 23.94,
+      "tmax_c": 29.98,
+      "relative_humidity_pct": 82.22,
+      "wind_speed_2m_m_s": 1.32,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-24",
+      "et0_mm": null,
+      "precipitation_mm": 6.74,
+      "tmin_c": 23.88,
+      "tmax_c": 28.79,
+      "relative_humidity_pct": 86.36,
+      "wind_speed_2m_m_s": 1.09,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-25",
+      "et0_mm": null,
+      "precipitation_mm": 19.43,
+      "tmin_c": 24.23,
+      "tmax_c": 28.66,
+      "relative_humidity_pct": 86.71,
+      "wind_speed_2m_m_s": 0.79,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-26",
+      "et0_mm": null,
+      "precipitation_mm": 2.26,
+      "tmin_c": 23.22,
+      "tmax_c": 29.47,
+      "relative_humidity_pct": 83.69,
+      "wind_speed_2m_m_s": 1.99,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-27",
+      "et0_mm": null,
+      "precipitation_mm": 5.53,
+      "tmin_c": 22.17,
+      "tmax_c": 29.31,
+      "relative_humidity_pct": 81.0,
+      "wind_speed_2m_m_s": 2.63,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-28",
+      "et0_mm": null,
+      "precipitation_mm": 2.68,
+      "tmin_c": 22.96,
+      "tmax_c": 30.2,
+      "relative_humidity_pct": 83.52,
+      "wind_speed_2m_m_s": 3.11,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.92,
+      "tmin_c": 23.43,
+      "tmax_c": 28.89,
+      "relative_humidity_pct": 85.55,
+      "wind_speed_2m_m_s": 3.24,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-30",
+      "et0_mm": null,
+      "precipitation_mm": 2.3,
+      "tmin_c": 23.43,
+      "tmax_c": 28.42,
+      "relative_humidity_pct": 84.83,
+      "wind_speed_2m_m_s": 3.46,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-10-31",
+      "et0_mm": null,
+      "precipitation_mm": 3.82,
+      "tmin_c": 23.32,
+      "tmax_c": 29.28,
+      "relative_humidity_pct": 84.14,
+      "wind_speed_2m_m_s": 3.18,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.49,
+      "tmin_c": 22.72,
+      "tmax_c": 30.49,
+      "relative_humidity_pct": 76.46,
+      "wind_speed_2m_m_s": 1.88,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-02",
+      "et0_mm": null,
+      "precipitation_mm": 7.26,
+      "tmin_c": 22.68,
+      "tmax_c": 30.4,
+      "relative_humidity_pct": 80.99,
+      "wind_speed_2m_m_s": 1.8,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-03",
+      "et0_mm": null,
+      "precipitation_mm": 10.15,
+      "tmin_c": 23.04,
+      "tmax_c": 30.01,
+      "relative_humidity_pct": 84.74,
+      "wind_speed_2m_m_s": 2.38,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-04",
+      "et0_mm": null,
+      "precipitation_mm": 3.88,
+      "tmin_c": 23.23,
+      "tmax_c": 30.57,
+      "relative_humidity_pct": 81.7,
+      "wind_speed_2m_m_s": 2.52,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-05",
+      "et0_mm": null,
+      "precipitation_mm": 4.76,
+      "tmin_c": 23.35,
+      "tmax_c": 30.61,
+      "relative_humidity_pct": 81.25,
+      "wind_speed_2m_m_s": 2.67,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-06",
+      "et0_mm": null,
+      "precipitation_mm": 3.67,
+      "tmin_c": 23.54,
+      "tmax_c": 30.75,
+      "relative_humidity_pct": 80.62,
+      "wind_speed_2m_m_s": 2.23,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-07",
+      "et0_mm": null,
+      "precipitation_mm": 2.44,
+      "tmin_c": 23.88,
+      "tmax_c": 28.9,
+      "relative_humidity_pct": 86.61,
+      "wind_speed_2m_m_s": 2.03,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.32,
+      "tmin_c": 23.7,
+      "tmax_c": 29.59,
+      "relative_humidity_pct": 81.53,
+      "wind_speed_2m_m_s": 1.87,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.48,
+      "tmin_c": 24.11,
+      "tmax_c": 30.39,
+      "relative_humidity_pct": 81.81,
+      "wind_speed_2m_m_s": 1.68,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.69,
+      "tmin_c": 24.22,
+      "tmax_c": 30.12,
+      "relative_humidity_pct": 81.57,
+      "wind_speed_2m_m_s": 1.52,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-11",
+      "et0_mm": null,
+      "precipitation_mm": 8.32,
+      "tmin_c": 23.94,
+      "tmax_c": 30.03,
+      "relative_humidity_pct": 83.03,
+      "wind_speed_2m_m_s": 1.87,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-12",
+      "et0_mm": null,
+      "precipitation_mm": 4.03,
+      "tmin_c": 23.88,
+      "tmax_c": 29.78,
+      "relative_humidity_pct": 83.43,
+      "wind_speed_2m_m_s": 2.73,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-13",
+      "et0_mm": null,
+      "precipitation_mm": 1.58,
+      "tmin_c": 24.0,
+      "tmax_c": 30.6,
+      "relative_humidity_pct": 79.75,
+      "wind_speed_2m_m_s": 1.87,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-14",
+      "et0_mm": null,
+      "precipitation_mm": 2.31,
+      "tmin_c": 25.05,
+      "tmax_c": 29.44,
+      "relative_humidity_pct": 81.13,
+      "wind_speed_2m_m_s": 2.65,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-15",
+      "et0_mm": null,
+      "precipitation_mm": 2.81,
+      "tmin_c": 24.02,
+      "tmax_c": 29.82,
+      "relative_humidity_pct": 79.08,
+      "wind_speed_2m_m_s": 1.44,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-16",
+      "et0_mm": null,
+      "precipitation_mm": 5.19,
+      "tmin_c": 23.55,
+      "tmax_c": 30.46,
+      "relative_humidity_pct": 74.79,
+      "wind_speed_2m_m_s": 1.05,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-17",
+      "et0_mm": null,
+      "precipitation_mm": 4.48,
+      "tmin_c": 23.85,
+      "tmax_c": 29.88,
+      "relative_humidity_pct": 82.19,
+      "wind_speed_2m_m_s": 2.59,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.46,
+      "tmin_c": 23.45,
+      "tmax_c": 30.83,
+      "relative_humidity_pct": 80.76,
+      "wind_speed_2m_m_s": 2.4,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.52,
+      "tmin_c": 24.06,
+      "tmax_c": 30.01,
+      "relative_humidity_pct": 81.4,
+      "wind_speed_2m_m_s": 1.33,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-20",
+      "et0_mm": null,
+      "precipitation_mm": 1.65,
+      "tmin_c": 24.58,
+      "tmax_c": 29.27,
+      "relative_humidity_pct": 85.04,
+      "wind_speed_2m_m_s": 1.98,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-21",
+      "et0_mm": null,
+      "precipitation_mm": 1.37,
+      "tmin_c": 25.09,
+      "tmax_c": 29.33,
+      "relative_humidity_pct": 84.6,
+      "wind_speed_2m_m_s": 3.38,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.37,
+      "tmin_c": 24.87,
+      "tmax_c": 29.31,
+      "relative_humidity_pct": 83.97,
+      "wind_speed_2m_m_s": 2.64,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.5,
+      "tmin_c": 23.68,
+      "tmax_c": 28.47,
+      "relative_humidity_pct": 85.92,
+      "wind_speed_2m_m_s": 3.08,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.08,
+      "tmin_c": 24.7,
+      "tmax_c": 29.43,
+      "relative_humidity_pct": 84.97,
+      "wind_speed_2m_m_s": 2.7,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 23.99,
+      "tmax_c": 31.22,
+      "relative_humidity_pct": 77.69,
+      "wind_speed_2m_m_s": 3.86,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.53,
+      "tmin_c": 22.9,
+      "tmax_c": 31.55,
+      "relative_humidity_pct": 78.31,
+      "wind_speed_2m_m_s": 2.21,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.85,
+      "tmin_c": 24.12,
+      "tmax_c": 30.91,
+      "relative_humidity_pct": 80.94,
+      "wind_speed_2m_m_s": 2.0,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-28",
+      "et0_mm": null,
+      "precipitation_mm": 3.33,
+      "tmin_c": 24.65,
+      "tmax_c": 28.59,
+      "relative_humidity_pct": 84.55,
+      "wind_speed_2m_m_s": 2.21,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-29",
+      "et0_mm": null,
+      "precipitation_mm": 9.8,
+      "tmin_c": 24.04,
+      "tmax_c": 27.81,
+      "relative_humidity_pct": 86.08,
+      "wind_speed_2m_m_s": 2.87,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-11-30",
+      "et0_mm": null,
+      "precipitation_mm": 3.38,
+      "tmin_c": 23.42,
+      "tmax_c": 30.43,
+      "relative_humidity_pct": 81.97,
+      "wind_speed_2m_m_s": 2.62,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-01",
+      "et0_mm": null,
+      "precipitation_mm": 2.85,
+      "tmin_c": 23.25,
+      "tmax_c": 30.87,
+      "relative_humidity_pct": 78.88,
+      "wind_speed_2m_m_s": 3.63,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.25,
+      "tmin_c": 22.51,
+      "tmax_c": 31.18,
+      "relative_humidity_pct": 76.65,
+      "wind_speed_2m_m_s": 3.53,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.52,
+      "tmin_c": 22.81,
+      "tmax_c": 31.68,
+      "relative_humidity_pct": 76.22,
+      "wind_speed_2m_m_s": 2.18,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-04",
+      "et0_mm": null,
+      "precipitation_mm": 1.42,
+      "tmin_c": 23.06,
+      "tmax_c": 31.23,
+      "relative_humidity_pct": 79.38,
+      "wind_speed_2m_m_s": 2.87,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-05",
+      "et0_mm": null,
+      "precipitation_mm": 1.15,
+      "tmin_c": 23.87,
+      "tmax_c": 30.77,
+      "relative_humidity_pct": 78.43,
+      "wind_speed_2m_m_s": 2.73,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-06",
+      "et0_mm": null,
+      "precipitation_mm": 1.42,
+      "tmin_c": 23.38,
+      "tmax_c": 31.37,
+      "relative_humidity_pct": 77.75,
+      "wind_speed_2m_m_s": 2.17,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 22.46,
+      "tmax_c": 30.79,
+      "relative_humidity_pct": 74.95,
+      "wind_speed_2m_m_s": 4.19,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 22.52,
+      "tmax_c": 31.5,
+      "relative_humidity_pct": 74.21,
+      "wind_speed_2m_m_s": 3.97,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 23.4,
+      "tmax_c": 31.55,
+      "relative_humidity_pct": 71.89,
+      "wind_speed_2m_m_s": 4.39,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.78,
+      "tmin_c": 22.76,
+      "tmax_c": 30.98,
+      "relative_humidity_pct": 75.08,
+      "wind_speed_2m_m_s": 3.83,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-11",
+      "et0_mm": null,
+      "precipitation_mm": 7.51,
+      "tmin_c": 23.24,
+      "tmax_c": 30.83,
+      "relative_humidity_pct": 79.49,
+      "wind_speed_2m_m_s": 3.73,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.19,
+      "tmin_c": 23.38,
+      "tmax_c": 29.44,
+      "relative_humidity_pct": 77.57,
+      "wind_speed_2m_m_s": 4.1,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-13",
+      "et0_mm": null,
+      "precipitation_mm": 1.69,
+      "tmin_c": 22.39,
+      "tmax_c": 29.75,
+      "relative_humidity_pct": 80.49,
+      "wind_speed_2m_m_s": 2.89,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.05,
+      "tmin_c": 23.3,
+      "tmax_c": 27.95,
+      "relative_humidity_pct": 83.63,
+      "wind_speed_2m_m_s": 2.61,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.1,
+      "tmax_c": 29.53,
+      "relative_humidity_pct": 77.26,
+      "wind_speed_2m_m_s": 1.4,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-16",
+      "et0_mm": null,
+      "precipitation_mm": 1.1,
+      "tmin_c": 23.77,
+      "tmax_c": 30.86,
+      "relative_humidity_pct": 76.82,
+      "wind_speed_2m_m_s": 3.43,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-17",
+      "et0_mm": null,
+      "precipitation_mm": 5.12,
+      "tmin_c": 23.69,
+      "tmax_c": 31.14,
+      "relative_humidity_pct": 75.57,
+      "wind_speed_2m_m_s": 4.4,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.08,
+      "tmin_c": 22.28,
+      "tmax_c": 31.11,
+      "relative_humidity_pct": 72.98,
+      "wind_speed_2m_m_s": 3.13,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.28,
+      "tmin_c": 23.07,
+      "tmax_c": 31.44,
+      "relative_humidity_pct": 74.11,
+      "wind_speed_2m_m_s": 3.1,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.35,
+      "tmin_c": 23.89,
+      "tmax_c": 31.09,
+      "relative_humidity_pct": 74.33,
+      "wind_speed_2m_m_s": 4.49,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.07,
+      "tmin_c": 23.22,
+      "tmax_c": 31.81,
+      "relative_humidity_pct": 73.2,
+      "wind_speed_2m_m_s": 4.09,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.07,
+      "tmin_c": 24.3,
+      "tmax_c": 30.31,
+      "relative_humidity_pct": 77.13,
+      "wind_speed_2m_m_s": 4.14,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.07,
+      "tmin_c": 24.01,
+      "tmax_c": 31.46,
+      "relative_humidity_pct": 71.78,
+      "wind_speed_2m_m_s": 4.93,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 23.68,
+      "tmax_c": 31.12,
+      "relative_humidity_pct": 73.21,
+      "wind_speed_2m_m_s": 4.99,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 23.91,
+      "tmax_c": 31.24,
+      "relative_humidity_pct": 70.27,
+      "wind_speed_2m_m_s": 5.6,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.22,
+      "tmin_c": 23.75,
+      "tmax_c": 29.53,
+      "relative_humidity_pct": 74.51,
+      "wind_speed_2m_m_s": 5.08,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.79,
+      "tmin_c": 22.72,
+      "tmax_c": 31.87,
+      "relative_humidity_pct": 74.18,
+      "wind_speed_2m_m_s": 3.44,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-28",
+      "et0_mm": null,
+      "precipitation_mm": 1.6,
+      "tmin_c": 23.85,
+      "tmax_c": 31.03,
+      "relative_humidity_pct": 76.86,
+      "wind_speed_2m_m_s": 2.42,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-29",
+      "et0_mm": null,
+      "precipitation_mm": 2.46,
+      "tmin_c": 23.5,
+      "tmax_c": 32.32,
+      "relative_humidity_pct": 74.02,
+      "wind_speed_2m_m_s": 2.41,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-30",
+      "et0_mm": null,
+      "precipitation_mm": 1.07,
+      "tmin_c": 23.92,
+      "tmax_c": 31.17,
+      "relative_humidity_pct": 71.3,
+      "wind_speed_2m_m_s": 4.65,
+      "solar_radiation_mj_m2_day": null
+    },
+    {
+      "date": "1983-12-31",
+      "et0_mm": null,
+      "precipitation_mm": 0.05,
+      "tmin_c": 23.38,
+      "tmax_c": 30.86,
+      "relative_humidity_pct": 68.1,
+      "wind_speed_2m_m_s": 5.22,
+      "solar_radiation_mj_m2_day": null
+    }
+  ],
+  "units": {
+    "precipitation_mm": "mm/day",
+    "tmin_c": "C",
+    "tmax_c": "C",
+    "relative_humidity_pct": "%",
+    "wind_speed_2m_m_s": "m/s",
+    "solar_radiation_mj_m2_day": "MJ/m^2/day",
+    "et0_mm": "mm/day"
+  },
+  "quality_control": {
+    "issues": [
+      {
+        "date": "1983-01-01",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-02",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-03",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-04",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-05",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-06",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-07",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-08",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-09",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-10",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-11",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-12",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-13",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-14",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-15",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-16",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-17",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-18",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-19",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-20",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-21",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-22",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-23",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-24",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-25",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-26",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-27",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-28",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-29",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-30",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-01-31",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-01",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-02",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-03",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-04",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-05",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-06",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-07",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-08",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-09",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-10",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-11",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-12",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-13",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-14",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-15",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-16",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-17",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-18",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-19",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-20",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-21",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-22",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-23",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-24",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-25",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-26",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-27",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-02-28",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-01",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-02",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-03",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-04",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-05",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-06",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-07",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-08",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-09",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-10",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-11",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-12",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-13",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-14",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-15",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-16",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-17",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-18",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-19",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-20",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-21",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-22",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-23",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-24",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-25",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-26",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-27",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-28",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-29",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-30",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-03-31",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-01",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-02",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-03",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-04",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-05",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-06",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-07",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-08",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-09",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-10",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-11",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-12",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-13",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-14",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-15",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-16",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-17",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-18",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-19",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-20",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-21",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-22",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-23",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-24",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-25",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-26",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-27",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-28",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-29",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-04-30",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-01",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-02",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-03",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-04",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-05",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-06",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-07",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-08",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-09",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-10",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-11",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-12",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-13",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-14",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-15",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-16",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-17",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-18",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-19",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-20",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-21",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-22",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-23",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-24",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-25",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-26",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-27",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-28",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-29",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-30",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-05-31",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-01",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-02",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-03",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-04",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-05",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-06",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-07",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-08",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-09",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-10",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-11",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-12",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-13",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-14",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-15",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-16",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-17",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-18",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-19",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-20",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-21",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-22",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-23",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-24",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-25",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-26",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-27",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-28",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-29",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-06-30",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-01",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-02",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-03",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-04",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-05",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-06",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-07",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-08",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-09",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-10",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-11",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-12",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-13",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-14",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-15",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-16",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-17",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-18",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-19",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-20",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-21",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-22",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-23",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-24",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-25",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-26",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-27",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-28",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-29",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-30",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-07-31",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-01",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-02",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-03",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-04",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-05",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-06",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-07",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-08",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-09",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-10",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-11",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-12",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-13",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-14",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-15",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-16",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-17",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-18",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-19",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-20",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-21",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-22",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-23",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-24",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-25",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-26",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-27",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-28",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-29",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-30",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-08-31",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-01",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-02",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-03",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-04",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-05",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-06",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-07",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-08",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-09",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-10",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-11",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-12",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-13",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-14",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-15",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-16",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-17",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-18",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-19",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-20",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-21",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-22",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-23",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-24",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-25",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-26",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-27",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-28",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-29",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-09-30",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-01",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-02",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-03",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-04",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-05",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-06",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-07",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-08",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-09",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-10",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-11",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-12",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-13",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-14",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-15",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-16",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-17",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-18",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-19",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-20",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-21",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-22",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-23",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-24",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-25",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-26",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-27",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-28",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-29",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-30",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-10-31",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-01",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-02",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-03",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-04",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-05",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-06",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-07",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-08",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-09",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-10",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-11",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-12",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-13",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-14",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-15",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-16",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-17",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-18",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-19",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-20",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-21",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-22",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-23",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-24",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-25",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-26",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-27",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-28",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-29",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-11-30",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-01",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-02",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-03",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-04",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-05",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-06",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-07",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-08",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-09",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-10",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-11",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-12",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-13",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-14",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-15",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-16",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-17",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-18",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-19",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-20",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-21",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-22",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-23",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-24",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-25",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-26",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-27",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-28",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-29",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-30",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      },
+      {
+        "date": "1983-12-31",
+        "parameter": "ALLSKY_SFC_SW_DWN",
+        "reason": "missing"
+      }
+    ],
+    "rain_warning_mm": 500,
+    "rain_policy": "flag_only_no_clipping",
+    "bias_correction": null
+  },
+  "provider_header": {
+    "title": "NASA/POWER Source Native Resolution Daily Data",
+    "api": {
+      "version": "v2.10.3",
+      "name": "POWER Daily API"
+    },
+    "sources": [
+      "MERRA2",
+      "POWER"
+    ],
+    "fill_value": -999.0,
+    "time_standard": "LST",
+    "start": "19830101",
+    "end": "19831231"
+  },
+  "provider_units": {
+    "PRECTOTCORR": "mm/day",
+    "T2M_MIN": "C",
+    "T2M_MAX": "C",
+    "RH2M": "%",
+    "WS2M": "m/s",
+    "ALLSKY_SFC_SW_DWN": null
+  },
+  "provider_geometry": {
+    "type": "Point",
+    "coordinates": [
+      -85.5,
+      10.55,
+      94.64
+    ]
+  }
+}

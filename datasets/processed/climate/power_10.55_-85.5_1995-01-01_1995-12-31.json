@@ -1,0 +1,3730 @@
+{
+  "schema_version": "0.1.0",
+  "_mock": false,
+  "generado": "2026-11-14T18:36:19.155067+00:00",
+  "zona": {
+    "id": "provisional-point",
+    "name": "Provisional agricultural point, Guanacaste",
+    "latitude": 10.55,
+    "longitude": -85.5,
+    "validated": false
+  },
+  "source_refs": [
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19950101&end=19951231&format=JSON&time-standard=LST&units=metric"
+  ],
+  "provenance": {
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19950101&end=19951231&format=JSON&time-standard=LST&units=metric",
+    "fetched_at": "2026-11-14T18:36:19.155067+00:00",
+    "sha256": "aebecbc3e65f58ea26e58b8d56b8746c6e9228f575e922b7fef30cba7591e4a1",
+    "status": 200,
+    "content_type": "application/json",
+    "etag": null,
+    "last_modified": null
+  },
+  "warnings": [
+    "Location is provisional; SoilGrids and farm suitability are not validated.",
+    "ET0 is null until the scientific kernel calculates it.",
+    "No IMN rainfall calibration is applied; bias claims require independent validation."
+  ],
+  "start": "1995-01-01",
+  "end": "1995-12-31",
+  "days": [
+    {
+      "date": "1995-01-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.44,
+      "tmax_c": 33.8,
+      "relative_humidity_pct": 60.12,
+      "wind_speed_2m_m_s": 4.75,
+      "solar_radiation_mj_m2_day": 19.84
+    },
+    {
+      "date": "1995-01-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.77,
+      "tmax_c": 33.89,
+      "relative_humidity_pct": 62.39,
+      "wind_speed_2m_m_s": 4.9,
+      "solar_radiation_mj_m2_day": 17.46
+    },
+    {
+      "date": "1995-01-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.2,
+      "tmax_c": 33.58,
+      "relative_humidity_pct": 61.0,
+      "wind_speed_2m_m_s": 4.67,
+      "solar_radiation_mj_m2_day": 17.51
+    },
+    {
+      "date": "1995-01-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 23.73,
+      "tmax_c": 33.85,
+      "relative_humidity_pct": 61.87,
+      "wind_speed_2m_m_s": 4.55,
+      "solar_radiation_mj_m2_day": 20.52
+    },
+    {
+      "date": "1995-01-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.09,
+      "tmax_c": 33.42,
+      "relative_humidity_pct": 63.58,
+      "wind_speed_2m_m_s": 5.18,
+      "solar_radiation_mj_m2_day": 16.81
+    },
+    {
+      "date": "1995-01-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.93,
+      "tmax_c": 33.89,
+      "relative_humidity_pct": 57.82,
+      "wind_speed_2m_m_s": 4.23,
+      "solar_radiation_mj_m2_day": 18.12
+    },
+    {
+      "date": "1995-01-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 21.49,
+      "tmax_c": 33.93,
+      "relative_humidity_pct": 57.78,
+      "wind_speed_2m_m_s": 2.96,
+      "solar_radiation_mj_m2_day": 19.37
+    },
+    {
+      "date": "1995-01-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.37,
+      "tmax_c": 33.69,
+      "relative_humidity_pct": 62.46,
+      "wind_speed_2m_m_s": 4.94,
+      "solar_radiation_mj_m2_day": 17.57
+    },
+    {
+      "date": "1995-01-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.8,
+      "tmax_c": 33.97,
+      "relative_humidity_pct": 63.41,
+      "wind_speed_2m_m_s": 5.03,
+      "solar_radiation_mj_m2_day": 16.97
+    },
+    {
+      "date": "1995-01-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.2,
+      "tmax_c": 33.23,
+      "relative_humidity_pct": 59.51,
+      "wind_speed_2m_m_s": 5.2,
+      "solar_radiation_mj_m2_day": 17.78
+    },
+    {
+      "date": "1995-01-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.52,
+      "tmax_c": 33.74,
+      "relative_humidity_pct": 59.08,
+      "wind_speed_2m_m_s": 4.32,
+      "solar_radiation_mj_m2_day": 20.16
+    },
+    {
+      "date": "1995-01-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.36,
+      "tmax_c": 33.72,
+      "relative_humidity_pct": 60.28,
+      "wind_speed_2m_m_s": 3.65,
+      "solar_radiation_mj_m2_day": 20.14
+    },
+    {
+      "date": "1995-01-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.2,
+      "tmax_c": 34.35,
+      "relative_humidity_pct": 62.39,
+      "wind_speed_2m_m_s": 2.61,
+      "solar_radiation_mj_m2_day": 19.68
+    },
+    {
+      "date": "1995-01-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.0,
+      "tmax_c": 32.02,
+      "relative_humidity_pct": 65.99,
+      "wind_speed_2m_m_s": 1.97,
+      "solar_radiation_mj_m2_day": 20.0
+    },
+    {
+      "date": "1995-01-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.2,
+      "tmax_c": 34.56,
+      "relative_humidity_pct": 56.93,
+      "wind_speed_2m_m_s": 3.01,
+      "solar_radiation_mj_m2_day": 20.76
+    },
+    {
+      "date": "1995-01-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.71,
+      "tmax_c": 33.86,
+      "relative_humidity_pct": 60.65,
+      "wind_speed_2m_m_s": 4.86,
+      "solar_radiation_mj_m2_day": 20.27
+    },
+    {
+      "date": "1995-01-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.39,
+      "tmax_c": 34.38,
+      "relative_humidity_pct": 59.83,
+      "wind_speed_2m_m_s": 3.82,
+      "solar_radiation_mj_m2_day": 20.15
+    },
+    {
+      "date": "1995-01-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.02,
+      "tmax_c": 34.94,
+      "relative_humidity_pct": 59.46,
+      "wind_speed_2m_m_s": 3.3,
+      "solar_radiation_mj_m2_day": 20.38
+    },
+    {
+      "date": "1995-01-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.58,
+      "tmax_c": 34.89,
+      "relative_humidity_pct": 58.31,
+      "wind_speed_2m_m_s": 3.73,
+      "solar_radiation_mj_m2_day": 20.77
+    },
+    {
+      "date": "1995-01-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.83,
+      "tmax_c": 34.41,
+      "relative_humidity_pct": 56.86,
+      "wind_speed_2m_m_s": 4.78,
+      "solar_radiation_mj_m2_day": 16.12
+    },
+    {
+      "date": "1995-01-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.4,
+      "tmax_c": 34.02,
+      "relative_humidity_pct": 61.92,
+      "wind_speed_2m_m_s": 4.55,
+      "solar_radiation_mj_m2_day": 20.63
+    },
+    {
+      "date": "1995-01-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.59,
+      "tmax_c": 33.21,
+      "relative_humidity_pct": 62.65,
+      "wind_speed_2m_m_s": 5.14,
+      "solar_radiation_mj_m2_day": 20.0
+    },
+    {
+      "date": "1995-01-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 24.77,
+      "tmax_c": 33.8,
+      "relative_humidity_pct": 63.33,
+      "wind_speed_2m_m_s": 4.92,
+      "solar_radiation_mj_m2_day": 18.67
+    },
+    {
+      "date": "1995-01-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.04,
+      "tmax_c": 34.16,
+      "relative_humidity_pct": 60.83,
+      "wind_speed_2m_m_s": 6.0,
+      "solar_radiation_mj_m2_day": 19.81
+    },
+    {
+      "date": "1995-01-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.7,
+      "tmax_c": 33.96,
+      "relative_humidity_pct": 59.21,
+      "wind_speed_2m_m_s": 6.55,
+      "solar_radiation_mj_m2_day": 20.62
+    },
+    {
+      "date": "1995-01-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.07,
+      "tmax_c": 34.12,
+      "relative_humidity_pct": 59.48,
+      "wind_speed_2m_m_s": 6.12,
+      "solar_radiation_mj_m2_day": 20.29
+    },
+    {
+      "date": "1995-01-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.23,
+      "tmax_c": 34.5,
+      "relative_humidity_pct": 60.7,
+      "wind_speed_2m_m_s": 5.15,
+      "solar_radiation_mj_m2_day": 20.54
+    },
+    {
+      "date": "1995-01-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.6,
+      "tmax_c": 35.85,
+      "relative_humidity_pct": 57.14,
+      "wind_speed_2m_m_s": 3.64,
+      "solar_radiation_mj_m2_day": 21.57
+    },
+    {
+      "date": "1995-01-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.43,
+      "tmax_c": 34.82,
+      "relative_humidity_pct": 59.0,
+      "wind_speed_2m_m_s": 2.72,
+      "solar_radiation_mj_m2_day": 20.3
+    },
+    {
+      "date": "1995-01-30",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.88,
+      "tmax_c": 35.17,
+      "relative_humidity_pct": 56.64,
+      "wind_speed_2m_m_s": 3.77,
+      "solar_radiation_mj_m2_day": 19.98
+    },
+    {
+      "date": "1995-01-31",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.86,
+      "tmax_c": 35.07,
+      "relative_humidity_pct": 60.5,
+      "wind_speed_2m_m_s": 4.6,
+      "solar_radiation_mj_m2_day": 21.12
+    },
+    {
+      "date": "1995-02-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.21,
+      "tmax_c": 33.42,
+      "relative_humidity_pct": 61.01,
+      "wind_speed_2m_m_s": 3.79,
+      "solar_radiation_mj_m2_day": 20.87
+    },
+    {
+      "date": "1995-02-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.85,
+      "tmax_c": 34.62,
+      "relative_humidity_pct": 56.66,
+      "wind_speed_2m_m_s": 4.22,
+      "solar_radiation_mj_m2_day": 19.32
+    },
+    {
+      "date": "1995-02-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.36,
+      "tmax_c": 35.61,
+      "relative_humidity_pct": 58.53,
+      "wind_speed_2m_m_s": 2.93,
+      "solar_radiation_mj_m2_day": 22.61
+    },
+    {
+      "date": "1995-02-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.32,
+      "tmax_c": 34.16,
+      "relative_humidity_pct": 57.09,
+      "wind_speed_2m_m_s": 4.43,
+      "solar_radiation_mj_m2_day": 21.16
+    },
+    {
+      "date": "1995-02-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.51,
+      "tmax_c": 34.3,
+      "relative_humidity_pct": 59.33,
+      "wind_speed_2m_m_s": 5.28,
+      "solar_radiation_mj_m2_day": 19.92
+    },
+    {
+      "date": "1995-02-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.52,
+      "tmax_c": 34.24,
+      "relative_humidity_pct": 60.73,
+      "wind_speed_2m_m_s": 5.27,
+      "solar_radiation_mj_m2_day": 22.67
+    },
+    {
+      "date": "1995-02-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 23.46,
+      "tmax_c": 34.59,
+      "relative_humidity_pct": 60.24,
+      "wind_speed_2m_m_s": 5.34,
+      "solar_radiation_mj_m2_day": 22.69
+    },
+    {
+      "date": "1995-02-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 23.4,
+      "tmax_c": 35.43,
+      "relative_humidity_pct": 61.0,
+      "wind_speed_2m_m_s": 4.63,
+      "solar_radiation_mj_m2_day": 22.81
+    },
+    {
+      "date": "1995-02-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.06,
+      "tmin_c": 23.41,
+      "tmax_c": 32.82,
+      "relative_humidity_pct": 61.54,
+      "wind_speed_2m_m_s": 6.16,
+      "solar_radiation_mj_m2_day": 22.65
+    },
+    {
+      "date": "1995-02-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.13,
+      "tmax_c": 34.18,
+      "relative_humidity_pct": 58.69,
+      "wind_speed_2m_m_s": 5.0,
+      "solar_radiation_mj_m2_day": 21.64
+    },
+    {
+      "date": "1995-02-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.45,
+      "tmax_c": 36.51,
+      "relative_humidity_pct": 56.15,
+      "wind_speed_2m_m_s": 2.38,
+      "solar_radiation_mj_m2_day": 23.12
+    },
+    {
+      "date": "1995-02-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.26,
+      "tmax_c": 36.47,
+      "relative_humidity_pct": 53.81,
+      "wind_speed_2m_m_s": 1.73,
+      "solar_radiation_mj_m2_day": 23.42
+    },
+    {
+      "date": "1995-02-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 21.78,
+      "tmax_c": 35.91,
+      "relative_humidity_pct": 55.49,
+      "wind_speed_2m_m_s": 3.1,
+      "solar_radiation_mj_m2_day": 23.77
+    },
+    {
+      "date": "1995-02-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.65,
+      "tmax_c": 35.76,
+      "relative_humidity_pct": 56.9,
+      "wind_speed_2m_m_s": 4.89,
+      "solar_radiation_mj_m2_day": 23.72
+    },
+    {
+      "date": "1995-02-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.64,
+      "tmax_c": 35.15,
+      "relative_humidity_pct": 54.71,
+      "wind_speed_2m_m_s": 4.99,
+      "solar_radiation_mj_m2_day": 21.15
+    },
+    {
+      "date": "1995-02-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.91,
+      "tmax_c": 36.29,
+      "relative_humidity_pct": 53.27,
+      "wind_speed_2m_m_s": 3.81,
+      "solar_radiation_mj_m2_day": 23.92
+    },
+    {
+      "date": "1995-02-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.21,
+      "tmax_c": 35.47,
+      "relative_humidity_pct": 55.16,
+      "wind_speed_2m_m_s": 4.49,
+      "solar_radiation_mj_m2_day": 22.54
+    },
+    {
+      "date": "1995-02-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.28,
+      "tmax_c": 35.29,
+      "relative_humidity_pct": 54.81,
+      "wind_speed_2m_m_s": 5.21,
+      "solar_radiation_mj_m2_day": 23.34
+    },
+    {
+      "date": "1995-02-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.62,
+      "tmax_c": 34.88,
+      "relative_humidity_pct": 57.25,
+      "wind_speed_2m_m_s": 5.27,
+      "solar_radiation_mj_m2_day": 23.04
+    },
+    {
+      "date": "1995-02-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.16,
+      "tmax_c": 34.37,
+      "relative_humidity_pct": 57.87,
+      "wind_speed_2m_m_s": 4.63,
+      "solar_radiation_mj_m2_day": 23.27
+    },
+    {
+      "date": "1995-02-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.6,
+      "tmax_c": 34.86,
+      "relative_humidity_pct": 56.53,
+      "wind_speed_2m_m_s": 4.04,
+      "solar_radiation_mj_m2_day": 22.92
+    },
+    {
+      "date": "1995-02-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.84,
+      "tmax_c": 34.49,
+      "relative_humidity_pct": 59.26,
+      "wind_speed_2m_m_s": 4.75,
+      "solar_radiation_mj_m2_day": 23.26
+    },
+    {
+      "date": "1995-02-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.19,
+      "tmax_c": 33.59,
+      "relative_humidity_pct": 58.17,
+      "wind_speed_2m_m_s": 5.1,
+      "solar_radiation_mj_m2_day": 24.05
+    },
+    {
+      "date": "1995-02-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.31,
+      "tmax_c": 34.4,
+      "relative_humidity_pct": 57.77,
+      "wind_speed_2m_m_s": 4.53,
+      "solar_radiation_mj_m2_day": 22.77
+    },
+    {
+      "date": "1995-02-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.81,
+      "tmax_c": 34.77,
+      "relative_humidity_pct": 60.16,
+      "wind_speed_2m_m_s": 4.66,
+      "solar_radiation_mj_m2_day": 20.28
+    },
+    {
+      "date": "1995-02-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.63,
+      "tmax_c": 34.76,
+      "relative_humidity_pct": 58.45,
+      "wind_speed_2m_m_s": 4.61,
+      "solar_radiation_mj_m2_day": 24.23
+    },
+    {
+      "date": "1995-02-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.17,
+      "tmax_c": 36.22,
+      "relative_humidity_pct": 59.0,
+      "wind_speed_2m_m_s": 4.43,
+      "solar_radiation_mj_m2_day": 23.89
+    },
+    {
+      "date": "1995-02-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.13,
+      "tmax_c": 36.27,
+      "relative_humidity_pct": 57.14,
+      "wind_speed_2m_m_s": 3.17,
+      "solar_radiation_mj_m2_day": 24.18
+    },
+    {
+      "date": "1995-03-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.19,
+      "tmax_c": 36.51,
+      "relative_humidity_pct": 57.62,
+      "wind_speed_2m_m_s": 2.28,
+      "solar_radiation_mj_m2_day": 23.66
+    },
+    {
+      "date": "1995-03-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.96,
+      "tmax_c": 36.26,
+      "relative_humidity_pct": 57.67,
+      "wind_speed_2m_m_s": 4.25,
+      "solar_radiation_mj_m2_day": 25.09
+    },
+    {
+      "date": "1995-03-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.51,
+      "tmax_c": 35.0,
+      "relative_humidity_pct": 58.74,
+      "wind_speed_2m_m_s": 6.11,
+      "solar_radiation_mj_m2_day": 22.41
+    },
+    {
+      "date": "1995-03-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.54,
+      "tmax_c": 35.35,
+      "relative_humidity_pct": 58.19,
+      "wind_speed_2m_m_s": 5.84,
+      "solar_radiation_mj_m2_day": 23.79
+    },
+    {
+      "date": "1995-03-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.78,
+      "tmax_c": 36.08,
+      "relative_humidity_pct": 56.31,
+      "wind_speed_2m_m_s": 4.75,
+      "solar_radiation_mj_m2_day": 24.85
+    },
+    {
+      "date": "1995-03-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.33,
+      "tmax_c": 36.67,
+      "relative_humidity_pct": 54.76,
+      "wind_speed_2m_m_s": 4.27,
+      "solar_radiation_mj_m2_day": 24.19
+    },
+    {
+      "date": "1995-03-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.97,
+      "tmax_c": 36.44,
+      "relative_humidity_pct": 58.54,
+      "wind_speed_2m_m_s": 3.17,
+      "solar_radiation_mj_m2_day": 22.82
+    },
+    {
+      "date": "1995-03-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.02,
+      "tmax_c": 36.09,
+      "relative_humidity_pct": 53.64,
+      "wind_speed_2m_m_s": 1.86,
+      "solar_radiation_mj_m2_day": 23.97
+    },
+    {
+      "date": "1995-03-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 24.06,
+      "tmax_c": 35.59,
+      "relative_humidity_pct": 56.67,
+      "wind_speed_2m_m_s": 4.3,
+      "solar_radiation_mj_m2_day": 21.31
+    },
+    {
+      "date": "1995-03-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.2,
+      "tmax_c": 34.86,
+      "relative_humidity_pct": 58.75,
+      "wind_speed_2m_m_s": 5.11,
+      "solar_radiation_mj_m2_day": 23.38
+    },
+    {
+      "date": "1995-03-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.16,
+      "tmax_c": 35.73,
+      "relative_humidity_pct": 58.97,
+      "wind_speed_2m_m_s": 3.88,
+      "solar_radiation_mj_m2_day": 24.31
+    },
+    {
+      "date": "1995-03-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.98,
+      "tmax_c": 36.48,
+      "relative_humidity_pct": 56.33,
+      "wind_speed_2m_m_s": 2.02,
+      "solar_radiation_mj_m2_day": 23.12
+    },
+    {
+      "date": "1995-03-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.7,
+      "tmax_c": 36.06,
+      "relative_humidity_pct": 56.61,
+      "wind_speed_2m_m_s": 1.6,
+      "solar_radiation_mj_m2_day": 22.78
+    },
+    {
+      "date": "1995-03-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.86,
+      "tmin_c": 24.43,
+      "tmax_c": 35.96,
+      "relative_humidity_pct": 54.77,
+      "wind_speed_2m_m_s": 1.6,
+      "solar_radiation_mj_m2_day": 21.88
+    },
+    {
+      "date": "1995-03-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.65,
+      "tmin_c": 24.47,
+      "tmax_c": 36.35,
+      "relative_humidity_pct": 53.78,
+      "wind_speed_2m_m_s": 2.12,
+      "solar_radiation_mj_m2_day": 20.36
+    },
+    {
+      "date": "1995-03-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.26,
+      "tmin_c": 24.34,
+      "tmax_c": 35.68,
+      "relative_humidity_pct": 57.64,
+      "wind_speed_2m_m_s": 2.13,
+      "solar_radiation_mj_m2_day": 19.55
+    },
+    {
+      "date": "1995-03-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 24.84,
+      "tmax_c": 36.87,
+      "relative_humidity_pct": 52.85,
+      "wind_speed_2m_m_s": 1.89,
+      "solar_radiation_mj_m2_day": 21.35
+    },
+    {
+      "date": "1995-03-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.92,
+      "tmax_c": 36.32,
+      "relative_humidity_pct": 55.56,
+      "wind_speed_2m_m_s": 3.42,
+      "solar_radiation_mj_m2_day": 21.35
+    },
+    {
+      "date": "1995-03-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.3,
+      "tmax_c": 36.66,
+      "relative_humidity_pct": 53.43,
+      "wind_speed_2m_m_s": 2.72,
+      "solar_radiation_mj_m2_day": 19.72
+    },
+    {
+      "date": "1995-03-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.85,
+      "tmax_c": 37.08,
+      "relative_humidity_pct": 53.31,
+      "wind_speed_2m_m_s": 2.32,
+      "solar_radiation_mj_m2_day": 21.32
+    },
+    {
+      "date": "1995-03-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 26.01,
+      "tmax_c": 34.91,
+      "relative_humidity_pct": 58.49,
+      "wind_speed_2m_m_s": 1.55,
+      "solar_radiation_mj_m2_day": 21.32
+    },
+    {
+      "date": "1995-03-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.3,
+      "tmax_c": 34.77,
+      "relative_humidity_pct": 60.7,
+      "wind_speed_2m_m_s": 1.83,
+      "solar_radiation_mj_m2_day": 21.57
+    },
+    {
+      "date": "1995-03-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.19,
+      "tmin_c": 25.56,
+      "tmax_c": 35.0,
+      "relative_humidity_pct": 62.27,
+      "wind_speed_2m_m_s": 1.82,
+      "solar_radiation_mj_m2_day": 19.26
+    },
+    {
+      "date": "1995-03-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 25.5,
+      "tmax_c": 34.17,
+      "relative_humidity_pct": 66.41,
+      "wind_speed_2m_m_s": 2.0,
+      "solar_radiation_mj_m2_day": 17.2
+    },
+    {
+      "date": "1995-03-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.74,
+      "tmax_c": 33.65,
+      "relative_humidity_pct": 65.61,
+      "wind_speed_2m_m_s": 1.62,
+      "solar_radiation_mj_m2_day": 20.25
+    },
+    {
+      "date": "1995-03-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 26.04,
+      "tmax_c": 37.63,
+      "relative_humidity_pct": 54.37,
+      "wind_speed_2m_m_s": 1.75,
+      "solar_radiation_mj_m2_day": 20.81
+    },
+    {
+      "date": "1995-03-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.57,
+      "tmax_c": 36.69,
+      "relative_humidity_pct": 52.45,
+      "wind_speed_2m_m_s": 2.58,
+      "solar_radiation_mj_m2_day": 24.24
+    },
+    {
+      "date": "1995-03-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.19,
+      "tmax_c": 36.81,
+      "relative_humidity_pct": 57.34,
+      "wind_speed_2m_m_s": 3.41,
+      "solar_radiation_mj_m2_day": 24.35
+    },
+    {
+      "date": "1995-03-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.02,
+      "tmax_c": 37.61,
+      "relative_humidity_pct": 52.96,
+      "wind_speed_2m_m_s": 3.75,
+      "solar_radiation_mj_m2_day": 23.27
+    },
+    {
+      "date": "1995-03-30",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.34,
+      "tmax_c": 37.36,
+      "relative_humidity_pct": 50.33,
+      "wind_speed_2m_m_s": 2.37,
+      "solar_radiation_mj_m2_day": 23.22
+    },
+    {
+      "date": "1995-03-31",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 23.94,
+      "tmax_c": 37.16,
+      "relative_humidity_pct": 52.28,
+      "wind_speed_2m_m_s": 2.38,
+      "solar_radiation_mj_m2_day": 21.0
+    },
+    {
+      "date": "1995-04-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 25.72,
+      "tmax_c": 37.17,
+      "relative_humidity_pct": 53.81,
+      "wind_speed_2m_m_s": 2.14,
+      "solar_radiation_mj_m2_day": 23.88
+    },
+    {
+      "date": "1995-04-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 24.94,
+      "tmax_c": 37.4,
+      "relative_humidity_pct": 54.99,
+      "wind_speed_2m_m_s": 3.18,
+      "solar_radiation_mj_m2_day": 20.92
+    },
+    {
+      "date": "1995-04-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.38,
+      "tmax_c": 34.66,
+      "relative_humidity_pct": 61.42,
+      "wind_speed_2m_m_s": 4.85,
+      "solar_radiation_mj_m2_day": 21.54
+    },
+    {
+      "date": "1995-04-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.51,
+      "tmax_c": 36.87,
+      "relative_humidity_pct": 57.26,
+      "wind_speed_2m_m_s": 3.37,
+      "solar_radiation_mj_m2_day": 22.69
+    },
+    {
+      "date": "1995-04-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 25.18,
+      "tmax_c": 37.14,
+      "relative_humidity_pct": 59.05,
+      "wind_speed_2m_m_s": 2.46,
+      "solar_radiation_mj_m2_day": 18.57
+    },
+    {
+      "date": "1995-04-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.07,
+      "tmin_c": 26.55,
+      "tmax_c": 38.35,
+      "relative_humidity_pct": 58.67,
+      "wind_speed_2m_m_s": 2.32,
+      "solar_radiation_mj_m2_day": 22.05
+    },
+    {
+      "date": "1995-04-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.09,
+      "tmin_c": 27.03,
+      "tmax_c": 37.41,
+      "relative_humidity_pct": 60.15,
+      "wind_speed_2m_m_s": 2.28,
+      "solar_radiation_mj_m2_day": 16.01
+    },
+    {
+      "date": "1995-04-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 27.08,
+      "tmax_c": 36.2,
+      "relative_humidity_pct": 64.1,
+      "wind_speed_2m_m_s": 1.58,
+      "solar_radiation_mj_m2_day": 20.78
+    },
+    {
+      "date": "1995-04-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.13,
+      "tmin_c": 27.49,
+      "tmax_c": 35.11,
+      "relative_humidity_pct": 62.67,
+      "wind_speed_2m_m_s": 1.53,
+      "solar_radiation_mj_m2_day": 20.16
+    },
+    {
+      "date": "1995-04-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.49,
+      "tmin_c": 27.01,
+      "tmax_c": 34.71,
+      "relative_humidity_pct": 63.01,
+      "wind_speed_2m_m_s": 1.55,
+      "solar_radiation_mj_m2_day": 15.29
+    },
+    {
+      "date": "1995-04-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 26.86,
+      "tmax_c": 32.91,
+      "relative_humidity_pct": 61.32,
+      "wind_speed_2m_m_s": 1.46,
+      "solar_radiation_mj_m2_day": 21.46
+    },
+    {
+      "date": "1995-04-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 26.64,
+      "tmax_c": 38.29,
+      "relative_humidity_pct": 53.85,
+      "wind_speed_2m_m_s": 2.25,
+      "solar_radiation_mj_m2_day": 25.7
+    },
+    {
+      "date": "1995-04-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.2,
+      "tmax_c": 37.05,
+      "relative_humidity_pct": 53.26,
+      "wind_speed_2m_m_s": 3.8,
+      "solar_radiation_mj_m2_day": 22.98
+    },
+    {
+      "date": "1995-04-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.04,
+      "tmax_c": 37.35,
+      "relative_humidity_pct": 54.71,
+      "wind_speed_2m_m_s": 3.36,
+      "solar_radiation_mj_m2_day": 22.69
+    },
+    {
+      "date": "1995-04-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.26,
+      "tmax_c": 36.25,
+      "relative_humidity_pct": 55.01,
+      "wind_speed_2m_m_s": 2.56,
+      "solar_radiation_mj_m2_day": 24.6
+    },
+    {
+      "date": "1995-04-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.24,
+      "tmax_c": 36.73,
+      "relative_humidity_pct": 53.23,
+      "wind_speed_2m_m_s": 3.24,
+      "solar_radiation_mj_m2_day": 21.73
+    },
+    {
+      "date": "1995-04-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 24.06,
+      "tmax_c": 36.93,
+      "relative_humidity_pct": 56.47,
+      "wind_speed_2m_m_s": 2.9,
+      "solar_radiation_mj_m2_day": 24.13
+    },
+    {
+      "date": "1995-04-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.37,
+      "tmin_c": 26.06,
+      "tmax_c": 36.22,
+      "relative_humidity_pct": 58.46,
+      "wind_speed_2m_m_s": 1.85,
+      "solar_radiation_mj_m2_day": 21.79
+    },
+    {
+      "date": "1995-04-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.57,
+      "tmin_c": 25.87,
+      "tmax_c": 35.21,
+      "relative_humidity_pct": 63.57,
+      "wind_speed_2m_m_s": 1.43,
+      "solar_radiation_mj_m2_day": 21.28
+    },
+    {
+      "date": "1995-04-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.86,
+      "tmin_c": 26.13,
+      "tmax_c": 34.32,
+      "relative_humidity_pct": 64.71,
+      "wind_speed_2m_m_s": 1.17,
+      "solar_radiation_mj_m2_day": 22.65
+    },
+    {
+      "date": "1995-04-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 25.99,
+      "tmax_c": 33.37,
+      "relative_humidity_pct": 66.97,
+      "wind_speed_2m_m_s": 3.22,
+      "solar_radiation_mj_m2_day": 17.52
+    },
+    {
+      "date": "1995-04-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.59,
+      "tmax_c": 35.46,
+      "relative_humidity_pct": 58.0,
+      "wind_speed_2m_m_s": 2.28,
+      "solar_radiation_mj_m2_day": 24.47
+    },
+    {
+      "date": "1995-04-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.29,
+      "tmax_c": 36.06,
+      "relative_humidity_pct": 56.7,
+      "wind_speed_2m_m_s": 2.15,
+      "solar_radiation_mj_m2_day": 24.24
+    },
+    {
+      "date": "1995-04-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.33,
+      "tmax_c": 37.24,
+      "relative_humidity_pct": 54.36,
+      "wind_speed_2m_m_s": 2.18,
+      "solar_radiation_mj_m2_day": 22.63
+    },
+    {
+      "date": "1995-04-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 25.86,
+      "tmax_c": 35.88,
+      "relative_humidity_pct": 54.85,
+      "wind_speed_2m_m_s": 3.08,
+      "solar_radiation_mj_m2_day": 25.16
+    },
+    {
+      "date": "1995-04-26",
+      "et0_mm": null,
+      "precipitation_mm": 1.14,
+      "tmin_c": 25.62,
+      "tmax_c": 35.16,
+      "relative_humidity_pct": 61.42,
+      "wind_speed_2m_m_s": 2.88,
+      "solar_radiation_mj_m2_day": 21.42
+    },
+    {
+      "date": "1995-04-27",
+      "et0_mm": null,
+      "precipitation_mm": 2.89,
+      "tmin_c": 25.78,
+      "tmax_c": 33.44,
+      "relative_humidity_pct": 67.45,
+      "wind_speed_2m_m_s": 2.5,
+      "solar_radiation_mj_m2_day": 18.35
+    },
+    {
+      "date": "1995-04-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.93,
+      "tmin_c": 26.3,
+      "tmax_c": 31.93,
+      "relative_humidity_pct": 69.96,
+      "wind_speed_2m_m_s": 1.81,
+      "solar_radiation_mj_m2_day": 15.23
+    },
+    {
+      "date": "1995-04-29",
+      "et0_mm": null,
+      "precipitation_mm": 1.95,
+      "tmin_c": 25.88,
+      "tmax_c": 31.17,
+      "relative_humidity_pct": 76.6,
+      "wind_speed_2m_m_s": 2.07,
+      "solar_radiation_mj_m2_day": 13.92
+    },
+    {
+      "date": "1995-04-30",
+      "et0_mm": null,
+      "precipitation_mm": 0.79,
+      "tmin_c": 26.05,
+      "tmax_c": 33.21,
+      "relative_humidity_pct": 71.85,
+      "wind_speed_2m_m_s": 2.61,
+      "solar_radiation_mj_m2_day": 15.93
+    },
+    {
+      "date": "1995-05-01",
+      "et0_mm": null,
+      "precipitation_mm": 2.74,
+      "tmin_c": 26.53,
+      "tmax_c": 34.47,
+      "relative_humidity_pct": 69.46,
+      "wind_speed_2m_m_s": 2.44,
+      "solar_radiation_mj_m2_day": 20.04
+    },
+    {
+      "date": "1995-05-02",
+      "et0_mm": null,
+      "precipitation_mm": 21.32,
+      "tmin_c": 26.03,
+      "tmax_c": 31.53,
+      "relative_humidity_pct": 80.53,
+      "wind_speed_2m_m_s": 2.47,
+      "solar_radiation_mj_m2_day": 16.78
+    },
+    {
+      "date": "1995-05-03",
+      "et0_mm": null,
+      "precipitation_mm": 3.29,
+      "tmin_c": 26.06,
+      "tmax_c": 33.95,
+      "relative_humidity_pct": 71.7,
+      "wind_speed_2m_m_s": 1.62,
+      "solar_radiation_mj_m2_day": 10.34
+    },
+    {
+      "date": "1995-05-04",
+      "et0_mm": null,
+      "precipitation_mm": 3.93,
+      "tmin_c": 26.05,
+      "tmax_c": 31.6,
+      "relative_humidity_pct": 75.53,
+      "wind_speed_2m_m_s": 1.73,
+      "solar_radiation_mj_m2_day": 19.92
+    },
+    {
+      "date": "1995-05-05",
+      "et0_mm": null,
+      "precipitation_mm": 1.61,
+      "tmin_c": 25.7,
+      "tmax_c": 33.28,
+      "relative_humidity_pct": 72.29,
+      "wind_speed_2m_m_s": 1.98,
+      "solar_radiation_mj_m2_day": 20.23
+    },
+    {
+      "date": "1995-05-06",
+      "et0_mm": null,
+      "precipitation_mm": 15.23,
+      "tmin_c": 25.24,
+      "tmax_c": 32.41,
+      "relative_humidity_pct": 75.33,
+      "wind_speed_2m_m_s": 2.34,
+      "solar_radiation_mj_m2_day": 19.13
+    },
+    {
+      "date": "1995-05-07",
+      "et0_mm": null,
+      "precipitation_mm": 13.83,
+      "tmin_c": 24.73,
+      "tmax_c": 32.17,
+      "relative_humidity_pct": 78.07,
+      "wind_speed_2m_m_s": 1.57,
+      "solar_radiation_mj_m2_day": 20.21
+    },
+    {
+      "date": "1995-05-08",
+      "et0_mm": null,
+      "precipitation_mm": 6.72,
+      "tmin_c": 24.66,
+      "tmax_c": 34.64,
+      "relative_humidity_pct": 73.64,
+      "wind_speed_2m_m_s": 2.2,
+      "solar_radiation_mj_m2_day": 20.83
+    },
+    {
+      "date": "1995-05-09",
+      "et0_mm": null,
+      "precipitation_mm": 9.38,
+      "tmin_c": 25.16,
+      "tmax_c": 32.72,
+      "relative_humidity_pct": 74.36,
+      "wind_speed_2m_m_s": 1.93,
+      "solar_radiation_mj_m2_day": 24.64
+    },
+    {
+      "date": "1995-05-10",
+      "et0_mm": null,
+      "precipitation_mm": 3.65,
+      "tmin_c": 24.86,
+      "tmax_c": 31.35,
+      "relative_humidity_pct": 77.19,
+      "wind_speed_2m_m_s": 1.44,
+      "solar_radiation_mj_m2_day": 20.91
+    },
+    {
+      "date": "1995-05-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.77,
+      "tmin_c": 24.28,
+      "tmax_c": 34.99,
+      "relative_humidity_pct": 68.06,
+      "wind_speed_2m_m_s": 1.62,
+      "solar_radiation_mj_m2_day": 23.52
+    },
+    {
+      "date": "1995-05-12",
+      "et0_mm": null,
+      "precipitation_mm": 3.83,
+      "tmin_c": 25.02,
+      "tmax_c": 33.14,
+      "relative_humidity_pct": 72.39,
+      "wind_speed_2m_m_s": 1.55,
+      "solar_radiation_mj_m2_day": 20.69
+    },
+    {
+      "date": "1995-05-13",
+      "et0_mm": null,
+      "precipitation_mm": 6.57,
+      "tmin_c": 24.5,
+      "tmax_c": 33.11,
+      "relative_humidity_pct": 74.83,
+      "wind_speed_2m_m_s": 1.83,
+      "solar_radiation_mj_m2_day": 20.87
+    },
+    {
+      "date": "1995-05-14",
+      "et0_mm": null,
+      "precipitation_mm": 3.6,
+      "tmin_c": 24.61,
+      "tmax_c": 34.48,
+      "relative_humidity_pct": 68.4,
+      "wind_speed_2m_m_s": 3.38,
+      "solar_radiation_mj_m2_day": 19.19
+    },
+    {
+      "date": "1995-05-15",
+      "et0_mm": null,
+      "precipitation_mm": 1.81,
+      "tmin_c": 25.35,
+      "tmax_c": 33.37,
+      "relative_humidity_pct": 68.18,
+      "wind_speed_2m_m_s": 3.16,
+      "solar_radiation_mj_m2_day": 23.66
+    },
+    {
+      "date": "1995-05-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.7,
+      "tmin_c": 24.58,
+      "tmax_c": 34.64,
+      "relative_humidity_pct": 68.74,
+      "wind_speed_2m_m_s": 2.3,
+      "solar_radiation_mj_m2_day": 22.17
+    },
+    {
+      "date": "1995-05-17",
+      "et0_mm": null,
+      "precipitation_mm": 1.0,
+      "tmin_c": 24.74,
+      "tmax_c": 28.51,
+      "relative_humidity_pct": 76.37,
+      "wind_speed_2m_m_s": 2.65,
+      "solar_radiation_mj_m2_day": 15.81
+    },
+    {
+      "date": "1995-05-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.31,
+      "tmin_c": 23.95,
+      "tmax_c": 30.85,
+      "relative_humidity_pct": 72.84,
+      "wind_speed_2m_m_s": 1.86,
+      "solar_radiation_mj_m2_day": 13.5
+    },
+    {
+      "date": "1995-05-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.1,
+      "tmin_c": 24.84,
+      "tmax_c": 32.62,
+      "relative_humidity_pct": 72.56,
+      "wind_speed_2m_m_s": 1.21,
+      "solar_radiation_mj_m2_day": 16.65
+    },
+    {
+      "date": "1995-05-20",
+      "et0_mm": null,
+      "precipitation_mm": 1.07,
+      "tmin_c": 25.77,
+      "tmax_c": 33.98,
+      "relative_humidity_pct": 69.94,
+      "wind_speed_2m_m_s": 1.42,
+      "solar_radiation_mj_m2_day": 13.76
+    },
+    {
+      "date": "1995-05-21",
+      "et0_mm": null,
+      "precipitation_mm": 5.05,
+      "tmin_c": 26.27,
+      "tmax_c": 31.79,
+      "relative_humidity_pct": 77.11,
+      "wind_speed_2m_m_s": 1.11,
+      "solar_radiation_mj_m2_day": 20.57
+    },
+    {
+      "date": "1995-05-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.92,
+      "tmin_c": 26.06,
+      "tmax_c": 32.81,
+      "relative_humidity_pct": 74.27,
+      "wind_speed_2m_m_s": 1.41,
+      "solar_radiation_mj_m2_day": 23.44
+    },
+    {
+      "date": "1995-05-23",
+      "et0_mm": null,
+      "precipitation_mm": 1.64,
+      "tmin_c": 25.6,
+      "tmax_c": 34.52,
+      "relative_humidity_pct": 68.52,
+      "wind_speed_2m_m_s": 1.33,
+      "solar_radiation_mj_m2_day": 22.78
+    },
+    {
+      "date": "1995-05-24",
+      "et0_mm": null,
+      "precipitation_mm": 1.32,
+      "tmin_c": 25.0,
+      "tmax_c": 33.45,
+      "relative_humidity_pct": 66.22,
+      "wind_speed_2m_m_s": 1.85,
+      "solar_radiation_mj_m2_day": 24.05
+    },
+    {
+      "date": "1995-05-25",
+      "et0_mm": null,
+      "precipitation_mm": 1.11,
+      "tmin_c": 25.36,
+      "tmax_c": 29.24,
+      "relative_humidity_pct": 77.58,
+      "wind_speed_2m_m_s": 1.96,
+      "solar_radiation_mj_m2_day": 19.75
+    },
+    {
+      "date": "1995-05-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 25.01,
+      "tmax_c": 31.68,
+      "relative_humidity_pct": 72.96,
+      "wind_speed_2m_m_s": 1.21,
+      "solar_radiation_mj_m2_day": 21.47
+    },
+    {
+      "date": "1995-05-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.05,
+      "tmin_c": 25.2,
+      "tmax_c": 31.16,
+      "relative_humidity_pct": 73.14,
+      "wind_speed_2m_m_s": 0.98,
+      "solar_radiation_mj_m2_day": 20.97
+    },
+    {
+      "date": "1995-05-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.14,
+      "tmin_c": 25.54,
+      "tmax_c": 30.8,
+      "relative_humidity_pct": 75.73,
+      "wind_speed_2m_m_s": 1.26,
+      "solar_radiation_mj_m2_day": 21.47
+    },
+    {
+      "date": "1995-05-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 24.79,
+      "tmax_c": 33.39,
+      "relative_humidity_pct": 69.84,
+      "wind_speed_2m_m_s": 2.32,
+      "solar_radiation_mj_m2_day": 19.59
+    },
+    {
+      "date": "1995-05-30",
+      "et0_mm": null,
+      "precipitation_mm": 1.48,
+      "tmin_c": 25.27,
+      "tmax_c": 34.2,
+      "relative_humidity_pct": 70.12,
+      "wind_speed_2m_m_s": 1.81,
+      "solar_radiation_mj_m2_day": 19.52
+    },
+    {
+      "date": "1995-05-31",
+      "et0_mm": null,
+      "precipitation_mm": 6.11,
+      "tmin_c": 25.46,
+      "tmax_c": 32.8,
+      "relative_humidity_pct": 75.08,
+      "wind_speed_2m_m_s": 1.76,
+      "solar_radiation_mj_m2_day": 22.64
+    },
+    {
+      "date": "1995-06-01",
+      "et0_mm": null,
+      "precipitation_mm": 10.13,
+      "tmin_c": 26.06,
+      "tmax_c": 28.81,
+      "relative_humidity_pct": 84.4,
+      "wind_speed_2m_m_s": 2.6,
+      "solar_radiation_mj_m2_day": 16.31
+    },
+    {
+      "date": "1995-06-02",
+      "et0_mm": null,
+      "precipitation_mm": 16.65,
+      "tmin_c": 25.65,
+      "tmax_c": 28.96,
+      "relative_humidity_pct": 85.3,
+      "wind_speed_2m_m_s": 2.21,
+      "solar_radiation_mj_m2_day": 13.9
+    },
+    {
+      "date": "1995-06-03",
+      "et0_mm": null,
+      "precipitation_mm": 2.12,
+      "tmin_c": 25.53,
+      "tmax_c": 30.03,
+      "relative_humidity_pct": 78.55,
+      "wind_speed_2m_m_s": 1.34,
+      "solar_radiation_mj_m2_day": 20.59
+    },
+    {
+      "date": "1995-06-04",
+      "et0_mm": null,
+      "precipitation_mm": 1.7,
+      "tmin_c": 25.54,
+      "tmax_c": 31.4,
+      "relative_humidity_pct": 76.87,
+      "wind_speed_2m_m_s": 1.29,
+      "solar_radiation_mj_m2_day": 20.18
+    },
+    {
+      "date": "1995-06-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.39,
+      "tmin_c": 25.61,
+      "tmax_c": 31.01,
+      "relative_humidity_pct": 80.8,
+      "wind_speed_2m_m_s": 1.97,
+      "solar_radiation_mj_m2_day": 17.63
+    },
+    {
+      "date": "1995-06-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.38,
+      "tmin_c": 25.41,
+      "tmax_c": 29.59,
+      "relative_humidity_pct": 83.95,
+      "wind_speed_2m_m_s": 3.02,
+      "solar_radiation_mj_m2_day": 18.94
+    },
+    {
+      "date": "1995-06-07",
+      "et0_mm": null,
+      "precipitation_mm": 1.11,
+      "tmin_c": 24.99,
+      "tmax_c": 30.24,
+      "relative_humidity_pct": 80.3,
+      "wind_speed_2m_m_s": 2.49,
+      "solar_radiation_mj_m2_day": 18.54
+    },
+    {
+      "date": "1995-06-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.79,
+      "tmin_c": 25.02,
+      "tmax_c": 32.47,
+      "relative_humidity_pct": 75.59,
+      "wind_speed_2m_m_s": 1.78,
+      "solar_radiation_mj_m2_day": 19.66
+    },
+    {
+      "date": "1995-06-09",
+      "et0_mm": null,
+      "precipitation_mm": 2.91,
+      "tmin_c": 25.04,
+      "tmax_c": 30.24,
+      "relative_humidity_pct": 78.32,
+      "wind_speed_2m_m_s": 1.76,
+      "solar_radiation_mj_m2_day": 17.1
+    },
+    {
+      "date": "1995-06-10",
+      "et0_mm": null,
+      "precipitation_mm": 1.09,
+      "tmin_c": 25.41,
+      "tmax_c": 31.24,
+      "relative_humidity_pct": 78.17,
+      "wind_speed_2m_m_s": 1.37,
+      "solar_radiation_mj_m2_day": 20.53
+    },
+    {
+      "date": "1995-06-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.98,
+      "tmin_c": 25.7,
+      "tmax_c": 33.82,
+      "relative_humidity_pct": 71.99,
+      "wind_speed_2m_m_s": 2.62,
+      "solar_radiation_mj_m2_day": 16.01
+    },
+    {
+      "date": "1995-06-12",
+      "et0_mm": null,
+      "precipitation_mm": 2.29,
+      "tmin_c": 26.08,
+      "tmax_c": 31.71,
+      "relative_humidity_pct": 75.45,
+      "wind_speed_2m_m_s": 2.52,
+      "solar_radiation_mj_m2_day": 16.5
+    },
+    {
+      "date": "1995-06-13",
+      "et0_mm": null,
+      "precipitation_mm": 6.97,
+      "tmin_c": 25.32,
+      "tmax_c": 28.97,
+      "relative_humidity_pct": 86.8,
+      "wind_speed_2m_m_s": 1.54,
+      "solar_radiation_mj_m2_day": 18.2
+    },
+    {
+      "date": "1995-06-14",
+      "et0_mm": null,
+      "precipitation_mm": 1.06,
+      "tmin_c": 25.22,
+      "tmax_c": 31.46,
+      "relative_humidity_pct": 81.73,
+      "wind_speed_2m_m_s": 1.96,
+      "solar_radiation_mj_m2_day": 18.27
+    },
+    {
+      "date": "1995-06-15",
+      "et0_mm": null,
+      "precipitation_mm": 7.56,
+      "tmin_c": 25.26,
+      "tmax_c": 28.65,
+      "relative_humidity_pct": 85.8,
+      "wind_speed_2m_m_s": 3.47,
+      "solar_radiation_mj_m2_day": 15.74
+    },
+    {
+      "date": "1995-06-16",
+      "et0_mm": null,
+      "precipitation_mm": 26.01,
+      "tmin_c": 24.82,
+      "tmax_c": 27.27,
+      "relative_humidity_pct": 91.39,
+      "wind_speed_2m_m_s": 2.56,
+      "solar_radiation_mj_m2_day": 19.93
+    },
+    {
+      "date": "1995-06-17",
+      "et0_mm": null,
+      "precipitation_mm": 2.49,
+      "tmin_c": 23.95,
+      "tmax_c": 30.64,
+      "relative_humidity_pct": 80.72,
+      "wind_speed_2m_m_s": 2.03,
+      "solar_radiation_mj_m2_day": 17.36
+    },
+    {
+      "date": "1995-06-18",
+      "et0_mm": null,
+      "precipitation_mm": 5.04,
+      "tmin_c": 25.44,
+      "tmax_c": 27.37,
+      "relative_humidity_pct": 89.4,
+      "wind_speed_2m_m_s": 4.09,
+      "solar_radiation_mj_m2_day": 14.69
+    },
+    {
+      "date": "1995-06-19",
+      "et0_mm": null,
+      "precipitation_mm": 3.74,
+      "tmin_c": 25.44,
+      "tmax_c": 27.9,
+      "relative_humidity_pct": 88.08,
+      "wind_speed_2m_m_s": 3.54,
+      "solar_radiation_mj_m2_day": 18.06
+    },
+    {
+      "date": "1995-06-20",
+      "et0_mm": null,
+      "precipitation_mm": 2.15,
+      "tmin_c": 25.17,
+      "tmax_c": 27.57,
+      "relative_humidity_pct": 88.9,
+      "wind_speed_2m_m_s": 3.37,
+      "solar_radiation_mj_m2_day": 16.46
+    },
+    {
+      "date": "1995-06-21",
+      "et0_mm": null,
+      "precipitation_mm": 2.15,
+      "tmin_c": 24.99,
+      "tmax_c": 28.51,
+      "relative_humidity_pct": 85.55,
+      "wind_speed_2m_m_s": 2.42,
+      "solar_radiation_mj_m2_day": 13.67
+    },
+    {
+      "date": "1995-06-22",
+      "et0_mm": null,
+      "precipitation_mm": 6.06,
+      "tmin_c": 24.92,
+      "tmax_c": 30.07,
+      "relative_humidity_pct": 87.0,
+      "wind_speed_2m_m_s": 1.93,
+      "solar_radiation_mj_m2_day": 20.58
+    },
+    {
+      "date": "1995-06-23",
+      "et0_mm": null,
+      "precipitation_mm": 1.01,
+      "tmin_c": 25.17,
+      "tmax_c": 30.0,
+      "relative_humidity_pct": 83.74,
+      "wind_speed_2m_m_s": 1.87,
+      "solar_radiation_mj_m2_day": 17.91
+    },
+    {
+      "date": "1995-06-24",
+      "et0_mm": null,
+      "precipitation_mm": 1.57,
+      "tmin_c": 24.35,
+      "tmax_c": 32.08,
+      "relative_humidity_pct": 79.5,
+      "wind_speed_2m_m_s": 2.22,
+      "solar_radiation_mj_m2_day": 19.3
+    },
+    {
+      "date": "1995-06-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.68,
+      "tmin_c": 24.28,
+      "tmax_c": 27.13,
+      "relative_humidity_pct": 85.75,
+      "wind_speed_2m_m_s": 2.46,
+      "solar_radiation_mj_m2_day": 18.36
+    },
+    {
+      "date": "1995-06-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.2,
+      "tmin_c": 23.92,
+      "tmax_c": 30.04,
+      "relative_humidity_pct": 78.96,
+      "wind_speed_2m_m_s": 1.85,
+      "solar_radiation_mj_m2_day": 19.38
+    },
+    {
+      "date": "1995-06-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.15,
+      "tmin_c": 24.26,
+      "tmax_c": 32.8,
+      "relative_humidity_pct": 72.8,
+      "wind_speed_2m_m_s": 2.74,
+      "solar_radiation_mj_m2_day": 22.36
+    },
+    {
+      "date": "1995-06-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.14,
+      "tmin_c": 24.57,
+      "tmax_c": 31.37,
+      "relative_humidity_pct": 74.29,
+      "wind_speed_2m_m_s": 2.81,
+      "solar_radiation_mj_m2_day": 19.63
+    },
+    {
+      "date": "1995-06-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.98,
+      "tmin_c": 24.17,
+      "tmax_c": 30.92,
+      "relative_humidity_pct": 76.56,
+      "wind_speed_2m_m_s": 1.99,
+      "solar_radiation_mj_m2_day": 18.69
+    },
+    {
+      "date": "1995-06-30",
+      "et0_mm": null,
+      "precipitation_mm": 3.14,
+      "tmin_c": 24.78,
+      "tmax_c": 30.37,
+      "relative_humidity_pct": 78.5,
+      "wind_speed_2m_m_s": 1.96,
+      "solar_radiation_mj_m2_day": 17.53
+    },
+    {
+      "date": "1995-07-01",
+      "et0_mm": null,
+      "precipitation_mm": 4.8,
+      "tmin_c": 24.41,
+      "tmax_c": 31.58,
+      "relative_humidity_pct": 76.57,
+      "wind_speed_2m_m_s": 1.9,
+      "solar_radiation_mj_m2_day": 20.71
+    },
+    {
+      "date": "1995-07-02",
+      "et0_mm": null,
+      "precipitation_mm": 19.91,
+      "tmin_c": 24.87,
+      "tmax_c": 28.16,
+      "relative_humidity_pct": 86.43,
+      "wind_speed_2m_m_s": 2.78,
+      "solar_radiation_mj_m2_day": 18.85
+    },
+    {
+      "date": "1995-07-03",
+      "et0_mm": null,
+      "precipitation_mm": 3.49,
+      "tmin_c": 24.68,
+      "tmax_c": 30.62,
+      "relative_humidity_pct": 78.33,
+      "wind_speed_2m_m_s": 1.03,
+      "solar_radiation_mj_m2_day": 19.21
+    },
+    {
+      "date": "1995-07-04",
+      "et0_mm": null,
+      "precipitation_mm": 6.01,
+      "tmin_c": 23.86,
+      "tmax_c": 32.47,
+      "relative_humidity_pct": 77.85,
+      "wind_speed_2m_m_s": 2.38,
+      "solar_radiation_mj_m2_day": 19.13
+    },
+    {
+      "date": "1995-07-05",
+      "et0_mm": null,
+      "precipitation_mm": 2.09,
+      "tmin_c": 24.08,
+      "tmax_c": 26.48,
+      "relative_humidity_pct": 87.88,
+      "wind_speed_2m_m_s": 1.64,
+      "solar_radiation_mj_m2_day": 9.41
+    },
+    {
+      "date": "1995-07-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.52,
+      "tmin_c": 23.54,
+      "tmax_c": 30.68,
+      "relative_humidity_pct": 76.18,
+      "wind_speed_2m_m_s": 1.89,
+      "solar_radiation_mj_m2_day": 12.75
+    },
+    {
+      "date": "1995-07-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.48,
+      "tmin_c": 24.28,
+      "tmax_c": 27.97,
+      "relative_humidity_pct": 83.77,
+      "wind_speed_2m_m_s": 2.46,
+      "solar_radiation_mj_m2_day": 18.24
+    },
+    {
+      "date": "1995-07-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.65,
+      "tmin_c": 23.9,
+      "tmax_c": 29.57,
+      "relative_humidity_pct": 81.89,
+      "wind_speed_2m_m_s": 1.54,
+      "solar_radiation_mj_m2_day": 20.04
+    },
+    {
+      "date": "1995-07-09",
+      "et0_mm": null,
+      "precipitation_mm": 1.3,
+      "tmin_c": 24.31,
+      "tmax_c": 31.35,
+      "relative_humidity_pct": 80.65,
+      "wind_speed_2m_m_s": 0.86,
+      "solar_radiation_mj_m2_day": 18.74
+    },
+    {
+      "date": "1995-07-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.77,
+      "tmin_c": 25.12,
+      "tmax_c": 33.51,
+      "relative_humidity_pct": 75.61,
+      "wind_speed_2m_m_s": 1.59,
+      "solar_radiation_mj_m2_day": 20.42
+    },
+    {
+      "date": "1995-07-11",
+      "et0_mm": null,
+      "precipitation_mm": 1.53,
+      "tmin_c": 25.22,
+      "tmax_c": 30.73,
+      "relative_humidity_pct": 78.15,
+      "wind_speed_2m_m_s": 2.19,
+      "solar_radiation_mj_m2_day": 19.73
+    },
+    {
+      "date": "1995-07-12",
+      "et0_mm": null,
+      "precipitation_mm": 1.31,
+      "tmin_c": 25.12,
+      "tmax_c": 31.83,
+      "relative_humidity_pct": 74.84,
+      "wind_speed_2m_m_s": 2.23,
+      "solar_radiation_mj_m2_day": 20.56
+    },
+    {
+      "date": "1995-07-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.49,
+      "tmin_c": 23.77,
+      "tmax_c": 32.41,
+      "relative_humidity_pct": 72.6,
+      "wind_speed_2m_m_s": 2.36,
+      "solar_radiation_mj_m2_day": 18.53
+    },
+    {
+      "date": "1995-07-14",
+      "et0_mm": null,
+      "precipitation_mm": 2.11,
+      "tmin_c": 24.38,
+      "tmax_c": 32.93,
+      "relative_humidity_pct": 72.73,
+      "wind_speed_2m_m_s": 1.46,
+      "solar_radiation_mj_m2_day": 20.42
+    },
+    {
+      "date": "1995-07-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.69,
+      "tmin_c": 25.32,
+      "tmax_c": 32.05,
+      "relative_humidity_pct": 72.42,
+      "wind_speed_2m_m_s": 2.8,
+      "solar_radiation_mj_m2_day": 15.32
+    },
+    {
+      "date": "1995-07-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.71,
+      "tmin_c": 24.74,
+      "tmax_c": 33.08,
+      "relative_humidity_pct": 72.2,
+      "wind_speed_2m_m_s": 3.06,
+      "solar_radiation_mj_m2_day": 20.84
+    },
+    {
+      "date": "1995-07-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.55,
+      "tmin_c": 23.98,
+      "tmax_c": 32.74,
+      "relative_humidity_pct": 75.15,
+      "wind_speed_2m_m_s": 2.03,
+      "solar_radiation_mj_m2_day": 17.99
+    },
+    {
+      "date": "1995-07-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.65,
+      "tmin_c": 24.35,
+      "tmax_c": 29.95,
+      "relative_humidity_pct": 79.17,
+      "wind_speed_2m_m_s": 2.01,
+      "solar_radiation_mj_m2_day": 16.64
+    },
+    {
+      "date": "1995-07-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.52,
+      "tmin_c": 24.21,
+      "tmax_c": 29.63,
+      "relative_humidity_pct": 74.52,
+      "wind_speed_2m_m_s": 3.08,
+      "solar_radiation_mj_m2_day": 15.96
+    },
+    {
+      "date": "1995-07-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.49,
+      "tmin_c": 24.37,
+      "tmax_c": 31.83,
+      "relative_humidity_pct": 74.51,
+      "wind_speed_2m_m_s": 3.16,
+      "solar_radiation_mj_m2_day": 18.48
+    },
+    {
+      "date": "1995-07-21",
+      "et0_mm": null,
+      "precipitation_mm": 1.19,
+      "tmin_c": 24.71,
+      "tmax_c": 30.46,
+      "relative_humidity_pct": 76.24,
+      "wind_speed_2m_m_s": 2.37,
+      "solar_radiation_mj_m2_day": 15.38
+    },
+    {
+      "date": "1995-07-22",
+      "et0_mm": null,
+      "precipitation_mm": 2.88,
+      "tmin_c": 23.99,
+      "tmax_c": 31.55,
+      "relative_humidity_pct": 77.33,
+      "wind_speed_2m_m_s": 2.05,
+      "solar_radiation_mj_m2_day": 13.83
+    },
+    {
+      "date": "1995-07-23",
+      "et0_mm": null,
+      "precipitation_mm": 4.57,
+      "tmin_c": 24.3,
+      "tmax_c": 28.86,
+      "relative_humidity_pct": 83.42,
+      "wind_speed_2m_m_s": 1.89,
+      "solar_radiation_mj_m2_day": 17.04
+    },
+    {
+      "date": "1995-07-24",
+      "et0_mm": null,
+      "precipitation_mm": 1.89,
+      "tmin_c": 24.09,
+      "tmax_c": 30.9,
+      "relative_humidity_pct": 75.74,
+      "wind_speed_2m_m_s": 0.94,
+      "solar_radiation_mj_m2_day": 16.5
+    },
+    {
+      "date": "1995-07-25",
+      "et0_mm": null,
+      "precipitation_mm": 1.59,
+      "tmin_c": 23.76,
+      "tmax_c": 32.7,
+      "relative_humidity_pct": 74.88,
+      "wind_speed_2m_m_s": 1.45,
+      "solar_radiation_mj_m2_day": 19.46
+    },
+    {
+      "date": "1995-07-26",
+      "et0_mm": null,
+      "precipitation_mm": 5.06,
+      "tmin_c": 24.41,
+      "tmax_c": 30.07,
+      "relative_humidity_pct": 81.26,
+      "wind_speed_2m_m_s": 1.29,
+      "solar_radiation_mj_m2_day": 15.57
+    },
+    {
+      "date": "1995-07-27",
+      "et0_mm": null,
+      "precipitation_mm": 4.76,
+      "tmin_c": 23.96,
+      "tmax_c": 27.44,
+      "relative_humidity_pct": 87.03,
+      "wind_speed_2m_m_s": 2.93,
+      "solar_radiation_mj_m2_day": 14.16
+    },
+    {
+      "date": "1995-07-28",
+      "et0_mm": null,
+      "precipitation_mm": 5.53,
+      "tmin_c": 23.31,
+      "tmax_c": 30.23,
+      "relative_humidity_pct": 81.02,
+      "wind_speed_2m_m_s": 1.02,
+      "solar_radiation_mj_m2_day": 15.48
+    },
+    {
+      "date": "1995-07-29",
+      "et0_mm": null,
+      "precipitation_mm": 1.15,
+      "tmin_c": 24.26,
+      "tmax_c": 30.52,
+      "relative_humidity_pct": 80.09,
+      "wind_speed_2m_m_s": 1.24,
+      "solar_radiation_mj_m2_day": 18.71
+    },
+    {
+      "date": "1995-07-30",
+      "et0_mm": null,
+      "precipitation_mm": 3.33,
+      "tmin_c": 24.72,
+      "tmax_c": 30.48,
+      "relative_humidity_pct": 80.94,
+      "wind_speed_2m_m_s": 1.65,
+      "solar_radiation_mj_m2_day": 17.69
+    },
+    {
+      "date": "1995-07-31",
+      "et0_mm": null,
+      "precipitation_mm": 9.52,
+      "tmin_c": 24.18,
+      "tmax_c": 28.65,
+      "relative_humidity_pct": 86.71,
+      "wind_speed_2m_m_s": 2.0,
+      "solar_radiation_mj_m2_day": 14.04
+    },
+    {
+      "date": "1995-08-01",
+      "et0_mm": null,
+      "precipitation_mm": 7.14,
+      "tmin_c": 23.8,
+      "tmax_c": 28.32,
+      "relative_humidity_pct": 87.6,
+      "wind_speed_2m_m_s": 2.56,
+      "solar_radiation_mj_m2_day": 15.84
+    },
+    {
+      "date": "1995-08-02",
+      "et0_mm": null,
+      "precipitation_mm": 6.3,
+      "tmin_c": 24.17,
+      "tmax_c": 26.96,
+      "relative_humidity_pct": 86.18,
+      "wind_speed_2m_m_s": 4.47,
+      "solar_radiation_mj_m2_day": 12.22
+    },
+    {
+      "date": "1995-08-03",
+      "et0_mm": null,
+      "precipitation_mm": 2.01,
+      "tmin_c": 23.78,
+      "tmax_c": 28.31,
+      "relative_humidity_pct": 85.23,
+      "wind_speed_2m_m_s": 2.28,
+      "solar_radiation_mj_m2_day": 17.01
+    },
+    {
+      "date": "1995-08-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.72,
+      "tmin_c": 23.93,
+      "tmax_c": 30.38,
+      "relative_humidity_pct": 81.32,
+      "wind_speed_2m_m_s": 2.04,
+      "solar_radiation_mj_m2_day": 18.8
+    },
+    {
+      "date": "1995-08-05",
+      "et0_mm": null,
+      "precipitation_mm": 1.4,
+      "tmin_c": 24.68,
+      "tmax_c": 27.84,
+      "relative_humidity_pct": 87.84,
+      "wind_speed_2m_m_s": 2.91,
+      "solar_radiation_mj_m2_day": 14.89
+    },
+    {
+      "date": "1995-08-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.84,
+      "tmin_c": 24.54,
+      "tmax_c": 28.51,
+      "relative_humidity_pct": 85.44,
+      "wind_speed_2m_m_s": 2.74,
+      "solar_radiation_mj_m2_day": 18.97
+    },
+    {
+      "date": "1995-08-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.24,
+      "tmin_c": 24.36,
+      "tmax_c": 27.98,
+      "relative_humidity_pct": 86.42,
+      "wind_speed_2m_m_s": 2.02,
+      "solar_radiation_mj_m2_day": 21.8
+    },
+    {
+      "date": "1995-08-08",
+      "et0_mm": null,
+      "precipitation_mm": 1.22,
+      "tmin_c": 24.79,
+      "tmax_c": 32.41,
+      "relative_humidity_pct": 78.01,
+      "wind_speed_2m_m_s": 1.6,
+      "solar_radiation_mj_m2_day": 23.57
+    },
+    {
+      "date": "1995-08-09",
+      "et0_mm": null,
+      "precipitation_mm": 7.05,
+      "tmin_c": 24.66,
+      "tmax_c": 30.44,
+      "relative_humidity_pct": 84.49,
+      "wind_speed_2m_m_s": 2.24,
+      "solar_radiation_mj_m2_day": 19.58
+    },
+    {
+      "date": "1995-08-10",
+      "et0_mm": null,
+      "precipitation_mm": 9.27,
+      "tmin_c": 24.27,
+      "tmax_c": 27.22,
+      "relative_humidity_pct": 87.57,
+      "wind_speed_2m_m_s": 1.89,
+      "solar_radiation_mj_m2_day": 16.37
+    },
+    {
+      "date": "1995-08-11",
+      "et0_mm": null,
+      "precipitation_mm": 1.42,
+      "tmin_c": 24.37,
+      "tmax_c": 30.04,
+      "relative_humidity_pct": 81.3,
+      "wind_speed_2m_m_s": 2.39,
+      "solar_radiation_mj_m2_day": 19.02
+    },
+    {
+      "date": "1995-08-12",
+      "et0_mm": null,
+      "precipitation_mm": 3.91,
+      "tmin_c": 24.75,
+      "tmax_c": 27.95,
+      "relative_humidity_pct": 87.04,
+      "wind_speed_2m_m_s": 2.9,
+      "solar_radiation_mj_m2_day": 17.41
+    },
+    {
+      "date": "1995-08-13",
+      "et0_mm": null,
+      "precipitation_mm": 8.49,
+      "tmin_c": 24.45,
+      "tmax_c": 27.59,
+      "relative_humidity_pct": 89.06,
+      "wind_speed_2m_m_s": 2.23,
+      "solar_radiation_mj_m2_day": 12.9
+    },
+    {
+      "date": "1995-08-14",
+      "et0_mm": null,
+      "precipitation_mm": 3.27,
+      "tmin_c": 23.65,
+      "tmax_c": 28.22,
+      "relative_humidity_pct": 86.07,
+      "wind_speed_2m_m_s": 2.29,
+      "solar_radiation_mj_m2_day": 15.87
+    },
+    {
+      "date": "1995-08-15",
+      "et0_mm": null,
+      "precipitation_mm": 12.56,
+      "tmin_c": 23.76,
+      "tmax_c": 27.17,
+      "relative_humidity_pct": 88.33,
+      "wind_speed_2m_m_s": 2.14,
+      "solar_radiation_mj_m2_day": 10.55
+    },
+    {
+      "date": "1995-08-16",
+      "et0_mm": null,
+      "precipitation_mm": 3.44,
+      "tmin_c": 23.69,
+      "tmax_c": 28.74,
+      "relative_humidity_pct": 85.46,
+      "wind_speed_2m_m_s": 2.22,
+      "solar_radiation_mj_m2_day": 15.19
+    },
+    {
+      "date": "1995-08-17",
+      "et0_mm": null,
+      "precipitation_mm": 2.27,
+      "tmin_c": 23.91,
+      "tmax_c": 27.65,
+      "relative_humidity_pct": 87.05,
+      "wind_speed_2m_m_s": 2.58,
+      "solar_radiation_mj_m2_day": 18.62
+    },
+    {
+      "date": "1995-08-18",
+      "et0_mm": null,
+      "precipitation_mm": 3.75,
+      "tmin_c": 24.41,
+      "tmax_c": 27.68,
+      "relative_humidity_pct": 87.15,
+      "wind_speed_2m_m_s": 2.37,
+      "solar_radiation_mj_m2_day": 19.58
+    },
+    {
+      "date": "1995-08-19",
+      "et0_mm": null,
+      "precipitation_mm": 1.52,
+      "tmin_c": 24.09,
+      "tmax_c": 28.24,
+      "relative_humidity_pct": 87.29,
+      "wind_speed_2m_m_s": 2.63,
+      "solar_radiation_mj_m2_day": 20.66
+    },
+    {
+      "date": "1995-08-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.26,
+      "tmin_c": 24.08,
+      "tmax_c": 28.59,
+      "relative_humidity_pct": 83.8,
+      "wind_speed_2m_m_s": 2.16,
+      "solar_radiation_mj_m2_day": 17.36
+    },
+    {
+      "date": "1995-08-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.34,
+      "tmin_c": 24.34,
+      "tmax_c": 30.57,
+      "relative_humidity_pct": 80.98,
+      "wind_speed_2m_m_s": 1.57,
+      "solar_radiation_mj_m2_day": 21.08
+    },
+    {
+      "date": "1995-08-22",
+      "et0_mm": null,
+      "precipitation_mm": 1.21,
+      "tmin_c": 24.85,
+      "tmax_c": 29.94,
+      "relative_humidity_pct": 82.61,
+      "wind_speed_2m_m_s": 1.53,
+      "solar_radiation_mj_m2_day": 20.48
+    },
+    {
+      "date": "1995-08-23",
+      "et0_mm": null,
+      "precipitation_mm": 10.51,
+      "tmin_c": 25.01,
+      "tmax_c": 29.62,
+      "relative_humidity_pct": 85.32,
+      "wind_speed_2m_m_s": 1.45,
+      "solar_radiation_mj_m2_day": 19.0
+    },
+    {
+      "date": "1995-08-24",
+      "et0_mm": null,
+      "precipitation_mm": 7.57,
+      "tmin_c": 24.36,
+      "tmax_c": 29.24,
+      "relative_humidity_pct": 86.03,
+      "wind_speed_2m_m_s": 1.88,
+      "solar_radiation_mj_m2_day": 18.91
+    },
+    {
+      "date": "1995-08-25",
+      "et0_mm": null,
+      "precipitation_mm": 18.87,
+      "tmin_c": 24.69,
+      "tmax_c": 28.32,
+      "relative_humidity_pct": 87.55,
+      "wind_speed_2m_m_s": 1.47,
+      "solar_radiation_mj_m2_day": 18.19
+    },
+    {
+      "date": "1995-08-26",
+      "et0_mm": null,
+      "precipitation_mm": 4.68,
+      "tmin_c": 24.56,
+      "tmax_c": 29.33,
+      "relative_humidity_pct": 86.52,
+      "wind_speed_2m_m_s": 1.81,
+      "solar_radiation_mj_m2_day": 16.28
+    },
+    {
+      "date": "1995-08-27",
+      "et0_mm": null,
+      "precipitation_mm": 8.92,
+      "tmin_c": 25.07,
+      "tmax_c": 27.85,
+      "relative_humidity_pct": 89.36,
+      "wind_speed_2m_m_s": 2.32,
+      "solar_radiation_mj_m2_day": 16.23
+    },
+    {
+      "date": "1995-08-28",
+      "et0_mm": null,
+      "precipitation_mm": 6.12,
+      "tmin_c": 24.64,
+      "tmax_c": 27.12,
+      "relative_humidity_pct": 90.99,
+      "wind_speed_2m_m_s": 2.08,
+      "solar_radiation_mj_m2_day": 13.01
+    },
+    {
+      "date": "1995-08-29",
+      "et0_mm": null,
+      "precipitation_mm": 6.92,
+      "tmin_c": 24.84,
+      "tmax_c": 27.29,
+      "relative_humidity_pct": 91.17,
+      "wind_speed_2m_m_s": 2.21,
+      "solar_radiation_mj_m2_day": 15.99
+    },
+    {
+      "date": "1995-08-30",
+      "et0_mm": null,
+      "precipitation_mm": 1.75,
+      "tmin_c": 24.39,
+      "tmax_c": 30.08,
+      "relative_humidity_pct": 82.77,
+      "wind_speed_2m_m_s": 1.32,
+      "solar_radiation_mj_m2_day": 14.88
+    },
+    {
+      "date": "1995-08-31",
+      "et0_mm": null,
+      "precipitation_mm": 3.2,
+      "tmin_c": 24.55,
+      "tmax_c": 28.47,
+      "relative_humidity_pct": 87.69,
+      "wind_speed_2m_m_s": 1.75,
+      "solar_radiation_mj_m2_day": 21.31
+    },
+    {
+      "date": "1995-09-01",
+      "et0_mm": null,
+      "precipitation_mm": 2.78,
+      "tmin_c": 24.3,
+      "tmax_c": 29.33,
+      "relative_humidity_pct": 85.73,
+      "wind_speed_2m_m_s": 1.06,
+      "solar_radiation_mj_m2_day": 20.31
+    },
+    {
+      "date": "1995-09-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.88,
+      "tmin_c": 23.97,
+      "tmax_c": 30.42,
+      "relative_humidity_pct": 83.83,
+      "wind_speed_2m_m_s": 1.56,
+      "solar_radiation_mj_m2_day": 19.73
+    },
+    {
+      "date": "1995-09-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.92,
+      "tmin_c": 24.59,
+      "tmax_c": 31.15,
+      "relative_humidity_pct": 83.4,
+      "wind_speed_2m_m_s": 1.74,
+      "solar_radiation_mj_m2_day": 19.47
+    },
+    {
+      "date": "1995-09-04",
+      "et0_mm": null,
+      "precipitation_mm": 1.23,
+      "tmin_c": 24.69,
+      "tmax_c": 30.71,
+      "relative_humidity_pct": 79.25,
+      "wind_speed_2m_m_s": 1.27,
+      "solar_radiation_mj_m2_day": 17.69
+    },
+    {
+      "date": "1995-09-05",
+      "et0_mm": null,
+      "precipitation_mm": 2.49,
+      "tmin_c": 24.77,
+      "tmax_c": 29.91,
+      "relative_humidity_pct": 80.54,
+      "wind_speed_2m_m_s": 1.71,
+      "solar_radiation_mj_m2_day": 15.92
+    },
+    {
+      "date": "1995-09-06",
+      "et0_mm": null,
+      "precipitation_mm": 13.04,
+      "tmin_c": 23.69,
+      "tmax_c": 29.27,
+      "relative_humidity_pct": 84.65,
+      "wind_speed_2m_m_s": 1.45,
+      "solar_radiation_mj_m2_day": 19.08
+    },
+    {
+      "date": "1995-09-07",
+      "et0_mm": null,
+      "precipitation_mm": 3.14,
+      "tmin_c": 24.4,
+      "tmax_c": 27.61,
+      "relative_humidity_pct": 89.9,
+      "wind_speed_2m_m_s": 2.46,
+      "solar_radiation_mj_m2_day": 15.03
+    },
+    {
+      "date": "1995-09-08",
+      "et0_mm": null,
+      "precipitation_mm": 6.48,
+      "tmin_c": 24.0,
+      "tmax_c": 28.62,
+      "relative_humidity_pct": 87.89,
+      "wind_speed_2m_m_s": 2.56,
+      "solar_radiation_mj_m2_day": 15.39
+    },
+    {
+      "date": "1995-09-09",
+      "et0_mm": null,
+      "precipitation_mm": 1.6,
+      "tmin_c": 24.33,
+      "tmax_c": 27.4,
+      "relative_humidity_pct": 89.43,
+      "wind_speed_2m_m_s": 2.65,
+      "solar_radiation_mj_m2_day": 16.14
+    },
+    {
+      "date": "1995-09-10",
+      "et0_mm": null,
+      "precipitation_mm": 1.75,
+      "tmin_c": 24.4,
+      "tmax_c": 29.45,
+      "relative_humidity_pct": 84.37,
+      "wind_speed_2m_m_s": 2.53,
+      "solar_radiation_mj_m2_day": 15.68
+    },
+    {
+      "date": "1995-09-11",
+      "et0_mm": null,
+      "precipitation_mm": 5.51,
+      "tmin_c": 24.14,
+      "tmax_c": 29.07,
+      "relative_humidity_pct": 85.19,
+      "wind_speed_2m_m_s": 3.26,
+      "solar_radiation_mj_m2_day": 15.95
+    },
+    {
+      "date": "1995-09-12",
+      "et0_mm": null,
+      "precipitation_mm": 4.5,
+      "tmin_c": 23.79,
+      "tmax_c": 29.28,
+      "relative_humidity_pct": 83.52,
+      "wind_speed_2m_m_s": 1.73,
+      "solar_radiation_mj_m2_day": 17.99
+    },
+    {
+      "date": "1995-09-13",
+      "et0_mm": null,
+      "precipitation_mm": 6.32,
+      "tmin_c": 23.71,
+      "tmax_c": 29.81,
+      "relative_humidity_pct": 82.52,
+      "wind_speed_2m_m_s": 2.1,
+      "solar_radiation_mj_m2_day": 22.72
+    },
+    {
+      "date": "1995-09-14",
+      "et0_mm": null,
+      "precipitation_mm": 12.11,
+      "tmin_c": 24.57,
+      "tmax_c": 27.25,
+      "relative_humidity_pct": 89.12,
+      "wind_speed_2m_m_s": 2.71,
+      "solar_radiation_mj_m2_day": 17.46
+    },
+    {
+      "date": "1995-09-15",
+      "et0_mm": null,
+      "precipitation_mm": 25.07,
+      "tmin_c": 24.2,
+      "tmax_c": 26.96,
+      "relative_humidity_pct": 90.84,
+      "wind_speed_2m_m_s": 3.06,
+      "solar_radiation_mj_m2_day": 13.13
+    },
+    {
+      "date": "1995-09-16",
+      "et0_mm": null,
+      "precipitation_mm": 4.28,
+      "tmin_c": 24.27,
+      "tmax_c": 27.33,
+      "relative_humidity_pct": 89.56,
+      "wind_speed_2m_m_s": 2.48,
+      "solar_radiation_mj_m2_day": 16.0
+    },
+    {
+      "date": "1995-09-17",
+      "et0_mm": null,
+      "precipitation_mm": 9.98,
+      "tmin_c": 24.52,
+      "tmax_c": 26.33,
+      "relative_humidity_pct": 91.89,
+      "wind_speed_2m_m_s": 2.87,
+      "solar_radiation_mj_m2_day": 16.99
+    },
+    {
+      "date": "1995-09-18",
+      "et0_mm": null,
+      "precipitation_mm": 2.69,
+      "tmin_c": 23.89,
+      "tmax_c": 28.53,
+      "relative_humidity_pct": 84.72,
+      "wind_speed_2m_m_s": 1.59,
+      "solar_radiation_mj_m2_day": 19.09
+    },
+    {
+      "date": "1995-09-19",
+      "et0_mm": null,
+      "precipitation_mm": 2.24,
+      "tmin_c": 24.0,
+      "tmax_c": 29.55,
+      "relative_humidity_pct": 80.56,
+      "wind_speed_2m_m_s": 1.32,
+      "solar_radiation_mj_m2_day": 19.6
+    },
+    {
+      "date": "1995-09-20",
+      "et0_mm": null,
+      "precipitation_mm": 1.14,
+      "tmin_c": 23.8,
+      "tmax_c": 29.85,
+      "relative_humidity_pct": 84.68,
+      "wind_speed_2m_m_s": 2.31,
+      "solar_radiation_mj_m2_day": 16.75
+    },
+    {
+      "date": "1995-09-21",
+      "et0_mm": null,
+      "precipitation_mm": 5.57,
+      "tmin_c": 23.99,
+      "tmax_c": 30.02,
+      "relative_humidity_pct": 83.84,
+      "wind_speed_2m_m_s": 2.07,
+      "solar_radiation_mj_m2_day": 6.4
+    },
+    {
+      "date": "1995-09-22",
+      "et0_mm": null,
+      "precipitation_mm": 9.12,
+      "tmin_c": 23.87,
+      "tmax_c": 29.21,
+      "relative_humidity_pct": 87.47,
+      "wind_speed_2m_m_s": 1.8,
+      "solar_radiation_mj_m2_day": 17.2
+    },
+    {
+      "date": "1995-09-23",
+      "et0_mm": null,
+      "precipitation_mm": 13.43,
+      "tmin_c": 23.88,
+      "tmax_c": 26.22,
+      "relative_humidity_pct": 91.84,
+      "wind_speed_2m_m_s": 2.25,
+      "solar_radiation_mj_m2_day": 16.97
+    },
+    {
+      "date": "1995-09-24",
+      "et0_mm": null,
+      "precipitation_mm": 6.61,
+      "tmin_c": 23.77,
+      "tmax_c": 27.95,
+      "relative_humidity_pct": 88.94,
+      "wind_speed_2m_m_s": 2.7,
+      "solar_radiation_mj_m2_day": 17.02
+    },
+    {
+      "date": "1995-09-25",
+      "et0_mm": null,
+      "precipitation_mm": 6.79,
+      "tmin_c": 24.49,
+      "tmax_c": 27.3,
+      "relative_humidity_pct": 88.78,
+      "wind_speed_2m_m_s": 3.28,
+      "solar_radiation_mj_m2_day": 12.82
+    },
+    {
+      "date": "1995-09-26",
+      "et0_mm": null,
+      "precipitation_mm": 22.28,
+      "tmin_c": 24.3,
+      "tmax_c": 26.83,
+      "relative_humidity_pct": 90.38,
+      "wind_speed_2m_m_s": 3.6,
+      "solar_radiation_mj_m2_day": 8.83
+    },
+    {
+      "date": "1995-09-27",
+      "et0_mm": null,
+      "precipitation_mm": 6.73,
+      "tmin_c": 24.2,
+      "tmax_c": 26.95,
+      "relative_humidity_pct": 89.48,
+      "wind_speed_2m_m_s": 3.05,
+      "solar_radiation_mj_m2_day": 12.05
+    },
+    {
+      "date": "1995-09-28",
+      "et0_mm": null,
+      "precipitation_mm": 12.42,
+      "tmin_c": 24.2,
+      "tmax_c": 27.72,
+      "relative_humidity_pct": 89.54,
+      "wind_speed_2m_m_s": 2.86,
+      "solar_radiation_mj_m2_day": 18.78
+    },
+    {
+      "date": "1995-09-29",
+      "et0_mm": null,
+      "precipitation_mm": 2.86,
+      "tmin_c": 24.31,
+      "tmax_c": 27.86,
+      "relative_humidity_pct": 88.69,
+      "wind_speed_2m_m_s": 2.66,
+      "solar_radiation_mj_m2_day": 20.43
+    },
+    {
+      "date": "1995-09-30",
+      "et0_mm": null,
+      "precipitation_mm": 1.01,
+      "tmin_c": 24.25,
+      "tmax_c": 28.03,
+      "relative_humidity_pct": 87.31,
+      "wind_speed_2m_m_s": 2.26,
+      "solar_radiation_mj_m2_day": 19.34
+    },
+    {
+      "date": "1995-10-01",
+      "et0_mm": null,
+      "precipitation_mm": 14.05,
+      "tmin_c": 24.22,
+      "tmax_c": 27.82,
+      "relative_humidity_pct": 89.6,
+      "wind_speed_2m_m_s": 2.56,
+      "solar_radiation_mj_m2_day": 13.13
+    },
+    {
+      "date": "1995-10-02",
+      "et0_mm": null,
+      "precipitation_mm": 21.54,
+      "tmin_c": 23.96,
+      "tmax_c": 27.02,
+      "relative_humidity_pct": 91.4,
+      "wind_speed_2m_m_s": 2.77,
+      "solar_radiation_mj_m2_day": 12.13
+    },
+    {
+      "date": "1995-10-03",
+      "et0_mm": null,
+      "precipitation_mm": 5.28,
+      "tmin_c": 24.31,
+      "tmax_c": 27.36,
+      "relative_humidity_pct": 89.07,
+      "wind_speed_2m_m_s": 2.4,
+      "solar_radiation_mj_m2_day": 12.67
+    },
+    {
+      "date": "1995-10-04",
+      "et0_mm": null,
+      "precipitation_mm": 21.31,
+      "tmin_c": 24.41,
+      "tmax_c": 27.88,
+      "relative_humidity_pct": 90.71,
+      "wind_speed_2m_m_s": 2.79,
+      "solar_radiation_mj_m2_day": 15.95
+    },
+    {
+      "date": "1995-10-05",
+      "et0_mm": null,
+      "precipitation_mm": 3.57,
+      "tmin_c": 24.91,
+      "tmax_c": 28.05,
+      "relative_humidity_pct": 91.25,
+      "wind_speed_2m_m_s": 2.88,
+      "solar_radiation_mj_m2_day": 15.88
+    },
+    {
+      "date": "1995-10-06",
+      "et0_mm": null,
+      "precipitation_mm": 10.89,
+      "tmin_c": 25.02,
+      "tmax_c": 27.59,
+      "relative_humidity_pct": 89.64,
+      "wind_speed_2m_m_s": 3.67,
+      "solar_radiation_mj_m2_day": 7.35
+    },
+    {
+      "date": "1995-10-07",
+      "et0_mm": null,
+      "precipitation_mm": 32.41,
+      "tmin_c": 24.7,
+      "tmax_c": 26.15,
+      "relative_humidity_pct": 91.1,
+      "wind_speed_2m_m_s": 3.99,
+      "solar_radiation_mj_m2_day": 7.38
+    },
+    {
+      "date": "1995-10-08",
+      "et0_mm": null,
+      "precipitation_mm": 4.9,
+      "tmin_c": 24.38,
+      "tmax_c": 27.54,
+      "relative_humidity_pct": 89.55,
+      "wind_speed_2m_m_s": 3.34,
+      "solar_radiation_mj_m2_day": 14.49
+    },
+    {
+      "date": "1995-10-09",
+      "et0_mm": null,
+      "precipitation_mm": 2.64,
+      "tmin_c": 24.31,
+      "tmax_c": 27.54,
+      "relative_humidity_pct": 88.3,
+      "wind_speed_2m_m_s": 3.81,
+      "solar_radiation_mj_m2_day": 11.36
+    },
+    {
+      "date": "1995-10-10",
+      "et0_mm": null,
+      "precipitation_mm": 3.75,
+      "tmin_c": 24.31,
+      "tmax_c": 26.97,
+      "relative_humidity_pct": 90.96,
+      "wind_speed_2m_m_s": 3.3,
+      "solar_radiation_mj_m2_day": 15.67
+    },
+    {
+      "date": "1995-10-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.86,
+      "tmin_c": 24.11,
+      "tmax_c": 27.36,
+      "relative_humidity_pct": 90.03,
+      "wind_speed_2m_m_s": 2.52,
+      "solar_radiation_mj_m2_day": 12.89
+    },
+    {
+      "date": "1995-10-12",
+      "et0_mm": null,
+      "precipitation_mm": 6.41,
+      "tmin_c": 23.72,
+      "tmax_c": 27.21,
+      "relative_humidity_pct": 89.11,
+      "wind_speed_2m_m_s": 2.93,
+      "solar_radiation_mj_m2_day": 12.08
+    },
+    {
+      "date": "1995-10-13",
+      "et0_mm": null,
+      "precipitation_mm": 22.96,
+      "tmin_c": 24.0,
+      "tmax_c": 26.91,
+      "relative_humidity_pct": 90.16,
+      "wind_speed_2m_m_s": 3.17,
+      "solar_radiation_mj_m2_day": 8.37
+    },
+    {
+      "date": "1995-10-14",
+      "et0_mm": null,
+      "precipitation_mm": 5.45,
+      "tmin_c": 24.08,
+      "tmax_c": 27.37,
+      "relative_humidity_pct": 89.66,
+      "wind_speed_2m_m_s": 3.24,
+      "solar_radiation_mj_m2_day": 10.87
+    },
+    {
+      "date": "1995-10-15",
+      "et0_mm": null,
+      "precipitation_mm": 7.49,
+      "tmin_c": 24.33,
+      "tmax_c": 27.14,
+      "relative_humidity_pct": 90.63,
+      "wind_speed_2m_m_s": 3.09,
+      "solar_radiation_mj_m2_day": 13.45
+    },
+    {
+      "date": "1995-10-16",
+      "et0_mm": null,
+      "precipitation_mm": 3.56,
+      "tmin_c": 24.3,
+      "tmax_c": 27.31,
+      "relative_humidity_pct": 90.63,
+      "wind_speed_2m_m_s": 2.3,
+      "solar_radiation_mj_m2_day": 14.22
+    },
+    {
+      "date": "1995-10-17",
+      "et0_mm": null,
+      "precipitation_mm": 7.65,
+      "tmin_c": 24.36,
+      "tmax_c": 27.74,
+      "relative_humidity_pct": 85.34,
+      "wind_speed_2m_m_s": 1.28,
+      "solar_radiation_mj_m2_day": 12.61
+    },
+    {
+      "date": "1995-10-18",
+      "et0_mm": null,
+      "precipitation_mm": 9.08,
+      "tmin_c": 23.81,
+      "tmax_c": 26.48,
+      "relative_humidity_pct": 88.82,
+      "wind_speed_2m_m_s": 1.44,
+      "solar_radiation_mj_m2_day": 17.93
+    },
+    {
+      "date": "1995-10-19",
+      "et0_mm": null,
+      "precipitation_mm": 8.39,
+      "tmin_c": 23.33,
+      "tmax_c": 28.39,
+      "relative_humidity_pct": 87.54,
+      "wind_speed_2m_m_s": 1.84,
+      "solar_radiation_mj_m2_day": 16.7
+    },
+    {
+      "date": "1995-10-20",
+      "et0_mm": null,
+      "precipitation_mm": 13.04,
+      "tmin_c": 24.0,
+      "tmax_c": 28.41,
+      "relative_humidity_pct": 88.15,
+      "wind_speed_2m_m_s": 2.07,
+      "solar_radiation_mj_m2_day": 18.24
+    },
+    {
+      "date": "1995-10-21",
+      "et0_mm": null,
+      "precipitation_mm": 5.78,
+      "tmin_c": 23.35,
+      "tmax_c": 29.19,
+      "relative_humidity_pct": 84.19,
+      "wind_speed_2m_m_s": 1.53,
+      "solar_radiation_mj_m2_day": 20.67
+    },
+    {
+      "date": "1995-10-22",
+      "et0_mm": null,
+      "precipitation_mm": 7.48,
+      "tmin_c": 23.56,
+      "tmax_c": 26.93,
+      "relative_humidity_pct": 89.25,
+      "wind_speed_2m_m_s": 1.39,
+      "solar_radiation_mj_m2_day": 18.43
+    },
+    {
+      "date": "1995-10-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.43,
+      "tmin_c": 23.63,
+      "tmax_c": 29.59,
+      "relative_humidity_pct": 82.87,
+      "wind_speed_2m_m_s": 0.9,
+      "solar_radiation_mj_m2_day": 20.6
+    },
+    {
+      "date": "1995-10-24",
+      "et0_mm": null,
+      "precipitation_mm": 1.96,
+      "tmin_c": 24.13,
+      "tmax_c": 28.75,
+      "relative_humidity_pct": 88.25,
+      "wind_speed_2m_m_s": 1.61,
+      "solar_radiation_mj_m2_day": 17.72
+    },
+    {
+      "date": "1995-10-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.77,
+      "tmin_c": 24.28,
+      "tmax_c": 28.77,
+      "relative_humidity_pct": 86.71,
+      "wind_speed_2m_m_s": 2.5,
+      "solar_radiation_mj_m2_day": 18.28
+    },
+    {
+      "date": "1995-10-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.86,
+      "tmin_c": 24.16,
+      "tmax_c": 26.92,
+      "relative_humidity_pct": 90.98,
+      "wind_speed_2m_m_s": 2.07,
+      "solar_radiation_mj_m2_day": 17.68
+    },
+    {
+      "date": "1995-10-27",
+      "et0_mm": null,
+      "precipitation_mm": 2.13,
+      "tmin_c": 24.11,
+      "tmax_c": 26.58,
+      "relative_humidity_pct": 91.48,
+      "wind_speed_2m_m_s": 3.14,
+      "solar_radiation_mj_m2_day": 14.98
+    },
+    {
+      "date": "1995-10-28",
+      "et0_mm": null,
+      "precipitation_mm": 1.43,
+      "tmin_c": 24.15,
+      "tmax_c": 26.28,
+      "relative_humidity_pct": 90.52,
+      "wind_speed_2m_m_s": 2.14,
+      "solar_radiation_mj_m2_day": 15.17
+    },
+    {
+      "date": "1995-10-29",
+      "et0_mm": null,
+      "precipitation_mm": 3.8,
+      "tmin_c": 23.96,
+      "tmax_c": 28.32,
+      "relative_humidity_pct": 87.22,
+      "wind_speed_2m_m_s": 0.84,
+      "solar_radiation_mj_m2_day": 19.23
+    },
+    {
+      "date": "1995-10-30",
+      "et0_mm": null,
+      "precipitation_mm": 6.29,
+      "tmin_c": 23.99,
+      "tmax_c": 28.7,
+      "relative_humidity_pct": 88.37,
+      "wind_speed_2m_m_s": 1.44,
+      "solar_radiation_mj_m2_day": 13.95
+    },
+    {
+      "date": "1995-10-31",
+      "et0_mm": null,
+      "precipitation_mm": 0.2,
+      "tmin_c": 23.93,
+      "tmax_c": 29.18,
+      "relative_humidity_pct": 85.32,
+      "wind_speed_2m_m_s": 1.32,
+      "solar_radiation_mj_m2_day": 17.44
+    },
+    {
+      "date": "1995-11-01",
+      "et0_mm": null,
+      "precipitation_mm": 1.02,
+      "tmin_c": 23.18,
+      "tmax_c": 29.85,
+      "relative_humidity_pct": 85.22,
+      "wind_speed_2m_m_s": 1.16,
+      "solar_radiation_mj_m2_day": 16.07
+    },
+    {
+      "date": "1995-11-02",
+      "et0_mm": null,
+      "precipitation_mm": 2.69,
+      "tmin_c": 23.7,
+      "tmax_c": 30.16,
+      "relative_humidity_pct": 84.91,
+      "wind_speed_2m_m_s": 2.86,
+      "solar_radiation_mj_m2_day": 18.06
+    },
+    {
+      "date": "1995-11-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.5,
+      "tmin_c": 23.22,
+      "tmax_c": 29.54,
+      "relative_humidity_pct": 84.4,
+      "wind_speed_2m_m_s": 2.92,
+      "solar_radiation_mj_m2_day": 18.89
+    },
+    {
+      "date": "1995-11-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.8,
+      "tmin_c": 23.97,
+      "tmax_c": 27.91,
+      "relative_humidity_pct": 88.1,
+      "wind_speed_2m_m_s": 2.52,
+      "solar_radiation_mj_m2_day": 11.5
+    },
+    {
+      "date": "1995-11-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.53,
+      "tmin_c": 23.56,
+      "tmax_c": 29.46,
+      "relative_humidity_pct": 85.81,
+      "wind_speed_2m_m_s": 2.6,
+      "solar_radiation_mj_m2_day": 12.06
+    },
+    {
+      "date": "1995-11-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.84,
+      "tmin_c": 23.17,
+      "tmax_c": 30.2,
+      "relative_humidity_pct": 84.96,
+      "wind_speed_2m_m_s": 2.26,
+      "solar_radiation_mj_m2_day": 15.92
+    },
+    {
+      "date": "1995-11-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.96,
+      "tmin_c": 23.2,
+      "tmax_c": 30.01,
+      "relative_humidity_pct": 83.29,
+      "wind_speed_2m_m_s": 2.06,
+      "solar_radiation_mj_m2_day": 15.36
+    },
+    {
+      "date": "1995-11-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.32,
+      "tmin_c": 22.96,
+      "tmax_c": 29.25,
+      "relative_humidity_pct": 82.74,
+      "wind_speed_2m_m_s": 2.17,
+      "solar_radiation_mj_m2_day": 18.37
+    },
+    {
+      "date": "1995-11-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.94,
+      "tmin_c": 22.36,
+      "tmax_c": 29.1,
+      "relative_humidity_pct": 84.49,
+      "wind_speed_2m_m_s": 2.64,
+      "solar_radiation_mj_m2_day": 20.91
+    },
+    {
+      "date": "1995-11-10",
+      "et0_mm": null,
+      "precipitation_mm": 1.07,
+      "tmin_c": 22.95,
+      "tmax_c": 29.74,
+      "relative_humidity_pct": 84.88,
+      "wind_speed_2m_m_s": 2.3,
+      "solar_radiation_mj_m2_day": 11.92
+    },
+    {
+      "date": "1995-11-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.41,
+      "tmin_c": 23.63,
+      "tmax_c": 30.08,
+      "relative_humidity_pct": 84.41,
+      "wind_speed_2m_m_s": 2.11,
+      "solar_radiation_mj_m2_day": 13.56
+    },
+    {
+      "date": "1995-11-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.23,
+      "tmin_c": 23.68,
+      "tmax_c": 29.27,
+      "relative_humidity_pct": 85.13,
+      "wind_speed_2m_m_s": 2.67,
+      "solar_radiation_mj_m2_day": 16.84
+    },
+    {
+      "date": "1995-11-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.26,
+      "tmin_c": 22.92,
+      "tmax_c": 29.64,
+      "relative_humidity_pct": 85.02,
+      "wind_speed_2m_m_s": 1.61,
+      "solar_radiation_mj_m2_day": 19.0
+    },
+    {
+      "date": "1995-11-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.82,
+      "tmin_c": 23.45,
+      "tmax_c": 28.96,
+      "relative_humidity_pct": 84.01,
+      "wind_speed_2m_m_s": 1.48,
+      "solar_radiation_mj_m2_day": 18.92
+    },
+    {
+      "date": "1995-11-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.12,
+      "tmin_c": 23.13,
+      "tmax_c": 29.42,
+      "relative_humidity_pct": 84.3,
+      "wind_speed_2m_m_s": 2.48,
+      "solar_radiation_mj_m2_day": 18.66
+    },
+    {
+      "date": "1995-11-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.1,
+      "tmin_c": 23.48,
+      "tmax_c": 29.97,
+      "relative_humidity_pct": 82.11,
+      "wind_speed_2m_m_s": 3.17,
+      "solar_radiation_mj_m2_day": 19.97
+    },
+    {
+      "date": "1995-11-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.07,
+      "tmin_c": 23.15,
+      "tmax_c": 30.39,
+      "relative_humidity_pct": 81.63,
+      "wind_speed_2m_m_s": 3.21,
+      "solar_radiation_mj_m2_day": 17.64
+    },
+    {
+      "date": "1995-11-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.46,
+      "tmin_c": 23.63,
+      "tmax_c": 30.74,
+      "relative_humidity_pct": 82.24,
+      "wind_speed_2m_m_s": 2.14,
+      "solar_radiation_mj_m2_day": 15.9
+    },
+    {
+      "date": "1995-11-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.46,
+      "tmin_c": 23.68,
+      "tmax_c": 30.69,
+      "relative_humidity_pct": 82.85,
+      "wind_speed_2m_m_s": 2.09,
+      "solar_radiation_mj_m2_day": 18.16
+    },
+    {
+      "date": "1995-11-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.4,
+      "tmin_c": 24.29,
+      "tmax_c": 28.8,
+      "relative_humidity_pct": 84.68,
+      "wind_speed_2m_m_s": 1.46,
+      "solar_radiation_mj_m2_day": 15.1
+    },
+    {
+      "date": "1995-11-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.31,
+      "tmin_c": 23.46,
+      "tmax_c": 29.6,
+      "relative_humidity_pct": 82.28,
+      "wind_speed_2m_m_s": 1.81,
+      "solar_radiation_mj_m2_day": 19.83
+    },
+    {
+      "date": "1995-11-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.05,
+      "tmin_c": 23.21,
+      "tmax_c": 30.37,
+      "relative_humidity_pct": 78.73,
+      "wind_speed_2m_m_s": 3.7,
+      "solar_radiation_mj_m2_day": 19.49
+    },
+    {
+      "date": "1995-11-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.06,
+      "tmin_c": 23.1,
+      "tmax_c": 30.7,
+      "relative_humidity_pct": 79.46,
+      "wind_speed_2m_m_s": 2.73,
+      "solar_radiation_mj_m2_day": 16.76
+    },
+    {
+      "date": "1995-11-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.14,
+      "tmin_c": 23.35,
+      "tmax_c": 30.84,
+      "relative_humidity_pct": 79.62,
+      "wind_speed_2m_m_s": 2.16,
+      "solar_radiation_mj_m2_day": 15.73
+    },
+    {
+      "date": "1995-11-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.38,
+      "tmin_c": 23.99,
+      "tmax_c": 30.84,
+      "relative_humidity_pct": 78.65,
+      "wind_speed_2m_m_s": 2.99,
+      "solar_radiation_mj_m2_day": 7.69
+    },
+    {
+      "date": "1995-11-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.07,
+      "tmin_c": 24.12,
+      "tmax_c": 30.15,
+      "relative_humidity_pct": 79.92,
+      "wind_speed_2m_m_s": 2.78,
+      "solar_radiation_mj_m2_day": 12.62
+    },
+    {
+      "date": "1995-11-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 23.18,
+      "tmax_c": 30.31,
+      "relative_humidity_pct": 80.94,
+      "wind_speed_2m_m_s": 1.7,
+      "solar_radiation_mj_m2_day": 17.04
+    },
+    {
+      "date": "1995-11-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.16,
+      "tmin_c": 23.83,
+      "tmax_c": 27.13,
+      "relative_humidity_pct": 88.07,
+      "wind_speed_2m_m_s": 1.47,
+      "solar_radiation_mj_m2_day": 12.68
+    },
+    {
+      "date": "1995-11-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.32,
+      "tmin_c": 23.92,
+      "tmax_c": 31.24,
+      "relative_humidity_pct": 79.58,
+      "wind_speed_2m_m_s": 1.93,
+      "solar_radiation_mj_m2_day": 18.22
+    },
+    {
+      "date": "1995-11-30",
+      "et0_mm": null,
+      "precipitation_mm": 0.05,
+      "tmin_c": 22.46,
+      "tmax_c": 31.47,
+      "relative_humidity_pct": 77.37,
+      "wind_speed_2m_m_s": 2.19,
+      "solar_radiation_mj_m2_day": 16.99
+    },
+    {
+      "date": "1995-12-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 22.9,
+      "tmax_c": 31.79,
+      "relative_humidity_pct": 76.51,
+      "wind_speed_2m_m_s": 1.62,
+      "solar_radiation_mj_m2_day": 19.41
+    },
+    {
+      "date": "1995-12-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.55,
+      "tmax_c": 31.07,
+      "relative_humidity_pct": 71.4,
+      "wind_speed_2m_m_s": 3.48,
+      "solar_radiation_mj_m2_day": 20.63
+    },
+    {
+      "date": "1995-12-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 21.74,
+      "tmax_c": 31.77,
+      "relative_humidity_pct": 72.32,
+      "wind_speed_2m_m_s": 3.39,
+      "solar_radiation_mj_m2_day": 20.88
+    },
+    {
+      "date": "1995-12-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 21.24,
+      "tmax_c": 30.9,
+      "relative_humidity_pct": 71.39,
+      "wind_speed_2m_m_s": 3.22,
+      "solar_radiation_mj_m2_day": 21.49
+    },
+    {
+      "date": "1995-12-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.76,
+      "tmin_c": 21.16,
+      "tmax_c": 31.37,
+      "relative_humidity_pct": 76.02,
+      "wind_speed_2m_m_s": 2.69,
+      "solar_radiation_mj_m2_day": 18.21
+    },
+    {
+      "date": "1995-12-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.4,
+      "tmin_c": 22.9,
+      "tmax_c": 32.04,
+      "relative_humidity_pct": 75.17,
+      "wind_speed_2m_m_s": 2.53,
+      "solar_radiation_mj_m2_day": 17.88
+    },
+    {
+      "date": "1995-12-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 22.68,
+      "tmax_c": 31.93,
+      "relative_humidity_pct": 75.62,
+      "wind_speed_2m_m_s": 1.8,
+      "solar_radiation_mj_m2_day": 18.69
+    },
+    {
+      "date": "1995-12-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 22.84,
+      "tmax_c": 31.89,
+      "relative_humidity_pct": 73.51,
+      "wind_speed_2m_m_s": 1.71,
+      "solar_radiation_mj_m2_day": 19.06
+    },
+    {
+      "date": "1995-12-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 23.74,
+      "tmax_c": 32.18,
+      "relative_humidity_pct": 71.89,
+      "wind_speed_2m_m_s": 2.68,
+      "solar_radiation_mj_m2_day": 18.02
+    },
+    {
+      "date": "1995-12-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 23.62,
+      "tmax_c": 31.84,
+      "relative_humidity_pct": 69.07,
+      "wind_speed_2m_m_s": 4.21,
+      "solar_radiation_mj_m2_day": 13.96
+    },
+    {
+      "date": "1995-12-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.48,
+      "tmax_c": 31.78,
+      "relative_humidity_pct": 68.6,
+      "wind_speed_2m_m_s": 4.4,
+      "solar_radiation_mj_m2_day": 15.08
+    },
+    {
+      "date": "1995-12-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.74,
+      "tmax_c": 31.88,
+      "relative_humidity_pct": 70.76,
+      "wind_speed_2m_m_s": 3.6,
+      "solar_radiation_mj_m2_day": 15.28
+    },
+    {
+      "date": "1995-12-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 23.88,
+      "tmax_c": 32.38,
+      "relative_humidity_pct": 70.19,
+      "wind_speed_2m_m_s": 3.5,
+      "solar_radiation_mj_m2_day": 16.5
+    },
+    {
+      "date": "1995-12-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.06,
+      "tmin_c": 23.13,
+      "tmax_c": 31.86,
+      "relative_humidity_pct": 74.25,
+      "wind_speed_2m_m_s": 1.64,
+      "solar_radiation_mj_m2_day": 15.05
+    },
+    {
+      "date": "1995-12-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 24.14,
+      "tmax_c": 29.65,
+      "relative_humidity_pct": 77.21,
+      "wind_speed_2m_m_s": 3.19,
+      "solar_radiation_mj_m2_day": 15.89
+    },
+    {
+      "date": "1995-12-16",
+      "et0_mm": null,
+      "precipitation_mm": 1.26,
+      "tmin_c": 23.33,
+      "tmax_c": 32.58,
+      "relative_humidity_pct": 72.58,
+      "wind_speed_2m_m_s": 2.19,
+      "solar_radiation_mj_m2_day": 19.14
+    },
+    {
+      "date": "1995-12-17",
+      "et0_mm": null,
+      "precipitation_mm": 2.71,
+      "tmin_c": 23.23,
+      "tmax_c": 31.76,
+      "relative_humidity_pct": 77.0,
+      "wind_speed_2m_m_s": 1.79,
+      "solar_radiation_mj_m2_day": 19.79
+    },
+    {
+      "date": "1995-12-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.15,
+      "tmin_c": 23.98,
+      "tmax_c": 31.82,
+      "relative_humidity_pct": 74.35,
+      "wind_speed_2m_m_s": 1.71,
+      "solar_radiation_mj_m2_day": 18.28
+    },
+    {
+      "date": "1995-12-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 23.59,
+      "tmax_c": 31.07,
+      "relative_humidity_pct": 77.52,
+      "wind_speed_2m_m_s": 2.15,
+      "solar_radiation_mj_m2_day": 17.95
+    },
+    {
+      "date": "1995-12-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.17,
+      "tmin_c": 24.28,
+      "tmax_c": 31.62,
+      "relative_humidity_pct": 76.8,
+      "wind_speed_2m_m_s": 1.56,
+      "solar_radiation_mj_m2_day": 18.71
+    },
+    {
+      "date": "1995-12-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.89,
+      "tmin_c": 23.95,
+      "tmax_c": 32.48,
+      "relative_humidity_pct": 71.74,
+      "wind_speed_2m_m_s": 1.21,
+      "solar_radiation_mj_m2_day": 19.92
+    },
+    {
+      "date": "1995-12-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 23.5,
+      "tmax_c": 32.77,
+      "relative_humidity_pct": 71.0,
+      "wind_speed_2m_m_s": 1.03,
+      "solar_radiation_mj_m2_day": 16.86
+    },
+    {
+      "date": "1995-12-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 24.47,
+      "tmax_c": 32.02,
+      "relative_humidity_pct": 72.9,
+      "wind_speed_2m_m_s": 1.15,
+      "solar_radiation_mj_m2_day": 18.78
+    },
+    {
+      "date": "1995-12-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 24.09,
+      "tmax_c": 31.63,
+      "relative_humidity_pct": 69.96,
+      "wind_speed_2m_m_s": 3.31,
+      "solar_radiation_mj_m2_day": 10.48
+    },
+    {
+      "date": "1995-12-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 24.67,
+      "tmax_c": 29.58,
+      "relative_humidity_pct": 72.06,
+      "wind_speed_2m_m_s": 5.28,
+      "solar_radiation_mj_m2_day": 15.03
+    },
+    {
+      "date": "1995-12-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 24.64,
+      "tmax_c": 31.44,
+      "relative_humidity_pct": 67.07,
+      "wind_speed_2m_m_s": 5.02,
+      "solar_radiation_mj_m2_day": 14.87
+    },
+    {
+      "date": "1995-12-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 24.18,
+      "tmax_c": 29.52,
+      "relative_humidity_pct": 75.36,
+      "wind_speed_2m_m_s": 2.46,
+      "solar_radiation_mj_m2_day": 14.04
+    },
+    {
+      "date": "1995-12-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 24.05,
+      "tmax_c": 30.85,
+      "relative_humidity_pct": 73.73,
+      "wind_speed_2m_m_s": 2.63,
+      "solar_radiation_mj_m2_day": 12.52
+    },
+    {
+      "date": "1995-12-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 22.29,
+      "tmax_c": 32.68,
+      "relative_humidity_pct": 67.92,
+      "wind_speed_2m_m_s": 2.84,
+      "solar_radiation_mj_m2_day": 17.88
+    },
+    {
+      "date": "1995-12-30",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 22.58,
+      "tmax_c": 33.21,
+      "relative_humidity_pct": 70.76,
+      "wind_speed_2m_m_s": 1.97,
+      "solar_radiation_mj_m2_day": 18.16
+    },
+    {
+      "date": "1995-12-31",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 23.53,
+      "tmax_c": 28.43,
+      "relative_humidity_pct": 75.92,
+      "wind_speed_2m_m_s": 2.3,
+      "solar_radiation_mj_m2_day": 12.69
+    }
+  ],
+  "units": {
+    "precipitation_mm": "mm/day",
+    "tmin_c": "C",
+    "tmax_c": "C",
+    "relative_humidity_pct": "%",
+    "wind_speed_2m_m_s": "m/s",
+    "solar_radiation_mj_m2_day": "MJ/m^2/day",
+    "et0_mm": "mm/day"
+  },
+  "quality_control": {
+    "issues": [],
+    "rain_warning_mm": 500,
+    "rain_policy": "flag_only_no_clipping",
+    "bias_correction": null
+  },
+  "provider_header": {
+    "title": "NASA/POWER Source Native Resolution Daily Data",
+    "api": {
+      "version": "v2.10.3",
+      "name": "POWER Daily API"
+    },
+    "sources": [
+      "MERRA2",
+      "SRB",
+      "POWER"
+    ],
+    "fill_value": -999.0,
+    "time_standard": "LST",
+    "start": "19950101",
+    "end": "19951231"
+  },
+  "provider_units": {
+    "PRECTOTCORR": "mm/day",
+    "T2M_MIN": "C",
+    "T2M_MAX": "C",
+    "RH2M": "%",
+    "WS2M": "m/s",
+    "ALLSKY_SFC_SW_DWN": "MJ/m^2/day"
+  },
+  "provider_geometry": {
+    "type": "Point",
+    "coordinates": [
+      -85.5,
+      10.55,
+      94.64
+    ]
+  }
+}
