@@ -1,0 +1,41 @@
+{
+  "rice_legume": {
+    "irrigation_requirement_mm": 0.0,
+    "metrics": {
+      "crop_water_demand_mm": 1153.84,
+      "modeled_water_deficit_mm": 505.399,
+      "water_stress_days": 171
+    },
+    "model_version": "fao56-kernel-0.1.0",
+    "per_crop": {
+      "legume": 343.767,
+      "rice": 810.073
+    }
+  },
+  "rice_melon": {
+    "irrigation_requirement_mm": 558.158,
+    "metrics": {
+      "crop_water_demand_mm": 1425.202,
+      "modeled_water_deficit_mm": 791.979,
+      "water_stress_days": 218
+    },
+    "model_version": "fao56-kernel-0.1.0",
+    "per_crop": {
+      "melon": 615.129,
+      "rice": 810.073
+    }
+  },
+  "rice_sorghum": {
+    "irrigation_requirement_mm": 0.0,
+    "metrics": {
+      "crop_water_demand_mm": 1280.161,
+      "modeled_water_deficit_mm": 509.076,
+      "water_stress_days": 174
+    },
+    "model_version": "fao56-kernel-0.1.0",
+    "per_crop": {
+      "rice": 810.073,
+      "sorghum": 470.088
+    }
+  }
+}

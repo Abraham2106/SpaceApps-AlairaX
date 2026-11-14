@@ -1,0 +1,30 @@
+# Corre la suite del backend (kernel FAO-56, contratos, KNN) en cada PR y en main.
+name: Backend tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Instalar dependencias
+        run: python -m pip install -r requirements.txt
+
+      - name: pytest
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python -m pytest backend/tests -q --cov=backend/app/simulation --cov-report=term-missing

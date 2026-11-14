@@ -94,6 +94,35 @@ El archivo sale con `reviewed: false`; `build_analogs.py` lo rechaza hasta que J
 python -m scripts.run_comparison --analogs analogs.json --scenario neutral --inputs inputs.json --kernel backend.app.simulation.kernel:simulate_rotation --output out.json --allow-mock
 ```
 
+### Cómo correr los tests
+
+Desde la raíz del repo, con el entorno virtual activo:
+
+```powershell
+python -m pytest backend/tests -q
+python -m unittest discover -s backend/tests
+python -m pytest backend/tests -q --cov=backend/app/simulation --cov-report=term-missing
+```
+
+La cobertura de `backend/app/simulation/` está en 96 %. `test_kernel_qa.py` cubre:
+
+- Cambio de etapa y cambio de cultivo.
+- Huecos de clima.
+- Suelo `null` o poco profundo.
+- Parámetros incompletos.
+- Temporada bisiesta.
+- El snapshot de regresión de 2015 (`backend/tests/snapshots/kernel_metrics_2015.json`). Si un cambio científico es intencional, regenéralo con `UPDATE_SNAPSHOTS=1` y explica el cambio en el PR.
+
+Los 3 casos calculados a mano de Ant (`research/qa_cases.md`, tarea 2.4) quedan como `xfail` hasta que existan.
+
+## Despliegue y CI
+
+- `.github/workflows/backend-tests.yml` corre `pytest` con cobertura en cada PR y en cada push a `main`.
+- `.github/workflows/pages.yml` publica en GitHub Pages en cada push a `main`, y también se puede lanzar a mano desde *Actions*:
+  - Si existe `frontend/package.json`, usa Node 22, corre `npm ci` y `npm run build`, y publica `frontend/dist`. Vite debe usar `base: "/SpaceApps-AlairaX/"` y HashRouter.
+  - Si todavía no existe, publica `.github/pages-placeholder/index.html` junto con `frontend/public/data/`. Así se prueba el pipeline antes de que llegue la UI.
+- El dueño del repo debe activar una vez *Settings → Pages → Source: GitHub Actions*. La URL queda en `https://abraham2106.github.io/SpaceApps-AlairaX/`. Pruébala en ventana privada y en el celular.
+
 ## Límites
 
 KNN busca temporadas parecidas; 2026 sirve de seguimiento y nunca entra como análogo. Se comparan ventanas temporales completas y equivalentes. Los cuantiles representan variación entre análogos, no probabilidades de éxito ni intervalos de confianza. Se reportan métricas modeladas; no se infiere rendimiento, rentabilidad, ahorro demostrado ni una rotación ganadora.
