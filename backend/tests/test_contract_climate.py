@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from app.simulation.contract import ClimateDaily, from_power_csv, validate_climate
+from backend.app.simulation.contract import ClimateDaily, from_power_csv, validate_climate
 
 EXAMPLES = Path(__file__).resolve().parents[2] / "datasets" / "examples"
 POWER_CSV = EXAMPLES / "power_liberia_urbano_2015_2025.csv"

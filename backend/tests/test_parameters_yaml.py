@@ -7,8 +7,8 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from app.simulation.contract import CropSegment, ModelAssumptions, RotationSchedule
-from app.simulation.parameters import load_crops, load_rotations
+from backend.app.simulation.contract import CropSegment, KernelAssumptions, RotationTemplate
+from backend.app.simulation.parameters import load_crops, load_rotations
 
 PARAMS = Path(__file__).resolve().parents[2] / "research" / "parameters"
 
@@ -97,7 +97,7 @@ def test_invalid_sowing_date_is_rejected() -> None:
 
 def test_repeated_crop_in_rotation_is_rejected() -> None:
     with pytest.raises(ValidationError, match="repite cultivos"):
-        RotationSchedule(
+        RotationTemplate(
             rotation_id="bad",
             name="Repite arroz",
             segments=[
@@ -108,7 +108,7 @@ def test_repeated_crop_in_rotation_is_rejected() -> None:
 
 
 def test_model_assumptions_defaults_match_decisions() -> None:
-    assumptions = ModelAssumptions()
+    assumptions = KernelAssumptions()
 
     assert assumptions.initial_depletion_fraction == pytest.approx(0.5)
     assert assumptions.runoff_threshold_mm == pytest.approx(60.0)

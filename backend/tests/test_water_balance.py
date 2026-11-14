@@ -9,17 +9,17 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from app.simulation.contract import (
+from backend.app.simulation.contract import (
     CropParameters,
     CropSegment,
-    ModelAssumptions,
-    RotationSchedule,
-    SoilProfile,
+    KernelAssumptions,
+    RotationTemplate,
+    SoilWaterProfile,
     from_power_csv,
 )
-from app.simulation.et0 import et0_pm
-from app.simulation.parameters import load_crops, load_rotations
-from app.simulation.water_balance import (
+from backend.app.simulation.et0 import et0_pm
+from backend.app.simulation.parameters import load_crops, load_rotations
+from backend.app.simulation.water_balance import (
     BALANCE_COLUMNS,
     daily_kc,
     resolve_season_date,
@@ -37,7 +37,7 @@ POWER_CSV = (
 )
 
 #: Suelo de prueba: TAW = 1000·(0.30−0.10)·1 m = 200 mm.
-SOIL = SoilProfile(theta_fc=0.30, theta_wp=0.10, source="test")
+SOIL = SoilWaterProfile(theta_fc=0.30, theta_wp=0.10, source="test")
 
 
 def _crop(**overrides) -> CropParameters:
@@ -61,12 +61,12 @@ def _rotation(
     sowings: list[str] | None = None,
     irrigated: list[bool] | None = None,
     regimes: list[str | None] | None = None,
-) -> RotationSchedule:
+) -> RotationTemplate:
     crop_ids = crop_ids or ["c1"]
     sowings = sowings or ["05-01"]
     irrigated = irrigated or [False] * len(crop_ids)
     regimes = regimes or [None] * len(crop_ids)
-    return RotationSchedule(
+    return RotationTemplate(
         rotation_id="test",
         name="Rotación de prueba",
         segments=[
@@ -287,7 +287,7 @@ def test_daily_kc_curve_is_piecewise_linear() -> None:
     )
     rotation = _rotation()
     cycles, _ = __import__(
-        "app.simulation.water_balance", fromlist=["build_cycles"]
+        "backend.app.simulation.water_balance", fromlist=["build_cycles"]
     ).build_cycles(rotation, {"c1": cycle_params}, 2021)
 
     cycle = cycles[0]
@@ -339,10 +339,10 @@ def test_rice_melon_runs_on_fixture_season() -> None:
 
     result = simulate_water_balance(
         season,
-        SoilProfile.from_soilgrids(280.0, 140.0),
+        SoilWaterProfile.from_soilgrids(280.0, 140.0),
         rotation,
         crops,
-        ModelAssumptions(),
+        KernelAssumptions(),
         mode="managed",
     )
 

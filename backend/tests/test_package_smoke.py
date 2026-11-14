@@ -1,14 +1,14 @@
-"""Smoke test: el paquete `app` se instala y sus módulos base importan.
+"""Smoke test: el paquete `backend.app` (ejecutado desde la raíz) sus módulos base importan.
 
 No valida física todavía; solo que la estructura del repo está sana.
 """
 
 
 def test_package_layout_imports() -> None:
-    import app  # noqa: F401
-    import app.api  # noqa: F401
-    import app.application  # noqa: F401
-    import app.domain  # noqa: F401
-    import app.infrastructure  # noqa: F401
-    import app.intelligence  # noqa: F401
-    import app.simulation  # noqa: F401
+    import backend.app  # noqa: F401
+    import backend.app.api  # noqa: F401
+    import backend.app.application  # noqa: F401
+    import backend.app.domain  # noqa: F401
+    import backend.app.infrastructure  # noqa: F401
+    import backend.app.intelligence  # noqa: F401
+    import backend.app.simulation  # noqa: F401

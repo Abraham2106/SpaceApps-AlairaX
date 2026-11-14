@@ -8,8 +8,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from app.simulation.contract import from_power_csv
-from app.simulation.et0 import (
+from backend.app.simulation.contract import from_power_csv
+from backend.app.simulation.et0 import (
     atmospheric_pressure,
     clear_sky_radiation,
     et0_pm,

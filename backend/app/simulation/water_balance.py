@@ -25,12 +25,12 @@ from typing import Literal
 import numpy as np
 import pandas as pd
 
-from app.simulation.contract import (
+from backend.app.simulation.contract import (
     CropLibrary,
     CropParameters,
-    ModelAssumptions,
-    RotationSchedule,
-    SoilProfile,
+    KernelAssumptions,
+    RotationTemplate,
+    SoilWaterProfile,
 )
 
 #: Profundidad radicular usada en barbecho [m] (D5).
@@ -58,7 +58,7 @@ BALANCE_COLUMNS = [
 
 
 @dataclass(frozen=True)
-class CropCycle:
+class CycleWindow:
     """Cultivo materializado con fechas absolutas dentro de una temporada."""
 
     crop_id: str
@@ -106,20 +106,20 @@ def resolve_season_date(mmdd: str, season_year: int, season_start_mmdd: str = "0
 
 
 def build_cycles(
-    rotation: RotationSchedule,
+    rotation: RotationTemplate,
     crops: CropLibrary | dict[str, CropParameters],
     season_year: int,
-    assumptions: ModelAssumptions | None = None,
-) -> tuple[list[CropCycle], list[str]]:
+    assumptions: KernelAssumptions | None = None,
+) -> tuple[list[CycleWindow], list[str]]:
     """Convierte una rotación (fechas MM-DD) en ciclos con fechas absolutas.
 
     Recorta el ciclo si excede el fin de temporada (30 abr) con warning.
     """
-    assumptions = assumptions or ModelAssumptions()
+    assumptions = assumptions or KernelAssumptions()
     catalog = crops.crops if isinstance(crops, CropLibrary) else crops
     season_end = date(season_year + 1, 4, 30)
     warnings: list[str] = []
-    cycles: list[CropCycle] = []
+    cycles: list[CycleWindow] = []
 
     for segment in rotation.segments:
         if segment.crop_id not in catalog:
@@ -141,7 +141,7 @@ def build_cycles(
             )
             end = season_end
         cycles.append(
-            CropCycle(
+            CycleWindow(
                 crop_id=segment.crop_id,
                 params=params,
                 sowing=sowing,
@@ -153,7 +153,7 @@ def build_cycles(
     return sorted(cycles, key=lambda cycle: cycle.sowing), warnings
 
 
-def daily_kc(cycle: CropCycle | None, kc_fallow: float, day: date) -> tuple[float, str]:
+def daily_kc(cycle: CycleWindow | None, kc_fallow: float, day: date) -> tuple[float, str]:
     """Kc del día por etapas con interpolación lineal (Eq. 66, Fig. 25).
 
     En desarrollo: ``Kc = Kc_ini + (d − L_ini)/L_dev · (Kc_mid − Kc_ini)``.
@@ -208,7 +208,7 @@ def runoff_mm(rain_mm: float, threshold_mm: float, fraction: float) -> float:
     return fraction * max(0.0, rain_mm - threshold_mm)
 
 
-def _active_cycle(cycles: list[CropCycle], day: date) -> CropCycle | None:
+def _active_cycle(cycles: list[CycleWindow], day: date) -> CycleWindow | None:
     for cycle in cycles:
         if cycle.sowing <= day <= cycle.end:
             return cycle
@@ -217,10 +217,10 @@ def _active_cycle(cycles: list[CropCycle], day: date) -> CropCycle | None:
 
 def simulate_water_balance(
     climate: pd.DataFrame,
-    soil: SoilProfile,
-    rotation: RotationSchedule,
+    soil: SoilWaterProfile,
+    rotation: RotationTemplate,
     crops: CropLibrary | dict[str, CropParameters],
-    assumptions: ModelAssumptions | None = None,
+    assumptions: KernelAssumptions | None = None,
     mode: Literal["rainfed", "managed"] = "rainfed",
 ) -> pd.DataFrame:
     """Balance hídrico diario (Eq. 85) para una rotación y una temporada.
@@ -234,7 +234,7 @@ def simulate_water_balance(
     """
     if mode not in ("rainfed", "managed"):
         raise ValueError(f"mode inválido: {mode!r} (usar 'rainfed' o 'managed')")
-    assumptions = assumptions or ModelAssumptions()
+    assumptions = assumptions or KernelAssumptions()
 
     missing = [col for col in ("date", "rain_mm", "et0_mm") if col not in climate.columns]
     if missing:

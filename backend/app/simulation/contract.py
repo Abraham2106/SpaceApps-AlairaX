@@ -261,7 +261,7 @@ SOIL_TEXTURE_WATER_CONTENT: dict[str, tuple[tuple[float, float], tuple[float, fl
 }
 
 
-class SoilProfile(BaseModel):
+class SoilWaterProfile(BaseModel):
     """Perfil de suelo usado por la Eq. 82 de FAO-56: ``TAW = 1000(θfc − θwp)Zr``."""
 
     model_config = ConfigDict(extra="forbid", frozen=True)
@@ -272,7 +272,7 @@ class SoilProfile(BaseModel):
     warnings: list[str] = Field(default_factory=list)
 
     @model_validator(mode="after")
-    def _check_order(self) -> SoilProfile:
+    def _check_order(self) -> SoilWaterProfile:
         if self.theta_wp >= self.theta_fc:
             raise ValueError(
                 "theta_wp debe ser menor que theta_fc "
@@ -286,7 +286,7 @@ class SoilProfile(BaseModel):
         wv0033: float | None,
         wv1500: float | None,
         texture: str = "loam",
-    ) -> SoilProfile:
+    ) -> SoilWaterProfile:
         """Construye el perfil desde SoilGrids 2.0 (ISRIC).
 
         ``wv0033`` (33 kPa ≈ θfc) y ``wv1500`` (1500 kPa ≈ θwp) llegan en las
@@ -342,7 +342,7 @@ class CropSegment(BaseModel):
         return _validate_mmdd(value)
 
 
-class RotationSchedule(BaseModel):
+class RotationTemplate(BaseModel):
     """Secuencia de cultivos; ``is_current`` marca la rotación de referencia."""
 
     model_config = ConfigDict(extra="forbid", frozen=True)
@@ -354,14 +354,14 @@ class RotationSchedule(BaseModel):
     notes: list[str] = Field(default_factory=list)
 
     @model_validator(mode="after")
-    def _check_unique_crops(self) -> RotationSchedule:
+    def _check_unique_crops(self) -> RotationTemplate:
         crops = [segment.crop_id for segment in self.segments]
         if len(crops) != len(set(crops)):
             raise ValueError(f"rotation_id '{self.rotation_id}' repite cultivos: {crops}")
         return self
 
 
-class ModelAssumptions(BaseModel):
+class KernelAssumptions(BaseModel):
     """Supuestos explícitos del balance (D1–D6). Ninguno vive en las ecuaciones."""
 
     model_config = ConfigDict(extra="forbid", frozen=True)
@@ -429,58 +429,4 @@ class RotationLibrary(BaseModel):
 
     version: str
     retrieved: str | None = None
-    rotations: list[RotationSchedule]
-
-
-# --------------------------------------------------------------------------- #
-# Salidas
-# --------------------------------------------------------------------------- #
-
-
-class DailyRecord(BaseModel):
-    """Un día del balance hídrico. Equivale a una fila del spreadsheet FAO-56 (Eq. 85)."""
-
-    model_config = ConfigDict(extra="forbid", frozen=True)
-
-    date: date
-    crop_id: str | None = None
-    stage: Literal["ini", "dev", "mid", "late", "fallow"] | None = None
-    kc: float = Field(ge=0, le=3)
-    et0_mm: float = Field(ge=0, description="ET0 [mm/día]")
-    etc_mm: float = Field(ge=0, description="ETc = Kc·ET0 [mm/día] (Eq. 58)")
-    ks: float = Field(1.0, ge=0, le=1, description="Ks [0-1] (Eq. 84)")
-    etc_adj_mm: float = Field(ge=0, description="ETc ajustada por estrés [mm/día] (Eq. 81)")
-    rain_mm: float = Field(0.0, ge=0)
-    runoff_mm: float = Field(0.0, ge=0)
-    irrigation_mm: float = Field(0.0, ge=0)
-    deep_percolation_mm: float = Field(0.0, ge=0)
-    depletion_mm: float = Field(ge=0, description="Dr al final del día [mm] (Eq. 85)")
-    taw_mm: float = Field(ge=0, description="Agua total disponible [mm] (Eq. 82)")
-    raw_mm: float = Field(ge=0, description="Agua fácilmente disponible [mm] (Eq. 83)")
-
-
-class Metrics(BaseModel):
-    """Métricas de una corrida. Todos los campos admiten ``null`` en el contrato."""
-
-    model_config = ConfigDict(extra="forbid", frozen=True)
-
-    crop_water_demand_mm: float | None = Field(None, ge=0)
-    modeled_water_deficit_mm: float | None = None
-    water_stress_days: int | None = Field(None, ge=0)
-    irrigation_requirement_mm: float | None = Field(None, ge=0)
-
-
-class SimulationResult(BaseModel):
-    """Salida de ``simulate_rotation`` (esquema 11.5 + métricas de D1)."""
-
-    model_config = ConfigDict(extra="forbid", frozen=True)
-
-    rotation_id: str
-    scenario_id: str
-    mode: Literal["rainfed", "managed"] = "rainfed"
-    metrics: Metrics
-    daily_balance: list[DailyRecord] = Field(default_factory=list)
-    assumptions: list[str] = Field(default_factory=list)
-    source_refs: list[str] = Field(default_factory=list)
-    warnings: list[str] = Field(default_factory=list)
-    model_version: str = "kernel-0.1.0"
+    rotations: list[RotationTemplate]

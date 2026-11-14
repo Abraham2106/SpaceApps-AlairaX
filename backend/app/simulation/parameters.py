@@ -12,7 +12,7 @@ from typing import Any
 
 import yaml
 
-from app.simulation.contract import CropLibrary, RotationLibrary
+from backend.app.simulation.contract import CropLibrary, RotationLibrary
 
 
 def _read_yaml(path: str | Path) -> dict[str, Any]:
