@@ -18,6 +18,7 @@ from backend.app.simulation.kernel import (
     _default_crops, scale_stage_days, simulate_rotation, simulate_rotation_detailed,
     template_rotation,
 )
+from backend.app.simulation.contract import CropLibrary, CropParameters
 from scripts.export_contracts import make_fixture
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -200,23 +201,86 @@ class LeapSeasonTests(unittest.TestCase):
         self.assertIsNotNone(rice['crop_water_demand_mm'])
 
 
-class AntHandCalculatedCasesTests(unittest.TestCase):
-    """TODO(Ant, tarea 2.4): codificar aquí los 3 casos hechos a mano de research/qa_cases.md.
+def _hand_case(rain, kc, stage_days, root_depth_m, p, initial_fraction, crop_days):
+    """Corre el kernel con el cultivo de juguete de research/qa_cases.md (suelo θfc 0.30, θwp 0.15, ET0 5.0).
 
-    Quedan como xfail mientras ese archivo no exista; al codificarlos, quitar el decorador.
+    El segundo ciclo (melón, sin parámetros) cae fuera de la ventana de clima: solo cumple la
+    regla del contrato de que ``rice_melon`` lleve arroz y melón.
+    """
+    start = date(2020, 5, 1)
+    days = [ClimateDay(date=start + timedelta(days=i), precipitation_mm=value, tmin_c=22.0, tmax_c=33.0,
+                       relative_humidity_pct=65.0, wind_speed_2m_m_s=2.5, solar_radiation_mj_m2_day=20.0,
+                       et0_mm=ET0) for i, value in enumerate(rain)]
+    climate = ClimateSeason(year=2020, start=start, end=start + timedelta(days=len(rain) - 1), days=days)
+    toy = CropParameters(display_name='qa toy', kc_ini=kc[0], kc_mid=kc[1], kc_end=kc[2],
+                         stage_days=stage_days, root_depth_max_m=root_depth_m, p_depletion=p)
+    crops = CropLibrary(version='qa', crops={'qa_toy': toy, 'qa_null': CropParameters(display_name='sin parametros')})
+    rotation = RotationSchedule(rotation_id='rice_melon', calendar_status='provisional', cycles=[
+        CropCycle(crop_id='rice', sowing_date=start, harvest_date=start + timedelta(days=crop_days - 1),
+                  parameter_set_id='qa_toy'),
+        CropCycle(crop_id='melon', sowing_date=date(2021, 1, 1), harvest_date=date(2021, 1, 20),
+                  parameter_set_id='qa_null'),
+    ])
+    soil = SoilProfile(field_capacity_m3_m3=0.30, wilting_point_m3_m3=0.15, rooting_depth_m=None,
+                       source_refs=['qa'])
+    assumptions = ModelAssumptions(irrigation_mode='rainfed', irrigation_mm_by_date={},
+                                   initial_soil_water_fraction=initial_fraction, notes=[])
+    return simulate_rotation_detailed(climate=climate, soil=soil, rotation=rotation,
+                                      assumptions=assumptions, crops=crops)
+
+
+class AntHandCalculatedCasesTests(unittest.TestCase):
+    """Los 3 casos calculados a mano de research/qa_cases.md (tarea 2.4).
+
+    Los valores esperados salen de la aritmética exacta de ese documento (Eq. 66, 82-85 de FAO-56
+    y las convenciones D3/D5), no de la salida del kernel. Tolerancia: el kernel redondea a 4 decimales.
     """
 
-    @unittest.expectedFailure
+    def assert_series(self, result, field, expected):
+        actual = [row[field] for row in result['daily_balance']]
+        self.assertEqual(len(actual), len(expected))
+        for index, (got, want) in enumerate(zip(actual, expected)):
+            if want is None:
+                self.assertIsNone(got, f'día {index}')
+            else:
+                self.assertAlmostEqual(got, want, places=3, msg=f'{field}, día {index}')
+
     def test_case_1(self):
-        self.fail('pendiente de codificar desde research/qa_cases.md')
+        """Caso 1: interpolación de Kc por etapas, sin estrés, lluvia de 10 mm el día 3."""
+        result = _hand_case([0, 0, 10, 0, 0, 0, 0, 0], (0.4, 1.2, 0.6), [2, 2, 2, 2], 1.0, 0.5, 0.8, 8)
+        self.assert_series(result, 'crop_water_demand_mm', [2, 2, 2, 4, 6, 6, 6, 4.5])
+        self.assert_series(result, 'modeled_water_deficit_mm', [0] * 8)
+        self.assert_series(result, 'soil_water_storage_mm', [118, 116, 124, 120, 114, 108, 102, 97.5])
+        self.assert_series(result, 'water_stress', [False] * 8)
+        self.assertAlmostEqual(result['metrics']['crop_water_demand_mm'], 32.5, places=3)
+        self.assertAlmostEqual(result['metrics']['modeled_water_deficit_mm'], 0.0, places=3)
+        self.assertEqual(result['metrics']['water_stress_days'], 0)
 
-    @unittest.expectedFailure
     def test_case_2(self):
-        self.fail('pendiente de codificar desde research/qa_cases.md')
+        """Caso 2: Ks < 1 (Eq. 84), escorrentía D3 con 80 mm y percolación profunda."""
+        result = _hand_case([0, 0, 0, 0, 80, 0], (1.0, 1.0, 1.0), [2, 1, 2, 1], 0.4, 0.5, 0.6, 6)
+        self.assert_series(result, 'crop_water_demand_mm', [5] * 6)
+        self.assert_series(result, 'modeled_water_deficit_mm',
+                           [0, 0, 2 / 3, 25 / 18, 215 / 108, 0])
+        self.assert_series(result, 'soil_water_storage_mm', [31, 26, 65 / 3, 325 / 18, 60, 55])
+        self.assert_series(result, 'water_stress', [False, False, True, True, True, False])
+        self.assertAlmostEqual(result['metrics']['crop_water_demand_mm'], 30.0, places=3)
+        self.assertAlmostEqual(result['metrics']['modeled_water_deficit_mm'], 437 / 108, places=3)
+        self.assertEqual(result['metrics']['water_stress_days'], 3)
 
-    @unittest.expectedFailure
     def test_case_3(self):
-        self.fail('pendiente de codificar desde research/qa_cases.md')
+        """Caso 3: cambio a barbecho con reescalado de Dr por Zr (D5), piso en 0 mm y percolación."""
+        result = _hand_case([0, 20, 0, 0, 0, 30, 0], (0.8, 0.8, 0.8), [1, 1, 1, 1], 0.6, 0.5, 0.5, 4)
+        self.assert_series(result, 'crop_water_demand_mm', [4, 4, 4, 4, 0.75, 0.75, 0.75])
+        self.assert_series(result, 'modeled_water_deficit_mm', [0, 16 / 45, 0, 0, 0, 0, 0])
+        self.assert_series(result, 'soil_water_storage_mm',
+                           [41, 2581 / 45, 2401 / 45, 2221 / 45, 11.588889, 22.5, 21.75])
+        self.assert_series(result, 'water_stress', [False, True, False, False, None, None, None])
+        # Solo cuentan los 4 días de cultivo; el barbecho (0.75 mm/día) no suma a las métricas.
+        self.assertAlmostEqual(result['metrics']['crop_water_demand_mm'], 16.0, places=3)
+        self.assertAlmostEqual(result['metrics']['modeled_water_deficit_mm'], 16 / 45, places=3)
+        self.assertEqual(result['metrics']['water_stress_days'], 1)
+        self.assertTrue(any('reescalado' in w for w in result['warnings']))
 
 
 @unittest.skipUnless(ET0_FILE.exists() and CLIMATE_DIR.exists(), 'datos POWER procesados no disponibles')

@@ -1,0 +1,370 @@
+{
+ "version": "0.1.0",
+ "generado": "2026-11-14",
+ "nota": "Todo valor sin fuente primaria verificable figura como parcial o no verificado; null = sin fuente.",
+ "filas": [
+  {
+   "fuente": "FAO-56 Tabla 12",
+   "dato": "rice Kc ini/mid/end",
+   "valor": [
+    1.05,
+    1.2,
+    0.9
+   ],
+   "fecha_o_version": "1998",
+   "unidad": "adimensional",
+   "confiabilidad": "alta (fuente primaria)",
+   "url": "https://www.fao.org/3/x0490e/x0490e0b.htm",
+   "estado": "verificado en fuente (paddy; upland no cubierto)"
+  },
+  {
+   "fuente": "FAO-56 Tabla 11",
+   "dato": "rice duracion de etapas",
+   "valor": [
+    30,
+    30,
+    60,
+    30
+   ],
+   "fecha_o_version": "1998",
+   "unidad": "dias",
+   "confiabilidad": "alta, no local",
+   "url": "https://www.fao.org/3/x0490e/x0490e0b.htm",
+   "estado": "parcial: fila Mediterranea, no Guanacaste"
+  },
+  {
+   "fuente": "FAO-56 Tabla 22",
+   "dato": "rice Zr max",
+   "valor": 1.0,
+   "fecha_o_version": "1998",
+   "unidad": "m",
+   "confiabilidad": "alta",
+   "url": "https://www.fao.org/3/x0490e/x0490e0e.htm",
+   "estado": "parcial (extremo superior del rango, nota 1)"
+  },
+  {
+   "fuente": "FAO-56 Tabla 22",
+   "dato": "rice p",
+   "valor": 0.2,
+   "fecha_o_version": "1998",
+   "unidad": "fraccion de TAW",
+   "confiabilidad": "alta (arroz: 'de saturacion')",
+   "url": "https://www.fao.org/3/x0490e/x0490e0e.htm",
+   "estado": "parcial"
+  },
+  {
+   "fuente": "FAO-56 Tabla 12",
+   "dato": "melon Kc ini/mid/end",
+   "valor": [
+    0.5,
+    1.05,
+    0.75
+   ],
+   "fecha_o_version": "1998",
+   "unidad": "adimensional",
+   "confiabilidad": "alta (fuente primaria)",
+   "url": "https://www.fao.org/3/x0490e/x0490e0b.htm",
+   "estado": "parcial (celda Kc ini de imagen para melon, cowpea, sorghum: solo valor de grupo)"
+  },
+  {
+   "fuente": "FAO-56 Tabla 11",
+   "dato": "melon duracion de etapas",
+   "valor": [
+    25,
+    35,
+    40,
+    20
+   ],
+   "fecha_o_version": "1998",
+   "unidad": "dias",
+   "confiabilidad": "alta, no local",
+   "url": "https://www.fao.org/3/x0490e/x0490e0b.htm",
+   "estado": "parcial: fila Mediterranea, no Guanacaste"
+  },
+  {
+   "fuente": "FAO-56 Tabla 22",
+   "dato": "melon Zr max",
+   "valor": 1.5,
+   "fecha_o_version": "1998",
+   "unidad": "m",
+   "confiabilidad": "alta",
+   "url": "https://www.fao.org/3/x0490e/x0490e0e.htm",
+   "estado": "parcial (extremo superior del rango, nota 1)"
+  },
+  {
+   "fuente": "FAO-56 Tabla 22",
+   "dato": "melon p",
+   "valor": 0.4,
+   "fecha_o_version": "1998",
+   "unidad": "fraccion de TAW",
+   "confiabilidad": "alta",
+   "url": "https://www.fao.org/3/x0490e/x0490e0e.htm",
+   "estado": "verificado en fuente"
+  },
+  {
+   "fuente": "FAO-56 Tabla 12",
+   "dato": "cowpea Kc ini/mid/end",
+   "valor": [
+    0.4,
+    1.05,
+    0.6
+   ],
+   "fecha_o_version": "1998",
+   "unidad": "adimensional",
+   "confiabilidad": "alta (fuente primaria)",
+   "url": "https://www.fao.org/3/x0490e/x0490e0b.htm",
+   "estado": "parcial (celda Kc ini de imagen para melon, cowpea, sorghum: solo valor de grupo)"
+  },
+  {
+   "fuente": "FAO-56 Tabla 11",
+   "dato": "cowpea duracion de etapas",
+   "valor": [
+    20,
+    30,
+    30,
+    20
+   ],
+   "fecha_o_version": "1998",
+   "unidad": "dias",
+   "confiabilidad": "alta, no local",
+   "url": "https://www.fao.org/3/x0490e/x0490e0b.htm",
+   "estado": "parcial: fila Mediterranea, no Guanacaste"
+  },
+  {
+   "fuente": "FAO-56 Tabla 22",
+   "dato": "cowpea Zr max",
+   "valor": 1.0,
+   "fecha_o_version": "1998",
+   "unidad": "m",
+   "confiabilidad": "alta",
+   "url": "https://www.fao.org/3/x0490e/x0490e0e.htm",
+   "estado": "parcial (extremo superior del rango, nota 1)"
+  },
+  {
+   "fuente": "FAO-56 Tabla 22",
+   "dato": "cowpea p",
+   "valor": 0.45,
+   "fecha_o_version": "1998",
+   "unidad": "fraccion de TAW",
+   "confiabilidad": "alta",
+   "url": "https://www.fao.org/3/x0490e/x0490e0e.htm",
+   "estado": "verificado en fuente"
+  },
+  {
+   "fuente": "FAO-56 Tabla 12",
+   "dato": "sorghum Kc ini/mid/end",
+   "valor": [
+    0.3,
+    1.05,
+    0.55
+   ],
+   "fecha_o_version": "1998",
+   "unidad": "adimensional",
+   "confiabilidad": "alta (fuente primaria)",
+   "url": "https://www.fao.org/3/x0490e/x0490e0b.htm",
+   "estado": "parcial (celda Kc ini de imagen para melon, cowpea, sorghum: solo valor de grupo)"
+  },
+  {
+   "fuente": "FAO-56 Tabla 11",
+   "dato": "sorghum duracion de etapas",
+   "valor": [
+    20,
+    35,
+    40,
+    30
+   ],
+   "fecha_o_version": "1998",
+   "unidad": "dias",
+   "confiabilidad": "alta, no local",
+   "url": "https://www.fao.org/3/x0490e/x0490e0b.htm",
+   "estado": "parcial: fila Mediterranea, no Guanacaste; suma 125 d vs 130 d citado: revisar"
+  },
+  {
+   "fuente": "FAO-56 Tabla 22",
+   "dato": "sorghum Zr max",
+   "valor": 2.0,
+   "fecha_o_version": "1998",
+   "unidad": "m",
+   "confiabilidad": "alta",
+   "url": "https://www.fao.org/3/x0490e/x0490e0e.htm",
+   "estado": "parcial (extremo superior del rango, nota 1)"
+  },
+  {
+   "fuente": "FAO-56 Tabla 22",
+   "dato": "sorghum p",
+   "valor": 0.55,
+   "fecha_o_version": "1998",
+   "unidad": "fraccion de TAW",
+   "confiabilidad": "alta",
+   "url": "https://www.fao.org/3/x0490e/x0490e0e.htm",
+   "estado": "verificado en fuente"
+  },
+  {
+   "fuente": "Jagadish et al. 2007 via Shrestha et al. 2022",
+   "dato": "rice heat_threshold_c",
+   "valor": 35.0,
+   "fecha_o_version": "2022",
+   "unidad": "grados C",
+   "confiabilidad": "media, cita secundaria",
+   "url": "https://doi.org/10.3389/fpls.2022.1050599",
+   "estado": "parcial: aplica a antesis"
+  },
+  {
+   "fuente": "crops.yaml",
+   "dato": "mucuna/canavalia todos los parametros",
+   "valor": null,
+   "fecha_o_version": "0.1.0",
+   "unidad": "-",
+   "confiabilidad": "-",
+   "url": null,
+   "estado": "null: sin fuente"
+  },
+  {
+   "fuente": "crops.yaml",
+   "dato": "melon/cowpea/sorghum heat_threshold_c",
+   "valor": null,
+   "fecha_o_version": "0.1.0",
+   "unidad": "grados C",
+   "confiabilidad": "-",
+   "url": null,
+   "estado": "null: sin fuente"
+  },
+  {
+   "fuente": "rotations.yaml",
+   "dato": "fechas de siembra (rice 05-15, melon 12-01, cowpea 10-15, sorghum 10-15)",
+   "valor": "ver YAML",
+   "fecha_o_version": "0.1.0",
+   "unidad": "MM-DD",
+   "confiabilidad": "baja: por defecto, sin productores",
+   "url": null,
+   "estado": "no verificado; sin solape (el arroz de 150 d termina el 11-oct); antes 06-01 y 10-01 se solapaban"
+  },
+  {
+   "fuente": "Manual FAO de riego No. 3 cap. 2",
+   "dato": "percolacion arroz inundado",
+   "valor": [
+    4,
+    6,
+    8
+   ],
+   "fecha_o_version": "-",
+   "unidad": "mm/dia",
+   "confiabilidad": "media (URL por confirmar)",
+   "url": null,
+   "estado": "parcial: capitulo posterior da 2/5/8; campo en Tailandia 0-3"
+  },
+  {
+   "fuente": "Manual FAO de riego No. 3 cap. 2",
+   "dato": "rangos de ETc estacional (arroz 450-700, melon 400-600, sorgo 450-650)",
+   "valor": null,
+   "fecha_o_version": "-",
+   "unidad": "mm/ciclo",
+   "confiabilidad": "media",
+   "url": null,
+   "estado": "parcial; la etiqueta 'Tabla 13' del kernel se corrigió a 'cap. 2'"
+  },
+  {
+   "fuente": "NASA POWER daily AG",
+   "dato": "T2M, T2M_MAX, T2M_MIN, PRECTOTCORR, humedad, viento, radiacion en 10.55,-85.50",
+   "valor": "16.754 dias 1981-14/11/2026",
+   "fecha_o_version": "descarga 2026-11-14",
+   "unidad": "mm/d, grados C, MJ/m2/d, m/s",
+   "confiabilidad": "media: grilla 0.5 grados, modelada/reanalisis",
+   "url": "https://power.larc.nasa.gov/docs/services/api/",
+   "estado": "verificado en repo (cobertura); punto provisional; sin radiacion 1981-1983"
+  },
+  {
+   "fuente": "NASA POWER",
+   "dato": "elevacion del punto",
+   "valor": 94.64,
+   "fecha_o_version": "2026-11-14",
+   "unidad": "m",
+   "confiabilidad": "media",
+   "url": "https://power.larc.nasa.gov/docs/services/api/",
+   "estado": "verificado en la respuesta"
+  },
+  {
+   "fuente": "NASA POWER vs IMN AIDO Liberia",
+   "dato": "diferencia de lluvia anual",
+   "valor": {
+    "media": "+29.5 %",
+    "mediana": "+26 %"
+   },
+   "fecha_o_version": "2005-2025",
+   "unidad": "%",
+   "confiabilidad": "indicativa; estacion puntual vs pixel 0.5 grados",
+   "url": "https://www.imn.ac.cr",
+   "estado": "parcial: consistente con '+28 %' del pitch, cuya fuente no esta verificada"
+  },
+  {
+   "fuente": "IMN AIDO Liberia (10 35 36 N, 85 32 40 W)",
+   "dato": "lluvia media anual",
+   "valor": 1545.9,
+   "fecha_o_version": "2005-2025",
+   "unidad": "mm/ano",
+   "confiabilidad": "alta (observada), estacion",
+   "url": "https://www.imn.ac.cr",
+   "estado": "verificado"
+  },
+  {
+   "fuente": "IMN",
+   "dato": "lluvia media anual 1,652.7 mm",
+   "valor": 1652.7,
+   "fecha_o_version": "-",
+   "unidad": "mm/ano",
+   "confiabilidad": "-",
+   "url": "https://www.imn.ac.cr",
+   "estado": "no verificado: no encontrada en fuente"
+  },
+  {
+   "fuente": "SoilGrids 2.0 (ISRIC)",
+   "dato": "wv0033 y wv1500 por 6 profundidades (÷1000)",
+   "valor": null,
+   "fecha_o_version": "descarga previa",
+   "unidad": "m3/m3",
+   "confiabilidad": "media: prediccion espacial 250 m, incertidumbre del modelo",
+   "url": "https://www.isric.org/explore/soilgrids",
+   "estado": "parcial: perfil hidraulico sin aprobar"
+  },
+  {
+   "fuente": "HLS (NASA)",
+   "dato": "imagen 30 m (uso previsto de contexto)",
+   "valor": null,
+   "fecha_o_version": "-",
+   "unidad": "-",
+   "confiabilidad": "alta resolucion, no usada en el balance",
+   "url": "https://hls.gsfc.nasa.gov/",
+   "estado": "no usado en calculos"
+  },
+  {
+   "fuente": "NOAA CPC ONI/RONI",
+   "dato": "anomalia ASO; fuertes Nino 1997, 2015, 2023",
+   "valor": "3 anios",
+   "fecha_o_version": "snapshot repo",
+   "unidad": "grados C",
+   "confiabilidad": "alta; ONI exploratorio, RONI oficial",
+   "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_v5.php",
+   "estado": "verificado en repo; version publicada por registrar"
+  },
+  {
+   "fuente": "Proyecto (decisions.md)",
+   "dato": "k=3 en Nino fuerte, k=5 en los demas",
+   "valor": null,
+   "fecha_o_version": "2026-11-14",
+   "unidad": "anios",
+   "confiabilidad": "decision de producto",
+   "url": "docs/decisions.md",
+   "estado": "decision registrada"
+  },
+  {
+   "fuente": "Proyecto (kernel)",
+   "dato": "RO = 0.3 max(0, P-60); barbecho kc 0.15 Zr 0.15 p 0.5",
+   "valor": "-",
+   "fecha_o_version": "kernel v0.1",
+   "unidad": "mm",
+   "confiabilidad": "convencion, no FAO-56",
+   "url": null,
+   "estado": "supuesto declarado"
+  }
+ ]
+}
