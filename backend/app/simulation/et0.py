@@ -16,6 +16,9 @@ https://www.fao.org/3/x0490e/x0490e00.htm
 
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
+from datetime import date as _date
+
 import numpy as np
 
 #: Constante solar [MJ m-2 min-1] (FAO-56, cap. 3).
@@ -202,3 +205,39 @@ def et0_pm(
     numerator = 0.408 * delta * (rn - g) + gamma * (900.0 / (tmean + 273.0)) * u2 * (es - ea)
     denominator = delta + gamma * (1.0 + 0.34 * u2)
     return _out(np.maximum(numerator / denominator, 0.0))
+
+
+ET0_INPUT_FIELDS = (
+    "tmax_c",
+    "tmin_c",
+    "relative_humidity_pct",
+    "wind_speed_2m_m_s",
+    "solar_radiation_mj_m2_day",
+)
+
+
+def et0_for_days(
+    days: Sequence[Mapping[str, object]],
+    lat_deg: float,
+    elevation_m: float,
+) -> list[float | None]:
+    """ET0 FAO-56 PM para filas con los nombres del contrato ``ClimateDay``.
+
+    Cada fila trae ``date`` (``datetime.date`` o ISO ``YYYY-MM-DD``) y las
+    variables de ``ET0_INPUT_FIELDS``. Un día con cualquier variable nula
+    devuelve ``None``: no se rellena ni se sustituye por cero.
+    """
+    out: list[float | None] = []
+    for row in days:
+        values = [row.get(name) for name in ET0_INPUT_FIELDS]
+        if any(value is None for value in values):
+            out.append(None)
+            continue
+        day = row["date"]
+        if isinstance(day, str):
+            day = _date.fromisoformat(day)
+        tmax, tmin, rh, u2, rs = (float(value) for value in values)
+        out.append(
+            float(et0_pm(tmax, tmin, rh, u2, rs, lat_deg, elevation_m, day.timetuple().tm_yday))
+        )
+    return out
