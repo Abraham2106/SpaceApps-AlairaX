@@ -1,0 +1,56 @@
+# Rotaciones — PROVISIONAL (I2). Fechas por defecto, sin validar con productores.
+# Regla D6: siembras en MM-DD; la temporada agrícola va del 1 may al 30 abr, así
+# que los meses de enero a abril caen en el año N+1 de la temporada.
+# `verified: false` hasta que I3 confirme fechas y manejo con fuente local.
+
+version: "0.1.0"
+retrieved: "2026-11-14"
+
+rotations:
+
+  - rotation_id: rice_melon
+    name: "Arroz secano → Melón regado"
+    is_current: true
+    notes:
+      - "Rotación actual de referencia (is_current): el melón es el único segmento con riego."
+      - "El arroz se simula como secano (regime=upland, D2), no como paddy."
+    segments:
+      - crop_id: rice
+        sowing_mmdd: "06-01"
+        irrigated: false
+        regime: upland
+      - crop_id: melon
+        sowing_mmdd: "12-01"
+        irrigated: true
+        regime: upland
+
+  - rotation_id: rice_legume
+    name: "Arroz secano → Caupí de cobertura (secano)"
+    is_current: false
+    notes:
+      - "La leguminosa se siembra al 15-10, tras la cosecha de arroz, y queda en secano."
+      - "El YAML de cultivos no tiene parámetros FAO-56 para mucuna ni canavalia (null); usar cowpea."
+    segments:
+      - crop_id: rice
+        sowing_mmdd: "06-01"
+        irrigated: false
+        regime: upland
+      - crop_id: cowpea
+        sowing_mmdd: "10-15"
+        irrigated: false
+        regime: upland
+
+  - rotation_id: rice_sorghum
+    name: "Arroz secano → Sorgo forrajero (secano)"
+    is_current: false
+    notes:
+      - "El sorgo se siembra al 01-10 en secano; no se riega ningún segmento."
+    segments:
+      - crop_id: rice
+        sowing_mmdd: "06-01"
+        irrigated: false
+        regime: upland
+      - crop_id: sorghum
+        sowing_mmdd: "10-01"
+        irrigated: false
+        regime: upland
