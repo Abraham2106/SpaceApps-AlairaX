@@ -346,17 +346,16 @@ for (const [name, path] of views) {
   }
 }
 
-test("la ficha de imagen nombra proveedor, fecha y resolución", async ({ page }) => {
-  await page.goto("/#/");
+test("la ficha de imagen muestra la fuente y permite elegir la fecha NASA", async ({ page }) => {
+  await page.goto("/#/mapa");
   const badge = page.getByRole("group", { name: "Procedencia de la imagen" });
-  await expect(badge).toContainText("Esri World Imagery");
-  await expect(badge).toContainText("fecha no publicada");
+  await expect(badge).toContainText("Imagen satelital · Esri");
   await expect(badge.getByLabel("Fecha de la imagen NASA")).toHaveCount(0);
   await expect(page.locator(".attrib")).toBeAttached();
 
-  await page.goto("/#/?s=modis&i=2025-06-01");
+  await page.goto("/#/mapa?s=modis&i=2025-06-01");
   await expect(badge).toHaveAttribute("data-source", "modis");
-  await expect(badge).toContainText("MODIS Terra · 250 m");
+  await expect(badge).toContainText("NASA · MODIS Terra");
   const date = badge.getByLabel("Fecha de la imagen NASA");
   await expect(date).toHaveValue("2025-06-01");
   await date.fill("2024-03-12");

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useRecentSeasons } from "../data/recent";
+import { QueryState } from "./QueryState";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Figure, SoilChart, StatusPill, conditionColor } from "./Instrument";
 import { formatValue } from "../lib/format";
@@ -6,6 +8,12 @@ import { ROTATION_ORDER, readingMetric, rotationName } from "../lib/plain";
 import { METRIC_IDS, type CompareResponse, type Lang, type MetricId, type RotationId } from "../lib/types";
 
 const DAY = 86_400_000;
+
+function periodLabel(start: string, end: string, lang: Lang) {
+  return new Intl.DateTimeFormat(lang === "es" ? "es-CR" : "en-US", {
+    day: "numeric", month: "short", year: "numeric", timeZone: "UTC",
+  }).formatRange(new Date(start), new Date(end));
+}
 
 function YearSelect({ years, year, onChange, label }: { years: number[]; year: number | undefined; onChange: (year: number) => void; label: string }) {
   if (years.length === 0) return null;
@@ -20,10 +28,11 @@ export function SoilStorageCard({ compare, lang }: { compare: CompareResponse; l
   const es = lang === "es";
   const [pickedYear, setPickedYear] = useState<number>();
   const [pickedRotation, setPickedRotation] = useState(compare.baseline_rotation_id);
-  const years = compare.analog_years.map(({ year }) => year).sort((a, b) => a - b);
+  const recent = useRecentSeasons();
+  const years = recent.data?.seasons.map(({ year }) => year).sort((a, b) => b - a) ?? [];
   const year = pickedYear !== undefined && years.includes(pickedYear) ? pickedYear : years[0];
-  const rows = compare.rotations.find(({ rotation_id }) => rotation_id === pickedRotation)?.runs
-    .find((run) => run.year === year)?.daily_balance ?? [];
+  const season = recent.data?.seasons.find((item) => item.year === year);
+  const rows = season?.runs.find(({ rotation_id }) => rotation_id === pickedRotation)?.daily_balance ?? [];
   const daily = rows.map((row) => ({ date: row.date, value: row.soil_water_storage_mm, status: row.water_stress }));
   const canDraw = daily.some(({ value }) => value !== null);
   const stressDays = daily.filter(({ status }) => status === true).length;
@@ -41,7 +50,9 @@ export function SoilStorageCard({ compare, lang }: { compare: CompareResponse; l
         </div>
       </CardHeader>
       <CardContent>
-        {canDraw ? <SoilChart rows={daily} lang={lang} /> : <p className="insight-caption">{es ? "No hay balance diario para esta selección." : "Daily balance is unavailable for this selection."}</p>}
+        <QueryState pending={recent.isPending} error={recent.isError} onRetry={() => recent.refetch()} lang={lang} />
+        {season && <p className="insight-caption">{periodLabel(season.start, season.end, lang)}</p>}
+        {canDraw ? <SoilChart rows={daily} lang={lang} /> : null}
         <p className="insight-caption soil-key">
           <span><i data-tone="ok" />{es ? "Sin estrés" : "No stress"}</span>
           <span><i data-tone="stress" />{es ? `Estrés hídrico · ${stressDays} días` : `Water stress · ${stressDays} days`}</span>
@@ -59,11 +70,13 @@ export function WeeklyHeatmap({ compare, lang }: { compare: CompareResponse; lan
   const es = lang === "es";
   const [chosenYear, setChosenYear] = useState<number>();
   const [chosenWeek, setChosenWeek] = useState(0);
-  const years = compare.analog_years.map(({ year }) => year).sort((a, b) => a - b);
+  const recent = useRecentSeasons();
+  const years = recent.data?.seasons.map(({ year }) => year).sort((a, b) => b - a) ?? [];
   const year = chosenYear !== undefined && years.includes(chosenYear) ? chosenYear : years[0];
-  const runs = compare.rotations.map(({ rotation_id, runs }) => ({
+  const season = recent.data?.seasons.find((item) => item.year === year);
+  const runs = compare.rotations.map(({ rotation_id }) => ({
     id: rotation_id,
-    rows: runs.find((run) => run.year === year)?.daily_balance ?? [],
+    rows: season?.runs.find((run) => run.rotation_id === rotation_id)?.daily_balance ?? [],
   }));
   const dates = runs.flatMap(({ rows }) => rows.map(({ date }) => date)).sort();
   const first = dates[0];
@@ -96,7 +109,9 @@ export function WeeklyHeatmap({ compare, lang }: { compare: CompareResponse; lan
           onChange={(value) => { setChosenYear(value); setChosenWeek(0); }} />
       </CardHeader>
       <CardContent>
-        {count === 0 ? <p className="insight-caption">{es ? "Este año no tiene datos diarios." : "Daily data is unavailable for this year."}</p> : (
+        <QueryState pending={recent.isPending} error={recent.isError} onRetry={() => recent.refetch()} lang={lang} />
+        {season && <p className="insight-caption">{periodLabel(season.start, season.end, lang)}</p>}
+        {count > 0 ? (
           <>
             <div className="heat-grid">
               {values.map(({ id, totals }, index) => (
@@ -129,7 +144,7 @@ export function WeeklyHeatmap({ compare, lang }: { compare: CompareResponse; lan
               {es ? `0–${Math.ceil(limit)} mm por semana · gris: sin dato` : `0–${Math.ceil(limit)} mm per week · gray: no data`}
             </p>
           </>
-        )}
+        ) : null}
       </CardContent>
     </Card>
   );

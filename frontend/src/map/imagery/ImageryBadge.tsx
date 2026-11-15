@@ -2,17 +2,10 @@ import { CalendarDays } from "lucide-react";
 import { translate, type MessageKey } from "../../lib/i18n";
 import { useInstrument } from "../../store";
 import { MODIS_FIRST_DATE, formatImageryDate, isIsoDay, latestImageryDate } from "./catalog";
-import type { HlsStatus, ImageryChoice } from "./selectSource";
-
-const HLS_NOTE: Partial<Record<HlsStatus, MessageKey>> = {
-  too_recent: "imagery.hlsTooRecent",
-  before_mission: "imagery.hlsBeforeMission",
-  failed: "imagery.hlsFailed",
-};
+import type { ImageryChoice } from "./selectSource";
 
 /**
- * Ficha de procedencia: siempre dice de quién es la imagen, qué resolución tiene
- * y de qué día es, o que el proveedor no publica la fecha.
+ * Compact source credit. Product details are available through the source panel.
  */
 export function ImageryBadge({ choice }: { choice: ImageryChoice }) {
   const lang = useInstrument((state) => state.lang);
@@ -29,7 +22,6 @@ export function ImageryBadge({ choice }: { choice: ImageryChoice }) {
         : choice.primary === "hls"
           ? choice.layers.includes("modis") ? "imagery.hlsOverModis" : "imagery.hls"
           : "imagery.modis";
-  const hlsNote = HLS_NOTE[choice.hls];
   return (
     <div className="imagery-badge" role="group" aria-label={translate(lang, "imagery.label")} data-source={choice.primary}>
       <span className="imagery-badge-text">{translate(lang, summary, { date: formatImageryDate(imageryDate, lang) })}</span>
@@ -48,7 +40,6 @@ export function ImageryBadge({ choice }: { choice: ImageryChoice }) {
           />
         </label>
       ) : null}
-      {hlsNote && nasaDated ? <span className="imagery-note" role="status">{translate(lang, hlsNote)}</span> : null}
     </div>
   );
 }

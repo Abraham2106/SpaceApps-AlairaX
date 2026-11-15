@@ -14,6 +14,17 @@ Niño fuerte, Neutro y Niña usan abril–octubre y ONI de agosto a octubre para
 
 ## Reproducción
 
+Los gráficos de agua en el suelo y déficit semanal usan
+`frontend/public/data/recent-seasons.json`, generado por
+`python -m scripts.export_recent_seasons`. El selector ofrece los años
+calendario 2022–2026, empezando por 2026. Las corridas recientes usan el mismo
+suelo y manejo del piloto, con un periodo de inicialización desde mayo del
+año anterior. Se publica únicamente enero–diciembre del año elegido.
+Para 2026 el corte de datos de NASA POWER es el 12 de noviembre.
+Los archivos actualizados de POWER para 2025 y 2026 están en
+`datasets/processed/recent-climate/`. El catálogo de análogos sigue
+alimentando las comparaciones históricas entre rotaciones.
+
 Desde la raíz, con los insumos del repo y las dependencias de Python y frontend instaladas:
 
 ```powershell
