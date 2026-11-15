@@ -76,12 +76,22 @@ def select_scenario(candidates: list[SeasonFeatures], scenario_id: str, *,
     if len({row.year for row in history}) != len(history):
         raise ValueError('one historical row per year is required')
     if scenario_id == 'like_2026':
-        if tracking_2026 is None or tracking_2026.year != 2026:
-            raise ValueError('like_2026 requires an actual 2026 feature window, never an invented target')
-        result = find_analogs(history, tracking_2026, k=k, weights=weights)
-        result.update(scenario_id=scenario_id, target_kind='tracking_window',
-                      phase_rule=None, warnings=['2026 is tracking only, never an analog.'])
-        return result
+        return _select_tracking_analogs(history, tracking_2026, k=k, weights=weights)
+    return _select_oni_analogs(history, scenario_id, k=k, weights=weights)
+
+
+def _select_tracking_analogs(history: list[SeasonFeatures], tracking_2026: SeasonFeatures | None, *,
+                             k: int, weights: dict[str, float] | None) -> dict:
+    if tracking_2026 is None or tracking_2026.year != 2026:
+        raise ValueError('like_2026 requires an actual 2026 feature window, never an invented target')
+    result = find_analogs(history, tracking_2026, k=k, weights=weights)
+    result.update(scenario_id='like_2026', target_kind='tracking_window',
+                  phase_rule=None, warnings=['2026 is tracking only, never an analog.'])
+    return result
+
+
+def _select_oni_analogs(history: list[SeasonFeatures], scenario_id: str, *,
+                        k: int, weights: dict[str, float] | None) -> dict:
     filters = {
         'strong_el_nino': (lambda row: row.oni >= 1.5, 'seasonal ONI >= 1.5 C'),
         'neutral': (lambda row: -0.5 < row.oni < 0.5, '-0.5 C < seasonal ONI < 0.5 C'),

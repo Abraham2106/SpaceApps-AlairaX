@@ -6,7 +6,7 @@ from hashlib import sha256
 import json
 
 from backend.app.api.schemas.contracts import (
-    AnalogYear, CompareRequest, CompareResponse, SimulationInput, SimulationResult,
+    REGIONAL_PILOT_WARNING, AnalogYear, CompareRequest, CompareResponse, SimulationInput, SimulationResult,
 )
 from backend.app.intelligence.counterfactual import compare_runs
 
@@ -15,6 +15,8 @@ def environment_fingerprint(simulation: SimulationInput) -> str:
     """Exclude rotation so alternative schedules share the same environment ID."""
     payload = simulation.model_dump(mode='json', by_alias=True)
     environment = {key: payload[key] for key in ('_mock', 'zona', 'climate', 'soil', 'assumptions')}
+    if simulation.regional_pilot:
+        environment['regional_pilot'] = True
     return sha256(json.dumps(environment, sort_keys=True, separators=(',', ':'),
                              allow_nan=False).encode()).hexdigest()
 
@@ -74,7 +76,8 @@ def execute_comparison(request: CompareRequest, analogs: list[AnalogYear],
         if (result.metrics.water_stress_days is not None and
                 result.metrics.water_stress_days > len(simulation.climate.days)):
             raise ValueError('water stress days exceed input climate duration')
-        result.warnings = list(dict.fromkeys(simulation.warnings + result.warnings))
+        pilot_warnings = [REGIONAL_PILOT_WARNING] if simulation.regional_pilot else []
+        result.warnings = list(dict.fromkeys(pilot_warnings + simulation.warnings + result.warnings))
         result.source_refs = list(dict.fromkeys(simulation.source_refs + result.source_refs))
         runs.append(result)
     return compare_runs(request, analogs, runs)

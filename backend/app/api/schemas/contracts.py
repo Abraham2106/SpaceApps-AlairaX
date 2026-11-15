@@ -9,6 +9,7 @@ NonNegative = Annotated[float, Field(ge=0)]
 RotationId = Literal['rice_melon', 'rice_legume', 'rice_sorghum']
 ScenarioId = Literal['strong_el_nino', 'neutral', 'la_nina', 'like_2026']
 METRICS = ('crop_water_demand_mm', 'modeled_water_deficit_mm', 'water_stress_days')
+REGIONAL_PILOT_WARNING = 'Piloto regional con clima histórico, suelo estimado y manejo de referencia. Requiere validación en finca.'
 
 
 class Contract(BaseModel):
@@ -128,6 +129,7 @@ class SimulationInput(Envelope):
     soil: SoilProfile
     rotation: RotationSchedule
     assumptions: ModelAssumptions
+    regional_pilot: bool = Field(default=False, strict=True)
 
     @model_validator(mode='after')
     def coverage_and_readiness(self):
@@ -137,8 +139,10 @@ class SimulationInput(Envelope):
         if any(not self.climate.start <= d <= self.climate.end
                for d in self.assumptions.irrigation_mm_by_date):
             raise ValueError('irrigation date outside climate coverage')
+        if self.regional_pilot and (self.mock or self.zona.validated or self.rotation.calendar_status != 'provisional'):
+            raise ValueError('regional pilot requires real climate, a reference point and a provisional calendar')
         if not self.mock:
-            if not self.zona.validated or self.rotation.calendar_status != 'confirmed':
+            if not self.regional_pilot and (not self.zona.validated or self.rotation.calendar_status != 'confirmed'):
                 raise ValueError('real simulation requires validated zone and confirmed calendar')
             if any(v is None for v in (self.soil.field_capacity_m3_m3,
                                        self.soil.wilting_point_m3_m3, self.soil.rooting_depth_m)):

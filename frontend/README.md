@@ -43,6 +43,7 @@ Están en `docs/ui-research.md` y `docs/ui-decisions.md`. Resumen: instrumento d
 | Cantones | geoBoundaries CRI ADM2 gbOpen, año representado 2020, geometría simplificada en este repo | CC0. Nombres con tilde de presentación; `sourceName` guarda el original. `Palmeras` se muestra como Palmares. |
 | Fotografía nítida | Esri World Imagery (Maxar, Earthstar Geographics) | Atribución visible. No es un producto NASA y no entra al modelo. |
 | Color real y mármol | NASA GIBS: MODIS Terra Corrected Reflectance True Color, 12 de marzo de 2024, y Blue Marble Next Generation | Imagen de contexto. Reconocimiento a NASA ESDIS. No entra al balance. |
+| Imagen de la portada | NASA GIBS WMS, Terra MODIS del 12 de marzo de 2024. Recorte EPSG:4326 entre −86.42°, 9.53° y −84.65°, 11.31° | Fotografía contextual. Los límites usan geoBoundaries y el marcador usa las coordenadas del catálogo. |
 | Relieve | Teselas terrarium de AWS. La tesela regional cita GMTED2010 y ETOPO1 | Solo iluminación. |
 | Calles y nombres | OpenFreeMap, dato OpenStreetMap | ODbL. No se usa el servidor oficial `tile.openstreetmap.org`. La atribución aparece con la capa. |
 
@@ -50,4 +51,4 @@ El clima del pipeline real, cuando hay corrida, es NASA POWER (comunidad AG). Lo
 
 ## Librerías
 
-React, TypeScript, Vite, MapLibre GL JS, Zustand, TanStack Query, Zod, Vitest, Testing Library, Playwright, Lucide. Tipografías OFL: IBM Plex Sans, IBM Plex Mono, Source Serif 4. El repositorio es MIT. Esas licencias son compatibles.
+React, TypeScript, Vite, MapLibre GL JS, Zustand, TanStack Query, Zod, Vitest, Testing Library, Playwright, Lucide. Tipografías OFL: IBM Plex Sans e IBM Plex Mono. El repositorio es MIT. Esas licencias son compatibles.

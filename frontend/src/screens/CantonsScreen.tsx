@@ -71,7 +71,7 @@ export function CantonsScreen() {
                 </div>
               ) : null}
             </dl>
-            <Link className="detail-action" to={{ pathname: "/", search: mapParams.toString() }} onClick={() => selectOnly(plate.id)}>
+            <Link className="detail-action" to={{ pathname: "/mapa", search: mapParams.toString() }} onClick={() => selectOnly(plate.id)}>
               {translate(lang, "cantons.viewCantonOnMap")} <ArrowUpRight size={16} aria-hidden="true" />
             </Link>
           </div>

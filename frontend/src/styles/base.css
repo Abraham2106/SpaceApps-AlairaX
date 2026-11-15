@@ -4,10 +4,15 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.45;
   font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
+::selection { background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--ink); }
+input, textarea { caret-color: var(--accent); }
 button, input, select, textarea { font: inherit; color: inherit; }
 button, select {
   min-height: var(--hit);
@@ -19,19 +24,40 @@ button, select {
   transition:
     background-color var(--dur-fast) var(--ease),
     border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease),
     color var(--dur-fast) var(--ease);
 }
-button:hover, select:hover { border-color: var(--accent); }
+button:hover, select:hover { border-color: var(--line-strong); }
 button:active:not(:disabled) { transform: translateY(1px); }
 
-/* Una rotación = un color + un trazo. El color llega por --rot; el trazo vive en el SVG. */
+/* Native selects drawn as quiet pills with an authored chevron. */
+select {
+  appearance: none;
+  padding-inline-end: 30px;
+  background-color: var(--control);
+  border-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2362665f' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  font-weight: 500;
+}
+select:hover { background-color: var(--well-strong); border-color: transparent; }
+
 [data-rot="rice_melon"] { --rot: var(--rot-melon); }
 [data-rot="rice_legume"] { --rot: var(--rot-legume); }
 [data-rot="rice_sorghum"] { --rot: var(--rot-sorghum); }
 .rot-bg { background: var(--rot); }
 .rot-dot { stroke: var(--outline); }
-button:disabled { cursor: not-allowed; opacity: 0.6; }
+button:disabled { cursor: not-allowed; opacity: 0.5; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-a { color: inherit; }
+a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 img, svg { max-width: 100%; }
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
 
+* { scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

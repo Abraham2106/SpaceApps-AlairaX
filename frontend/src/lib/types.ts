@@ -111,7 +111,7 @@ export type Catalog = {
 };
 
 export type LoadedComparison = {
-  mode: "fixtures" | "live";
+  mode: "static" | "live";
   catalog: Catalog;
   compare: CompareResponse | null;
   httpStatus: number | null;

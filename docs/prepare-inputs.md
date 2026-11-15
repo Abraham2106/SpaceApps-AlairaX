@@ -14,7 +14,7 @@ python -m scripts.prepare_comparison --analogs datasets/processed/analogs/analog
 python -m scripts.run_comparison --analogs datasets/processed/analogs/analogos.json --scenario neutral --inputs datasets/processed/simulation-inputs-neutral.json --kernel backend.app.simulation.kernel:simulate_rotation --output frontend/public/data/compare-neutral.json
 ```
 
-Son comandos de integración: los nombres `reviewed-et0.json` y `comparison-setup.json` indican los artefactos que debe entregar el equipo, no archivos reales ya validados. El kernel también debe existir y estar revisado. Los análogos reales actuales están `unavailable` por ET0 pendiente; esta preparación se detiene mientras el escenario seleccionado no esté disponible.
+Son comandos de integración con rutas de ejemplo. La configuración precalculada, las rutas actuales y el proceso de regeneración del piloto están en [Piloto regional de Liberia](guanacaste-pilot.md). La preparación se detiene si el escenario seleccionado está indisponible.
 
 El tamaño del lote es **3 × k**, donde k procede del escenario seleccionado en `analogos.json`. No se fija un único tamaño para todos los escenarios: por ejemplo, si un escenario usa k=3 se generan 9 entradas, y si usa k=5 se generan 15. Cada año seleccionado requiere las tres rotaciones y su manejo explícito. El preparador no elige ni cambia k.
 
@@ -38,10 +38,11 @@ La preparación escribe el array de entradas y un archivo lateral `*.manifest.js
 | `soil` | `field_capacity_m3_m3`, `wilting_point_m3_m3`, `rooting_depth_m`, `source_refs` |
 | `rotations_by_year` | Objeto JSON cuyas claves son años y cuyos valores son arrays de tres `RotationSchedule` distintos |
 | `assumptions_by_year` | Objeto JSON cuyas claves son años y cuyos valores son `ModelAssumptions` |
+| `regional_pilot` | Activación explícita del piloto regional con clima real, punto de referencia y calendarios provisionales. Por defecto es `false`. |
 
 Las claves de año en JSON son cadenas, como `"2015"`; Pydantic las convierte a enteros en el modelo. Cada array de rotaciones contiene una vez `rice_melon`, `rice_legume` y `rice_sorghum`. Cada calendario debe listar arroz seguido de melón, leguminosa o sorgo, respectivamente, con siembra y cosecha válidas, sin solapamientos y dentro de la ventana de simulación.
 
-En una configuración real, `calendar_status` debe ser `confirmed` y cada ciclo necesita `parameter_set_id`. El manejo de cada año especifica `irrigation_mode`, `irrigation_mm_by_date`, `initial_soil_water_fraction` y `notes`. Un calendario de riego requiere `irrigation_mode=scheduled`; sus fechas deben quedar dentro de la serie. Los mismos supuestos de manejo se aplican a las tres alternativas de un año. El suelo también es común: las propiedades desconocidas permanecen `null` en los mocks y bloquean entradas reales.
+Para una simulación de finca se requiere una zona validada y `calendar_status=confirmed`. El piloto regional usa zona sin validación de finca, calendarios provisionales y una advertencia que acompaña las salidas. Cada ciclo con clima real requiere `parameter_set_id`. El manejo de cada año especifica `irrigation_mode`, `irrigation_mm_by_date`, `initial_soil_water_fraction` y `notes`. Para aportar fechas de riego se usa `irrigation_mode=scheduled` dentro de la cobertura climática. Las tres alternativas de un año comparten suelo completo y supuestos de manejo.
 
 El ejemplo sintético no propone una práctica agronómica ni un manejo de riego. Para extenderlo a otros años se deben aportar sus calendarios revisados; el preparador no desplaza las fechas de 2015 ni inventa fechas para años análogos.
 

@@ -23,9 +23,7 @@ export function MapLayers() {
   const toggleOverlay = useInstrument((state) => state.toggleOverlay);
   const [layersOpen, setLayersOpen] = useState(false);
 
-  const layerButtons = (
-    <>
-      {([
+  const basemapButtons = ([
         ["satellite", translate(lang, "mapLayers.photo")],
         ["modis", translate(lang, "mapLayers.nasa")],
         ["marble", translate(lang, "mapLayers.marble")],
@@ -33,12 +31,12 @@ export function MapLayers() {
         const Icon = ICONS[id];
         return (
           <button key={id} className="layer-btn" aria-pressed={basemap === id} onClick={() => setBasemap(id)}>
-            <Icon size={22} strokeWidth={1.5} aria-hidden />
+            <Icon size={20} strokeWidth={1.6} aria-hidden />
             {label}
           </button>
         );
-      })}
-      {([
+      });
+  const overlayButtons = ([
         ["cantons", translate(lang, "common.cantons")],
         ["hex", translate(lang, "mapLayers.mesh")],
         ["terrain", translate(lang, "mapLayers.relief")],
@@ -48,26 +46,30 @@ export function MapLayers() {
         const Icon = ICONS[id];
         return (
           <button key={id} className="layer-btn" aria-pressed={overlays[id]} onClick={() => toggleOverlay(id)}>
-            <Icon size={22} strokeWidth={1.5} aria-hidden />
+            <Icon size={20} strokeWidth={1.6} aria-hidden />
             {label}
           </button>
         );
-      })}
-    </>
-  );
+      });
 
   return (
     <>
-      <button className="layers-fab" type="button" aria-haspopup="dialog" onClick={() => setLayersOpen(true)}><Layers size={18} strokeWidth={1.5} aria-hidden /> {translate(lang, "mapLayers.layers")}</button>
-      <div className="hud right-hud hide-mobile" role="toolbar" aria-label={translate(lang, "mapLayers.layers")}>
-        {layerButtons}
-      </div>
+      <button className="layers-fab" type="button" aria-haspopup="dialog" onClick={() => setLayersOpen(true)}><Layers size={16} strokeWidth={1.8} aria-hidden /> {translate(lang, "mapLayers.layers")}</button>
       {layersOpen ? (
         <Dialog labelledBy="layers-title" onClose={() => setLayersOpen(false)}>
           <h2 id="layers-title">{translate(lang, "mapLayers.layers")}</h2>
-          <div className="layer-grid">{layerButtons}</div>
-          <p className="faint">{translate(lang, "mapLayers.eachHexagonCopiesSyntheticValue")}</p>
-          <button type="button" onClick={() => setLayersOpen(false)}>{translate(lang, "common.close")}</button>
+          <fieldset className="map-layer-group">
+            <legend>{lang === "es" ? "Mapa base" : "Basemap"}</legend>
+            <div className="layer-grid">{basemapButtons}</div>
+          </fieldset>
+          <fieldset className="map-layer-group">
+            <legend>{lang === "es" ? "Detalles del mapa" : "Map details"}</legend>
+            <div className="layer-grid">{overlayButtons}</div>
+          </fieldset>
+          {overlays.hex && <p className="faint">{translate(lang, "mapLayers.eachHexagonCopiesSyntheticValue")}</p>}
+          <div className="dialog-actions">
+            <button type="button" className="btn btn-primary" onClick={() => setLayersOpen(false)}>{translate(lang, "common.close")}</button>
+          </div>
         </Dialog>
       ) : null}
     </>

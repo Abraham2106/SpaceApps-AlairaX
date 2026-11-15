@@ -1,9 +1,12 @@
-/* Hoja de estilos, en el orden de la cascada. Los tokens de color, tipografía, radios y movimiento viven en tokens.css. */
-@import "./styles/tokens.css";
-@import "./styles/base.css";
-@import "./styles/shell.css";
-@import "./styles/map.css";
-@import "./styles/content.css";
-@import "./styles/charts.css";
-@import "./styles/field-pages.css";
-@import "./styles/responsive.css";
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+/* Existing application rules sit below Tailwind utilities in the cascade. */
+@import "./styles/tokens.css" layer(components);
+@import "./styles/base.css" layer(components);
+@import "./styles/shell.css" layer(components);
+@import "./styles/components.css" layer(components);
+@import "./styles/map.css" layer(components);
+@import "./styles/dashboard.css" layer(components);
+@import "./styles/charts.css" layer(components);
+@import "./styles/field-pages.css" layer(components);

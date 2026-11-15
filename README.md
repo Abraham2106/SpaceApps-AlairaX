@@ -1,5 +1,7 @@
 # NandaView · AlairaX
 
+El frontend incluye las cuatro comparaciones precalculadas del [piloto regional de Liberia](docs/guanacaste-pilot.md). El piloto usa clima histórico, suelo estimado y calendarios de referencia. La validación de finca sigue pendiente.
+
 La conexión con el kernel de Justin puede comprobarse con `python -m scripts.smoke_kernel`: genera un ejemplo de tres rotaciones y dos temporadas sintéticas usando el motor real. La [guía de integración](docs/kernel-integration.md) explica la prueba, las temporadas que cruzan año y la auditoría de calendarios.
 
 Comparación explicable de tres rotaciones agrícolas de Guanacaste bajo el mismo clima histórico: `rice_melon`, `rice_legume` y `rice_sorghum`.
@@ -21,7 +23,7 @@ Si ya tienes Python con Pydantic instalado, puedes usar `python` directamente.
 
 ## Entregas para el equipo
 
-- **Angelina:** `frontend/public/data/scenarios.json` enumera los cuatro archivos `compare-*.json`; `rotations.json` contiene los IDs comunes. Todos los datos de estos archivos son **sintéticos**, con `_mock: true`; la UI debe mostrar el aviso mock.
+- **Angelina:** `frontend/public/data/scenarios.json` enumera las cuatro comparaciones precalculadas; `rotations.json` contiene los IDs comunes. El mapa por cantón conserva su aviso de datos sintéticos.
 - **Justin:** modelos en `backend/app/api/schemas/contracts.py`, firma y unidades en [el contrato de integración](docs/contract-handoff.md). `execute_comparison()` en `backend/app/application/compare.py` recibe su callback `simulate_rotation(climate=..., soil=..., rotation=..., assumptions=...)`.
 - **Ant:** entregó la revisión de parámetros, matriz de fuentes, procedencia, casos QA y fichas de evidencia en `research/`. Faltan validar el punto de finca, perfil de agua útil del suelo, calendarios y la aprobación científica escrita. Las entradas reales rechazan estos campos pendientes.
 
@@ -47,7 +49,7 @@ Detalles: [ingesta y procedencia](docs/data-ingestion.md), [features y KNN](docs
 
 La selección usa tres análogos en Niño fuerte y cinco en los demás escenarios, según la [decisión explícita del equipo](docs/decisions.md). El tamaño de muestra y las advertencias acompañan los resultados.
 
-La descarga local ya contiene 16.754 días, 1981–14/11/2026, con 42 años completos de las seis variables (1984–2025). POWER no entregó radiación en 1981–1983. Las exclusiones y faltantes se conservan en QC. El pipeline real de análogos fue ejecutado y reporta `unavailable` por ET0 pendiente; sus archivos están en `datasets/processed/analogs/`.
+La descarga local ya contiene 16.754 días, 1981–14/11/2026, con 42 años completos de las seis variables (1984–2025). POWER no entregó radiación en 1981–1983. Las exclusiones y faltantes se conservan en QC. El catálogo de `datasets/processed/analogs/` tiene los cuatro escenarios del piloto. «Como 2026» usa abril–agosto por el faltante de radiación del 7 de septiembre.
 
 ## Comparación y exportación
 
@@ -59,7 +61,7 @@ Exportar ejecuciones precalculadas del kernel:
 python -m scripts.compare_results --request request.json --analogs analogs.json --runs runs.json --output frontend/public/data/compare-neutral.json
 ```
 
-El comando exige `--allow-mock` para exportar ejecuciones sintéticas. Generar ejemplos mock completos con `python -m scripts.export_contracts` sobrescribe los archivos de ejemplo y `frontend/public/data/`; úsalo solo para preparar o regenerar fixtures.
+El comando exige `--allow-mock` para exportar ejecuciones sintéticas. `python -m scripts.export_contracts` genera ejemplos y esquemas. Añadir `--frontend-fixtures` reemplaza las comparaciones estáticas con los fixtures de QA.
 
 `python -m scripts.prepare_comparison` arma las entradas del kernel desde el clima, ET0 revisada y una configuración explícita de suelo, calendarios y manejo por año. Guarda un manifiesto SHA-256 de las fuentes y rechaza destinos que sobrescriban entradas. El [formato y los comandos de integración](docs/prepare-inputs.md) incluyen un ejemplo sintético; los valores científicos reales los entrega el equipo.
 
@@ -159,7 +161,7 @@ Los 3 casos calculados a mano de Ant (`research/qa_cases.md`, tarea 2.4) pasan c
 
 KNN busca temporadas parecidas; 2026 sirve de seguimiento y nunca entra como análogo. Se comparan ventanas temporales completas y equivalentes. Los cuantiles representan variación entre análogos, no probabilidades de éxito ni intervalos de confianza. Se reportan métricas modeladas; no se infiere rendimiento, rentabilidad, ahorro demostrado ni una rotación ganadora.
 
-El demo científico real requiere integrar la ET0 y el balance FAO-56 de Justin, parámetros y calendarios revisados por Ant, y la UI de Angelina. Los fixtures no constituyen validación física ni de campo.
+El piloto ya integra ET₀, FAO-56, parámetros documentados y el frontend. La aplicación a una finca requiere confirmar suelo, calendario y manejo, y contrastar el modelo con observaciones locales.
 
 ## Uso de IA
 

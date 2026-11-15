@@ -290,6 +290,11 @@
       },
       "title": "Assumptions By Year",
       "type": "object"
+    },
+    "regional_pilot": {
+      "default": false,
+      "title": "Regional Pilot",
+      "type": "boolean"
     }
   },
   "required": [

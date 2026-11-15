@@ -33,3 +33,7 @@ El catálogo operativo se regeneró para abril–octubre con ONI ASO.
 Quedaron disponibles Niño fuerte, Neutro y Niña. «Como 2026» requiere
 recuperar la radiación del 7 de septiembre o acordar y documentar una
 ventana distinta.
+
+El [piloto regional](guanacaste-pilot.md) usa abril–agosto y ONI JJA para
+«Como 2026». Esa ventana conserva todos los días con datos completos hasta
+agosto. El faltante de septiembre sigue registrado en el artefacto de ET₀.

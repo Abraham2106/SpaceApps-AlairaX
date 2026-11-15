@@ -9,13 +9,18 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.testclient import TestClient
 
 from backend.app.api.main import PROCESSED, ROOT, create_app
-from backend.app.api.schemas.contracts import METRICS, CompareResponse, RotationId, ScenarioId
+from backend.app.api.schemas.contracts import METRICS, REGIONAL_PILOT_WARNING, CompareResponse, RotationId, ScenarioId
 
 
-def verify_result(payload, scenario_id, years):
+def verify_result(payload, scenario_id, years, *, regional_pilot=False):
     result = CompareResponse.model_validate(payload)
-    if result.mock or not result.zona.validated:
-        raise ValueError('expected a scientific result for a confirmed zone')
+    if result.mock:
+        raise ValueError('expected a calculation with historical climate data')
+    if regional_pilot:
+        if result.zona.validated or REGIONAL_PILOT_WARNING not in result.warnings:
+            raise ValueError('expected an explicitly labeled regional pilot')
+    elif not result.zona.validated:
+        raise ValueError('expected a confirmed zone')
     if result.scenario_id != scenario_id or [a.year for a in result.analog_years] != years:
         raise ValueError('scenario or analog years differ from the catalog')
     if {r.rotation_id for r in result.rotations} != set(get_args(RotationId)):
@@ -30,7 +35,7 @@ def verify_result(payload, scenario_id, years):
     return result
 
 
-def verify_release(client, dist):
+def verify_release(client, dist, *, regional_pilot=False):
     failures = []
     pages = None
     base = '/SpaceApps-AlairaX'
@@ -61,14 +66,14 @@ def verify_release(client, dist):
             continue
         try:
             years = [row['year'] for row in scenario['neighbors']]
-            actual = verify_result(response.json(), scenario_id, years)
+            actual = verify_result(response.json(), scenario_id, years, regional_pilot=regional_pilot)
             if pages is None:
                 print(f'{scenario_id}: API verified across 3 rotations × {len(years)} analogs')
                 continue
             published = pages.get(f'{base}/data/compare-{scenario_id}.json')
             if published.status_code != 200:
                 raise ValueError(f'published comparison returned HTTP {published.status_code}')
-            public = verify_result(published.json(), scenario_id, years)
+            public = verify_result(published.json(), scenario_id, years, regional_pilot=regional_pilot)
             # Timestamps reflect separate executions of the same input batch.
             exclude = {'generado': True, 'rotations': {'__all__': {
                 'runs': {'__all__': {'generado'}},
@@ -87,9 +92,10 @@ def main():
     parser.add_argument('--analogs', type=Path, default=PROCESSED / 'analogs' / 'analogos.json')
     parser.add_argument('--inputs-dir', type=Path, default=ROOT / 'outputs' / 'inputs')
     parser.add_argument('--dist', type=Path, default=ROOT / 'frontend' / 'dist')
+    parser.add_argument('--regional-pilot', action='store_true')
     args = parser.parse_args()
     client = TestClient(create_app(args.analogs, args.inputs_dir))
-    failures = verify_release(client, args.dist)
+    failures = verify_release(client, args.dist, regional_pilot=args.regional_pilot)
     for failure in failures:
         print(f'BLOCKED: {failure}')
     if not failures:

@@ -18,6 +18,7 @@ class ComparisonSetup(Envelope):
     soil: SoilProfile
     rotations_by_year: dict[int, list[RotationSchedule]]
     assumptions_by_year: dict[int, ModelAssumptions]
+    regional_pilot: bool = Field(default=False, strict=True)
 
 
 class ReviewedET0(Contract):
@@ -136,6 +137,7 @@ def prepare_inputs(analog_document: dict, scenario_id: ScenarioId,
                 mock=setup.mock, generado=datetime.now(timezone.utc), zona=setup.zona.model_copy(deep=True),
                 source_refs=sorted(sources), warnings=list(dict.fromkeys(warnings)),
                 scenario_id=scenario_id, climate=season.model_copy(deep=True), soil=setup.soil.model_copy(deep=True),
+                regional_pilot=setup.regional_pilot,
                 rotation=rotation.model_copy(deep=True),
                 assumptions=setup.assumptions_by_year[year].model_copy(deep=True)))
     return prepared

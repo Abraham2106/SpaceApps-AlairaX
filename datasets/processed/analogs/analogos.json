@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "_mock": false,
-  "generado": "2026-11-15T01:45:44.981007+00:00",
+  "generado": "2026-11-15T10:41:50.787933+00:00",
   "zona": {
     "id": "provisional-point",
     "name": "Provisional agricultural point, Guanacaste",
@@ -1611,11 +1611,242 @@
       ]
     },
     "like_2026": {
-      "status": "unavailable",
-      "reason": "like_2026 requires an actual 2026 feature window, never an invented target",
-      "k": 5,
+      "status": "available",
       "requested_k": 5,
-      "effective_k": null
+      "effective_k": 5,
+      "_mock": false,
+      "method": "weighted_standardized_euclidean",
+      "interpretation": "historical replay similarity; distances are not probabilities",
+      "k": 5,
+      "target": {
+        "year": 2026,
+        "start": "2026-04-01",
+        "end": "2026-08-31",
+        "precipitation_mm": 474.43,
+        "et0_mm": 807.7959999999999,
+        "tmax_mean_c": 34.06503267973856,
+        "heat_days": 48,
+        "oni": 1.8,
+        "heat_threshold_c": 35.0,
+        "oni_season": "JJA",
+        "mock": false
+      },
+      "candidate_years": [
+        1984,
+        1985,
+        1986,
+        1987,
+        1988,
+        1989,
+        1990,
+        1991,
+        1992,
+        1993,
+        1994,
+        1995,
+        1996,
+        1997,
+        1998,
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "weights": {
+        "precipitation_mm": 1.0,
+        "et0_mm": 1.0,
+        "tmax_mean_c": 1.0,
+        "heat_days": 1.0,
+        "oni": 1.0
+      },
+      "scaler": {
+        "mean": {
+          "precipitation_mm": 731.7935714285713,
+          "et0_mm": 735.9156428571429,
+          "tmax_mean_c": 32.32399004046063,
+          "heat_days": 34.19047619047619,
+          "oni": 0.02
+        },
+        "scale": {
+          "precipitation_mm": 447.98774030218107,
+          "et0_mm": 62.66657348745153,
+          "tmax_mean_c": 0.9404660713274616,
+          "heat_days": 10.374506517783308,
+          "oni": 0.6002499479383567
+        },
+        "zero_variance_features": [],
+        "fit_years": [
+          1984,
+          1985,
+          1986,
+          1987,
+          1988,
+          1989,
+          1990,
+          1991,
+          1992,
+          1993,
+          1994,
+          1995,
+          1996,
+          1997,
+          1998,
+          1999,
+          2000,
+          2001,
+          2002,
+          2003,
+          2004,
+          2005,
+          2006,
+          2007,
+          2008,
+          2009,
+          2010,
+          2011,
+          2012,
+          2013,
+          2014,
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025
+        ]
+      },
+      "neighbors": [
+        {
+          "year": 2015,
+          "distance": 0.4705362310273596,
+          "squared_distance_contributions": {
+            "precipitation_mm": 0.02631830513815256,
+            "et0_mm": 0.07580232818258581,
+            "tmax_mean_c": 0.0008883785903389011,
+            "heat_days": 0.04645528283998737,
+            "oni": 0.07194004995836809
+          }
+        },
+        {
+          "year": 1997,
+          "distance": 0.5566430370497337,
+          "squared_distance_contributions": {
+            "precipitation_mm": 0.022356581118144057,
+            "et0_mm": 0.19679861104939672,
+            "tmax_mean_c": 0.026421912319252512,
+            "heat_days": 0.007432845254397977,
+            "oni": 0.05684152095475995
+          }
+        },
+        {
+          "year": 1987,
+          "distance": 0.6489398197081171,
+          "squared_distance_contributions": {
+            "precipitation_mm": 0.03600943263221042,
+            "et0_mm": 0.001313755429031232,
+            "tmax_mean_c": 0.02018288807756624,
+            "heat_days": 0.2248435689455388,
+            "oni": 0.13877324451845685
+          }
+        },
+        {
+          "year": 2023,
+          "distance": 0.7009966982905701,
+          "squared_distance_contributions": {
+            "precipitation_mm": 0.003902733128009598,
+            "et0_mm": 0.0561485969431508,
+            "tmax_mean_c": 0.07422732366227106,
+            "heat_days": 0.0018582113135994943,
+            "oni": 0.35525950596724964
+          }
+        },
+        {
+          "year": 1991,
+          "distance": 1.155679048706716,
+          "squared_distance_contributions": {
+            "precipitation_mm": 0.009485087040158617,
+            "et0_mm": 0.01559675303625824,
+            "tmax_mean_c": 0.30351653754483326,
+            "heat_days": 0.4180975455598863,
+            "oni": 0.5888981404385235
+          }
+        }
+      ],
+      "k_sensitivity": [
+        {
+          "k": 3,
+          "years": [
+            2015,
+            1997,
+            1987
+          ],
+          "jaccard_vs_selected_k": 0.6
+        },
+        {
+          "k": 5,
+          "years": [
+            2015,
+            1997,
+            1987,
+            2023,
+            1991
+          ],
+          "jaccard_vs_selected_k": 1.0
+        },
+        {
+          "k": 7,
+          "years": [
+            2015,
+            1997,
+            1987,
+            2023,
+            1991,
+            1990,
+            1994
+          ],
+          "jaccard_vs_selected_k": 0.7142857142857143
+        }
+      ],
+      "scenario_id": "like_2026",
+      "target_kind": "tracking_window",
+      "phase_rule": null,
+      "warnings": [
+        "2026 is tracking only, never an analog.",
+        "Como 2026 compara ventanas de clima del 04-01 al 08-31 con ONI JJA."
+      ],
+      "feature_window": {
+        "start_mmdd": "04-01",
+        "end_mmdd": "08-31",
+        "oni_season": "JJA"
+      }
     }
   },
   "excluded_years": [
