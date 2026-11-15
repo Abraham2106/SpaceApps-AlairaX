@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Box, Globe2, Hexagon, Mountain, Pentagon, Route, Satellite, ScanLine } from "lucide-react";
+import { Box, Globe2, Hexagon, Layers, LocateFixed, Mountain, Pause, Pentagon, Play, Route, Satellite, ScanLine, Search, Share2 } from "lucide-react";
 import { formatNumber, formatSigned, formatValue, metricUnit } from "../lib/format";
 import { cantonAt } from "../lib/geo";
 import { ROTATION_ORDER, ROTATION_STYLE, comparisonSentence, leadSentence, metricNoun, rotationName } from "../lib/plain";
 import { surfaceColor, surfaceDomain, surfaceValue, useSurface } from "../lib/surface";
 import { useCantons, useComparison } from "../data/queries";
 import { useInstrument } from "../store";
-import type { MetricId, RotationId } from "../lib/types";
-import type { Surface } from "../lib/surface";
+import type { RotationId } from "../lib/types";
 
 const SEASON_DAYS = 274;
 const STAGES = [
@@ -39,79 +38,6 @@ const ICONS = {
   plates: Box,
   osm: Route,
 } as const;
-
-function cells(surface: Surface | undefined, metric: MetricId): string[] {
-  if (!surface) return ["#24556a", "#6a6e73", "#9a8756", "#d2b24a", "#fee838"];
-  const [min, max] = surfaceDomain(surface, metric);
-  return Object.values(surface.cantons).map((entry) => surfaceColor(entry[metric].rice_melon, min, max));
-}
-
-function Thumb({ kind, colors }: { kind: string; colors: string[] }) {
-  if (kind === "cantons" || kind === "plates") {
-    return (
-      <svg className="thumb" viewBox="0 0 44 28" aria-hidden>
-        {colors.slice(0, 8).map((color, index) => (
-          <rect key={color + index} x={(index % 4) * 11} y={Math.floor(index / 4) * 14} width="11" height="14" fill={color} />
-        ))}
-      </svg>
-    );
-  }
-  if (kind === "hex") {
-    return (
-      <svg className="thumb" viewBox="0 0 44 28" aria-hidden>
-        {colors.slice(0, 5).map((color, index) => {
-          const x = 6 + index * 8;
-          const y = index % 2 === 0 ? 8 : 15;
-          return <polygon key={color + index} points={`${x},${y} ${x + 4},${y + 2} ${x + 4},${y + 7} ${x},${y + 9} ${x - 4},${y + 7} ${x - 4},${y + 2}`} fill={color} />;
-        })}
-      </svg>
-    );
-  }
-  if (kind === "terrain") {
-    return (
-      <svg className="thumb" viewBox="0 0 44 28" aria-hidden>
-        <rect width="44" height="28" fill="#1a221c" />
-        <path d="M0 22 10 8l8 9 7-12 9 8 10-6v21H0Z" fill="#3c4a3e" />
-        <path d="M0 24 12 14l10 8 8-9 14 6v9H0Z" fill="#141c16" />
-      </svg>
-    );
-  }
-  if (kind === "modis") {
-    return (
-      <svg className="thumb" viewBox="0 0 44 28" aria-hidden>
-        <rect width="44" height="28" fill="#10242c" />
-        <rect x="4" y="4" width="12" height="9" fill="#1d4e5f" />
-        <rect x="18" y="6" width="14" height="8" fill="#6d8f62" />
-        <rect x="8" y="16" width="16" height="8" fill="#c4a15a" />
-      </svg>
-    );
-  }
-  if (kind === "marble") {
-    return (
-      <svg className="thumb" viewBox="0 0 44 28" aria-hidden>
-        <rect width="44" height="28" fill="#071018" />
-        <circle cx="22" cy="14" r="10" fill="#16324a" />
-        <path d="M14 14c3-6 10-6 16 0" fill="none" stroke="#9eb4c4" />
-      </svg>
-    );
-  }
-  if (kind === "osm") {
-    return (
-      <svg className="thumb" viewBox="0 0 44 28" aria-hidden>
-        <rect width="44" height="28" fill="#121816" />
-        <path d="M4 22 16 6l8 10 12-8" fill="none" stroke="#f4efe4" strokeWidth="1.4" />
-        <path d="M8 8h20M10 18h16" stroke="#8ec8e8" strokeWidth="1" />
-      </svg>
-    );
-  }
-  return (
-    <svg className="thumb" viewBox="0 0 44 28" aria-hidden>
-      <rect width="44" height="28" fill="#121816" />
-      <path d="M0 20c8-10 14-2 22-8s10 1 22-6v22H0Z" fill="#243028" />
-      <path d="M0 24c10-6 16 2 24-3s12-2 20-6v13H0Z" fill="#1a2420" />
-    </svg>
-  );
-}
 
 function stageAt(day: number, spanish: boolean) {
   const hit = [...STAGES].reverse().find((stage) => day >= stage.day) ?? STAGES[0];
@@ -155,7 +81,6 @@ export function MapScreen() {
   const scenarioName = loaded?.catalog.scenarios.find((item) => item.id === loaded.compare?.scenario_id)?.name
     ?? loaded?.catalog.scenarios.find((item) => item.id === useInstrument.getState().scenarioId)?.name
     ?? "";
-  const palette = cells(surface.data, metric);
   const [min, max] = surfaceDomain(surface.data, metric);
 
   const visible = useMemo(() => {
@@ -288,8 +213,7 @@ export function MapScreen() {
         const Icon = ICONS[id];
         return (
           <button key={id} className="layer-btn" aria-pressed={basemap === id} onClick={() => setBasemap(id)}>
-            <Icon size={15} strokeWidth={1.5} aria-hidden />
-            <Thumb kind={id} colors={palette} />
+            <Icon size={22} strokeWidth={1.5} aria-hidden />
             {label}
           </button>
         );
@@ -304,8 +228,7 @@ export function MapScreen() {
         const Icon = ICONS[id];
         return (
           <button key={id} className="layer-btn" aria-pressed={overlays[id]} onClick={() => toggleOverlay(id)}>
-            <Icon size={15} strokeWidth={1.5} aria-hidden />
-            <Thumb kind={id} colors={palette} />
+            <Icon size={22} strokeWidth={1.5} aria-hidden />
             {label}
           </button>
         );
@@ -316,6 +239,7 @@ export function MapScreen() {
   return (
     <>
       <form className="map-search" role="search" onSubmit={(event) => event.preventDefault()}>
+        <Search size={16} strokeWidth={1.5} aria-hidden />
         <input className="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={spanish ? "Buscar cantón" : "Find a canton"} aria-label={spanish ? "Buscar cantón" : "Find a canton"} />
       </form>
       <aside ref={sheetRef} className={`left-hud ${open ? "" : "is-collapsed"} ${hovered ? "is-linked" : ""}`}>
@@ -403,7 +327,7 @@ export function MapScreen() {
                 </details>
               ) : null}
               <div className="row">
-                <button type="button" onClick={() => setAsk(true)}>{spanish ? "Usar mi ubicación" : "Use my location"}</button>
+                <button type="button" onClick={() => setAsk(true)}><LocateFixed size={16} strokeWidth={1.5} aria-hidden /> {spanish ? "Usar mi ubicación" : "Use my location"}</button>
                 <button type="button" onClick={() => {
                   if (!compare || !cantons.data) return;
                   const hit = cantonAt(compare.zona.longitude, compare.zona.latitude, cantons.data);
@@ -434,13 +358,13 @@ export function MapScreen() {
               </div>
               <div className="row">
                 <Link to={{ pathname: "/rotaciones", search: params.toString() }}>{spanish ? "Ver la gráfica" : "See the chart"}</Link>
-                <button type="button" onClick={() => setShareOpen(true)}>{spanish ? "Compartir" : "Share"}</button>
+                <button type="button" onClick={() => setShareOpen(true)}><Share2 size={16} strokeWidth={1.5} aria-hidden /> {spanish ? "Compartir" : "Share"}</button>
               </div>
             </>
           ) : null}
         </section>
       </aside>
-      <button className="layers-fab only-mobile" type="button" onClick={() => setLayersOpen(true)}>{spanish ? "Capas" : "Layers"}</button>
+      <button className="layers-fab only-mobile" type="button" onClick={() => setLayersOpen(true)}><Layers size={18} strokeWidth={1.5} aria-hidden /> {spanish ? "Capas" : "Layers"}</button>
       <div className="hud right-hud hide-mobile" role="toolbar" aria-label={spanish ? "Capas" : "Layers"}>
         {layerButtons}
       </div>
@@ -462,7 +386,7 @@ export function MapScreen() {
           <button type="button" className="play" aria-pressed={playing} onClick={() => {
             if (day >= SEASON_DAYS) setDay(0);
             setPlaying((value) => !value);
-          }}>{playing ? (spanish ? "Pausa" : "Pause") : (spanish ? "Play" : "Play")}</button>
+          }}>{playing ? <Pause size={16} strokeWidth={1.5} aria-hidden /> : <Play size={16} strokeWidth={1.5} aria-hidden />} {playing ? (spanish ? "Pausa" : "Pause") : "Play"}</button>
           <div className="scrub">
             <div className="scrub-stages" aria-hidden>
               {STAGES.map((stage) => (

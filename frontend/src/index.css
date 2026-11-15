@@ -302,15 +302,22 @@ img, svg { max-width: 100%; }
   left: 50%;
   transform: translateX(-50%);
   width: min(280px, 28vw);
-}
-.map-search .search {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
   border-radius: 999px;
   border: 1px solid rgba(232, 238, 236, 0.16);
   background: rgba(8, 14, 16, 0.82);
-  color: #e7eef4;
+  color: #d5e0dc;
   backdrop-filter: blur(16px);
-  padding: 0 16px;
+}
+.map-search .search {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #e7eef4;
+  padding: 0;
 }
 .map-legend {
   position: absolute;
@@ -374,7 +381,8 @@ img, svg { max-width: 100%; }
   color: #f2d48a;
   background: rgba(242, 212, 138, 0.12);
 }
-.thumb { width: 44px; height: 28px; display: block; border-radius: 4px; }
+.layer-btn svg, .play svg, .layers-fab svg, .row svg { flex: none; }
+.play, .row button, .layers-fab { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
 .layer-grid { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .row { display: flex; gap: 8px; align-items: center; }
