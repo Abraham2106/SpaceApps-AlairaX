@@ -37,8 +37,9 @@ test("un productor resuelve las cinco tareas y la consola queda limpia", async (
   await page.getByRole("link", { name: "Mapa" }).click();
   await page.getByRole("button", { name: "Compartir" }).click();
   const share = page.getByRole("dialog");
-  await expect(share).toContainText("fixture");
-  await expect(share).not.toContainText("ganadora es");
+  const shared = share.locator("textarea");
+  await expect(shared).toHaveValue(/fixture/);
+  await expect(shared).not.toHaveValue(/ganadora es/);
   await share.getByRole("button", { name: "Cerrar" }).click();
 
   expect(errors, errors.join("\n")).toEqual([]);

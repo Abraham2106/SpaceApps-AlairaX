@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Box, Globe2, Hexagon, Layers, LocateFixed, Mountain, Pause, Pentagon, Play, Route, Satellite, ScanLine, Search, Share2 } from "lucide-react";
-import { formatNumber, formatSigned, formatValue, metricUnit } from "../lib/format";
+import { formatNumber, formatValue, metricUnit } from "../lib/format";
 import { cantonAt } from "../lib/geo";
 import { ROTATION_ORDER, ROTATION_STYLE, comparisonSentence, leadSentence, metricNoun, rotationName } from "../lib/plain";
 import { surfaceColor, surfaceDomain, surfaceValue, useSurface } from "../lib/surface";
@@ -257,13 +257,13 @@ export function MapScreen() {
                 {lead.value == null ? null : <small>{metricUnit(metric, lang)}</small>}
               </p>
               <h1>{metricNoun(metric, lang)}</h1>
-              <p className="faint">{scenarioName} · n = {n || "…"}</p>
+              <p className="faint">{scenarioName} · n = {n || "…"} · {spanish ? "años parecidos" : "similar years"}</p>
               <p className="kicker">
                 {outside && focus
                   ? `${focus.properties.name} · ${spanish ? "sin simulación" : "no simulation"}`
                   : synthetic && focus
-                    ? `${focus.properties.name} · ${spanish ? "fixture sintético" : "synthetic fixture"}`
-                    : spanish ? "punto del modelo" : "model point"}
+                    ? `${focus.properties.name} · ${spanish ? "cifra de prueba de este cantón" : "sample figure for this canton"}`
+                    : spanish ? "el punto de la simulación" : "the simulation point"}
               </p>
               {comparison.isPending ? <p className="kicker">{spanish ? "Cargando…" : "Loading…"}</p> : null}
               {comparison.isError ? <p className="warn">{spanish ? "No se pudo leer la comparación." : "The comparison could not be read."}</p> : null}
@@ -286,17 +286,22 @@ export function MapScreen() {
                         <span className="bullet-delta">
                           {item.delta == null
                             ? (spanish ? "referencia" : "reference")
-                            : `${formatSigned(item.delta, metric, lang)} ${spanish ? "vs arroz→melón" : "vs rice→melon"}`}
+                            : item.delta === 0
+                              ? (spanish ? "igual que arroz → melón" : "same as rice → melon")
+                              : item.delta < 0
+                                ? `${formatNumber(Math.abs(item.delta), lang, 1)} ${metricUnit(metric, lang)} ${spanish ? "menos que arroz → melón" : "less than rice → melon"}`
+                                : `${formatNumber(item.delta, lang, 1)} ${metricUnit(metric, lang)} ${spanish ? "más que arroz → melón" : "more than rice → melon"}`}
                         </span>
                       </div>
                     );
                   })}
                 </div>
               )}
-              {compare ? <p className="meta-line">{version} · {compare.warnings.length} {spanish ? "avisos" : "warnings"}</p> : null}
+              {compare ? <p className="meta-line">{compare.warnings.length} {spanish ? "avisos en la lectura" : "warnings in the reading"}</p> : null}
               {compare ? (
                 <details>
                   <summary>{spanish ? "Leer más" : "Read more"}</summary>
+                  <p>{version}</p>
                   <p>{leadSentence(lang, scenarioName, metric, n, compare._mock)}</p>
                   {ROTATION_ORDER.map((id) => {
                     const rotation = compare.rotations.find((item) => item.rotation_id === id);

@@ -416,7 +416,7 @@ img, svg { max-width: 100%; }
 .track i { position: absolute; top: -3px; width: 2px; height: 14px; background: var(--ink); }
 
 .search { width: 100%; min-height: var(--hit); background: transparent; border: 1px solid var(--line); padding: 0 10px; }
-.canton-list { list-style: none; margin: 0; padding: 0; max-height: 220px; overflow: auto; }
+.canton-list { list-style: none; margin: 0; padding: 0; max-height: 132px; overflow: auto; }
 .canton-list button { width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; }
 .canton-list button[aria-selected="true"] { background: color-mix(in srgb, var(--accent) 22%, transparent); }
 
@@ -635,7 +635,7 @@ caption { text-align: left; font-family: var(--serif); font-size: 1.3rem; paddin
     right: 0;
     top: auto;
     width: 100%;
-    height: var(--sheet, 210px);
+    height: var(--sheet, 168px);
     bottom: 64px;
     max-height: 70%;
   }
@@ -645,7 +645,7 @@ caption { text-align: left; font-family: var(--serif); font-size: 1.3rem; paddin
     display: block;
     left: 8px;
     right: 8px;
-    bottom: calc(72px + var(--sheet, 210px));
+    bottom: calc(72px + var(--sheet, 168px));
   }
   .player { padding: 6px; gap: 6px; flex-wrap: nowrap; }
   .player .play { min-width: 44px; padding: 0 10px; }
@@ -655,7 +655,7 @@ caption { text-align: left; font-family: var(--serif); font-size: 1.3rem; paddin
     left: 8px;
     right: 8px;
     width: auto;
-    bottom: calc(72px + var(--sheet, 210px) + 64px);
+    bottom: calc(72px + var(--sheet, 168px) + 64px);
   }
   .map-legend p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .search-slot { display: none; }
