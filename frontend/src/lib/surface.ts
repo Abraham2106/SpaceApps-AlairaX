@@ -54,10 +54,10 @@ export function surfaceDomain(surface: Surface | undefined, metric: MetricId): [
   return min === max ? [min - 1, max + 1] : [min, max];
 }
 
-/** Sequential cividis, lifted off pure navy so the low end still reads on a night basemap. */
+/** Upper half of cividis: ochre to yellow, one sequence a farmer can read on a night map. */
 export function surfaceColor(value: number, min: number, max: number): string {
   const t = (value - min) / (max - min || 1);
-  return cividis(0.22 + Math.min(1, Math.max(0, t)) * 0.78);
+  return cividis(0.5 + Math.min(1, Math.max(0, t)) * 0.5);
 }
 
 function matchColor(key: "id" | "canton", surface: Surface | undefined, metric: MetricId) {
