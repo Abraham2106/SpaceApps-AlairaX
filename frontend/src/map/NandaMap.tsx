@@ -44,6 +44,7 @@ function buildStyle(): StyleSpecification {
       },
       openmaptiles: { type: "vector", url: "https://tiles.openfreemap.org/planet" },
       cantons: { type: "geojson", data: EMPTY },
+      labels: { type: "geojson", data: EMPTY },
       hexCoarse: { type: "geojson", data: EMPTY },
       hexMid: { type: "geojson", data: EMPTY },
       hexFine: { type: "geojson", data: EMPTY },
@@ -71,16 +72,14 @@ function buildStyle(): StyleSpecification {
         type: "fill",
         source: "cantons",
         paint: {
-          "fill-color": ["case", ["boolean", ["feature-state", "selected"], false], ["get", "tint"], ["get", "guanacaste"], ["get", "tint"], "#24302c"],
+          "fill-color": "#d7e6f0",
           "fill-opacity": [
             "case",
             ["boolean", ["feature-state", "selected"], false],
-            0.42,
-            ["boolean", ["feature-state", "hover"], false],
-            0.28,
-            ["get", "guanacaste"],
             0.16,
-            0.05,
+            ["boolean", ["feature-state", "hover"], false],
+            0.08,
+            0,
           ],
         },
       },
@@ -124,8 +123,8 @@ function buildStyle(): StyleSpecification {
         source: "cantons",
         paint: {
           "line-color": "#06110e",
-          "line-width": ["interpolate", ["linear"], ["zoom"], 6, 5, 10, 12],
-          "line-opacity": ["case", ["get", "guanacaste"], 0.92, 0.35],
+          "line-width": 0,
+          "line-opacity": 0,
         },
       },
       {
@@ -133,24 +132,24 @@ function buildStyle(): StyleSpecification {
         type: "line",
         source: "cantons",
         paint: {
-          "line-color": ["case", ["boolean", ["feature-state", "selected"], false], "#fff6e4", ["get", "guanacaste"], "#ffffff", "rgba(255,255,255,0.45)"],
-          "line-width": ["case", ["boolean", ["feature-state", "selected"], false], 3.2, ["get", "guanacaste"], 2.4, 0.8],
+          "line-color": ["case", ["boolean", ["feature-state", "selected"], false], "#d7f1ff", ["get", "guanacaste"], "rgba(232,242,248,0.92)", "rgba(232,242,248,0.28)"],
+          "line-width": ["case", ["boolean", ["feature-state", "selected"], false], 1.6, ["get", "guanacaste"], 1.05, 0.4],
         },
       },
       {
         id: "canton-label",
         type: "symbol",
-        source: "cantons",
-        filter: ["==", ["get", "guanacaste"], true],
+        source: "labels",
         layout: {
           "text-field": ["get", "name"],
           "text-font": ["Noto Sans Regular"],
-          "text-size": ["interpolate", ["linear"], ["zoom"], 6, 13, 10, 18],
+          "text-size": ["interpolate", ["linear"], ["zoom"], 6, 11, 10, 14],
+          "text-letter-spacing": 0.04,
         },
         paint: {
-          "text-color": "#f7f4ec",
-          "text-halo-color": "#07110e",
-          "text-halo-width": 1.3,
+          "text-color": "#e7eef4",
+          "text-halo-color": "#0c1014",
+          "text-halo-width": 1.1,
         },
       },
       {
@@ -189,10 +188,10 @@ function buildStyle(): StyleSpecification {
         source: "marks",
         filter: ["==", ["get", "kind"], "model"],
         paint: {
-          "circle-radius": 8,
-          "circle-color": "#e2b15c",
-          "circle-stroke-color": "#07110e",
-          "circle-stroke-width": 2,
+          "circle-radius": 5,
+          "circle-color": "rgba(0,0,0,0)",
+          "circle-stroke-color": "#e7eef4",
+          "circle-stroke-width": 1.5,
         },
       },
       {
@@ -213,9 +212,9 @@ function buildStyle(): StyleSpecification {
         source: "marks",
         filter: ["==", ["get", "kind"], "model"],
         layout: {
-          "text-field": "punto",
+          "text-field": ["get", "label"],
           "text-font": ["Noto Sans Regular"],
-          "text-size": 13,
+          "text-size": 11,
           "text-offset": [0, 1.1],
           "text-anchor": "top",
         },
@@ -328,6 +327,16 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     if (!map || !collection) return;
     const apply = () => {
       (map.getSource("cantons") as maplibregl.GeoJSONSource | undefined)?.setData(collection);
+      (map.getSource("labels") as maplibregl.GeoJSONSource | undefined)?.setData({
+        type: "FeatureCollection",
+        features: collection.features
+          .filter((feature) => feature.properties.guanacaste)
+          .map((feature) => ({
+            type: "Feature" as const,
+            properties: { name: feature.properties.name },
+            geometry: { type: "Point" as const, coordinates: feature.properties.center },
+          })),
+      });
       (map.getSource("hexCoarse") as maplibregl.GeoJSONSource | undefined)?.setData(hexMesh(collection, 0.22, "coarse"));
       (map.getSource("hexMid") as maplibregl.GeoJSONSource | undefined)?.setData(hexMesh(collection, 0.12, "mid"));
       (map.getSource("hexFine") as maplibregl.GeoJSONSource | undefined)?.setData(hexMesh(collection, 0.065, "fine"));
@@ -416,11 +425,11 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     const map = mapRef.current;
     if (!map) return;
     const zona = comparison.data?.compare?.zona ?? comparison.data?.catalog.zona;
-    const features: { type: "Feature"; properties: { kind: string }; geometry: { type: "Point"; coordinates: [number, number] } }[] = [];
+    const features: { type: "Feature"; properties: { kind: string; label?: string }; geometry: { type: "Point"; coordinates: [number, number] } }[] = [];
     if (zona) {
       features.push({
         type: "Feature" as const,
-        properties: { kind: "model" },
+        properties: { kind: "model", label: `${zona.latitude.toFixed(2)}, ${zona.longitude.toFixed(2)}` },
         geometry: { type: "Point" as const, coordinates: [zona.longitude, zona.latitude] },
       });
     }

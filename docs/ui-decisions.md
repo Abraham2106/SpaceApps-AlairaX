@@ -30,7 +30,7 @@ Capas, de abajo hacia arriba:
 6. Placas 3D de cantón, optativas, misma idea: altura constante, color de identidad.
 7. Calles y poblados de OpenFreeMap (dato OSM, esquema OpenMapTiles), desde un zoom cercano. No se usa `tile.openstreetmap.org`. La atribución de OSM aparece cuando la capa está encendida, y el crédito de límites y de imagen está siempre.
 
-La cámara se queda en planta. Una vista inclinada con relieve exagerado se leía como un juego, no como un mapa de trabajo. El relieve, si está encendido, es una sombra suave sobre la fotografía, sin levantar el terreno. El punto del modelo es el `zona` de la respuesta, no un marcador fijo en el código.
+La cámara se queda en planta. El borde de los cantones es una línea fina, sin relleno de territorio ni filete negro: el contorno grueso se leía como un mapa de estrategia, no como un instrumento. El acento es un cian de lectura, no un dorado. El punto del modelo se marca con la coordenada, no con una ficha. El punto del modelo es el `zona` de la respuesta, no un marcador fijo en el código.
 
 ## Datos
 
