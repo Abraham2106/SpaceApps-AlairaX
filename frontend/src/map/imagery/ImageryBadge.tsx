@@ -21,10 +21,12 @@ export function ImageryBadge({ choice }: { choice: ImageryChoice }) {
   const setImageryDate = useInstrument((state) => state.setImageryDate);
   const nasaDated = basemap === "modis";
   const drone = choice.drone;
+  const scene = choice.scene;
+  const resolution = formatGsd(drone?.gsdM ?? null, lang);
   const summary: MessageKey = choice.primary === "oam" && drone
-    ? "imagery.oam"
+    ? (resolution ? "imagery.oam" : "imagery.oamBare")
     : choice.primary === "s2"
-    ? "imagery.s2"
+    ? (scene?.cloudCover == null ? "imagery.s2" : "imagery.s2WithCloud")
     : choice.fallback
       ? "imagery.esriFallback"
       : choice.primary === "esri"
@@ -36,13 +38,12 @@ export function ImageryBadge({ choice }: { choice: ImageryChoice }) {
             : "imagery.modis";
   const droneNote: MessageKey | undefined = choice.oam === "failed" ? "imagery.oamFailed" : undefined;
   const note = droneNote ?? (nasaDated && choice.oam !== "active" ? S2_NOTE[choice.s2] : undefined);
-  const scene = choice.scene;
   const values = {
     date: formatImageryDate(drone?.date ?? scene?.date ?? imageryDate, lang),
     provider: drone?.provider ?? "",
-    resolution: formatGsd(drone?.gsdM ?? null, lang) ?? translate(lang, "imagery.resolutionUnknown"),
+    resolution: resolution ?? "",
     license: drone?.license ?? "",
-    cloud: scene?.cloudCover == null ? translate(lang, "imagery.cloudUnknown") : `${Math.round(scene.cloudCover)} %`,
+    cloud: scene?.cloudCover == null ? "" : `${Math.round(scene.cloudCover)} %`,
     id: scene?.id ?? "",
   };
   return (

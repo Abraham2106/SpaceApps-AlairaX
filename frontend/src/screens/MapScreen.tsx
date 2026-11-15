@@ -10,13 +10,12 @@ import { MapCantonList } from "../map/MapCantonList";
 
 export function MapScreen() {
   const lang = useInstrument((state) => state.lang);
-  const metric = useInstrument((state) => state.metric);
   const mesh = useInstrument((state) => state.overlays.hex);
   const locationMessage = useInstrument((state) => state.locationMessage);
   const [query, setQuery] = useState("");
   const input = useRef<HTMLInputElement>(null);
   const surface = useSurface();
-  const [min, max] = surfaceDomain(surface.data, metric);
+  const [min, max] = surfaceDomain(surface.data);
   const boundaryMessage = isCantonBoundaryMessage(locationMessage) ? locationMessage : null;
 
   function clearBoundaryMessage() {
@@ -63,7 +62,6 @@ export function MapScreen() {
             <span key={index} style={{ background: surfaceColor(min + ((max - min) * index) / 31, min, max) }} />
           ))}
         </div>
-        <p>{translate(lang, "map.grayNoSimulationNotModel")}</p>
       </div> : null}
     </>
   );

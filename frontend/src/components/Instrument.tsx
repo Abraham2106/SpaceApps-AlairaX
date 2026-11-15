@@ -16,7 +16,7 @@ export function StatusPill({ tone = "pending", children }: { tone?: "pending" | 
 
 /** A number set large with its unit set small, the way an instrument face reads. */
 export function Figure({ value, metric, lang, unit }: { value: number | null; metric?: MetricId; lang: Lang; unit?: string }) {
-  if (value === null) return <span className="figure figure-empty">{formatValue(null, metric ?? "modeled_water_deficit_mm", lang)}</span>;
+  if (value === null) return null;
   return (
     <span className="figure">
       {formatNumber(value, lang)}

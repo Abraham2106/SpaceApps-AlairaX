@@ -13,7 +13,7 @@ npm run dev
 
 Abre `http://127.0.0.1:5173/SpaceApps-AlairaX/#/`.
 
-Sin `VITE_API_URL` lee los fixtures de `public/data/` y muestra el aviso de datos sintéticos. Con una URL, por ejemplo `http://127.0.0.1:8000`, prueba `GET /health` y usa `GET /scenarios`, `GET /rotations`, `GET /sources` y `POST /compare`. Un 409 o un 503 se muestran con el motivo. La misma dirección se puede escribir en Confianza.
+`npm run dev` habla con FastAPI: si `VITE_API_URL` está vacío, el cliente usa `/api` y Vite lo reenvía a `http://127.0.0.1:8000`. Prueba `GET /health` y usa `GET /scenarios`, `GET /rotations`, `GET /sources` y `POST /compare`. Un 409 o un 503 se muestran con el motivo. En Confianza se puede escribir otra dirección (`/api` o `http://127.0.0.1:8000`). El build de producción, sin esa variable, sigue leyendo `public/data/` porque GitHub Pages no corre el backend.
 
 ```bash
 npm test

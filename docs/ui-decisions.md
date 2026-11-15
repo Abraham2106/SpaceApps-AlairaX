@@ -44,7 +44,7 @@ La cámara se queda en planta. El borde de los cantones es una línea fina, sin 
 
 ## Datos
 
-Sin `VITE_API_URL` y sin una URL escrita en Confianza, se leen los fixtures con `import.meta.env.BASE_URL`. Si hay URL, se prueba `GET /health`. Si responde, `GET /scenarios`, `GET /rotations`, `GET /sources` y `POST /compare` con la zona y el `k` del catálogo. Un 409 o un 503 se muestran con el `detail`, y no se rellenan con el fixture. El modo queda escrito en la barra.
+En `npm run dev`, si `VITE_API_URL` está vacío, el cliente usa `/api` y Vite lo reenvía a FastAPI en `http://127.0.0.1:8000`. Con esa dirección se prueba `GET /health`. Si responde, `GET /scenarios`, `GET /rotations`, `GET /sources` y `POST /compare` con la zona y el `k` del catálogo. Un 409 o un 503 se muestran con el `detail`, y no se rellenan con el fixture. El build de producción, sin la variable, sigue leyendo `public/data` porque GitHub Pages no ejecuta el backend. El modo queda escrito en la barra.
 
 Los tipos de `src/lib/types.ts` siguen los JSON Schema de `docs/contracts/`. Zod valida lo que el navegador recibe, incluidos los cuatro fixtures. La interfaz no recalcula p10/p50/p90 ni el delta. La prosa sale de reglas en `src/lib/plain.ts`.
 

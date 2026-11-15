@@ -70,6 +70,13 @@ function isMetric(value: string | null): value is MetricId {
 
 const storedLang = typeof localStorage !== "undefined" ? localStorage.getItem("nandaview-lang") : null;
 
+/** Dev talks to FastAPI through the Vite proxy. Production stays on static JSON unless VITE_API_URL is set. */
+export function initialApiBase(): string {
+  const configured = (import.meta.env.VITE_API_URL ?? "").trim();
+  if (configured) return configured;
+  return import.meta.env.DEV ? "/api" : "";
+}
+
 export const useInstrument = create<Store>((set, get) => ({
   scenarioId: "strong_el_nino",
   metric: "modeled_water_deficit_mm",
@@ -82,7 +89,7 @@ export const useInstrument = create<Store>((set, get) => ({
   selectedCenter: null,
   yearA: null,
   yearB: null,
-  apiBase: (import.meta.env.VITE_API_URL ?? "").trim(),
+  apiBase: initialApiBase(),
   location: null,
   locationMessage: null,
   hovered: null,

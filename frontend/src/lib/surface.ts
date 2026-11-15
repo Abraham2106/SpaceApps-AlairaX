@@ -2,30 +2,48 @@ import { useQuery } from "@tanstack/react-query";
 import type maplibregl from "maplibre-gl";
 import { z } from "zod";
 import { publicUrl } from "./api";
-import type { MetricId } from "./types";
 
-const row = z.object({
-  rice_melon: z.number(),
-  rice_legume: z.number(),
-  rice_sorghum: z.number(),
-  delta_legume: z.number(),
-  delta_sorghum: z.number(),
+const soilSchema = z.object({
+  status: z.enum(["map", "unavailable"]),
+  field_capacity_m3_m3: z.number().optional(),
+  wilting_point_m3_m3: z.number().optional(),
+  source: z.string(),
+  error: z.string().optional(),
+});
+
+const stationCheckSchema = z.object({
+  water_demand_mm: z.number(),
+  study_mm: z.number(),
+  difference_mm: z.number(),
+  senara_mean_m3_s: z.number(),
+  published_field_capacity_m3_m3: z.number(),
+});
+
+const cantonSchema = z.object({
+  _mock: z.literal(false),
+  name: z.string(),
+  latitude: z.number(),
+  longitude: z.number(),
+  elevation_m: z.number(),
+  rain_mm: z.number(),
+  et0_mm: z.number(),
+  water_demand_mm: z.number(),
+  days: z.number(),
+  soil: soilSchema,
+  sowing_dates_observed: z.literal(false),
+  station_check: stationCheckSchema.optional(),
 });
 
 const surfaceSchema = z.object({
-  _mock: z.literal(true),
+  _mock: z.literal(false),
   purpose: z.string(),
+  sowing_dates_observed: z.literal(false),
   warnings: z.array(z.string()),
-  cantons: z.record(z.string(), z.object({
-    _mock: z.literal(true),
-    modeled_water_deficit_mm: row,
-    crop_water_demand_mm: row,
-    water_stress_days: row,
-  })),
+  cantons: z.record(z.string(), cantonSchema),
 });
 
 export type Surface = z.infer<typeof surfaceSchema>;
-export type SurfaceRow = z.infer<typeof row>;
+export type SurfaceCanton = z.infer<typeof cantonSchema>;
 
 export function useSurface() {
   return useQuery({
@@ -39,14 +57,14 @@ export function useSurface() {
   });
 }
 
-export function surfaceValue(surface: Surface | undefined, cantonId: string | undefined, metric: MetricId): SurfaceRow | null {
+export function surfaceCanton(surface: Surface | undefined, cantonId: string | undefined): SurfaceCanton | null {
   if (!surface || !cantonId) return null;
-  return surface.cantons[cantonId]?.[metric] ?? null;
+  return surface.cantons[cantonId] ?? null;
 }
 
-export function surfaceDomain(surface: Surface | undefined, metric: MetricId): [number, number] {
+export function surfaceDomain(surface: Surface | undefined): [number, number] {
   if (!surface) return [0, 1];
-  const values = Object.values(surface.cantons).map((entry) => entry[metric].rice_melon);
+  const values = Object.values(surface.cantons).map((entry) => entry.water_demand_mm);
   if (values.length === 0) return [0, 1];
   const min = Math.min(...values);
   const max = Math.max(...values);
@@ -73,23 +91,23 @@ export function surfaceColor(value: number, min: number, max: number): string {
   return mixHex(GREEN[low], GREEN[high], scaled - low);
 }
 
-export function hexPaint(surface: Surface | undefined, metric: MetricId) {
+export function hexPaint(surface: Surface | undefined) {
   if (!surface) return "#1c2823" as const;
-  const [min, max] = surfaceDomain(surface, metric);
+  const [min, max] = surfaceDomain(surface);
   const expression: unknown[] = ["match", ["get", "canton"]];
-  for (const [id, metrics] of Object.entries(surface.cantons)) {
-    expression.push(id, surfaceColor(metrics[metric].rice_melon, min, max));
+  for (const [id, entry] of Object.entries(surface.cantons)) {
+    expression.push(id, surfaceColor(entry.water_demand_mm, min, max));
   }
   expression.push("#24302c");
   return expression as maplibregl.ExpressionSpecification;
 }
 
-export function hexHeight(surface: Surface | undefined, metric: MetricId) {
+export function hexHeight(surface: Surface | undefined) {
   if (!surface) return 0;
-  const [min, max] = surfaceDomain(surface, metric);
+  const [min, max] = surfaceDomain(surface);
   const expression: unknown[] = ["match", ["get", "canton"]];
-  for (const [id, metrics] of Object.entries(surface.cantons)) {
-    const t = (metrics[metric].rice_melon - min) / (max - min || 1);
+  for (const [id, entry] of Object.entries(surface.cantons)) {
+    const t = (entry.water_demand_mm - min) / (max - min || 1);
     expression.push(id, Math.round(480 + t * 2600));
   }
   expression.push(0);

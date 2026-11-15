@@ -47,6 +47,7 @@ export type SentenceInput = {
  */
 export function comparisonSentence(input: SentenceInput): string {
   const { lang, scenarioName, metric, rotationName: name, baselineName, isBaseline, p50, deltaP50, n, like2026 } = input;
+  if (p50 === null || (deltaP50 === null && !isBaseline)) return "";
   const noun = metricNoun(metric, lang);
   const watch = translate(lang, "plain.thisNotYieldNotSavings");
   const sample = [
@@ -57,10 +58,6 @@ export function comparisonSentence(input: SentenceInput): string {
     like2026
       ? translate(lang, "plain.2026NotAnalogYearScenario")
       : "";
-
-  if (p50 === null || (deltaP50 === null && !isBaseline)) {
-    return translate(lang, "plain.noDataContractDidNot", { name, noun, sample });
-  }
 
   if (isBaseline) {
     return translate(lang, "plain.referenceModeledMedianDelta0", { name, scenarioName, noun, value: formatValue(p50, metric, lang), follow, sample, watch });
@@ -81,9 +78,7 @@ export function comparisonSentence(input: SentenceInput): string {
 export function farmerLine(input: SentenceInput): string {
   const { lang, rotationName: name, metric, isBaseline, p50, deltaP50, n } = input;
   const years = translate(lang, "plain.similarYears", { count: n });
-  if (p50 === null || (deltaP50 === null && !isBaseline)) {
-    return translate(lang, "plain.noData", { name, years });
-  }
+  if (p50 === null || (deltaP50 === null && !isBaseline)) return "";
   if (isBaseline) {
     return translate(lang, "plain.cycleOtherRotationsAreCompared", { name, value: formatValue(p50, metric, lang), years });
   }
@@ -97,21 +92,18 @@ export function farmerLine(input: SentenceInput): string {
 
 export function compactLine(input: SentenceInput): string {
   const { lang, rotationName: name, metric, isBaseline, p50, deltaP50, n } = input;
-  if (p50 === null || (deltaP50 === null && !isBaseline)) {
-    return translate(lang, "plain.noDataN", { name, count: n });
-  }
+  if (p50 === null || (deltaP50 === null && !isBaseline)) return "";
   if (isBaseline) {
     return translate(lang, "plain.referenceN", { name, value: formatValue(p50, metric, lang), count: n });
   }
   return translate(lang, "plain.deltaN", { name, value: formatValue(p50, metric, lang), difference: formatSigned(deltaP50, metric, lang), count: n });
 }
 
-export function leadSentence(lang: Lang, scenarioName: string, metric: MetricId, n: number, mock: boolean): string {
+export function leadSentence(lang: Lang, scenarioName: string, metric: MetricId, n: number): string {
   return translate(lang, "plain.readingLead", {
     scenarioName,
     count: n,
     noun: metricNoun(metric, lang),
-    source: translate(lang, mock ? "plain.mockSource" : "plain.modelSource"),
   });
 }
 

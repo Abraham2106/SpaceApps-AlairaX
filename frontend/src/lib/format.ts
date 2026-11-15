@@ -9,12 +9,12 @@ export function formatNumber(value: number, lang: Lang, digits = 1): string {
 }
 
 export function formatValue(value: number | null, metric: MetricId, lang: Lang): string {
-  if (value === null) return translate(lang, "common.noData");
+  if (value === null) return "";
   return `${formatNumber(value, lang)} ${metricUnit(metric, lang)}`;
 }
 
 export function formatSigned(value: number | null, metric: MetricId, lang: Lang): string {
-  if (value === null) return translate(lang, "common.noData");
+  if (value === null) return "";
   const sign = value > 0 ? "+" : value < 0 ? "−" : "";
   const body = formatNumber(Math.abs(value), lang, 1);
   return `${sign}${body} ${metricUnit(metric, lang)}`;

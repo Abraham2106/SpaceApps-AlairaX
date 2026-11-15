@@ -2,7 +2,7 @@ import { translate } from "../lib/i18n";
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ArrowUpRight, LocateFixed, MapPin, Share2 } from "lucide-react";
-import { StatusPill, TickScale } from "../components/Instrument";
+import { TickScale } from "../components/Instrument";
 import { formatNumber, formatValue, metricUnit } from "../lib/format";
 import { cantonAt } from "../lib/geo";
 import { ROTATION_ORDER, comparisonSentence, leadSentence, readingMetric, rotationName } from "../lib/plain";
@@ -22,7 +22,6 @@ export function MapReading() {
   const scenarioId = useInstrument((state) => state.scenarioId);
   const setScenario = useInstrument((state) => state.setScenario);
   const selectOnly = useInstrument((state) => state.selectOnly);
-  const location = useInstrument((state) => state.location);
   const locationMessage = useInstrument((state) => state.locationMessage);
   const setLocation = useInstrument((state) => state.setLocation);
   const [params] = useSearchParams();
@@ -44,8 +43,7 @@ export function MapReading() {
 
   const shareText = compare
     ? [
-        leadSentence(lang, scenarioName, metric, n, compare._mock),
-        ...(!compare._mock && !compare.zona.validated ? [translate(lang, "plain.pilotSource")] : []),
+        leadSentence(lang, scenarioName, metric, n),
         ...ROTATION_ORDER.map((id) => {
           const rotation = compare.rotations.find((item) => item.rotation_id === id);
           if (!rotation) return "";
@@ -105,27 +103,22 @@ export function MapReading() {
   const rankText = rank === 0 ? "" : es
     ? `${rank}.º de ${ranked.length} rotaciones`
     : `${rank} of ${ranked.length} rotations`;
-  const statusText = compare?._mock ? translate(lang, "shell.syntheticData")
-    : compare?.zona.validated ? (es ? "Estimación" : "Estimate")
-    : (es ? "Sin validar en finca" : "On-farm validation pending");
-
   return (
     <>
       <aside className="map-note" aria-label={es ? "Lectura del punto" : "Model location reading"}>
         <div className="note-head">
           <p className="map-note-site"><MapPin size={13} strokeWidth={1.8} aria-hidden /> {modelCanton?.properties.name ?? "Guanacaste"} · {translate(lang, `scenario.${scenarioId}`)}</p>
-          {compare ? <p className="map-note-caption note-status"><StatusPill tone={compare.zona.validated && !compare._mock ? "ok" : "pending"}>{statusText}</StatusPill></p> : null}
         </div>
         <h1>{readingMetric(metric, lang)}</h1>
         <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
         {loaded && !compare && <p className="warn" role="alert">{comparisonError(loaded, lang)}</p>}
         {compare && (
           <>
-            <p className="readout">
-              {amount === null ? formatValue(null, metric, lang) : (
-                <>{formatNumber(amount, lang)}<small> {metricUnit(metric, lang)}</small></>
-              )}
-            </p>
+            {amount !== null ? (
+              <p className="readout">
+                {formatNumber(amount, lang)}<small> {metricUnit(metric, lang)}</small>
+              </p>
+            ) : null}
             <p className="note-ref">{baselineName} · {es ? "mediana de" : "median of"} {n} {es ? "temporadas" : "seasons"}</p>
             {spread.length > 0 ? (
               <div className="note-scale">
@@ -176,7 +169,6 @@ export function MapReading() {
         {cantons.isError && <p className="warn" role="alert">{translate(lang, "map.searchError")}</p>}
         {locationMessage && !isCantonBoundaryMessage(locationMessage) &&
           <p className="map-note-caption" role="status">{translate(lang, locationMessage.key, locationMessage.values)}</p>}
-        {location && !location.inside && <p className="warn">{translate(lang, "mapReading.noExtrapolation")}</p>}
       </aside>
       {ask ? (
         <Dialog labelledBy="loc-title" onClose={() => setAsk(false)}>

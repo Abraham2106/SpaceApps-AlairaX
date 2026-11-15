@@ -134,14 +134,14 @@ export function WeeklyHeatmap({ compare, lang }: { compare: CompareResponse; lan
                 onChange={(event) => setChosenWeek(Number(event.target.value))} />
             </label>
             <dl className="heat-values">
-              {values.map(({ id, totals }) => (
+              {values.map(({ id, totals }) => totals[week] == null ? null : (
                 <div key={id} data-rot={id}><dt><i />{cropNames[ROTATION_INDEX[id]]}</dt>
-                  <dd>{formatValue(totals[week] ?? null, "modeled_water_deficit_mm", lang)}</dd></div>
+                  <dd>{formatValue(totals[week], "modeled_water_deficit_mm", lang)}</dd></div>
               ))}
             </dl>
             <p className="insight-caption heat-key">
               <span className="heat-scale" aria-hidden="true">{[0, 0.25, 0.5, 0.75, 1].map((t) => <i key={t} style={{ background: conditionColor(t) }} />)}</span>
-              {es ? `0–${Math.ceil(limit)} mm por semana · gris: sin dato` : `0–${Math.ceil(limit)} mm per week · gray: no data`}
+              {es ? `0–${Math.ceil(limit)} mm por semana` : `0–${Math.ceil(limit)} mm per week`}
             </p>
           </>
         ) : null}

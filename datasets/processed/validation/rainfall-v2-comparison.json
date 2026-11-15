@@ -1,0 +1,66 @@
+{
+  "power_model_selection": "Nested temporal validation, outer periods 2014-2017 and 2018-2022",
+  "selected_power_candidate": {
+    "id": "engineered_all",
+    "engineered": true,
+    "enriched": false,
+    "start": 1984,
+    "objective": "reg:absoluteerror"
+  },
+  "features": 37,
+  "development_basic_mae_mm": 25.57957546069654,
+  "development_selected_mae_mm": 24.56252008452497,
+  "power_2023plus_diagnostic": {
+    "model": {
+      "n": 1404,
+      "mae": 32.0597289091009,
+      "rmse": 97.38841638748944,
+      "within_tolerance_pct": 47.57834757834758
+    },
+    "baseline": {
+      "n": 1404,
+      "mae": 34.0349074074074,
+      "rmse": 101.51100305573661,
+      "within_tolerance_pct": 52.27920227920227
+    }
+  },
+  "previous_power_2023plus": {
+    "n": 1404,
+    "mae": 33.40428180853865,
+    "rmse": 94.93747655281572,
+    "within_tolerance_pct": 43.09116809116809
+  },
+  "previous_model_limitations": "Previous model used nominal same-day predictors and trained before 2018. V2 uses two-day publication lag and trains before 2023. Differences combine features, objective and training period.",
+  "local_supervised_2023plus_diagnostic": {
+    "model": {
+      "n": 97,
+      "mae": 50.546534186294394,
+      "rmse": 74.68354363592765,
+      "within_tolerance_pct": 17.525773195876287
+    },
+    "baseline": {
+      "n": 97,
+      "mae": 56.21958762886599,
+      "rmse": 89.23165785127271,
+      "within_tolerance_pct": 22.68041237113402
+    }
+  },
+  "local_supervised_disjoint_weeks": {
+    "xgboost": {
+      "n": 19,
+      "mae_mm": 48.06520072535464,
+      "rmse_mm": 72.39515238934939,
+      "bias_mm": -30.28696457712274,
+      "within_10mm_pct": 31.57894736842105
+    },
+    "monthly_median": {
+      "n": 19,
+      "mae_mm": 49.69210526315789,
+      "rmse_mm": 79.11752999577008,
+      "bias_mm": -39.328947368421055,
+      "within_10mm_pct": 26.31578947368421
+    }
+  },
+  "deployment_status": "Experimental artifacts saved. Prospective and irrigation decision validation pending.",
+  "training_platform": "Local CPU. The prior v1 model was trained in Molab."
+}

@@ -5,7 +5,8 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Dialog } from "../components/Dialog";
 import { useComparison } from "../data/queries";
 import { useInstrument } from "../store";
-import { comparisonYears, hasDailyBalance, seasonDates, SEASON_MONTHS } from "../lib/season";
+import { hasDailyBalance, SEASON_MONTHS } from "../lib/season";
+import { useRecentSeasons } from "../data/recent";
 import type { Lang } from "../lib/types";
 import { useMobileViewport } from "../lib/viewport";
 
@@ -34,8 +35,10 @@ export function MapSeasonPlayer() {
   const [params] = useSearchParams();
   const mobile = useMobileViewport();
   const compare = useComparison().data?.compare;
-  const years = comparisonYears(compare);
-  const dates = seasonDates(compare, yearA);
+  const recent = useRecentSeasons();
+  const years = recent.data?.seasons.map(({ year }) => year).sort((a, b) => b - a) ?? [];
+  const selectedYear = yearA !== null && years.includes(yearA) ? yearA : years[0];
+  const dates = recent.data?.seasons.find(({ year }) => year === selectedYear)?.runs[0]?.daily_balance.map(({ date }) => date) ?? [];
   const lastDay = dates.length > 1 ? dates.length - 1 : SEASON_DAYS;
   const activeDay = Math.min(day, lastDay);
   const locale = lang === "es" ? "es-CR" : "en-US";
@@ -93,7 +96,7 @@ export function MapSeasonPlayer() {
           </div>
         </div>
         <p className="player-now">
-          <span>{translate(lang, dates.length ? "mapSeasonPlayer.modeledSeason" : "season.provisionalCalendar")}</span>
+          <span>{translate(lang, dates.length ? "mapSeasonPlayer.modeledSeason" : "mapSeasonPlayer.seasonAprilDecember")}</span>
           <strong>{date}</strong>
         </p>
         <button className="compare-years" type="button" disabled={!compare} aria-expanded={compareOpen && Boolean(compare)} aria-haspopup={mobile ? "dialog" : undefined} aria-controls={compareOpen && compare ? "compare-years" : undefined} onClick={() => setCompareOpen((value) => !value)}>
@@ -114,11 +117,7 @@ export function MapSeasonPlayer() {
               {years.map((year) => <option key={year} value={year}>{year}</option>)}
             </select>
           </label>
-          <p className="faint">
-            {hasDailyBalance(compare)
-              ? (translate(lang, "mapSeasonPlayer.similarYearsUsedSimulation"))
-              : (translate(lang, "mapSeasonPlayer.thisResultHasFiguresFull"))}
-          </p>
+          {hasDailyBalance(compare) ? <p className="faint">{translate(lang, "mapSeasonPlayer.similarYearsUsedSimulation")}</p> : null}
           <Link className="year-results" to={{ pathname: "/temporada", search: params.toString() }}>
             {translate(lang, "mapSeasonPlayer.viewSeasonResults")}
           </Link>

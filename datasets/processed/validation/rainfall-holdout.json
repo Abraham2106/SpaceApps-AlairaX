@@ -1,0 +1,148 @@
+{
+  "status": "registered_awaiting_future_observations",
+  "registered_at_utc": "2026-11-15T11:18:50.295504+00:00",
+  "horizon_days": 7,
+  "target_unit": "mm",
+  "forecast_origin_start": "2026-11-15",
+  "forecast_origin_end": "2027-11-14",
+  "training_labels_latest": "2017-12-31",
+  "validation_start": "2018-01-01",
+  "previously_inspected_evaluation_start": "2023-01-01",
+  "model_file": "datasets/processed/validation/rainfall-frozen-model.ubj",
+  "model_sha256": "23a87dbf8f7eb0ef1c1953bd2a5238787f6fde630bf657feca47053138e415ef",
+  "trainer_file": "datasets/processed/validation/rainfall-frozen-trainer.py",
+  "trainer_sha256": "991eab9adfc9216cf7d0b5290d4cc4ff9649e72a1abd8193470da9b0d9812a2e",
+  "features": [
+    "rain_7d_mm",
+    "rain_15d_mm",
+    "rain_30d_mm",
+    "rain_90d_mm",
+    "tmin_c",
+    "tmax_c",
+    "relative_humidity_pct",
+    "wind_speed_2m_m_s",
+    "solar_radiation_mj_m2_day",
+    "month"
+  ],
+  "model_report": {
+    "task": "rainfall",
+    "target": "rain_next_7d_mm",
+    "label_source": "NASA POWER gridded rainfall",
+    "_mock": false,
+    "data_sha256": "6cef329d031233b254414b808031134e2bcb77670a44853f76f3a20b5886e121",
+    "trainer_sha256": "991eab9adfc9216cf7d0b5290d4cc4ff9649e72a1abd8193470da9b0d9812a2e",
+    "hardware": "CPU",
+    "device": "cpu",
+    "xgboost_version": "3.4.1",
+    "parameters": {
+      "device": "cpu",
+      "tree_method": "hist",
+      "objective": "reg:squarederror",
+      "eval_metric": "mae",
+      "max_depth": 4,
+      "eta": 0.05,
+      "seed": 42,
+      "nthread": 4
+    },
+    "validation_start": "2018-01-01",
+    "test_start": "2023-01-01",
+    "tolerance": 10,
+    "round_limit": 500,
+    "patience": 40,
+    "seconds_limit": 120,
+    "split_counts": {
+      "train": 13507,
+      "validation": 1819,
+      "test": 1404
+    },
+    "purged_rows": 14,
+    "best_round": 70,
+    "test": {
+      "n": 1404,
+      "mae": 33.40428180853865,
+      "rmse": 94.93747655281572,
+      "within_tolerance_pct": 43.09116809116809
+    },
+    "baseline": {
+      "n": 1404,
+      "mae": 34.22501424501424,
+      "rmse": 101.88152431855106,
+      "within_tolerance_pct": 52.77777777777778
+    },
+    "test_by_year": {
+      "2023": {
+        "n": 365,
+        "mae": 17.411536429248446,
+        "rmse": 25.620755245598144,
+        "within_tolerance_pct": 46.849315068493155
+      },
+      "2024": {
+        "n": 366,
+        "mae": 59.98634749574089,
+        "rmse": 167.6779112512637,
+        "within_tolerance_pct": 41.80327868852459
+      },
+      "2025": {
+        "n": 365,
+        "mae": 33.28936828321954,
+        "rmse": 69.25617650136053,
+        "within_tolerance_pct": 37.26027397260274
+      },
+      "2026": {
+        "n": 308,
+        "mae": 20.905124206806153,
+        "rmse": 34.83388013151498,
+        "within_tolerance_pct": 47.07792207792208
+      }
+    },
+    "numeric_features": [
+      "rain_7d_mm",
+      "rain_15d_mm",
+      "rain_30d_mm",
+      "rain_90d_mm",
+      "tmin_c",
+      "tmax_c",
+      "relative_humidity_pct",
+      "wind_speed_2m_m_s",
+      "solar_radiation_mj_m2_day",
+      "month"
+    ],
+    "categorical_vocabulary": {},
+    "reload_verified": true
+  },
+  "primary_target": "POWER precipitation accumulated on origin+1 through origin+7",
+  "secondary_target": "Liberia CS000078774 station accumulation on identical seven dates, subject to observed coverage and day-boundary comparability",
+  "primary_metric": "MAE in mm, paired model and training-only monthly median",
+  "secondary_metrics": [
+    "RMSE_mm",
+    "bias_mm",
+    "within_10mm_pct"
+  ],
+  "strata": {
+    "dry_months": [
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "wet_months": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  "issuance_rule": "Save a timestamped prediction and exact input snapshot before the first target day begins in America/Costa_Rica. Exclude late predictions and origins with unavailable features. Record source publication time and input date.",
+  "feature_availability": "Only predictors published at issuance are eligible. A nominal cutoff with unpublished POWER values cannot be retrospectively issued.",
+  "baseline_rule": "Use monthly medians calculated only from the original pre-2018 training examples with the original boundary purge.",
+  "independent_sampling": "Primary operational summary uses weeks whose seven target dates do not overlap. Report all available issued forecasts separately.",
+  "selection_rule": "Model and feature schema are frozen before observing these labels. Evaluate any retrained model as a separate registered experiment.",
+  "success_rule": "Report the signed paired MAE difference overall and by season, sample coverage and tolerances. Do not infer irrigation benefit from rainfall error alone.",
+  "missing_data_rule": "No imputation of station totals. Require all seven valid daily records. Zero rainfall is valid.",
+  "collection_status": "Protocol registered. No forecasts have been issued for the reserved period yet.",
+  "future_observations_available": false
+}

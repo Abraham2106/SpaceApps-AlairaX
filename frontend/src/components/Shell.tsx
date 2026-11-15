@@ -65,9 +65,6 @@ export function Shell() {
     if (next.toString() !== params.toString()) setParams(next, { replace: true });
   }, [scenarioId, metric, theme, lang, selected, yearA, yearB, basemap, imageryDate, params, setParams, toParams]);
 
-  const mock = comparison.data?.compare?._mock ?? comparison.data?.catalog.mock ?? false;
-  const currentResult = comparison.data?.compare;
-  const regional = currentResult && !currentResult._mock && !currentResult.zona.validated;
   const liveFailure = comparison.data?.mode === "live" && comparison.data.httpStatus !== 200;
 
   return (
@@ -127,18 +124,6 @@ export function Shell() {
               />
             </>}
             <span className="spacer" />
-            {mock && !liveFailure ? (
-              <p className="chip" role="status">
-                <strong>{translate(lang, "shell.sample")}</strong>
-                <span className="chip-note">{translate(lang, "shell.syntheticData")}</span>
-              </p>
-            ) : null}
-            {regional && !isReplay && (
-              <p className="chip chip-regional" role="status">
-                <strong>{translate(lang, "shell.regionalPilot")}</strong>
-                <span className="chip-note">{translate(lang, "shell.validationPending")}</span>
-              </p>
-            )}
             {liveFailure ? (
               <p className="chip chip-live" role="status">
                 <strong>HTTP {comparison.data?.httpStatus}</strong>

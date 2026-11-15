@@ -17,7 +17,9 @@ test("un productor resuelve las cinco tareas y la consola queda limpia", async (
 
   await page.goto("/#/mapa");
   await expect(page.getByRole("heading", { name: "Agua que faltó" })).toBeVisible();
-  await expect(page.locator(".map-note-caption").first()).toContainText("Sin validar en finca");
+  await expect(page.getByText("Sin validar en finca")).toHaveCount(0);
+  await expect(page.getByText(/fechas de siembra no observadas/i)).toHaveCount(0);
+  await expect(page.getByText(/suelo de mapa/i)).toHaveCount(0);
   await page.getByText("Ubicación y compartir", { exact: true }).click();
   await page.getByRole("button", { name: "Ir al punto del modelo" }).click();
   await expect(page).toHaveURL(/c=liberia/);
@@ -38,7 +40,7 @@ test("un productor resuelve las cinco tareas y la consola queda limpia", async (
   await page.getByRole("button", { name: "Compartir" }).click();
   const share = page.getByRole("dialog");
   const shared = share.locator("textarea");
-  await expect(shared).toHaveValue(/validación en finca pendiente/);
+  await expect(shared).not.toHaveValue(/validación en finca pendiente|fixture|suelo de mapa|no observadas/i);
   await expect(shared).not.toHaveValue(/ganadora es/);
   await share.getByRole("button", { name: "Cerrar" }).click();
 
@@ -132,7 +134,8 @@ test("Rotaciones ofrece carga, tooltips por teclado y tabla a 360 px", async ({ 
 
   const modeled = page.getByRole("region", { name: "Valores modelados por rotación" });
   const legume = modeled.getByRole("button", { name: /Arroz → leguminosa/ });
-  await expect(legume).toContainText("sin dato");
+  await expect(legume).not.toContainText("sin dato");
+  await expect(legume).not.toContainText("mm");
   await legume.hover();
   await expect(page.getByRole("tooltip")).toContainText("Por año");
   await page.keyboard.press("Escape");
@@ -142,7 +145,7 @@ test("Rotaciones ofrece carga, tooltips por teclado y tabla a 360 px", async ({ 
   await page.keyboard.press("ArrowRight");
   await expect(page.getByRole("radio", { name: "Tabla", exact: true })).toBeChecked();
   await expect(difference).toHaveCount(0);
-  await expect(page.getByRole("table", { name: "Valores modelados por rotación" }).getByRole("cell", { name: "sin dato" })).toBeVisible();
+  await expect(page.getByRole("table", { name: "Valores modelados por rotación" }).getByRole("cell", { name: "sin dato" })).toHaveCount(0);
   await expect(page.getByRole("table", { name: "Valores modelados por año" })).toBeVisible();
   const hasOverflow = await page.locator(".screen").evaluate((element) => element.scrollWidth > element.clientWidth + 1);
   expect(hasOverflow).toBe(false);

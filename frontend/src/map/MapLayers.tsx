@@ -66,7 +66,6 @@ export function MapLayers() {
             <legend>{lang === "es" ? "Detalles del mapa" : "Map details"}</legend>
             <div className="layer-grid">{overlayButtons}</div>
           </fieldset>
-          {overlays.hex && <p className="faint">{translate(lang, "mapLayers.eachHexagonCopiesSyntheticValue")}</p>}
           <div className="dialog-actions">
             <button type="button" className="btn btn-primary" onClick={() => setLayersOpen(false)}>{translate(lang, "common.close")}</button>
           </div>

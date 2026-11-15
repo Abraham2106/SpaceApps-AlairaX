@@ -1,4 +1,4 @@
-"""Export 2022–2026 daily pilot replays for the recent-season selectors."""
+"""Export 2017–2026 daily pilot replays for the year selectors."""
 
 from datetime import date
 import json
@@ -26,13 +26,13 @@ def main():
     for path in sorted((ROOT / 'datasets/processed/recent-climate').glob('power-*.json')):
         document = json.loads(path.read_bytes())
         documents[date.fromisoformat(document['start']).year] = document
-    rows = {row['date']: row for year, doc in documents.items() if year >= 2021 for row in doc['days']}
-    sources = sorted({ref for year, doc in documents.items() if year >= 2021 for ref in doc['source_refs']})
+    rows = {row['date']: row for year, doc in documents.items() if year >= 2016 for row in doc['days']}
+    sources = sorted({ref for year, doc in documents.items() if year >= 2016 for ref in doc['source_refs']})
     last_available = max(day for day, row in rows.items()
                          if row['precipitation_mm'] is not None and row['tmax_c'] is not None)
     base_year = min(setup.rotations_by_year)
     seasons = []
-    for year in range(2022, 2027):
+    for year in range(2017, 2027):
         start = date(year, 1, 1)
         warmup = date(year - 1, 5, 1)
         end = min(date(year, 12, 31), date.fromisoformat(last_available))
