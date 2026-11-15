@@ -1,5 +1,7 @@
 # NandaView · AlairaX
 
+[English](README.en.md)
+
 **Un laboratorio de decisiones agrícolas para Guanacaste, Costa Rica.**
 
 NandaView ayuda a explorar cómo distintas rotaciones de cultivo podrían responder a condiciones climáticas históricas. Combina datos públicos, un modelo de balance hídrico y visualizaciones interactivas para que productores y equipos técnicos puedan entender las diferencias entre escenarios y formular mejores preguntas para su finca.
