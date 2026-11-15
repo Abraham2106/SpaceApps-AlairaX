@@ -1,3 +1,4 @@
+import { translate } from "../lib/i18n";
 import { useEffect, useId, useState } from "react";
 import type { CompareResponse, Lang, MetricId, RotationComparison, RotationId } from "../lib/types";
 import { formatNumber, formatSigned, formatValue, metricUnit } from "../lib/format";
@@ -24,7 +25,6 @@ function RotationPlot({ rows, difference, metric, lang, format }: {
 }) {
   const chartId = useId();
   const [active, setActive] = useState<RotationId | null>(null);
-  const spanish = lang === "es";
   const values = rows.flatMap(({ summary, annual }) => [
     summary.p10, summary.p50, summary.p90, ...annual.map(({ value }) => value),
   ]).filter((value) => value !== null);
@@ -45,7 +45,7 @@ function RotationPlot({ rows, difference, metric, lang, format }: {
   }, [active]);
 
   if (values.length === 0) {
-    return <p className="chart-empty">{spanish ? "sin dato para esta métrica" : "no data for this metric"}</p>;
+    return <p className="chart-empty">{translate(lang, "charts.noDataThisMetric")}</p>;
   }
 
   return (
@@ -65,7 +65,6 @@ function RotationPlot({ rows, difference, metric, lang, format }: {
               <button
                 type="button"
                 className="chart-reading"
-                aria-labelledby={`${tooltipId}-name`}
                 aria-describedby={tooltipId}
                 onFocus={() => setActive(id)}
                 onBlur={close}
@@ -74,7 +73,7 @@ function RotationPlot({ rows, difference, metric, lang, format }: {
                 <span className="chart-reading-header">
                   <span className="chart-rotation">
                     <span className="chart-swatch" style={{ borderTopStyle: ROTATION_STYLE[id].swatch }} aria-hidden />
-                    <span id={`${tooltipId}-name`}>{name}</span>
+                    <span>{name}</span>
                   </span>
                   <strong>{format(p50)}</strong>
                 </span>
@@ -96,12 +95,12 @@ function RotationPlot({ rows, difference, metric, lang, format }: {
               <div className="chart-tooltip" role="tooltip" id={tooltipId} hidden={active !== id}>
                 <dl>
                   <div><dt>p10</dt><dd>{format(p10)}</dd></div>
-                  <div><dt>{spanish ? "Mediana (p50)" : "Median (p50)"}</dt><dd>{format(p50)}</dd></div>
+                  <div><dt>{translate(lang, "charts.medianP50")}</dt><dd>{format(p50)}</dd></div>
                   <div><dt>p90</dt><dd>{format(p90)}</dd></div>
-                  <div><dt>{spanish ? "Años en la muestra" : "Years in the sample"}</dt><dd>{n}</dd></div>
+                  <div><dt>{translate(lang, "common.sampleYears")}</dt><dd>{n}</dd></div>
                 </dl>
                 {annual.length > 0 ? (
-                  <p>{spanish ? "Por año" : "By year"} · {annual.map(({ year, value }) => `${year} · ${format(value)}`).join(" / ")}</p>
+                  <p>{translate(lang, "common.byYear")} · {annual.map(({ year, value }) => `${year} · ${format(value)}`).join(" / ")}</p>
                 ) : null}
               </div>
             </li>
@@ -124,13 +123,12 @@ function RotationTable({ rows, title, lang, format }: {
   lang: Lang;
   format: ValueFormat;
 }) {
-  const spanish = lang === "es";
   return (
     <table className="rotation-table">
       <caption>{title}</caption>
       <thead>
         <tr>
-          <th scope="col">{spanish ? "Rotación" : "Rotation"}</th>
+          <th scope="col">{translate(lang, "common.rotation")}</th>
           <th scope="col">p10</th>
           <th scope="col">p50</th>
           <th scope="col">p90</th>
@@ -141,7 +139,7 @@ function RotationTable({ rows, title, lang, format }: {
           <tr key={id}>
             <th scope="row">
               {name}
-              <small>{spanish ? "Años en la muestra" : "Years in the sample"} · {summary.n}</small>
+              <small>{translate(lang, "common.sampleYears")} · {summary.n}</small>
             </th>
             <td>{format(summary.p10)}</td>
             <td>{format(summary.p50)}</td>
@@ -158,12 +156,11 @@ export function ComparisonViewPicker({ view, onChange, lang }: {
   onChange: (value: ComparisonView) => void;
   lang: Lang;
 }) {
-  const spanish = lang === "es";
-  return <RadioGroup label={spanish ? "Vista de los datos" : "Data view"} value={view} onChange={onChange}
+  return <RadioGroup label={translate(lang, "charts.dataView")} value={view} onChange={onChange}
     className="comparison-picker"
     options={[
-      { value: "chart", label: spanish ? "Gráfico" : "Chart" },
-      { value: "table", label: spanish ? "Tabla" : "Table" },
+      { value: "chart", label: translate(lang, "charts.chart") },
+      { value: "table", label: translate(lang, "charts.table") },
     ]}
   />;
 }
@@ -176,7 +173,6 @@ export function ComparisonResults({ compare, metric, lang, names, view }: {
   view: ComparisonView;
 }) {
   const sectionId = useId();
-  const spanish = lang === "es";
   const baseline = rotationName(compare.baseline_rotation_id, lang, names[compare.baseline_rotation_id]);
   const rotations = ROTATION_ORDER.flatMap((id) => {
     const rotation = compare.rotations.find((item) => item.rotation_id === id);
@@ -189,7 +185,7 @@ export function ComparisonResults({ compare, metric, lang, names, view }: {
   })));
 
   if (rotations.length === 0) {
-    return <p className="chart-empty">{spanish ? "sin dato para esta comparación" : "no data for this comparison"}</p>;
+    return <p className="chart-empty">{translate(lang, "charts.noDataThisComparison")}</p>;
   }
 
   return (
@@ -197,8 +193,8 @@ export function ComparisonResults({ compare, metric, lang, names, view }: {
       {[true, false].map((difference) => {
         const id = `${sectionId}-${difference ? "difference" : "level"}`;
         const title = difference
-          ? (spanish ? `Diferencia frente a ${baseline}` : `Difference from ${baseline}`)
-          : (spanish ? "Valores modelados por rotación" : "Modeled values by rotation");
+          ? (translate(lang, "charts.differenceFrom", { baseline }))
+          : (translate(lang, "charts.modeledValuesRotation"));
         const rows = rotations.map((rotation) => ({
           id: rotation.rotation_id,
           name: rotationName(rotation.rotation_id, lang, names[rotation.rotation_id]),
@@ -214,8 +210,10 @@ export function ComparisonResults({ compare, metric, lang, names, view }: {
             <h2 id={id}>{title}</h2>
             <p className="chart-guide">
               {difference
-                ? (spanish ? "Cero marca la referencia. Un valor negativo indica una cifra modelada más baja." : "Zero marks the reference. A negative value indicates a lower modeled figure.")
-                : (spanish ? "La escala empieza en cero. Los puntos muestran las cifras de cada año." : "The scale starts at zero. Dots show the figures for each year.")}
+                ? (translate(lang, "charts.zeroMarksReferenceNegativeValue"))
+                : (translate(lang, "charts.scaleStartsZeroDotsShow"))}
+              {difference && rows.every(({ summary }) => summary.p10 !== null && summary.p10 === summary.p90)
+                ? " " + translate(lang, "charts.equalRange") : ""}
             </p>
             <RotationPlot rows={rows} difference={difference} metric={metric} lang={lang} format={format} />
           </section>
@@ -223,12 +221,12 @@ export function ComparisonResults({ compare, metric, lang, names, view }: {
       })}
       {view === "table" && annual.length > 0 ? (
         <table className="rotation-table">
-          <caption>{spanish ? "Valores modelados por año" : "Modeled values by year"}</caption>
+          <caption>{translate(lang, "charts.modeledValuesYear")}</caption>
           <thead>
             <tr>
-              <th scope="col">{spanish ? "Rotación" : "Rotation"}</th>
-              <th scope="col">{spanish ? "Año" : "Year"}</th>
-              <th scope="col">{spanish ? "Valor" : "Value"}</th>
+              <th scope="col">{translate(lang, "common.rotation")}</th>
+              <th scope="col">{translate(lang, "charts.year")}</th>
+              <th scope="col">{translate(lang, "charts.value")}</th>
             </tr>
           </thead>
           <tbody>

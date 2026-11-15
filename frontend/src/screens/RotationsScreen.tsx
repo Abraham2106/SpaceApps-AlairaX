@@ -1,3 +1,5 @@
+import { translate } from "../lib/i18n";
+import { comparisonError } from "../lib/api";
 import { useState } from "react";
 import { ComparisonResults, ComparisonSkeleton, ComparisonViewPicker, type ComparisonView } from "../components/Charts";
 import { Ledger } from "../components/Ledger";
@@ -9,7 +11,6 @@ import { useInstrument } from "../store";
 export function RotationsScreen() {
   const lang = useInstrument((state) => state.lang);
   const metric = useInstrument((state) => state.metric);
-  const spanish = lang === "es";
   const [view, setView] = useState<ComparisonView>("chart");
   const comparison = useComparison();
   const loaded = comparison.data;
@@ -25,11 +26,11 @@ export function RotationsScreen() {
         </header>
         {view === "chart" ? (
           <p className="comparison-key">
-            {spanish ? "Banda de p10 a p90 · Raya en la mediana (p50)" : "Band from p10 to p90 · Tick at the median (p50)"}
+            {translate(lang, "rotations.bandFromP10P90Tick")}
           </p>
         ) : null}
         <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
-        {loaded && !compare ? <p className="warn" role="alert">{loaded.httpDetail}</p> : null}
+        {loaded && !compare ? <p className="warn" role="alert">{comparisonError(loaded, lang)}</p> : null}
         <div aria-busy={comparison.isPending}>
           {comparison.isPending ? <ComparisonSkeleton view={view} /> : null}
           {compare ? <ComparisonResults compare={compare} metric={metric} lang={lang} names={names} view={view} /> : null}
@@ -38,7 +39,7 @@ export function RotationsScreen() {
           <>
             <p className="comparison-note">{readingNotes(lang, compare.scenario_id === "like_2026")}</p>
             <details className="comparison-ledger">
-              <summary>{spanish ? "Registro del cálculo" : "Calculation record"}</summary>
+              <summary>{translate(lang, "common.calculationRecord")}</summary>
               <Ledger loaded={loaded} lang={lang} />
             </details>
           </>

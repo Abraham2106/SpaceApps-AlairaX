@@ -7,26 +7,20 @@ import {
   liveRotationLibrarySchema,
   sourcesSchema,
 } from "./schemas";
-import type { Catalog, CompareResponse, LoadedComparison, ScenarioChoice, ScenarioId, Zone } from "./types";
+import { translate } from "./i18n";
+import type { Catalog, CompareResponse, Lang, LoadedComparison, ScenarioChoice, ScenarioId, Zone } from "./types";
 import { SCENARIO_IDS } from "./types";
 
 export class ApiError extends Error {
   status: number;
-  detail: string;
+  detail: string | null;
 
-  constructor(status: number, detail: string) {
-    super(detail);
+  constructor(status: number, detail: string | null) {
+    super(detail ?? `HTTP ${status}`);
     this.status = status;
     this.detail = detail;
   }
 }
-
-const SCENARIO_LABEL: Record<ScenarioId, string> = {
-  strong_el_nino: "Niño fuerte",
-  neutral: "Neutro",
-  la_nina: "Niña",
-  like_2026: "Como 2026",
-};
 
 function isScenarioId(value: string): value is ScenarioId {
   return (SCENARIO_IDS as readonly string[]).includes(value);
@@ -40,13 +34,17 @@ async function readJson(url: string, signal?: AbortSignal): Promise<unknown> {
   return response.json();
 }
 
-function detailOf(body: unknown): string {
+function detailOf(body: unknown): string | null {
   if (body && typeof body === "object" && "detail" in body) {
     const detail = (body as { detail: unknown }).detail;
-    if (typeof detail === "string") return detail;
+    if (typeof detail === "string") return detail || null;
     if (detail != null) return JSON.stringify(detail);
   }
-  return "La API no explicó el fallo.";
+  return null;
+}
+
+export function comparisonError(loaded: LoadedComparison | undefined, lang: Lang): string | null {
+  return loaded?.httpDetail ?? (loaded?.httpDetailKey ? translate(lang, loaded.httpDetailKey) : null);
 }
 
 export function publicUrl(path: string): string {
@@ -97,7 +95,7 @@ async function liveCatalog(base: string, signal?: AbortSignal): Promise<Catalog>
     if (!isScenarioId(id)) continue;
     choices.push({
       id,
-      name: SCENARIO_LABEL[id],
+      name: translate("es", `scenario.${id}`),
       k: item.k,
       status: item.status,
       reason: item.reason ?? null,
@@ -175,7 +173,8 @@ export async function loadComparison(apiBase: string, scenarioId: ScenarioId, si
       catalog,
       compare: null,
       httpStatus: 404,
-      httpDetail: "Ese escenario no está en el catálogo.",
+      httpDetail: null,
+      httpDetailKey: "api.scenarioMissing",
     };
   }
   try {
@@ -189,6 +188,7 @@ export async function loadComparison(apiBase: string, scenarioId: ScenarioId, si
         compare: null,
         httpStatus: error.status,
         httpDetail: error.detail,
+        httpDetailKey: error.detail ? undefined : "api.noErrorDetail",
       };
     }
     throw error;

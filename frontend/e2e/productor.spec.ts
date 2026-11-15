@@ -25,7 +25,7 @@ test("un productor resuelve las cinco tareas y la consola queda limpia", async (
   await expect(page.locator(".reading-lead")).toContainText("en el punto del modelo");
   const modeledValue = await page.locator(".readout").innerText();
   await page.getByRole("option", { name: "Cañas" }).click();
-  await expect(page.locator(".readout")).toHaveText(modeledValue);
+  await expect(page.locator(".readout")).toHaveText(modeledValue, { useInnerText: true });
   await expect(page.getByText(/Las cifras no indican rendimiento/)).toBeHidden();
   await page.getByText("Leer más").click();
   await expect(page.getByText(/Las cifras no indican rendimiento/)).toBeVisible();
@@ -94,6 +94,7 @@ test("el reproductor y los controles del mapa caben a 768 px", async ({ page }) 
 
   const slider = page.getByRole("slider", { name: "Temporada, abril a diciembre" });
   const compareYears = page.getByRole("button", { name: "Comparar años" });
+  await expect(page.getByRole("button", { name: "Capas", exact: true })).toBeVisible();
   expect((await slider.boundingBox())?.width).toBeGreaterThanOrEqual(240);
   await expect(compareYears).toHaveCSS("white-space", "nowrap");
   await compareYears.click();
@@ -145,7 +146,7 @@ test("Rotaciones ofrece carga, tooltips por teclado y tabla a 360 px", async ({ 
 
   await picker.focus();
   await page.keyboard.press("Tab");
-  const reference = difference.getByRole("button", { name: "Arroz → melón" });
+  const reference = difference.getByRole("button", { name: /^Arroz → melón/ });
   await expect(reference).toBeFocused();
   await expect(reference).toHaveAccessibleDescription(/Mediana \(p50\) 0 mm/);
   await expect(page.getByRole("tooltip")).toBeVisible();
@@ -203,7 +204,122 @@ test("la fase 6 conserva las fechas provisionales y la navegación de los canton
   await expect(page.getByRole("img", { name: "Límite de Cañas" })).toBeVisible();
   await page.getByRole("link", { name: "Ver cantón en el mapa" }).click();
   await expect(page.getByRole("option", { name: "Cañas", exact: true })).toHaveAttribute("aria-selected", "true");
-  await expect(page.locator(".readout")).toHaveText("120 mm");
+  await expect(page.locator(".readout")).toContainText("120 mm");
+});
+
+test("la fase 7 traduce los avisos activos y descarga el mapa al abrirlo", async ({ page }) => {
+  const mapAssets: string[] = [];
+  const mapAsset = /\/assets\/NandaMap-[^/]+\.(?:js|css)$/;
+  page.on("request", (request) => {
+    if (mapAsset.test(new URL(request.url()).pathname)) mapAssets.push(request.url());
+  });
+  let release = () => {};
+  const held = new Promise<void>((resolve) => { release = resolve; });
+  await page.route(/\/assets\/NandaMap-[^/]+\.js$/, async (route) => {
+    await held;
+    await route.continue();
+  });
+
+  try {
+    await page.goto("/#/confianza");
+    await expect(page.getByText("reviewed: false")).toBeVisible();
+    await expect(page.getByRole("application")).toHaveCount(0);
+    expect(mapAssets).toEqual([]);
+
+    const address = page.getByLabel("Dirección de la API");
+    await address.fill("api-invalida");
+    await address.press("Enter");
+    await expect(page.getByRole("alert")).toContainText("La dirección debe empezar");
+    await page.getByRole("button", { name: /Cambiar a inglés/ }).click();
+    await expect(page.locator("html")).toHaveAttribute("lang", "en");
+    await expect(page.getByRole("heading", { name: "Trust and provenance" })).toBeVisible();
+    await expect(page.getByRole("alert")).toContainText("The address must start");
+    expect(mapAssets).toEqual([]);
+
+    await page.getByRole("link", { name: "Map", exact: true }).click();
+    await expect(page.getByText("Loading the map…")).toBeVisible();
+    await expect.poll(() => mapAssets.length).toBeGreaterThan(0);
+  } finally {
+    release();
+  }
+
+  await expect(page.getByRole("application", { name: /^Map of Costa Rica/ })).toBeVisible();
+  await page.getByRole("button", { name: "Share", exact: true }).click();
+  await expect(page.getByRole("textbox", { name: "Text to share" })).toHaveValue(/Strong El Niño/);
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: /Switch to Spanish/ }).click();
+  await expect(page.locator("html")).toHaveAttribute("lang", "es");
+  await expect(page.getByRole("application", { name: /^Mapa de Costa Rica/ })).toBeVisible();
+});
+
+test("Saltar al contenido lleva el foco al área principal sin cambiar de ruta", async ({ page }) => {
+  await page.goto("/#/confianza");
+  await expect(page.getByRole("heading", { name: "Confianza y procedencia" })).toBeVisible();
+  await expect(page).toHaveURL(/#\/confianza\?/);
+  const route = page.url();
+  await page.keyboard.press("Tab");
+  const skip = page.getByRole("link", { name: "Saltar al contenido" });
+  await expect(skip).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("main")).toBeFocused();
+  await expect(page).toHaveURL(route);
+});
+
+test("captura rotations error desktop y recupera al reintentar", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.route("**/data/compare-strong_el_nino.json", (route) => route.fulfill({ status: 503 }), { times: 1 });
+  await page.goto("/#/rotaciones");
+  await expect(page.getByRole("alert")).toContainText("No se pudo leer la comparación");
+  mkdirSync(shots, { recursive: true });
+  await page.screenshot({ path: resolve(shots, "rotations-error-desktop.png") });
+  await page.getByRole("button", { name: "Reintentar" }).click();
+  await expect(page.getByRole("region", { name: /Diferencia frente a/ })).toBeVisible();
+});
+
+test("el calendario y la búsqueda del mapa siguen disponibles a 360 px", async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 740 });
+  await page.goto("/#/");
+  await expect(page.locator(".readout")).toContainText("120 mm");
+  await expect(page.locator(".map-legend")).toHaveCount(0);
+
+  const slider = page.getByRole("slider", { name: "Temporada, abril a diciembre" });
+  expect((await slider.boundingBox())?.width).toBeGreaterThan(260);
+  const firstDate = await slider.getAttribute("aria-valuetext");
+  await slider.press("ArrowRight");
+  await expect(slider).not.toHaveAttribute("aria-valuetext", firstDate!);
+  await expect(page.getByText("Calendario provisional", { exact: true })).toBeVisible();
+
+  const handle = page.getByRole("slider", { name: "Alto de la ficha" });
+  await handle.press("End");
+  await page.getByRole("button", { name: "Comparar años" }).click();
+  const years = page.getByRole("dialog", { name: "Comparar años" });
+  await expect(years).toBeInViewport();
+  await expect(years.getByRole("link", { name: "Ver cifras en Temporada" })).toBeVisible();
+  await years.getByRole("button", { name: "Cerrar" }).click();
+  await page.getByRole("button", { name: "Ocultar", exact: true }).click();
+  await expect(handle).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Lectura", exact: true })).toBeInViewport();
+
+  const search = page.getByRole("textbox", { name: "Buscar cantón" });
+  await search.fill("sin resultados 123");
+  await expect(page.getByText("No hay cantones que coincidan con la búsqueda.")).toBeVisible();
+  await search.fill("San José");
+  await page.getByRole("listbox", { name: "Resultados de cantones" }).getByRole("option", { name: /^San José.*sin simulación/ }).click();
+  await expect(page.getByRole("search").getByRole("status")).toHaveText("San José: sin simulación disponible.");
+  await search.fill("Cañas");
+  const results = page.getByRole("listbox", { name: "Resultados de cantones" });
+  const canas = results.getByRole("option", { name: "Cañas", exact: true });
+  await expect(canas).toBeInViewport();
+  await search.press("Enter");
+  await expect(canas).toBeFocused();
+  await canas.press("Enter");
+  await expect(results).toHaveCount(0);
+  await expect(page).toHaveURL(/c=canas/);
+
+  await page.getByRole("button", { name: "Capas", exact: true }).click();
+  await page.getByRole("dialog").getByRole("button", { name: "Malla de prueba" }).click();
+  await page.getByRole("dialog").getByRole("button", { name: "Cerrar" }).click();
+  await expect(page.locator(".map-legend")).toBeVisible();
 });
 
 const views = [

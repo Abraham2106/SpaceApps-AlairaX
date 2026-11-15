@@ -73,10 +73,10 @@ export function surfaceColor(value: number, min: number, max: number): string {
   return mixHex(GREEN[low], GREEN[high], scaled - low);
 }
 
-function matchColor(key: "id" | "canton", surface: Surface | undefined, metric: MetricId) {
+export function hexPaint(surface: Surface | undefined, metric: MetricId) {
   if (!surface) return "#1c2823" as const;
   const [min, max] = surfaceDomain(surface, metric);
-  const expression: unknown[] = ["match", ["get", key]];
+  const expression: unknown[] = ["match", ["get", "canton"]];
   for (const [id, metrics] of Object.entries(surface.cantons)) {
     expression.push(id, surfaceColor(metrics[metric].rice_melon, min, max));
   }
@@ -84,30 +84,14 @@ function matchColor(key: "id" | "canton", surface: Surface | undefined, metric: 
   return expression as maplibregl.ExpressionSpecification;
 }
 
-function matchHeight(key: "id" | "canton", surface: Surface | undefined, metric: MetricId) {
+export function hexHeight(surface: Surface | undefined, metric: MetricId) {
   if (!surface) return 0;
   const [min, max] = surfaceDomain(surface, metric);
-  const expression: unknown[] = ["match", ["get", key]];
+  const expression: unknown[] = ["match", ["get", "canton"]];
   for (const [id, metrics] of Object.entries(surface.cantons)) {
     const t = (metrics[metric].rice_melon - min) / (max - min || 1);
     expression.push(id, Math.round(480 + t * 2600));
   }
   expression.push(0);
   return expression as maplibregl.ExpressionSpecification;
-}
-
-export function cantonPaint(surface: Surface | undefined, metric: MetricId) {
-  return matchColor("id", surface, metric);
-}
-
-export function hexPaint(surface: Surface | undefined, metric: MetricId) {
-  return matchColor("canton", surface, metric);
-}
-
-export function cantonHeight(surface: Surface | undefined, metric: MetricId) {
-  return matchHeight("id", surface, metric);
-}
-
-export function hexHeight(surface: Surface | undefined, metric: MetricId) {
-  return matchHeight("canton", surface, metric);
 }

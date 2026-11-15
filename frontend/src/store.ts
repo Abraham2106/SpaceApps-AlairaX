@@ -1,6 +1,13 @@
 import { create } from "zustand";
 import type { BasemapId, Lang, MetricId, ScenarioId, ThemeName } from "./lib/types";
 import { METRIC_IDS, SCENARIO_IDS } from "./lib/types";
+import type { LocalizedMessage } from "./lib/i18n";
+
+export function isCantonBoundaryMessage(message: LocalizedMessage | null): message is LocalizedMessage & {
+  key: "mapReading.noSimulationAvailable" | "nandaMap.noSimulationAvailableModelStays";
+} {
+  return message?.key === "mapReading.noSimulationAvailable" || message?.key === "nandaMap.noSimulationAvailableModelStays";
+}
 
 export type Overlays = {
   cantons: boolean;
@@ -26,11 +33,12 @@ type Store = {
   basemap: BasemapId;
   overlays: Overlays;
   selected: string[];
+  selectedCenter: [number, number] | null;
   yearA: number | null;
   yearB: number | null;
   apiBase: string;
   location: LocationFix | null;
-  locationMessage: string | null;
+  locationMessage: LocalizedMessage | null;
   hovered: string | null;
   setScenario: (id: ScenarioId) => void;
   setMetric: (id: MetricId) => void;
@@ -39,10 +47,10 @@ type Store = {
   setBasemap: (id: BasemapId) => void;
   toggleOverlay: (key: keyof Overlays) => void;
   toggleCanton: (id: string, extend: boolean) => void;
-  selectOnly: (id: string) => void;
+  selectOnly: (id: string, center?: [number, number]) => void;
   setYears: (yearA: number | null, yearB: number | null) => void;
   setApiBase: (value: string) => void;
-  setLocation: (value: LocationFix | null, message: string | null) => void;
+  setLocation: (value: LocationFix | null, message: LocalizedMessage | null) => void;
   setHovered: (id: string | null) => void;
   hydrate: (params: URLSearchParams) => void;
   toParams: () => URLSearchParams;
@@ -69,6 +77,7 @@ export const useInstrument = create<Store>((set, get) => ({
   basemap: "satellite",
   overlays: { cantons: true, hex: false, terrain: true, plates: false, osm: true },
   selected: [],
+  selectedCenter: null,
   yearA: null,
   yearB: null,
   apiBase: (import.meta.env.VITE_API_URL ?? "").trim(),
@@ -89,13 +98,18 @@ export const useInstrument = create<Store>((set, get) => ({
   toggleOverlay: (key) => set({ overlays: { ...get().overlays, [key]: !get().overlays[key] } }),
   toggleCanton: (id, extend) => {
     const current = get().selected;
+    const previousMessage = get().locationMessage;
+    const locationMessage = isCantonBoundaryMessage(previousMessage) ? null : previousMessage;
     if (!extend) {
-      set({ selected: current.length === 1 && current[0] === id ? [] : [id] });
+      set({ selected: current.length === 1 && current[0] === id ? [] : [id], selectedCenter: null, locationMessage });
       return;
     }
-    set({ selected: current.includes(id) ? current.filter((item) => item !== id) : [...current, id] });
+    set({ selected: current.includes(id) ? current.filter((item) => item !== id) : [...current, id], selectedCenter: null, locationMessage });
   },
-  selectOnly: (id) => set({ selected: [id] }),
+  selectOnly: (id, center) => {
+    const message = get().locationMessage;
+    set({ selected: [id], selectedCenter: center ?? null, locationMessage: isCantonBoundaryMessage(message) ? null : message });
+  },
   setYears: (yearA, yearB) => set({ yearA, yearB }),
   setApiBase: (apiBase) => set({ apiBase: apiBase.trim() }),
   setLocation: (location, locationMessage) => set({ location, locationMessage }),

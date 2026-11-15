@@ -1,3 +1,4 @@
+import { translate } from "../lib/i18n";
 import type { Lang } from "../lib/types";
 
 /**
@@ -15,11 +16,10 @@ export function QueryState({
   onRetry: () => void;
   lang: Lang;
 }) {
-  const spanish = lang === "es";
   if (pending) {
     return (
       <div className="state state-loading" role="status">
-        <p>{spanish ? "Cargando la comparación…" : "Loading the comparison…"}</p>
+        <p>{translate(lang, "queryState.loadingComparison")}</p>
       </div>
     );
   }
@@ -27,11 +27,9 @@ export function QueryState({
     return (
       <div className="state state-error" role="alert">
         <p>
-          {spanish
-            ? "No se pudo leer la comparación. Revisa la conexión e inténtalo de nuevo."
-            : "The comparison could not be loaded. Check the connection and try again."}
+          {translate(lang, "queryState.comparisonCouldNotBeLoaded")}
         </p>
-        <button type="button" onClick={onRetry}>{spanish ? "Reintentar" : "Try again"}</button>
+        <button type="button" onClick={onRetry}>{translate(lang, "queryState.tryAgain")}</button>
       </div>
     );
   }

@@ -1,3 +1,4 @@
+import { translate } from "../lib/i18n";
 import { useEffect, useRef, useState } from "react";
 import maplibregl, { type StyleSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -5,10 +6,10 @@ import { hexMesh } from "../lib/color";
 import { boundsOf, cantonAt, guanacasteFeatures } from "../lib/geo";
 import { useCantons, useComparison } from "../data/queries";
 import { formatValue } from "../lib/format";
-import { cantonHeight, cantonPaint, hexHeight, hexPaint, useSurface } from "../lib/surface";
+import { hexHeight, hexPaint, surfaceValue, useSurface } from "../lib/surface";
 import { useInstrument } from "../store";
 import type { MetricId } from "../lib/types";
-import { isMobile } from "../lib/viewport";
+import { isMobile, isTablet } from "../lib/viewport";
 
 const EMPTY = { type: "FeatureCollection" as const, features: [] };
 
@@ -94,12 +95,12 @@ function buildStyle(): StyleSpecification {
           "fill-opacity": [
             "case",
             ["boolean", ["feature-state", "selected"], false],
-            0.7,
+            0.34,
             ["boolean", ["feature-state", "hover"], false],
-            0.62,
+            0.26,
             ["get", "guanacaste"],
-            0.55,
-            0.18,
+            0.04,
+            0,
           ],
         },
       },
@@ -283,13 +284,16 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
   const basemap = useInstrument((state) => state.basemap);
   const overlays = useInstrument((state) => state.overlays);
   const selected = useInstrument((state) => state.selected);
+  const selectedCenter = useInstrument((state) => state.selectedCenter);
   const metric = useInstrument((state) => state.metric);
   const lang = useInstrument((state) => state.lang);
   const location = useInstrument((state) => state.location);
   const toggleCanton = useInstrument((state) => state.toggleCanton);
   const setLocation = useInstrument((state) => state.setLocation);
-  surfaceRef.current = surface.data;
-  metricRef.current = metric;
+  useEffect(() => {
+    surfaceRef.current = surface.data;
+    metricRef.current = metric;
+  }, [surface.data, metric]);
 
   useEffect(() => {
     if (!container.current || mapRef.current) return;
@@ -308,31 +312,23 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     map.on("load", () => {
       ready.current = true;
       map.setTerrain(null);
-      const canvas = map.getCanvas();
-      canvas.setAttribute("role", "application");
-      const spanish = useInstrument.getState().lang === "es";
-      canvas.setAttribute(
-        "aria-label",
-        spanish
-          ? "Mapa de Costa Rica. Las flechas lo mueven. Los cantones también están en la lista."
-          : "Map of Costa Rica. Arrow keys pan. Cantons are also in the list.",
-      );
     });
-    map.on("click", "canton-fill", (event) => {
+    const cantonLayers = ["canton-fill", "canton-extrude"];
+    map.on("click", cantonLayers, (event) => {
       const feature = event.features?.[0];
       if (!feature) return;
       const guanacaste = Boolean(feature.properties.guanacaste);
       const id = String(feature.id ?? feature.properties.id);
       if (!guanacaste) {
-        const spanish = useInstrument.getState().lang === "es";
-        setLocation(useInstrument.getState().location, spanish
-          ? `${feature.properties.name}: sin simulación disponible. El modelo no sale de Guanacaste y no se extrapola.`
-          : `${feature.properties.name}: no simulation available. The model stays in Guanacaste and is not extrapolated.`);
+        setLocation(useInstrument.getState().location, {
+          key: "nandaMap.noSimulationAvailableModelStays",
+          values: { canton: feature.properties.name },
+        });
         return;
       }
       toggleCanton(id, event.originalEvent.shiftKey);
     });
-    map.on("mousemove", "canton-fill", (event) => {
+    map.on("mousemove", cantonLayers, (event) => {
       map.getCanvas().style.cursor = "pointer";
       const id = event.features?.[0]?.id;
       if (id == null) return;
@@ -345,7 +341,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       const feature = event.features?.[0];
       const name = String(feature?.properties.name ?? "");
       const inside = Boolean(feature?.properties.guanacaste);
-      const row = inside ? surfaceRef.current?.cantons[next]?.[metricRef.current] : null;
+      const row = inside ? surfaceValue(surfaceRef.current, next, metricRef.current) : null;
       useInstrument.getState().setHovered(next);
       setTip({
         x: event.point.x,
@@ -355,7 +351,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
         outside: !inside,
       });
     });
-    map.on("mouseleave", "canton-fill", () => {
+    map.on("mouseleave", cantonLayers, () => {
       map.getCanvas().style.cursor = "";
       if (hovered.current) map.setFeatureState({ source: "cantons", id: hovered.current }, { hover: false });
       hovered.current = null;
@@ -371,6 +367,12 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       ready.current = false;
     };
   }, [setLocation, toggleCanton]);
+
+  useEffect(() => {
+    const canvas = mapRef.current?.getCanvas();
+    canvas?.setAttribute("role", "application");
+    canvas?.setAttribute("aria-label", translate(lang, "nandaMap.mapCostaRicaArrowKeys"));
+  }, [lang]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -400,7 +402,9 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
             {
               padding: narrow
                 ? { top: 36, bottom: 150, left: 10, right: 10 }
-                : inset === "panel"
+                : isTablet() && inset === "panel"
+                  ? { top: 86, bottom: 80, left: 290, right: 24 }
+                  : inset === "panel"
                   ? { top: 24, bottom: 72, left: 368, right: 96 }
                   : { top: 36, bottom: 64, left: 120, right: 56 },
               pitch: 0,
@@ -430,11 +434,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       map.setLayoutProperty("canton-extrude", "visibility", overlays.cantons && overlays.plates ? "visible" : "none");
       map.setLayoutProperty("osm-roads", "visibility", overlays.osm ? "visible" : "none");
       map.setLayoutProperty("osm-places", "visibility", overlays.osm ? "visible" : "none");
-      const paint = cantonPaint(surface.data, metric);
       const mesh = hexPaint(surface.data, metric);
-      map.setPaintProperty("canton-fill", "fill-color", paint);
-      map.setPaintProperty("canton-extrude", "fill-extrusion-color", paint);
-      map.setPaintProperty("canton-extrude", "fill-extrusion-height", cantonHeight(surface.data, metric));
       map.setLayoutProperty("hillshade", "visibility", overlays.terrain ? "visible" : "none");
       map.setTerrain(null);
       const zoom = map.getZoom();
@@ -465,25 +465,31 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
 
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !map.isStyleLoaded()) return;
-    for (const feature of cantons.data?.features ?? []) {
-      map.setFeatureState({ source: "cantons", id: feature.id }, { selected: selected.includes(feature.id) });
-    }
-    if (selected.length !== 1) return;
-    const feature = cantons.data?.features.find((item) => item.id === selected[0]);
-    if (!feature) return;
-    const narrow = isMobile();
-    map.flyTo({
-      center: feature.properties.center,
-      zoom: 9.6,
-      pitch: 26,
-      bearing: -14,
-      duration: reducedMotion() ? 0 : 1700,
-      curve: 1.35,
-      essential: true,
-      padding: narrow ? { top: 30, bottom: 200, left: 16, right: 72 } : { left: 430, right: 96, top: 24, bottom: 80 },
-    });
-  }, [selected, cantons.data]);
+    if (!map) return;
+    const syncSelection = () => {
+      for (const feature of cantons.data?.features ?? []) {
+        map.setFeatureState({ source: "cantons", id: feature.id }, { selected: selected.includes(feature.id) });
+      }
+      if (selected.length !== 1) return;
+      const feature = cantons.data?.features.find((item) => item.id === selected[0]);
+      if (!feature) return;
+      map.flyTo({
+        center: selectedCenter ?? feature.properties.center,
+        zoom: 9.6,
+        pitch: 26,
+        bearing: -14,
+        duration: reducedMotion() ? 0 : 1700,
+        curve: 1.35,
+        essential: true,
+        padding: isMobile()
+          ? { top: 30, bottom: 200, left: 16, right: 72 }
+          : isTablet() ? { left: 290, right: 24, top: 86, bottom: 80 } : { left: 430, right: 96, top: 24, bottom: 80 },
+      });
+    };
+    if (ready.current) syncSelection();
+    else map.once("load", syncSelection);
+    return () => { map.off("load", syncSelection); };
+  }, [selected, selectedCenter, cantons.data]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -535,19 +541,19 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
 
   const zona = comparison.data?.compare?.zona ?? comparison.data?.catalog.zona;
   const pointName = zona && cantons.data ? cantonAt(zona.longitude, zona.latitude, cantons.data)?.properties.name : null;
-  const credit =
-    lang === "es"
-      ? `Imagen: ${basemap === "satellite" ? "Esri, Maxar, Earthstar Geographics (no es NASA)" : basemap === "modis" ? "NASA GIBS, MODIS Terra, 12 mar 2024" : "NASA GIBS, Blue Marble"}. Relieve: teselas AWS terrarium (GMTED2010, ETOPO1; no entra al modelo). Límites: geoBoundaries CRI ADM2, CC0, 2020.${overlays.osm ? " Calles y nombres: © OpenFreeMap © colaboradores de OpenStreetMap." : ""} Punto del modelo${pointName ? ` dentro de ${pointName}` : ""}: ${zona ? `${zona.latitude.toFixed(2)}, ${zona.longitude.toFixed(2)}` : "…"}.`
-      : `Imagery: ${basemap === "satellite" ? "Esri, Maxar, Earthstar Geographics (not NASA)" : basemap === "modis" ? "NASA GIBS, MODIS Terra, 12 Mar 2024" : "NASA GIBS, Blue Marble"}. Relief: AWS terrarium tiles (GMTED2010, ETOPO1; not a model input). Boundaries: geoBoundaries CRI ADM2, CC0, 2020.${overlays.osm ? " Roads and names: © OpenFreeMap © OpenStreetMap contributors." : ""} Model point${pointName ? ` inside ${pointName}` : ""}: ${zona ? `${zona.latitude.toFixed(2)}, ${zona.longitude.toFixed(2)}` : "…"}.`;
-
-  const shortCredit = lang === "es"
-    ? `Fuentes · punto ${zona ? `${zona.latitude.toFixed(2)}, ${zona.longitude.toFixed(2)}` : "…"}`
-    : `Sources · point ${zona ? `${zona.latitude.toFixed(2)}, ${zona.longitude.toFixed(2)}` : "…"}`;
+  const coordinates = zona ? `${zona.latitude.toFixed(2)}, ${zona.longitude.toFixed(2)}` : "…";
+  const credit = translate(lang, "nandaMap.credit", {
+    imagery: translate(lang, `nandaMap.${basemap}Credit`),
+    roads: overlays.osm ? translate(lang, "nandaMap.roadCredit") : "",
+    point: pointName ? translate(lang, "nandaMap.pointCredit", { canton: pointName }) : "",
+    coordinates,
+  });
+  const shortCredit = translate(lang, "nandaMap.sourcesPoint", { value: coordinates });
   const tipValue = tip
     ? tip.outside
-      ? (lang === "es" ? "Sin simulación disponible" : "No simulation available")
+      ? (translate(lang, "nandaMap.noSimulationAvailable"))
       : tip.value == null
-        ? (lang === "es" ? "sin dato" : "no data")
+        ? (translate(lang, "common.noData"))
         : formatValue(tip.value, metric, lang)
     : "";
 
@@ -557,8 +563,8 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       {tip ? (
         <div className="map-tip" style={{ left: tip.x, top: tip.y }} role="status">
           <strong>{tip.name}</strong>
-          <span>{tipValue}</span>
-          {tip.outside ? null : <em>{lang === "es" ? "fixture sintético" : "synthetic fixture"}</em>}
+          {tip.outside || overlays.hex ? <span>{tipValue}</span> : null}
+          {overlays.hex && !tip.outside ? <em>{translate(lang, "nandaMap.syntheticFixture")}</em> : null}
         </div>
       ) : null}
       <details className="attrib">

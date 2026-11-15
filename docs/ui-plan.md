@@ -21,8 +21,8 @@ Reglas que valen para todas las fases:
 | 4 | Pantalla del mapa | Hecha |
 | 5 | Gráficos | Hecha |
 | 6 | Temporada, Confianza y Cantones | Hecha |
-| 7 | i18n, carga diferida y división de `MapScreen` | Pendiente |
-| 8 | Controles de calidad | Pendiente |
+| 7 | i18n, carga diferida y división de `MapScreen` | Hecha |
+| 8 | Controles de calidad | Mediciones, capturas y tres rondas hechas. Umbral de crítica pendiente |
 
 ## Fase 1: accesibilidad (hecha)
 
@@ -54,21 +54,21 @@ CSS grid, cuatro anchos (≤767, 768–1099, ≥1100, ≥1440), barra superior s
 
 Rediseño de las tres páginas con el sistema de las fases 2 y 3. El calendario de la temporada sigue con `verified: false`.
 
-## Fase 7: i18n y rendimiento
+## Fase 7: i18n y rendimiento (hecha)
 
 - Diccionario de textos único para español e inglés.
-- Carga diferida del mapa (el bundle pesa unos 1,5 MB).
-- Dividir `MapScreen` en piezas más pequeñas.
+- MapLibre y su CSS se descargan al abrir Mapa. El JavaScript de entrada pasó de 1.511 kB a 456 kB minificados.
+- `MapScreen` compone el buscador, la ficha de lectura, las capas, la leyenda y el reproductor.
 
 ## Fase 8: controles de calidad
 
-- Lighthouse de accesibilidad ≥ 95.
-- axe sin violaciones.
-- Capturas con Playwright a 360, 768 y 1440 en Noche y Sol, y regenerar `docs/screenshots`.
-- Tres rondas de crítica con ojos nuevos.
+- Lighthouse de accesibilidad obtuvo 100/100 en las cinco rutas, en Noche y Sol. La meta era ≥ 95.
+- axe detectó cero violaciones en 46 vistas y estados.
+- Se regeneraron las 31 imágenes de `docs/screenshots` con Playwright, incluida la del error en Rotaciones. La matriz principal cubre 360, 768 y 1440 px en Noche y Sol.
+- Se completaron tres rondas independientes. El registro detalla los ajustes y los hallazgos visuales pendientes. La última ronda dio entre 7 y 8 de 10 en los ejes observados.
 
 ## Propuestas abiertas del registro de críticas
 
 - 3: acento.
 - 4: fondo del tema Sol.
-- 5: tres rondas de crítica con ojos nuevos.
+- 5: alcanzar el umbral de tres rondas consecutivas con 9/10 o más.

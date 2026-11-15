@@ -1,3 +1,4 @@
+import { translate } from "./i18n";
 import { formatSigned, formatValue } from "./format";
 import type { Lang, MetricId, RotationId } from "./types";
 
@@ -13,45 +14,18 @@ export const ROTATION_STYLE: Record<
   rice_sorghum: { color: "var(--rot-sorghum)", dash: "1.5 4", swatch: "dotted" },
 };
 
-const FALLBACK_NAME: Record<RotationId, { es: string; en: string }> = {
-  rice_melon: { es: "Arroz → melón", en: "Rice → melon" },
-  rice_legume: { es: "Arroz → leguminosa", en: "Rice → legume" },
-  rice_sorghum: { es: "Arroz → sorgo", en: "Rice → sorghum" },
-};
-
 export function rotationName(id: string, lang: Lang, fromData?: string): string {
   if (fromData && lang === "es") return fromData;
-  if (id in FALLBACK_NAME) return FALLBACK_NAME[id as RotationId][lang];
-  return fromData ?? id;
+  const known = ROTATION_ORDER.find((rotation) => rotation === id);
+  return known ? translate(lang, `rotation.${known}`) : fromData ?? id;
 }
-
-const METRIC_NOUN: Record<MetricId, { es: string; en: string }> = {
-  modeled_water_deficit_mm: {
-    es: "déficit hídrico modelado",
-    en: "modeled water deficit",
-  },
-  crop_water_demand_mm: {
-    es: "demanda hídrica modelada",
-    en: "modeled crop water demand",
-  },
-  water_stress_days: {
-    es: "días de estrés modelados",
-    en: "modeled stress days",
-  },
-};
 
 export function metricNoun(metric: MetricId, lang: Lang): string {
-  return METRIC_NOUN[metric][lang];
+  return translate(lang, `metric.${metric}.noun`);
 }
 
-const READING_METRIC: Record<MetricId, Record<Lang, string>> = {
-  modeled_water_deficit_mm: { es: "Agua que faltó", en: "Water shortfall" },
-  crop_water_demand_mm: { es: "Agua que necesitó el cultivo", en: "Water the crop needed" },
-  water_stress_days: { es: "Días con estrés por falta de agua", en: "Days of water stress" },
-};
-
 export function readingMetric(metric: MetricId, lang: Lang): string {
-  return READING_METRIC[metric][lang];
+  return translate(lang, `metric.${metric}.reading`);
 }
 
 export type SentenceInput = {
@@ -74,108 +48,74 @@ export type SentenceInput = {
 export function comparisonSentence(input: SentenceInput): string {
   const { lang, scenarioName, metric, rotationName: name, baselineName, isBaseline, p50, deltaP50, n, like2026 } = input;
   const noun = metricNoun(metric, lang);
-  const watch =
-    lang === "es"
-      ? "No es rendimiento, ni ahorro, ni una rotación ganadora."
-      : "This is not yield, not savings, and not a winning rotation.";
-  const sample =
-    lang === "es"
-      ? `La muestra tiene ${n} ${n === 1 ? "año análogo" : "años análogos"}. p10–p90 es la variación entre esos años, no una probabilidad ni un intervalo de confianza.`
-      : `The sample has ${n} analog ${n === 1 ? "year" : "years"}. p10–p90 is the spread across those years, not a probability and not a confidence interval.`;
+  const watch = translate(lang, "plain.thisNotYieldNotSavings");
+  const sample = [
+    translate(lang, n === 1 ? "plain.oneAnalogYear" : "plain.analogYears", { count: n }),
+    translate(lang, "plain.quantileSpread"),
+  ].join(" ");
   const follow =
     like2026
-      ? lang === "es"
-        ? " 2026 no entra como análogo: el escenario solo pide años parecidos y 2026 queda en seguimiento."
-        : " 2026 is not an analog year: the scenario only asks for similar years, and 2026 stays in monitoring."
+      ? translate(lang, "plain.2026NotAnalogYearScenario")
       : "";
 
   if (p50 === null || (deltaP50 === null && !isBaseline)) {
-    return lang === "es"
-      ? `${name}: sin dato para ${noun}. El contrato no trajo el número. No se muestra como cero. ${sample}`
-      : `${name}: no data for ${noun}. The contract did not include the number. It is not shown as zero. ${sample}`;
+    return translate(lang, "plain.noDataContractDidNot", { name, noun, sample });
   }
 
   if (isBaseline) {
-    return lang === "es"
-      ? `${name} es la referencia en ${scenarioName}. La mediana modelada de ${noun} es ${formatValue(p50, metric, lang)}. El delta es 0 porque la resta es contra ella misma, no porque el campo esté en equilibrio.${follow} ${sample} ${watch}`
-      : `${name} is the reference in ${scenarioName}. The modeled median ${noun} is ${formatValue(p50, metric, lang)}. The delta is 0 because it is subtracted from itself, not because the field is in balance.${follow} ${sample} ${watch}`;
+    return translate(lang, "plain.referenceModeledMedianDelta0", { name, scenarioName, noun, value: formatValue(p50, metric, lang), follow, sample, watch });
   }
 
   const direction =
     deltaP50 === null
       ? ""
       : deltaP50 === 0
-        ? lang === "es"
-          ? `La mediana del delta contra ${baselineName} es 0.`
-          : `The median delta against ${baselineName} is 0.`
+        ? translate(lang, "plain.medianDeltaAgainst0", { baselineName })
         : deltaP50 < 0
-          ? lang === "es"
-            ? `La mediana queda ${formatSigned(deltaP50, metric, lang)} respecto de ${baselineName}: un valor modelado más bajo.`
-            : `The median sits ${formatSigned(deltaP50, metric, lang)} against ${baselineName}: a lower modeled value.`
-          : lang === "es"
-            ? `La mediana queda ${formatSigned(deltaP50, metric, lang)} respecto de ${baselineName}: un valor modelado más alto.`
-            : `The median sits ${formatSigned(deltaP50, metric, lang)} against ${baselineName}: a higher modeled value.`;
+          ? translate(lang, "plain.medianSitsAgainstLowerModeled", { difference: formatSigned(deltaP50, metric, lang), baselineName })
+          : translate(lang, "plain.medianSitsAgainstHigherModeled", { difference: formatSigned(deltaP50, metric, lang), baselineName });
 
-  return lang === "es"
-    ? `${name}, en ${scenarioName}: la mediana de ${noun} es ${formatValue(p50, metric, lang)}. ${direction} El delta ya viene calculado año por año, antes de los cuantiles.${follow} ${sample} ${watch}`
-    : `${name}, in ${scenarioName}: the median ${noun} is ${formatValue(p50, metric, lang)}. ${direction} The delta was computed year by year before the quantiles.${follow} ${sample} ${watch}`;
+  return translate(lang, "plain.medianDeltaWasComputedYear", { name, scenarioName, noun, value: formatValue(p50, metric, lang), direction, follow, sample, watch });
 }
 
 export function farmerLine(input: SentenceInput): string {
   const { lang, rotationName: name, metric, isBaseline, p50, deltaP50, n } = input;
-  const years = lang === "es" ? `${n} años parecidos` : `${n} similar years`;
+  const years = translate(lang, "plain.similarYears", { count: n });
   if (p50 === null || (deltaP50 === null && !isBaseline)) {
-    return lang === "es" ? `${name}: sin dato. ${years}.` : `${name}: no data. ${years}.`;
+    return translate(lang, "plain.noData", { name, years });
   }
   if (isBaseline) {
-    return lang === "es"
-      ? `${name}: ${formatValue(p50, metric, lang)} en el ciclo. Es la rotación con la que se comparan las otras. ${years}.`
-      : `${name}: ${formatValue(p50, metric, lang)} in the cycle. The other rotations are compared with this one. ${years}.`;
+    return translate(lang, "plain.cycleOtherRotationsAreCompared", { name, value: formatValue(p50, metric, lang), years });
   }
   const delta = deltaP50 ?? 0;
   const amount = formatValue(Math.abs(delta), metric, lang);
-  if (lang === "es") {
-    const sense = delta < 0 ? `${amount} menos` : delta > 0 ? `${amount} más` : "lo mismo";
-    return `${name}: ${formatValue(p50, metric, lang)}. ${sense} que arroz → melón. ${years}.`;
-  }
-  const sense = delta < 0 ? `${amount} less` : delta > 0 ? `${amount} more` : "the same";
-  return `${name}: ${formatValue(p50, metric, lang)}. ${sense} than rice → melon. ${years}.`;
+  const sense = delta === 0
+    ? translate(lang, "plain.farmerEqual")
+    : translate(lang, delta < 0 ? "plain.farmerLower" : "plain.farmerHigher", { amount });
+  return translate(lang, "plain.farmerDifference", { name, value: formatValue(p50, metric, lang), sense, years });
 }
 
 export function compactLine(input: SentenceInput): string {
   const { lang, rotationName: name, metric, isBaseline, p50, deltaP50, n } = input;
   if (p50 === null || (deltaP50 === null && !isBaseline)) {
-    return lang === "es" ? `${name}: sin dato · n = ${n}` : `${name}: no data · n = ${n}`;
+    return translate(lang, "plain.noDataN", { name, count: n });
   }
   if (isBaseline) {
-    return lang === "es"
-      ? `${name}: ${formatValue(p50, metric, lang)} · referencia · n = ${n}`
-      : `${name}: ${formatValue(p50, metric, lang)} · reference · n = ${n}`;
+    return translate(lang, "plain.referenceN", { name, value: formatValue(p50, metric, lang), count: n });
   }
-  return lang === "es"
-    ? `${name}: ${formatValue(p50, metric, lang)} · delta ${formatSigned(deltaP50, metric, lang)} · n = ${n}`
-    : `${name}: ${formatValue(p50, metric, lang)} · delta ${formatSigned(deltaP50, metric, lang)} · n = ${n}`;
+  return translate(lang, "plain.deltaN", { name, value: formatValue(p50, metric, lang), difference: formatSigned(deltaP50, metric, lang), count: n });
 }
 
 export function leadSentence(lang: Lang, scenarioName: string, metric: MetricId, n: number, mock: boolean): string {
-  const noun = metricNoun(metric, lang);
-  if (lang === "es") {
-    const source = mock
-      ? "Los números salen de un fixture sintético, no de una corrida de campo."
-      : "Los números salen de la respuesta que entregó la API.";
-    return `En ${scenarioName} hay ${n} años en la muestra. Estas son las medianas de ${noun}. ${source}`;
-  }
-  const source = mock
-    ? "The numbers come from a synthetic fixture, not a field run."
-    : "The numbers come from the API response.";
-  return `In ${scenarioName} the sample has ${n} years. These are the medians of ${noun}. ${source}`;
+  return translate(lang, "plain.readingLead", {
+    scenarioName,
+    count: n,
+    noun: metricNoun(metric, lang),
+    source: translate(lang, mock ? "plain.mockSource" : "plain.apiSource"),
+  });
 }
 
 export function readingNotes(lang: Lang, like2026: boolean): string {
-  if (lang === "es") {
-    const caveats = "El rango p10–p90 muestra cuánto variaron las cifras entre los años de la muestra. No es una probabilidad ni un intervalo de confianza. Las cifras no indican rendimiento, ahorro ni una rotación ganadora.";
-    return like2026 ? `${caveats} El escenario «Como 2026» usa años parecidos. 2026 sigue en observación.` : caveats;
-  }
-  const caveats = "The p10–p90 range shows how much the figures varied across the years in the sample. It is not a probability or a confidence interval. The figures do not indicate yield, savings, or a winning rotation.";
-  return like2026 ? `${caveats} The “Like 2026” scenario uses similar years. Monitoring for 2026 is ongoing.` : caveats;
+  const caveats = translate(lang, "plain.readingCaveats");
+  return like2026 ? `${caveats} ${translate(lang, "plain.followUp2026")}` : caveats;
 }

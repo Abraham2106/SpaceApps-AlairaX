@@ -1,18 +1,21 @@
+import { translate } from "../lib/i18n";
 import { NavLink, Outlet, useLocation, useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Droplets, Grid2x2, Leaf, Map, Moon, ShieldCheck, Sprout, SunMedium } from "lucide-react";
-import { NandaMap } from "../map/NandaMap";
+import { MapViewport } from "../map/MapViewport";
 import { RadioGroup } from "./RadioGroup";
 import { useComparison } from "../data/queries";
 import { useInstrument } from "../store";
+import { SCENARIO_IDS } from "../lib/types";
+import { comparisonError } from "../lib/api";
 
 const LINKS = [
-  { to: "/", label: ["Mapa", "Map"], icon: Map },
-  { to: "/cantones", label: ["Cantones", "Cantons"], icon: Grid2x2 },
-  { to: "/rotaciones", label: ["Rotaciones", "Rotations"], icon: Sprout },
-  { to: "/temporada", label: ["Temporada", "Season"], icon: Droplets },
-  { to: "/confianza", label: ["Confianza", "Trust"], icon: ShieldCheck },
-];
+  { to: "/", label: "common.map", icon: Map },
+  { to: "/cantones", label: "common.cantons", icon: Grid2x2 },
+  { to: "/rotaciones", label: "common.rotations", icon: Sprout },
+  { to: "/temporada", label: "common.season", icon: Droplets },
+  { to: "/confianza", label: "common.trust", icon: ShieldCheck },
+] as const;
 
 export function Shell() {
   const lang = useInstrument((state) => state.lang);
@@ -30,10 +33,11 @@ export function Shell() {
   const hydrate = useInstrument((state) => state.hydrate);
   const toParams = useInstrument((state) => state.toParams);
   const comparison = useComparison();
+  const content = useRef<HTMLElement>(null);
   const location = useLocation();
   const [params, setParams] = useSearchParams();
   const showMap = location.pathname === "/";
-  const spanish = lang === "es";
+  const scenarios = SCENARIO_IDS.map((value) => ({ value, label: translate(lang, `scenario.${value}`) }));
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -56,7 +60,10 @@ export function Shell() {
 
   return (
     <div className="app">
-      <a className="skip" href="#contenido">{spanish ? "Saltar al contenido" : "Skip to content"}</a>
+      <a className="skip" href="#contenido" onClick={(event) => {
+        event.preventDefault();
+        content.current?.focus();
+      }}>{translate(lang, "shell.skipContent")}</a>
       <header className="topbar">
         <NavLink className="brand" to={{ pathname: "/", search: params.toString() }}>
           <Leaf size={22} strokeWidth={1.5} aria-hidden />
@@ -66,71 +73,65 @@ export function Shell() {
           </span>
         </NavLink>
         <label className="only-mobile">
-          <span className="kicker">{spanish ? "Escenario" : "Scenario"}</span>
-          <select className="scenario-select" value={scenarioId} onChange={(event) => setScenario(event.target.value as typeof scenarioId)} aria-label={spanish ? "Escenario" : "Scenario"}>
-            <option value="strong_el_nino">{spanish ? "Niño fuerte" : "Strong El Niño"}</option>
-            <option value="neutral">{spanish ? "Neutro" : "Neutral"}</option>
-            <option value="la_nina">{spanish ? "Niña" : "La Niña"}</option>
-            <option value="like_2026">{spanish ? "Como 2026" : "Like 2026"}</option>
+          <span className="kicker">{translate(lang, "common.scenario")}</span>
+          <select className="scenario-select" value={scenarioId} onChange={(event) => setScenario(event.target.value as typeof scenarioId)} aria-label={translate(lang, "common.scenario")}>
+            {scenarios.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
           </select>
         </label>
         <RadioGroup
           className="segment hide-mobile"
-          label={spanish ? "Escenario" : "Scenario"}
+          label={translate(lang, "common.scenario")}
           value={scenarioId}
           onChange={setScenario}
-          options={[
-            { value: "strong_el_nino", label: spanish ? "Niño fuerte" : "Strong El Niño" },
-            { value: "neutral", label: spanish ? "Neutro" : "Neutral" },
-            { value: "la_nina", label: spanish ? "Niña" : "La Niña" },
-            { value: "like_2026", label: spanish ? "Como 2026" : "Like 2026" },
-          ]}
+          options={scenarios}
         />
         <RadioGroup
           className="metric-tabs"
-          label={spanish ? "Métrica" : "Metric"}
+          label={translate(lang, "shell.metric")}
           value={metric}
           onChange={setMetric}
           options={[
-            { value: "modeled_water_deficit_mm", label: spanish ? "Agua" : "Water" },
-            { value: "crop_water_demand_mm", label: spanish ? "Demanda" : "Demand" },
-            { value: "water_stress_days", label: spanish ? "Estrés" : "Stress" },
+            { value: "modeled_water_deficit_mm", label: translate(lang, "metric.water") },
+            { value: "crop_water_demand_mm", label: translate(lang, "metric.demand") },
+            { value: "water_stress_days", label: translate(lang, "metric.stress") },
           ]}
         />
         <span className="spacer" />
         {mock && !liveFailure ? (
           <p className="chip" role="status">
-            <strong>{spanish ? "PRUEBA" : "SAMPLE"}</strong>
-            <span className="chip-note">{spanish ? "Datos sintéticos" : "Synthetic data"}</span>
+            <strong>{translate(lang, "shell.sample")}</strong>
+            <span className="chip-note">{translate(lang, "shell.syntheticData")}</span>
           </p>
         ) : null}
         {liveFailure ? (
           <p className="chip chip-live" role="status">
             <strong>HTTP {comparison.data?.httpStatus}</strong>
-            <span>{comparison.data?.httpDetail}</span>
+            <span>{comparisonError(comparison.data, lang)}</span>
           </p>
         ) : null}
-        <span className="mode-pill">{apiBase ? "API" : spanish ? "Fixture" : "Fixture"}</span>
+        <span className="mode-pill">{apiBase ? "API" : translate(lang, "shell.fixture")}</span>
         <button onClick={() => setTheme(theme === "night" ? "sun" : "night")} aria-pressed={theme === "sun"}>
           {theme === "night" ? <Moon size={16} aria-hidden /> : <SunMedium size={16} aria-hidden />}
-          <span className="btn-label">{theme === "night" ? (spanish ? "Noche" : "Night") : (spanish ? "Sol" : "Sun")}</span>
+          <span className="btn-label">{theme === "night" ? (translate(lang, "shell.night")) : (translate(lang, "shell.sun"))}</span>
         </button>
-        <button onClick={() => setLang(spanish ? "en" : "es")}>{spanish ? "EN" : "ES"}</button>
+        <button onClick={() => setLang(lang === "es" ? "en" : "es")} aria-label={translate(lang, "shell.switchLanguageLabel")}>
+          {translate(lang, "shell.switchLanguage")}
+        </button>
       </header>
       <div className="workspace">
-        <nav className="rail" aria-label={spanish ? "Secciones" : "Sections"}>
+        <nav className="rail" aria-label={translate(lang, "shell.sections")}>
           {LINKS.map((link) => {
             const Icon = link.icon;
             return (
               <NavLink key={link.to} to={{ pathname: link.to, search: params.toString() }} end={link.to === "/"}>
                 <Icon size={18} strokeWidth={1.5} aria-hidden />
-                <span className="rail-label">{spanish ? link.label[0] : link.label[1]}</span>
+                <span className="rail-label">{translate(lang, link.label)}</span>
               </NavLink>
             );
           })}
         </nav>
-        <main id="contenido" className="stage">
-          <NandaMap hidden={!showMap} inset={location.pathname === "/" ? "panel" : "open"} />
+        <main ref={content} id="contenido" className="stage" tabIndex={-1}>
+          <MapViewport visible={showMap} lang={lang} />
           <Outlet />
         </main>
       </div>

@@ -10,6 +10,22 @@
 .map-canvas { position: absolute; inset: 0; }
 .map-root .maplibregl-map { height: 100%; width: 100%; font-family: var(--sans); }
 .map-root[data-hidden="true"] { visibility: hidden; }
+.map-load-state {
+  position: absolute;
+  z-index: 3;
+  top: 38%;
+  left: 50%;
+  translate: -50% 0;
+  max-width: calc(100% - 32px);
+  width: max-content;
+  margin: 0;
+  padding: 10px 14px;
+  border: 1px solid var(--panel-line);
+  border-radius: var(--r-2);
+  background: var(--panel-solid);
+  color: var(--panel-ink);
+}
+.map-load-state p { margin: 0 0 8px; }
 
 .hud {
   position: absolute;
@@ -121,6 +137,20 @@
 }
 /* El anillo lo lleva el contenedor redondeado (focus-within), no el campo interno. */
 .map-search .search:focus-visible { outline: none; box-shadow: none; }
+.map-search-results {
+  position: absolute;
+  z-index: 1;
+  top: calc(100% + 4px);
+  inset-inline: -1px;
+  padding: 4px;
+  border: 1px solid var(--panel-line);
+  border-radius: var(--r-2);
+  background: var(--panel-solid);
+  color: var(--panel-ink);
+}
+.map-search-results .canton-list { max-height: min(35dvh, 240px); }
+.map-search-results button:focus-visible { outline-offset: -2px; }
+.map-search-status { margin: 0; padding: 8px; font-size: var(--fs-sm); color: var(--panel-muted); }
 .map-legend {
   position: absolute;
   z-index: 2;
@@ -159,7 +189,7 @@
 }
 .attrib summary::-webkit-details-marker { display: none; }
 .attrib p { margin: 0; padding: 8px 10px; background: var(--map-scrim-solid); white-space: normal; }
-.layer-btn { white-space: nowrap; }
+.layer-btn { line-height: 1.1; }
 .attrib, .attrib summary { color: var(--map-scrim-ink); }
 
 .layer-btn {
@@ -296,7 +326,11 @@
   font-size: var(--fs-xs);
   color: var(--panel-muted);
 }
-.player-now { margin: 0; min-width: 92px; font-size: var(--fs-sm); color: var(--panel-accent); }
+.player-now { flex: 0 0 92px; margin: 0; min-width: 0; font-size: var(--fs-sm); color: var(--panel-accent); }
+.player-now span, .player-now strong { display: block; }
+.player-now span { color: var(--panel-muted); font-size: var(--fs-xs); }
+.map-time-overlays { display: contents; }
+.layers-fab, .reading-sample { display: none; }
 .compare-years { flex: none; white-space: nowrap; }
 .year-pop {
   margin-top: 8px;
@@ -316,5 +350,7 @@
 .year-pop label { display: grid; gap: 4px; }
 .year-pop p { flex-basis: 100%; margin: 0; font-size: var(--fs-sm); }
 .year-pop select { min-height: var(--hit); background: transparent; }
+.year-results { display: inline-flex; align-items: center; min-height: var(--hit); color: var(--panel-accent); }
+.dialog .year-pop { border: 0; padding-inline: 0; margin-bottom: 8px; }
 
 .screen { position: absolute; inset: 0; overflow: auto; background: var(--bg); padding: 24px; }

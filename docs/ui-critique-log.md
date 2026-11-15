@@ -149,3 +149,21 @@ No cambia ningún texto público sobre el modelo. Siguen sin aparecer ahorro, re
 - A 768 px el reproductor de la parte baja queda apretado (el control deslizante es corto y «Comparar años» se parte en dos líneas). Se resuelve con el rediseño del mapa de la Fase 4.
 - Sin revisar con lector de pantalla real ni con pantallas táctiles físicas; los gestos se probaron con toques de Playwright.
 - `docs/screenshots` no se regeneró.
+
+## Fase 8 · verificación del 14 de noviembre de 2026
+
+- Lighthouse 13.6.0 dio 100/100 en accesibilidad móvil para Mapa, Cantones, Rotaciones, Temporada y Confianza, en los dos temas y con datos de prueba.
+- axe 4.14.0 terminó con cero violaciones en 46 ejecuciones. Se revisaron las 30 combinaciones de ruta, ancho y tema, más 16 estados interactivos. Se corrigieron los nombres accesibles del selector de idioma y de las filas de los gráficos, que ahora incluyen el texto visible.
+- «Saltar al contenido» lleva el foco al área principal y conserva la ruta del hash. La comprobación funcionó mediante teclado en Noche y Sol.
+- Playwright pasó 38/38. Se renovaron las 30 capturas de la matriz y la captura de recuperación por error en Rotaciones. Vitest pasó 11/11 y oxlint terminó limpio.
+- Antes de las rondas independientes, la captura de 360 px mostraba un deslizador estrecho para elegir un día.
+
+### Tres rondas de revisión independiente
+
+Cada ronda recibió una lectura de diseño y una comprobación técnica de revisores distintos. En la segunda ronda se reemplazó al primer revisor técnico tras un límite de uso. El detector de Impeccable no pudo cargar su motor local. Los revisores usaron capturas, inspección de fuente y, donde fue posible, reproducción en Chromium o los resultados de axe.
+
+1. **Primera ronda.** La rampa sobre cantones sugería un resultado del modelo por área. El calendario podía confundirse con balance diario, la búsqueda quedaba oculta en la ficha y el comparador móvil podía subir detrás de la cabecera. Se usaron límites neutros por defecto; la malla y su leyenda se activan juntas como prueba. El calendario provisional muestra la fecha exacta, el deslizador usa el ancho disponible en móvil, el comparador abre en diálogo y enlaza a Temporada, y la búsqueda responde junto al campo. Los estados observados quedaron entre 6 y 8 de 10.
+2. **Segunda ronda.** A 768 px la columna fija de capas reducía el espacio cartográfico. Se sustituyó por un botón y se ajustó el encuadre. A 360 px la cifra muestra su origen sintético. Rotaciones indica cuándo coinciden los extremos del rango y Confianza explica en palabras el estado de revisión. También se corrigieron el destino al punto exacto del modelo, la selección con Altura activa, la espera de límites para interpretar el GPS y el estado cuando la API devuelve una comparación ausente. Los ejes visuales observados quedaron entre 7 y 8 de 10.
+3. **Tercera ronda.** Se trasladó el aviso de cantón fuera de Guanacaste al buscador para que se mantenga visible con la ficha cerrada. Quedaron como hallazgos visuales la falta de contexto de muestra junto al título de Rotaciones, las marcas del calendario sin rótulos de meses a 360 px y la presencia de códigos técnicos en el recorrido general. Los ejes visuales observados quedaron entre 7 y 8 de 10. El umbral de tres rondas consecutivas con 9/10 o más sigue pendiente.
+
+Tras los ajustes visuales se regeneraron las 31 capturas, Playwright pasó 39/39, Lighthouse volvió a dar 100/100 en las diez combinaciones de ruta y tema y axe volvió a marcar cero violaciones en 46 ejecuciones. Las correcciones de interacción posteriores se comprobaron con los casos de Mapa en Playwright.

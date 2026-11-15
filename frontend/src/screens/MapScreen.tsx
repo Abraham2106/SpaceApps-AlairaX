@@ -1,433 +1,63 @@
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import { Box, Globe2, Hexagon, Layers, LocateFixed, Mountain, Pause, Pentagon, Play, Route, Satellite, ScanLine, Search, Share2 } from "lucide-react";
-import { formatNumber, formatValue, metricUnit } from "../lib/format";
-import { cantonAt } from "../lib/geo";
-import { ROTATION_ORDER, comparisonSentence, leadSentence, readingMetric, readingNotes, rotationName } from "../lib/plain";
+import { translate } from "../lib/i18n";
+import { useRef, useState } from "react";
+import { Search } from "lucide-react";
+import { formatNumber } from "../lib/format";
 import { surfaceColor, surfaceDomain, useSurface } from "../lib/surface";
-import { useCantons, useComparison } from "../data/queries";
-import { useInstrument } from "../store";
-import { QueryState } from "../components/QueryState";
-import { isMobile } from "../lib/viewport";
-import { Dialog } from "../components/Dialog";
-import type { RotationId } from "../lib/types";
-
-const SEASON_DAYS = 274;
-const STAGES = [
-  { day: 0, es: "Ventana", en: "Window" },
-  { day: 44, es: "Arroz 15 may", en: "Rice 15 May" },
-  { day: 197, es: "Caupí / sorgo", en: "Cowpea / sorghum" },
-  { day: 244, es: "Melón 1 dic", en: "Melon 1 Dec" },
-];
-const MONTHS = [
-  [0, "Abr", "Apr"],
-  [30, "May", "May"],
-  [61, "Jun", "Jun"],
-  [91, "Jul", "Jul"],
-  [122, "Ago", "Aug"],
-  [153, "Sep", "Sep"],
-  [183, "Oct", "Oct"],
-  [214, "Nov", "Nov"],
-  [244, "Dic", "Dec"],
-] as const;
-
-const ICONS = {
-  satellite: Satellite,
-  modis: ScanLine,
-  marble: Globe2,
-  cantons: Pentagon,
-  hex: Hexagon,
-  terrain: Mountain,
-  plates: Box,
-  osm: Route,
-} as const;
-
-function stageAt(day: number, spanish: boolean) {
-  const hit = [...STAGES].reverse().find((stage) => day >= stage.day) ?? STAGES[0];
-  return spanish ? hit.es : hit.en;
-}
-
-const SNAP_NAMES = [["corta", "short"], ["media", "medium"], ["alta", "tall"]] as const;
-
-/** Tres alturas de la hoja inferior, medidas contra el escenario (la hoja no tapa todo el mapa). */
-function snapHeights(sheet: HTMLElement | null): [number, number, number] {
-  const room = (sheet?.offsetParent as HTMLElement | null)?.clientHeight ?? window.innerHeight;
-  const tall = Math.round(room * 0.7);
-  const short = Math.min(196, Math.round(room * 0.35));
-  return [short, Math.round((short + tall) / 2), tall];
-}
+import { isCantonBoundaryMessage, useInstrument } from "../store";
+import { MapLayers } from "../map/MapLayers";
+import { MapReading } from "../map/MapReading";
+import { MapSeasonPlayer } from "../map/MapSeasonPlayer";
+import { MapCantonList } from "../map/MapCantonList";
 
 export function MapScreen() {
   const lang = useInstrument((state) => state.lang);
-  const spanish = lang === "es";
   const metric = useInstrument((state) => state.metric);
-  const basemap = useInstrument((state) => state.basemap);
-  const setBasemap = useInstrument((state) => state.setBasemap);
-  const overlays = useInstrument((state) => state.overlays);
-  const toggleOverlay = useInstrument((state) => state.toggleOverlay);
-  const selected = useInstrument((state) => state.selected);
-  const toggleCanton = useInstrument((state) => state.toggleCanton);
-  const location = useInstrument((state) => state.location);
+  const mesh = useInstrument((state) => state.overlays.hex);
   const locationMessage = useInstrument((state) => state.locationMessage);
-  const setLocation = useInstrument((state) => state.setLocation);
-  const yearA = useInstrument((state) => state.yearA);
-  const yearB = useInstrument((state) => state.yearB);
-  const setYears = useInstrument((state) => state.setYears);
-  const [params] = useSearchParams();
   const [query, setQuery] = useState("");
-  const [ask, setAsk] = useState(false);
-  const [shareOpen, setShareOpen] = useState(false);
-  const [layersOpen, setLayersOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [open, setOpen] = useState(true);
-  const [day, setDay] = useState(44);
-  const [playing, setPlaying] = useState(false);
-  const [compareOpen, setCompareOpen] = useState(false);
-  const [listStop, setListStop] = useState<number | null>(null);
-  const sheetRef = useRef<HTMLElement>(null);
-  const [snap, setSnap] = useState(0);
-  const cantons = useCantons();
-  const comparison = useComparison();
+  const input = useRef<HTMLInputElement>(null);
   const surface = useSurface();
-  const loaded = comparison.data;
-  const compare = loaded?.compare ?? null;
-  const names = Object.fromEntries((loaded?.catalog.rotations ?? []).map((item) => [item.id, item.name]));
-  const scenarioName = loaded?.catalog.scenarios.find((item) => item.id === compare?.scenario_id)?.name ?? "";
   const [min, max] = surfaceDomain(surface.data, metric);
+  const boundaryMessage = isCantonBoundaryMessage(locationMessage) ? locationMessage : null;
 
-  const visible = useMemo(() => {
-    const features = cantons.data?.features ?? [];
-    const needle = query.trim().toLowerCase();
-    const ranked = [...features].sort((a, b) => Number(b.properties.guanacaste) - Number(a.properties.guanacaste) || a.properties.name.localeCompare(b.properties.name, "es"));
-    return ranked.filter((feature) => !needle || feature.properties.name.toLowerCase().includes(needle) || feature.properties.sourceName.toLowerCase().includes(needle));
-  }, [cantons.data, query]);
-
-  const n = compare?.analog_years.length ?? 0;
-  const modelCanton = compare && cantons.data ? cantonAt(compare.zona.longitude, compare.zona.latitude, cantons.data) : null;
-  const baselineId = compare?.baseline_rotation_id ?? "rice_melon";
-  const baselineName = rotationName(baselineId, lang, names[baselineId]);
-  const version = compare?.rotations[0]?.runs[0]?.model_version ?? "";
-  const hasDailyBalance = compare?.rotations.some((rotation) => rotation.runs.some((run) => run.daily_balance.length > 0));
-
-  function reading(id: RotationId): { value: number | null; delta: number | null } {
-    const rotation = compare?.rotations.find((item) => item.rotation_id === id);
-    return {
-      value: rotation?.metrics[metric].p50 ?? null,
-      delta: id === compare?.baseline_rotation_id ? null : rotation?.delta_vs_baseline[metric].p50 ?? null,
-    };
-  }
-
-  const lead = reading(baselineId);
-  const barMax = Math.max(
-    1,
-    ...ROTATION_ORDER.map((id) => reading(id).value ?? 0),
-  );
-
-  const shareText = compare
-    ? [
-        leadSentence(lang, scenarioName, metric, n, compare._mock),
-        ...ROTATION_ORDER.map((id) => {
-          const rotation = compare.rotations.find((item) => item.rotation_id === id);
-          if (!rotation) return "";
-          return comparisonSentence({
-            lang,
-            scenarioName,
-            metric,
-            rotationName: rotationName(id, lang, names[id]),
-            baselineName: rotationName(compare.baseline_rotation_id, lang, names[compare.baseline_rotation_id]),
-            isBaseline: id === compare.baseline_rotation_id,
-            p50: rotation.metrics[metric].p50,
-            deltaP50: rotation.delta_vs_baseline[metric].p50,
-            n: rotation.metrics[metric].n,
-            like2026: compare.scenario_id === "like_2026",
-          });
-        }),
-        window.location.href,
-      ].filter(Boolean).join("\n\n")
-    : spanish ? "Todavía no hay una comparación para compartir." : "There is no comparison to share yet.";
-
-  useEffect(() => {
-    if (!playing) return;
-    const timer = window.setInterval(() => {
-      setDay((current) => {
-        if (current >= SEASON_DAYS) {
-          setPlaying(false);
-          return SEASON_DAYS;
-        }
-        return Math.min(SEASON_DAYS, current + 4);
-      });
-    }, 160);
-    return () => window.clearInterval(timer);
-  }, [playing]);
-
-  function locate() {
-    setAsk(false);
-    if (!navigator.geolocation) {
-      setLocation(null, spanish ? "Este navegador no entrega la ubicación." : "This browser does not provide a location.");
-      return;
+  function clearBoundaryMessage() {
+    if (boundaryMessage) {
+      const { location, setLocation } = useInstrument.getState();
+      setLocation(location, null);
     }
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const hit = cantons.data ? cantonAt(position.coords.longitude, position.coords.latitude, cantons.data) : null;
-        const inside = Boolean(hit?.properties.guanacaste);
-        setLocation(
-          {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            inside,
-            cantonId: hit?.id ?? null,
-            cantonName: hit?.properties.name ?? null,
-          },
-          inside
-            ? spanish
-              ? `Ubicación en ${hit?.properties.name ?? "Guanacaste"}. Sirve para centrar el mapa en este aparato. Las cifras siguen siendo del punto provisional, no de este GPS.`
-              : `Location in ${hit?.properties.name ?? "Guanacaste"}. It only recenters the map on this device. The numbers remain the provisional point, not this GPS fix.`
-            : spanish
-              ? "Este punto está fuera de Guanacaste. El modelo no está calibrado aquí y no se extrapola."
-              : "This point is outside Guanacaste. The model is not calibrated here and is not extrapolated.",
-        );
-      },
-      () => setLocation(null, spanish ? "No se concedió la ubicación. Podés elegir un cantón en la lista." : "Location was denied. You can pick a canton from the list."),
-      { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 },
-    );
   }
-
-  const cantonRows = visible.slice(0, query ? 12 : 11);
-  const firstSelected = cantonRows.findIndex((feature) => selected.includes(feature.id));
-  const listTabStop = Math.min(listStop ?? (firstSelected >= 0 ? firstSelected : 0), Math.max(0, cantonRows.length - 1));
-
-  function onListKey(event: ReactKeyboardEvent<HTMLDivElement>) {
-    const options = Array.from(event.currentTarget.querySelectorAll<HTMLElement>('[role="option"]'));
-    const at = options.indexOf(document.activeElement as HTMLElement);
-    let next = -1;
-    if (event.key === "ArrowDown") next = Math.min(options.length - 1, at + 1);
-    else if (event.key === "ArrowUp") next = Math.max(0, at - 1);
-    else if (event.key === "Home") next = 0;
-    else if (event.key === "End") next = options.length - 1;
-    if (next < 0 || options.length === 0) return;
-    event.preventDefault();
-    options[next].focus();
-  }
-
-  // La altura de la hoja es una de tres: corta, media o alta. Arrastrar la sigue y al soltar ajusta a la más cercana.
-  useEffect(() => {
-    const apply = () => document.documentElement.style.setProperty("--sheet", `${snapHeights(sheetRef.current)[snap]}px`);
-    apply();
-    window.addEventListener("resize", apply);
-    return () => window.removeEventListener("resize", apply);
-  }, [snap]);
-
-  function onHandleKey(event: ReactKeyboardEvent) {
-    if (event.key === "ArrowUp" || event.key === "ArrowRight") setSnap((value) => Math.min(2, value + 1));
-    else if (event.key === "ArrowDown" || event.key === "ArrowLeft") setSnap((value) => Math.max(0, value - 1));
-    else if (event.key === "Home") setSnap(0);
-    else if (event.key === "End") setSnap(2);
-    else if (event.key === "Enter" || event.key === " ") setSnap((value) => (value + 1) % 3);
-    else return;
-    event.preventDefault();
-  }
-
-  function onHandleDown(event: ReactPointerEvent) {
-    if (!isMobile()) return;
-    const heights = snapHeights(sheetRef.current);
-    const startY = event.clientY;
-    const start = sheetRef.current?.getBoundingClientRect().height ?? heights[snap];
-    let moved = 0;
-    let current = start;
-    const move = (pointer: PointerEvent) => {
-      moved = Math.max(moved, Math.abs(startY - pointer.clientY));
-      current = Math.min(heights[2], Math.max(heights[0], start + (startY - pointer.clientY)));
-      document.documentElement.style.setProperty("--sheet", `${current}px`);
-    };
-    const up = () => {
-      window.removeEventListener("pointermove", move);
-      window.removeEventListener("pointerup", up);
-      // Un toque sin arrastre pasa a la altura siguiente: alternativa al gesto para quien no arrastra.
-      const next = moved < 6
-        ? (snap + 1) % 3
-        : heights.reduce((best, height, index) => (Math.abs(height - current) < Math.abs(heights[best] - current) ? index : best), 0);
-      document.documentElement.style.setProperty("--sheet", `${heights[next]}px`);
-      setSnap(next);
-    };
-    window.addEventListener("pointermove", move);
-    window.addEventListener("pointerup", up);
-  }
-
-  const layerButtons = (
-    <>
-      {([
-        ["satellite", spanish ? "Foto" : "Photo"],
-        ["modis", spanish ? "NASA" : "NASA"],
-        ["marble", spanish ? "Mármol" : "Marble"],
-      ] as const).map(([id, label]) => {
-        const Icon = ICONS[id];
-        return (
-          <button key={id} className="layer-btn" aria-pressed={basemap === id} onClick={() => setBasemap(id)}>
-            <Icon size={22} strokeWidth={1.5} aria-hidden />
-            {label}
-          </button>
-        );
-      })}
-      {([
-        ["cantons", spanish ? "Cantones" : "Cantons"],
-        ["hex", spanish ? "Malla" : "Mesh"],
-        ["terrain", spanish ? "Relieve" : "Relief"],
-        ["plates", spanish ? "Altura" : "Height"],
-        ["osm", spanish ? "Calles" : "Roads"],
-      ] as const).map(([id, label]) => {
-        const Icon = ICONS[id];
-        return (
-          <button key={id} className="layer-btn" aria-pressed={overlays[id]} onClick={() => toggleOverlay(id)}>
-            <Icon size={22} strokeWidth={1.5} aria-hidden />
-            {label}
-          </button>
-        );
-      })}
-    </>
-  );
 
   return (
     <>
-      <form className="map-search" role="search" onSubmit={(event) => event.preventDefault()}>
+      <form className="map-search" role="search" onSubmit={(event) => {
+        event.preventDefault();
+        event.currentTarget.querySelector<HTMLElement>('[role="option"][tabindex="0"]')?.focus();
+      }} onKeyDown={(event) => {
+        if (event.key !== "Escape" || (!query && !boundaryMessage)) return;
+        event.preventDefault();
+        setQuery("");
+        clearBoundaryMessage();
+        input.current?.focus();
+      }}>
         <Search size={16} strokeWidth={1.5} aria-hidden />
-        <input className="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={spanish ? "Buscar cantón" : "Find a canton"} aria-label={spanish ? "Buscar cantón" : "Find a canton"} />
-      </form>
-      <aside ref={sheetRef} className={`left-hud ${open ? "" : "is-collapsed"}`}>
-        <section className="glass stack" aria-label={spanish ? "Lectura" : "Reading"}>
-          <div
-            className="sheet-handle"
-            role="slider"
-            tabIndex={0}
-            aria-orientation="vertical"
-            aria-valuemin={0}
-            aria-valuemax={2}
-            aria-valuenow={snap}
-            aria-valuetext={SNAP_NAMES[snap][spanish ? 0 : 1]}
-            aria-label={spanish ? "Alto de la ficha" : "Card height"}
-            onPointerDown={onHandleDown}
-            onKeyDown={onHandleKey}
-          />
-          <div className="glass-top">
-            {open ? <h1>{readingMetric(metric, lang)}</h1> : null}
-            <button type="button" className="text-btn" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
-              {open ? (spanish ? "Ocultar" : "Hide") : (spanish ? "Lectura" : "Reading")}
-            </button>
+        <input ref={input} className="search" value={query} onChange={(event) => {
+          setQuery(event.target.value);
+          clearBoundaryMessage();
+        }} placeholder={translate(lang, "map.findCanton")} aria-label={translate(lang, "map.findCanton")} />
+        {query.trim() || boundaryMessage ? (
+          <div className="map-search-results">
+            {query.trim() ? <MapCantonList query={query} onPick={() => { setQuery(""); input.current?.focus(); }} /> : null}
+            {boundaryMessage ? <p className="map-search-status" role="status">{translate(lang, boundaryMessage.key, boundaryMessage.values)}</p> : null}
           </div>
-          {open ? (
-            <>
-              <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
-              {compare ? (
-                <div className="reading-lead">
-                  <p className={lead.value == null ? "reading-empty" : "readout"}>
-                    {lead.value == null ? formatValue(null, metric, lang) : (
-                      <>{formatNumber(lead.value, lang)}<small> {metricUnit(metric, lang)}</small></>
-                    )}
-                  </p>
-                  <p>{spanish ? `${baselineName} en el punto del modelo.` : `${baselineName} at the model point.`}</p>
-                </div>
-              ) : null}
-              {compare ? (
-                <details className="reading-details">
-                  <summary>{spanish ? "Leer más" : "Read more"}</summary>
-                  <h2>{spanish ? "Comparación de rotaciones" : "Rotation comparison"}</h2>
-                  <div className="bullets">
-                    {ROTATION_ORDER.map((id) => {
-                      const item = reading(id);
-                      const width = item.value == null ? 0 : Math.min(100, (item.value / barMax) * 100);
-                      return (
-                        <div key={id} className="bullet" data-rot={id}>
-                          <div className="bullet-top">
-                            <span><i className="rot-bg" />{rotationName(id, lang, names[id])}</span>
-                            <strong>{item.value == null ? (spanish ? "sin dato" : "no data") : formatValue(item.value, metric, lang)}</strong>
-                          </div>
-                          <div className="bullet-track" aria-hidden>
-                            {item.value == null ? null : <span className="bullet-bar" style={{ width: `${width}%` }} />}
-                            {id !== baselineId && lead.value != null ? <span className="bullet-mark" style={{ left: `${(lead.value / barMax) * 100}%` }} /> : null}
-                          </div>
-                          <span className="bullet-delta">
-                            {item.delta == null
-                              ? id === baselineId ? (spanish ? "referencia" : "reference") : (spanish ? "diferencia: sin dato" : "difference: no data")
-                              : item.delta === 0
-                                ? `${spanish ? "Igual que" : "Same as"} ${baselineName}`
-                                : item.delta < 0
-                                  ? `${formatValue(Math.abs(item.delta), metric, lang)} ${spanish ? "menos que" : "less than"} ${baselineName}`
-                                  : `${formatValue(item.delta, metric, lang)} ${spanish ? "más que" : "more than"} ${baselineName}`}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <h2>{spanish ? "Cómo leer la comparación" : "How to read the comparison"}</h2>
-                  <p>{leadSentence(lang, scenarioName, metric, n, compare._mock)}</p>
-                  <p>{readingNotes(lang, compare.scenario_id === "like_2026")}</p>
-                  {compare.warnings.length > 0 ? (
-                    <>
-                      <h2>{spanish ? "Avisos" : "Warnings"}</h2>
-                      <ul>{compare.warnings.map((warning, index) => <li key={index}>{warning}</li>)}</ul>
-                    </>
-                  ) : null}
-                  {compare.limitations.length > 0 ? (
-                    <>
-                      <h2>{spanish ? "Limitaciones" : "Limitations"}</h2>
-                      <ul>{compare.limitations.map((limitation, index) => <li key={index}>{limitation}</li>)}</ul>
-                    </>
-                  ) : null}
-                  <p className="faint">
-                    {spanish
-                      ? `${modelCanton ? `El punto del modelo está en ${modelCanton.properties.name}. ` : ""}Elegir un cantón sirve para explorar el mapa. La cifra corresponde al mismo punto de la simulación.`
-                      : `${modelCanton ? `The model point is in ${modelCanton.properties.name}. ` : ""}Choose a canton to explore the map. The figure still comes from the same simulation point.`}
-                  </p>
-                  {version ? <p className="faint">{spanish ? "Versión del modelo" : "Model version"} <code>{version}</code></p> : null}
-                </details>
-              ) : null}
-              <div className="row">
-                <button type="button" onClick={() => setAsk(true)}><LocateFixed size={16} strokeWidth={1.5} aria-hidden /> {spanish ? "Usar mi ubicación" : "Use my location"}</button>
-                <button type="button" onClick={() => {
-                  if (!compare || !cantons.data) return;
-                  const hit = cantonAt(compare.zona.longitude, compare.zona.latitude, cantons.data);
-                  if (hit) toggleCanton(hit.id, false);
-                }}>{spanish ? "Ir al punto del modelo" : "Go to the model point"}</button>
-              </div>
-              {locationMessage ? <p className="kicker" role="status">{locationMessage}</p> : null}
-              {location && !location.inside ? <p className="warn">{spanish ? "Sin extrapolación." : "No extrapolation."}</p> : null}
-              <div className="canton-list" role="listbox" aria-multiselectable="true" aria-label={spanish ? "Cantones" : "Cantons"} onKeyDown={onListKey}>
-                {cantonRows.map((feature, index) => (
-                  <button
-                    key={feature.id}
-                    type="button"
-                    role="option"
-                    aria-selected={selected.includes(feature.id)}
-                    tabIndex={index === listTabStop ? 0 : -1}
-                    onFocus={() => setListStop(index)}
-                    onClick={(event) => {
-                      if (!feature.properties.guanacaste) {
-                        setLocation(location, spanish ? `${feature.properties.name}: sin simulación disponible.` : `${feature.properties.name}: no simulation available.`);
-                        return;
-                      }
-                      toggleCanton(feature.id, event.shiftKey);
-                    }}
-                  >
-                    <span>{feature.properties.name}</span>
-                    <span className="faint">{feature.properties.guanacaste ? "" : spanish ? "sin simulación" : "no simulation"}</span>
-                  </button>
-                ))}
-              </div>
-              <div className="row">
-                <Link to={{ pathname: "/rotaciones", search: params.toString() }}>{spanish ? "Ver la gráfica" : "See the chart"}</Link>
-                <button type="button" onClick={() => setShareOpen(true)}><Share2 size={16} strokeWidth={1.5} aria-hidden /> {spanish ? "Compartir" : "Share"}</button>
-              </div>
-            </>
-          ) : null}
-        </section>
-      </aside>
-      <button className="layers-fab only-mobile" type="button" onClick={() => setLayersOpen(true)}><Layers size={18} strokeWidth={1.5} aria-hidden /> {spanish ? "Capas" : "Layers"}</button>
-      <div className="hud right-hud hide-mobile" role="toolbar" aria-label={spanish ? "Capas" : "Layers"}>
-        {layerButtons}
-      </div>
-      {surface.data ? <div className="map-legend" aria-label={spanish ? "Escala" : "Scale"}>
+        ) : null}
+      </form>
+      <MapReading />
+      <MapLayers />
+      <div className="map-time-overlays">
+      {mesh && surface.data ? <div className="map-legend" role="group" aria-label={translate(lang, "map.scale")}>
         <div className="legend-top">
           <span>{formatNumber(min, lang, 0)}</span>
-          <span>{spanish ? "Cifras de prueba · arroz → melón" : "Sample figures · rice → melon"}</span>
+          <span>{translate(lang, "map.sampleFiguresRiceMelon")}</span>
           <span>{formatNumber(max, lang, 0)}</span>
         </div>
         <div className="legend">
@@ -435,101 +65,10 @@ export function MapScreen() {
             <span key={index} style={{ background: surfaceColor(min + ((max - min) * index) / 6, min, max) }} />
           ))}
         </div>
-        <p>{spanish ? "Gris: sin simulación. No es la salida del modelo." : "Gray: no simulation. Not a model output."}</p>
+        <p>{translate(lang, "map.grayNoSimulationNotModel")}</p>
       </div> : null}
-      <div className="hud bottom-hud">
-        <div className="player">
-          <button type="button" className="play" aria-pressed={playing} onClick={() => {
-            if (day >= SEASON_DAYS) setDay(0);
-            setPlaying((value) => !value);
-          }}>{playing ? <Pause size={16} strokeWidth={1.5} aria-hidden /> : <Play size={16} strokeWidth={1.5} aria-hidden />} {playing ? (spanish ? "Pausa" : "Pause") : spanish ? "Iniciar" : "Play"}</button>
-          <div className="scrub">
-            <div className="scrub-stages" aria-hidden>
-              {STAGES.map((stage) => (
-                <i key={stage.day} style={{ left: `${(stage.day / SEASON_DAYS) * 100}%` }} title={spanish ? stage.es : stage.en} />
-              ))}
-            </div>
-            <input
-              type="range"
-              min={0}
-              max={SEASON_DAYS}
-              value={day}
-              aria-valuetext={stageAt(day, spanish)}
-              aria-label={spanish ? "Temporada, abril a diciembre" : "Season, April to December"}
-              onChange={(event) => {
-                setPlaying(false);
-                setDay(Number(event.target.value));
-              }}
-            />
-            <div className="scrub-months" aria-hidden>
-              {MONTHS.map(([at, es, en]) => (
-                <span key={es} style={{ left: `${(at / SEASON_DAYS) * 100}%` }}>{spanish ? es : en}</span>
-              ))}
-            </div>
-          </div>
-          <p className="player-now">{stageAt(day, spanish)}</p>
-          <button className="compare-years" type="button" disabled={!compare} aria-expanded={compareOpen && Boolean(compare)} aria-controls={compareOpen && compare ? "compare-years" : undefined} onClick={() => setCompareOpen((value) => !value)}>
-            {spanish ? "Comparar años" : "Compare years"}
-          </button>
-        </div>
-        {compareOpen && compare ? (
-          <div className="year-pop" id="compare-years">
-            <label>{spanish ? "Año A" : "Year A"}
-              <select value={yearA ?? ""} onChange={(event) => setYears(event.target.value ? Number(event.target.value) : null, yearB)}>
-                <option value="">{spanish ? "Elegir" : "Choose"}</option>
-                {compare.analog_years.map((item) => <option key={item.year} value={item.year}>{item.year}</option>)}
-              </select>
-            </label>
-            <label>{spanish ? "Año B" : "Year B"}
-              <select value={yearB ?? ""} onChange={(event) => setYears(yearA, event.target.value ? Number(event.target.value) : null)}>
-                <option value="">{spanish ? "Elegir" : "Choose"}</option>
-                {compare.analog_years.map((item) => <option key={item.year} value={item.year}>{item.year}</option>)}
-              </select>
-            </label>
-            <p className="faint">
-              {hasDailyBalance
-                ? (spanish ? "Años parecidos usados en la simulación." : "Similar years used in the simulation.")
-                : (spanish ? "Este resultado trae cifras del ciclo completo. Balance diario: sin dato." : "This result has figures for the full cycle. Daily balance: no data.")}
-            </p>
-          </div>
-        ) : null}
+      <MapSeasonPlayer />
       </div>
-      {layersOpen ? (
-        <Dialog labelledBy="layers-title" onClose={() => setLayersOpen(false)}>
-          <h2 id="layers-title">{spanish ? "Capas" : "Layers"}</h2>
-          <div className="layer-grid">{layerButtons}</div>
-          <p className="faint">{spanish ? "Cada hexágono copia el valor sintético del cantón que lo contiene. No hay interpolación." : "Each hexagon copies the synthetic value of the canton that contains it. There is no interpolation."}</p>
-          <button type="button" onClick={() => setLayersOpen(false)}>{spanish ? "Cerrar" : "Close"}</button>
-        </Dialog>
-      ) : null}
-      {ask ? (
-        <Dialog labelledBy="loc-title" onClose={() => setAsk(false)}>
-          <h2 id="loc-title">{spanish ? "Ubicación de este aparato" : "This device’s location"}</h2>
-          <p>{spanish ? "El navegador va a pedir permiso. La coordenada solo centra el mapa aquí. No se envía a un servidor y no crea una simulación nueva. Si cae fuera de Guanacaste, se dice y no se extrapola." : "The browser will ask permission. The coordinate only recenters the map here. It is not sent to a server and it does not create a new simulation. Outside Guanacaste, the screen says so and does not extrapolate."}</p>
-          <div className="row">
-            <button type="button" onClick={locate}>{spanish ? "Pedir permiso" : "Ask permission"}</button>
-            <button type="button" onClick={() => setAsk(false)}>{spanish ? "Ahora no" : "Not now"}</button>
-          </div>
-        </Dialog>
-      ) : null}
-      {shareOpen ? (
-        <Dialog labelledBy="share-title" onClose={() => setShareOpen(false)}>
-          <h2 id="share-title">{spanish ? "Compartir esta lectura" : "Share this reading"}</h2>
-          <textarea readOnly value={shareText} aria-label={spanish ? "Texto para compartir" : "Text to share"} />
-          <div className="row">
-            <button type="button" onClick={async () => {
-              try {
-                await navigator.clipboard.writeText(shareText);
-                setCopied(true);
-              } catch {
-                setCopied(false);
-              }
-            }}>{spanish ? "Copiar" : "Copy"}</button>
-            <button type="button" onClick={() => setShareOpen(false)}>{spanish ? "Cerrar" : "Close"}</button>
-          </div>
-          {copied ? <p role="status">{spanish ? "Copiado." : "Copied."}</p> : null}
-        </Dialog>
-      ) : null}
     </>
   );
 }
