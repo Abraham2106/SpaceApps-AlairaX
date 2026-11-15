@@ -1,0 +1,86 @@
+{
+ "_recorded": "POST https://earth-search.aws.element84.com/v1/search, sentinel-2-l2a, point -85.44 10.63, 2026-10-15/2026-11-08, recorded 2026-11-15",
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "id": "S2C_16PFS_20261108_0_L2A",
+   "collection": "sentinel-2-l2a",
+   "bbox": [
+    -86.087966,
+    9.856993,
+    -85.080838,
+    10.854112
+   ],
+   "properties": {
+    "datetime": "2026-11-08T16:20:29.723000Z",
+    "eo:cloud_cover": 99.739802,
+    "platform": "sentinel-2c"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "S2B_16PFS_20261103_0_L2A",
+   "collection": "sentinel-2-l2a",
+   "bbox": [
+    -86.087966,
+    9.856993,
+    -85.080838,
+    10.854112
+   ],
+   "properties": {
+    "datetime": "2026-11-03T16:20:34.287000Z",
+    "eo:cloud_cover": 99.972725,
+    "platform": "sentinel-2b"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "S2C_16PFS_20261029_0_L2A",
+   "collection": "sentinel-2-l2a",
+   "bbox": [
+    -86.087966,
+    9.856993,
+    -85.080838,
+    10.854112
+   ],
+   "properties": {
+    "datetime": "2026-10-29T16:20:31.197000Z",
+    "eo:cloud_cover": 19.50831,
+    "platform": "sentinel-2c"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "S2B_16PFS_20261024_0_L2A",
+   "collection": "sentinel-2-l2a",
+   "bbox": [
+    -86.087966,
+    9.856993,
+    -85.080838,
+    10.854112
+   ],
+   "properties": {
+    "datetime": "2026-10-24T16:20:33.746000Z",
+    "eo:cloud_cover": 14.186157,
+    "platform": "sentinel-2b"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "S2A_16PFS_20261021_0_L2A",
+   "collection": "sentinel-2-l2a",
+   "bbox": [
+    -86.087966,
+    9.856993,
+    -85.080838,
+    10.854112
+   ],
+   "properties": {
+    "datetime": "2026-10-21T16:20:42.452000Z",
+    "eo:cloud_cover": 86.731553,
+    "platform": "sentinel-2a"
+   }
+  }
+ ]
+}

@@ -5,8 +5,11 @@ import {
   healthSchema,
   liveCatalogSchema,
   liveRotationLibrarySchema,
+  sentinelSearchSchema,
+  droneSearchSchema,
   sourcesSchema,
 } from "./schemas";
+import type { DroneImage, SentinelScene } from "../map/imagery/catalog";
 import { translate } from "./i18n";
 import type { Catalog, CompareResponse, Lang, LoadedComparison, ScenarioChoice, ScenarioId, Zone } from "./types";
 import { SCENARIO_IDS } from "./types";
@@ -130,6 +133,33 @@ export async function probeHealth(base: string, signal?: AbortSignal): Promise<b
   }
 }
 
+/**
+ * Pide al backend la escena Sentinel-2 L2A menos nublada de los 15 días previos a `date`
+ * que cubre el punto. Devuelve null si no hay ninguna con nubosidad aceptable.
+ */
+export async function findSentinelScene(
+  base: string,
+  query: { date: string; lon: number; lat: number },
+  signal?: AbortSignal,
+): Promise<SentinelScene | null> {
+  const params = new URLSearchParams({
+    date: query.date,
+    lon: query.lon.toFixed(4),
+    lat: query.lat.toFixed(4),
+  });
+  const body = sentinelSearchSchema.parse(await readJson(`${base.replace(/\/$/, "")}/imagery/search?${params}`, signal));
+  if (!body.scene || !body.attribution) return null;
+  return {
+    id: body.scene.id,
+    date: body.scene.date,
+    datetime: body.scene.datetime,
+    cloudCover: body.scene.cloud_cover,
+    platform: body.scene.platform,
+    bbox: body.scene.bbox,
+    attribution: body.attribution,
+  };
+}
+
 async function postCompare(base: string, zona: Zone, scenario: ScenarioChoice, signal?: AbortSignal): Promise<CompareResponse> {
   const response = await fetch(`${base}/compare`, {
     method: "POST",
@@ -193,6 +223,30 @@ async function loadLiveComparison(base: string, scenarioId: ScenarioId, signal?:
     }
     throw error;
   }
+}
+
+/**
+ * Pide al backend las huellas de dron de OpenAerialMap que tocan la caja
+ * [oeste, sur, este, norte]. El navegador no puede pedirlas directo: OAM no abre CORS.
+ */
+export async function findDroneImages(
+  base: string,
+  box: readonly [number, number, number, number],
+  signal?: AbortSignal,
+): Promise<DroneImage[]> {
+  const [west, south, east, north] = box;
+  const params = new URLSearchParams({ west: String(west), south: String(south), east: String(east), north: String(north) });
+  const body = droneSearchSchema.parse(await readJson(`${base.replace(/\/$/, "")}/imagery/drones?${params}`, signal));
+  return body.images.map((image) => ({
+    id: image.id,
+    title: image.title,
+    date: image.date,
+    gsdM: image.gsd_m,
+    provider: image.provider,
+    license: image.license || body.license,
+    bbox: image.bbox,
+    tiles: image.tiles,
+  }));
 }
 
 export async function loadComparison(apiBase: string, scenarioId: ScenarioId, signal?: AbortSignal): Promise<LoadedComparison> {

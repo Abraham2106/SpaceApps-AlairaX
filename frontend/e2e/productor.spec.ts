@@ -64,12 +64,12 @@ test("el teclado alcanza diálogo, escenarios y lista de cantones", async ({ pag
   await expect(dialog).toBeHidden();
   await expect(opener).toBeFocused();
 
-  const climate = page.getByLabel("Clima", { exact: true });
+  const climate = page.getByRole("combobox", { name: "Clima", exact: true });
   await climate.focus();
   await climate.press("ArrowDown");
   await expect(climate).toHaveValue("neutral");
 
-  const metric = page.getByLabel("Qué ver", { exact: true });
+  const metric = page.getByRole("combobox", { name: "Qué ver", exact: true });
   await metric.focus();
   await metric.press("End");
   await expect(metric).toHaveValue("water_stress_days");
@@ -79,24 +79,6 @@ test("el teclado alcanza diálogo, escenarios y lista de cantones", async ({ pag
   await option.focus();
   await option.press("Enter");
   await expect(page).toHaveURL(/c=canas/);
-});
-  await expect(strong).toHaveAttribute("aria-checked", "true");
-  await strong.focus();
-  await page.keyboard.press("ArrowRight");
-  await expect(page.getByRole("radio", { name: "Neutro" })).toBeChecked();
-  await expect(page.getByRole("radio", { name: "Neutro" })).toBeFocused();
-
-  // Métrica: igual.
-  await page.getByRole("radio", { name: "Agua" }).focus();
-  await page.keyboard.press("End");
-  await expect(page.getByRole("radio", { name: "Estrés" })).toBeChecked();
-
-  // Lista de cantones: un solo tope de tabulación y flechas entre opciones.
-  const stops = page.locator('[role="option"][tabindex="0"]');
-  await expect(stops).toHaveCount(1);
-  await stops.focus();
-  await page.keyboard.press("ArrowDown");
-  await expect(page.locator('[role="option"]').nth(1)).toBeFocused();
 });
 
 test("el panel y los controles del mapa caben a 768 px", async ({ page }) => {
