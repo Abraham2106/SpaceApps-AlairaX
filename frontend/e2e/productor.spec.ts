@@ -34,7 +34,7 @@ test("un productor resuelve las cinco tareas y la consola queda limpia", async (
 
   await page.getByRole("link", { name: "Confianza" }).click();
   await expect(page.getByRole("heading", { name: "Confianza y procedencia" })).toBeVisible();
-  await expect(page.getByText("reviewed: false")).toBeVisible();
+  await expect(page.getByText("Método revisado")).toBeVisible();
   await expect(page.getByRole("heading", { name: "NASA POWER" })).toBeVisible();
 
   await page.getByRole("link", { name: "Mapa" }).click();
@@ -187,7 +187,7 @@ test("la fase 6 conserva las fechas provisionales y la navegación de los canton
   await expect(page.getByRole("columnheader", { name: "B · " + year })).toBeVisible();
 
   await page.getByRole("link", { name: "Confianza", exact: true }).click();
-  await expect(page.getByText("reviewed: false")).toBeVisible();
+  await expect(page.getByText("Método revisado")).toBeVisible();
   await expect(page.getByRole("heading", { name: "NASA POWER" })).toBeVisible();
   const address = page.getByLabel("Dirección de la API");
   await address.fill("api-invalida");
@@ -222,7 +222,7 @@ test("la fase 7 traduce los avisos activos y descarga el mapa al abrirlo", async
 
   try {
     await page.goto("/#/confianza");
-    await expect(page.getByText("reviewed: false")).toBeVisible();
+    await expect(page.getByText("Método revisado")).toBeVisible();
     await expect(page.getByRole("application")).toHaveCount(0);
     expect(mapAssets).toEqual([]);
 

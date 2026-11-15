@@ -27,12 +27,15 @@ class KernelHandoffTests(unittest.TestCase):
         path = Path('datasets/processed/et0/et0_10.55_-85.5.json')
         payload = json.loads(path.read_text(encoding='utf-8'))
         model = ReviewedET0.model_validate(payload)
+        self.assertEqual(len(model.values), 16754)
+
+        unreviewed = {**payload, 'reviewed': False, 'reviewed_by': None}
+        model = ReviewedET0.model_validate(unreviewed)
         self.assertFalse(model.reviewed)
         self.assertIsNone(model.reviewed_by)
-        self.assertEqual(len(model.values), 16754)
-        payload['reviewed'] = True
+
         with self.assertRaisesRegex(ValueError, 'named reviewer'):
-            ReviewedET0.model_validate(payload)
+            ReviewedET0.model_validate({**unreviewed, 'reviewed': True})
 
     def test_calendar_audit_finds_no_overlaps_with_current_dates(self):
         # Arroz 05-15 (150 d, cosecha 11-oct) antes del 2.º cultivo del 15-oct: sin solapes.

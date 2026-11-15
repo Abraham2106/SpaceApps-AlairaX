@@ -104,7 +104,7 @@ export function TrustScreen() {
               </div>
               <div>
                 <dt>{translate(lang, "trust.et0Documentation")}</dt>
-                <dd>{translate(lang, "trust.et0ReviewPending")} <small><code>reviewed: false</code></small></dd>
+                <dd>{translate(lang, "trust.et0MethodReviewed")}</dd>
               </div>
               <div>
                 <dt>{translate(lang, "trust.hydraulicProfile")}</dt>
