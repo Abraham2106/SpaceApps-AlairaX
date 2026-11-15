@@ -35,6 +35,17 @@ describe("cantones", () => {
     ).toBe(false);
   });
 
+  it("el fixture espacial cubre los 11 cantones y se declara sintético", () => {
+    const surface = JSON.parse(readFileSync(new URL("data/canton-surface.json", root), "utf8")) as {
+      _mock: boolean;
+      cantons: Record<string, { _mock: boolean }>;
+    };
+    const ids = collection.features.filter((feature) => feature.properties.guanacaste).map((feature) => feature.id);
+    expect(surface._mock).toBe(true);
+    expect(Object.keys(surface.cantons).sort()).toEqual([...ids].sort());
+    expect(Object.values(surface.cantons).every((row) => row._mock)).toBe(true);
+  });
+
   it("dibuja la malla solo dentro de Guanacaste", () => {
     const mesh = hexMesh(collection, 0.2, "coarse");
     expect(mesh.features.length).toBeGreaterThan(5);

@@ -25,7 +25,7 @@ test("un productor resuelve las cinco tareas y la consola queda limpia", async (
   await page.getByRole("button", { name: "Niño fuerte" }).click();
   await expect(page.getByText("Niño fuerte · n = 3")).toBeVisible();
   await expect(page.getByText(/No es rendimiento/).first()).toBeHidden();
-  await page.getByText("Leer la frase completa").click();
+  await page.getByText("Leer más").click();
   await expect(page.getByText(/No es rendimiento/).first()).toBeVisible();
   await expect(page.getByText(/no una probabilidad/).first()).toBeVisible();
 

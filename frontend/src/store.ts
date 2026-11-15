@@ -31,6 +31,7 @@ type Store = {
   apiBase: string;
   location: LocationFix | null;
   locationMessage: string | null;
+  hovered: string | null;
   setScenario: (id: ScenarioId) => void;
   setMetric: (id: MetricId) => void;
   setLang: (lang: Lang) => void;
@@ -42,6 +43,7 @@ type Store = {
   setYears: (yearA: number | null, yearB: number | null) => void;
   setApiBase: (value: string) => void;
   setLocation: (value: LocationFix | null, message: string | null) => void;
+  setHovered: (id: string | null) => void;
   hydrate: (params: URLSearchParams) => void;
   toParams: () => URLSearchParams;
 };
@@ -72,6 +74,7 @@ export const useInstrument = create<Store>((set, get) => ({
   apiBase: (import.meta.env.VITE_API_URL ?? "").trim(),
   location: null,
   locationMessage: null,
+  hovered: null,
   setScenario: (scenarioId) => set({ scenarioId, yearA: null, yearB: null }),
   setMetric: (metric) => set({ metric }),
   setLang: (lang) => {
@@ -96,6 +99,7 @@ export const useInstrument = create<Store>((set, get) => ({
   setYears: (yearA, yearB) => set({ yearA, yearB }),
   setApiBase: (apiBase) => set({ apiBase: apiBase.trim() }),
   setLocation: (location, locationMessage) => set({ location, locationMessage }),
+  setHovered: (hovered) => set({ hovered }),
   hydrate: (params) => {
     const scenario = params.get("e");
     const metric = params.get("m");

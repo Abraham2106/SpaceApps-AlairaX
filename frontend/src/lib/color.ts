@@ -1,10 +1,10 @@
-import { boundsOf, guanacasteFeatures, pointInGeometry, type CantonCollection, type Geometry } from "./geo";
+import { boundsOf, guanacasteFeatures, pointInGeometry, type CantonCollection } from "./geo";
 
 export type HexCollection = {
   type: "FeatureCollection";
   features: {
     type: "Feature";
-    properties: { res: "coarse" | "mid" | "fine" };
+    properties: { res: "coarse" | "mid" | "fine"; canton: string };
     geometry: { type: "Polygon"; coordinates: [number, number][][] };
   }[];
 };
@@ -20,16 +20,11 @@ function hexRing(cx: number, cy: number, radius: number): [number, number][] {
   return ring;
 }
 
-function covers(lon: number, lat: number, geometries: Geometry[]): boolean {
-  return geometries.some((geometry) => pointInGeometry(lon, lat, geometry));
-}
-
 export function hexMesh(collection: CantonCollection, radius: number, res: "coarse" | "mid" | "fine"): HexCollection {
   const features = guanacasteFeatures(collection);
   const bounds = boundsOf(features);
   if (!bounds || radius <= 0) return { type: "FeatureCollection", features: [] };
   const [minX, minY, maxX, maxY] = bounds;
-  const geometries = features.map((feature) => feature.geometry);
   const midLat = (minY + maxY) / 2;
   const cos = Math.cos((midLat * Math.PI) / 180) || 0.01;
   const dx = Math.sqrt(3) * radius / cos;
@@ -41,10 +36,11 @@ export function hexMesh(collection: CantonCollection, radius: number, res: "coar
     for (let x = minX - dx; x <= maxX + dx; x += dx) {
       const cx = x + offset;
       const cy = y;
-      if (!covers(cx, cy, geometries)) continue;
+      const owner = features.find((feature) => pointInGeometry(cx, cy, feature.geometry));
+      if (!owner) continue;
       hexes.push({
         type: "Feature",
-        properties: { res },
+        properties: { res, canton: owner.id },
         geometry: { type: "Polygon", coordinates: [hexRing(cx, cy, radius)] },
       });
     }
@@ -53,7 +49,7 @@ export function hexMesh(collection: CantonCollection, radius: number, res: "coar
   return { type: "FeatureCollection", features: hexes };
 }
 
-/** Six published cividis anchors. One value paints the whole mesh. */
+/** Six published cividis anchors. The mesh inherits each hex's canton value. */
 const CIVIDIS = ["#00224e", "#3b496c", "#6a6e73", "#9a8756", "#d2b24a", "#fee838"];
 
 function channel(hex: string, index: number): number {

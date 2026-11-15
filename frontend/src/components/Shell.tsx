@@ -70,7 +70,7 @@ export function Shell() {
             <option value="like_2026">{spanish ? "Como 2026" : "Like 2026"}</option>
           </select>
         </label>
-        <div className="cluster hide-mobile" role="radiogroup" aria-label={spanish ? "Escenario" : "Scenario"}>
+        <div className="segment hide-mobile" role="radiogroup" aria-label={spanish ? "Escenario" : "Scenario"}>
           {([
             ["strong_el_nino", "Niño fuerte", "Strong El Niño"],
             ["neutral", "Neutro", "Neutral"],
@@ -80,34 +80,30 @@ export function Shell() {
             <button key={id} aria-pressed={scenarioId === id} onClick={() => setScenario(id)}>{spanish ? es : en}</button>
           ))}
         </div>
-        <div className="cluster hide-mobile" role="radiogroup" aria-label={spanish ? "Foco agrícola" : "Farm focus"}>
-          <button aria-pressed={metric === "modeled_water_deficit_mm"} onClick={() => setMetric("modeled_water_deficit_mm")}>{spanish ? "Agua" : "Water"}</button>
-          <button aria-pressed={metric === "crop_water_demand_mm"} onClick={() => setMetric("crop_water_demand_mm")}>{spanish ? "Demanda" : "Demand"}</button>
-          <button aria-pressed={metric === "water_stress_days"} onClick={() => setMetric("water_stress_days")}>{spanish ? "Estrés" : "Stress"}</button>
+        <div className="metric-tabs" role="tablist" aria-label={spanish ? "Métrica" : "Metric"}>
+          <button role="tab" aria-selected={metric === "modeled_water_deficit_mm"} onClick={() => setMetric("modeled_water_deficit_mm")}>{spanish ? "Agua" : "Water"}</button>
+          <button role="tab" aria-selected={metric === "crop_water_demand_mm"} onClick={() => setMetric("crop_water_demand_mm")}>{spanish ? "Demanda" : "Demand"}</button>
+          <button role="tab" aria-selected={metric === "water_stress_days"} onClick={() => setMetric("water_stress_days")}>{spanish ? "Estrés" : "Stress"}</button>
         </div>
         <span className="spacer" />
-        <span className="mode-pill">{apiBase ? (spanish ? "API" : "API") : spanish ? "Fixture" : "Fixture"}</span>
+        {mock && !liveFailure ? (
+          <p className="chip" role="status">
+            <strong>{spanish ? "PRUEBA" : "SAMPLE"}</strong>
+            <span>{spanish ? "Datos sintéticos" : "Synthetic data"}</span>
+          </p>
+        ) : null}
+        {liveFailure ? (
+          <p className="chip chip-live" role="status">
+            <strong>HTTP {comparison.data?.httpStatus}</strong>
+            <span>{comparison.data?.httpDetail}</span>
+          </p>
+        ) : null}
+        <span className="mode-pill">{apiBase ? "API" : spanish ? "Fixture" : "Fixture"}</span>
         <button onClick={() => setTheme(theme === "night" ? "sun" : "night")} aria-pressed={theme === "sun"}>
           {theme === "night" ? <Moon size={16} aria-hidden /> : <SunMedium size={16} aria-hidden />} {theme === "night" ? (spanish ? "Noche" : "Night") : (spanish ? "Sol" : "Sun")}
         </button>
         <button onClick={() => setLang(spanish ? "en" : "es")}>{spanish ? "EN" : "ES"}</button>
       </header>
-      {mock && !liveFailure ? (
-        <div className="alarm" role="status">
-          <strong>{spanish ? "PRUEBA" : "SAMPLE"}</strong>
-          <span>
-            {spanish
-              ? "Estas cifras son de prueba, no una medición de la finca. El aviso se queda mientras los datos sean de ejemplo."
-              : "These figures are a sample, not a measurement from the farm. The notice stays while the data is an example."}
-          </span>
-        </div>
-      ) : null}
-      {liveFailure ? (
-        <div className="alarm" role="status">
-          <strong>HTTP {comparison.data?.httpStatus}</strong>
-          <span>{comparison.data?.httpDetail}</span>
-        </div>
-      ) : null}
       <div className="workspace">
         <nav className="rail" aria-label={spanish ? "Secciones" : "Sections"}>
           {LINKS.map((link) => {

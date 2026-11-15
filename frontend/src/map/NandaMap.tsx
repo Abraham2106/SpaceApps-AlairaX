@@ -1,14 +1,18 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import maplibregl, { type StyleSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { hexMesh, metricColor } from "../lib/color";
+import { hexMesh } from "../lib/color";
 import { boundsOf, cantonAt, guanacasteFeatures } from "../lib/geo";
 import { useCantons, useComparison } from "../data/queries";
+import { formatValue } from "../lib/format";
+import { cantonHeight, cantonPaint, hexHeight, hexPaint, useSurface } from "../lib/surface";
 import { useInstrument } from "../store";
+import type { MetricId } from "../lib/types";
 
 const EMPTY = { type: "FeatureCollection" as const, features: [] };
 
 function buildStyle(): StyleSpecification {
+  const motion = reducedMotion() ? 0 : 680;
   return {
     version: 8,
     glyphs: "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf",
@@ -52,7 +56,18 @@ function buildStyle(): StyleSpecification {
     },
     layers: [
       { id: "background", type: "background", paint: { "background-color": "#0c1412" } },
-      { id: "satellite", type: "raster", source: "satellite" },
+      {
+        id: "satellite",
+        type: "raster",
+        source: "satellite",
+        paint: {
+          "raster-saturation": -0.9,
+          "raster-brightness-max": 0.3,
+          "raster-brightness-min": 0.02,
+          "raster-contrast": -0.18,
+          "raster-opacity": 0.95,
+        },
+      },
       { id: "modis", type: "raster", source: "modis", layout: { visibility: "none" } },
       { id: "marble", type: "raster", source: "marble", layout: { visibility: "none" } },
       {
@@ -72,16 +87,18 @@ function buildStyle(): StyleSpecification {
         type: "fill",
         source: "cantons",
         paint: {
-          "fill-color": "#8ec8e8",
+          "fill-color": "#1c2823",
+          "fill-color-transition": { duration: motion, delay: 0 },
+          "fill-opacity-transition": { duration: motion, delay: 0 },
           "fill-opacity": [
             "case",
             ["boolean", ["feature-state", "selected"], false],
-            0.38,
+            0.94,
             ["boolean", ["feature-state", "hover"], false],
-            0.3,
+            0.9,
             ["get", "guanacaste"],
-            0.45,
-            0,
+            0.82,
+            0.4,
           ],
         },
       },
@@ -104,7 +121,11 @@ function buildStyle(): StyleSpecification {
             type: "fill" as const,
             source,
             layout: { visibility: "none" as const },
-            paint: { "fill-color": "#9a8756", "fill-opacity": 0.45 },
+            paint: {
+              "fill-color": "#9a8756",
+              "fill-color-transition": { duration: motion, delay: 0 },
+              "fill-opacity": 0.78,
+            },
           },
           {
             id: `hex-${res}-extrude`,
@@ -113,8 +134,9 @@ function buildStyle(): StyleSpecification {
             layout: { visibility: "none" as const },
             paint: {
               "fill-extrusion-color": "#9a8756",
+              "fill-extrusion-color-transition": { duration: motion, delay: 0 },
               "fill-extrusion-height": 500,
-              "fill-extrusion-opacity": 0.55,
+              "fill-extrusion-opacity": 0.86,
             },
           },
         ];
@@ -134,9 +156,18 @@ function buildStyle(): StyleSpecification {
         type: "line",
         source: "cantons",
         paint: {
-          "line-color": ["case", ["boolean", ["feature-state", "selected"], false], "#142028", "#1c2830"],
-          "line-width": ["case", ["boolean", ["feature-state", "selected"], false], 1.4, ["get", "guanacaste"], 0.7, 0.35],
-          "line-opacity": ["case", ["get", "guanacaste"], 0.85, 0.35],
+          "line-color": [
+            "case",
+            ["boolean", ["feature-state", "selected"], false],
+            "#ffffff",
+            ["boolean", ["feature-state", "hover"], false],
+            "#f2d48a",
+            ["get", "guanacaste"],
+            "rgba(244,247,242,0.9)",
+            "rgba(244,247,242,0.28)",
+          ],
+          "line-width": ["case", ["boolean", ["feature-state", "selected"], false], 2.1, ["boolean", ["feature-state", "hover"], false], 1.7, ["get", "guanacaste"], 1.05, 0.45],
+          "line-opacity": ["case", ["get", "guanacaste"], 0.95, 0.55],
         },
       },
       {
@@ -150,9 +181,10 @@ function buildStyle(): StyleSpecification {
           "text-letter-spacing": 0.04,
         },
         paint: {
-          "text-color": "#142028",
-          "text-halo-color": "#f4f7f5",
-          "text-halo-width": 1.2,
+          "text-color": "#f4f7f2",
+          "text-halo-color": "#06110e",
+          "text-halo-width": 1.8,
+          "text-halo-blur": 0.4,
         },
       },
       {
@@ -217,13 +249,13 @@ function buildStyle(): StyleSpecification {
         layout: {
           "text-field": ["get", "label"],
           "text-font": ["Noto Sans Regular"],
-          "text-size": 22,
-          "text-offset": [0, 1.1],
+          "text-size": 12,
+          "text-offset": [0, 1.15],
           "text-anchor": "top",
         },
         paint: {
-          "text-color": "#142028",
-          "text-halo-color": "#ffffff",
+          "text-color": "#f4f7f2",
+          "text-halo-color": "#06110e",
           "text-halo-width": 1.6,
         },
       },
@@ -240,8 +272,13 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
   const mapRef = useRef<maplibregl.Map | null>(null);
   const ready = useRef(false);
   const hovered = useRef<string | null>(null);
+  const platesWere = useRef(false);
+  const surfaceRef = useRef<ReturnType<typeof useSurface>["data"]>(undefined);
+  const metricRef = useRef<MetricId>("modeled_water_deficit_mm");
+  const [tip, setTip] = useState<{ x: number; y: number; name: string; value: number | null; outside: boolean } | null>(null);
   const cantons = useCantons();
   const comparison = useComparison();
+  const surface = useSurface();
   const basemap = useInstrument((state) => state.basemap);
   const overlays = useInstrument((state) => state.overlays);
   const selected = useInstrument((state) => state.selected);
@@ -250,12 +287,8 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
   const location = useInstrument((state) => state.location);
   const toggleCanton = useInstrument((state) => state.toggleCanton);
   const setLocation = useInstrument((state) => state.setLocation);
-
-  const color = useMemo(() => {
-    const compare = comparison.data?.compare;
-    const row = compare?.rotations.find((item) => item.rotation_id === "rice_melon");
-    return metricColor(metric, row?.metrics[metric].p50 ?? null);
-  }, [comparison.data, metric]);
+  surfaceRef.current = surface.data;
+  metricRef.current = metric;
 
   useEffect(() => {
     if (!container.current || mapRef.current) return;
@@ -266,7 +299,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       zoom: 8.05,
       pitch: 0,
       bearing: 0,
-      maxPitch: 0,
+      maxPitch: 52,
       attributionControl: false,
       fadeDuration: reducedMotion() ? 0 : 280,
     });
@@ -308,11 +341,25 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       }
       hovered.current = next;
       map.setFeatureState({ source: "cantons", id: next }, { hover: true });
+      const feature = event.features?.[0];
+      const name = String(feature?.properties.name ?? "");
+      const inside = Boolean(feature?.properties.guanacaste);
+      const row = inside ? surfaceRef.current?.cantons[next]?.[metricRef.current] : null;
+      useInstrument.getState().setHovered(next);
+      setTip({
+        x: event.point.x,
+        y: event.point.y,
+        name,
+        value: row ? row.rice_melon : null,
+        outside: !inside,
+      });
     });
     map.on("mouseleave", "canton-fill", () => {
       map.getCanvas().style.cursor = "";
       if (hovered.current) map.setFeatureState({ source: "cantons", id: hovered.current }, { hover: false });
       hovered.current = null;
+      useInstrument.getState().setHovered(null);
+      setTip(null);
     });
     const onResize = () => map.resize();
     window.addEventListener("resize", onResize);
@@ -382,7 +429,11 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       map.setLayoutProperty("canton-extrude", "visibility", overlays.cantons && overlays.plates ? "visible" : "none");
       map.setLayoutProperty("osm-roads", "visibility", overlays.osm ? "visible" : "none");
       map.setLayoutProperty("osm-places", "visibility", overlays.osm ? "visible" : "none");
-      map.setPaintProperty("canton-fill", "fill-color", color);
+      const paint = cantonPaint(surface.data, metric);
+      const mesh = hexPaint(surface.data, metric);
+      map.setPaintProperty("canton-fill", "fill-color", paint);
+      map.setPaintProperty("canton-extrude", "fill-extrusion-color", paint);
+      map.setPaintProperty("canton-extrude", "fill-extrusion-height", cantonHeight(surface.data, metric));
       map.setLayoutProperty("hillshade", "visibility", overlays.terrain ? "visible" : "none");
       map.setTerrain(null);
       const zoom = map.getZoom();
@@ -391,9 +442,17 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
         const show = overlays.hex && res === level;
         map.setLayoutProperty(`hex-${res}`, "visibility", show && !overlays.plates ? "visible" : "none");
         map.setLayoutProperty(`hex-${res}-extrude`, "visibility", show && overlays.plates ? "visible" : "none");
-        map.setPaintProperty(`hex-${res}`, "fill-color", color);
-        map.setPaintProperty(`hex-${res}-extrude`, "fill-extrusion-color", color);
+        map.setPaintProperty(`hex-${res}`, "fill-color", mesh);
+        map.setPaintProperty(`hex-${res}-extrude`, "fill-extrusion-color", mesh);
+        map.setPaintProperty(`hex-${res}-extrude`, "fill-extrusion-height", hexHeight(surface.data, metric));
       }
+      if (overlays.plates && !platesWere.current && map.getPitch() < 24) {
+        map.easeTo({ pitch: 42, bearing: -16, duration: reducedMotion() ? 0 : 900 });
+      }
+      if (!overlays.plates && platesWere.current) {
+        map.easeTo({ pitch: 0, bearing: 0, duration: reducedMotion() ? 0 : 700 });
+      }
+      platesWere.current = overlays.plates;
     };
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
@@ -401,7 +460,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     return () => {
       map.off("zoomend", apply);
     };
-  }, [basemap, overlays, color]);
+  }, [basemap, overlays, metric, surface.data]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -416,8 +475,8 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     map.flyTo({
       center: feature.properties.center,
       zoom: 9.6,
-      pitch: 0,
-      bearing: 0,
+      pitch: 26,
+      bearing: -14,
       duration: reducedMotion() ? 0 : 1700,
       curve: 1.35,
       essential: true,
@@ -436,10 +495,8 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
         properties: {
           kind: "model",
           label: (() => {
-            const baseline = comparison.data?.compare?.rotations.find((item) => item.rotation_id === "rice_melon");
-            const value = baseline?.metrics[metric].p50;
             const place = cantons.data && zona ? cantonAt(zona.longitude, zona.latitude, cantons.data)?.properties.name : "";
-            return value == null ? "sin dato" : `${Math.round(value)} mm\n${place ?? ""}`;
+            return place ? `punto · ${place}` : "punto";
           })(),
         },
         geometry: { type: "Point" as const, coordinates: [zona.longitude, zona.latitude] },
@@ -463,8 +520,8 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     map.flyTo({
       center: [location.longitude, location.latitude],
       zoom: Math.max(map.getZoom(), 10),
-      pitch: 0,
-      bearing: 0,
+      pitch: 24,
+      bearing: 12,
       duration: reducedMotion() ? 0 : 1800,
       curve: 1.4,
       essential: true,
@@ -482,10 +539,31 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       ? `Imagen: ${basemap === "satellite" ? "Esri, Maxar, Earthstar Geographics (no es NASA)" : basemap === "modis" ? "NASA GIBS, MODIS Terra, 12 mar 2024" : "NASA GIBS, Blue Marble"}. Relieve: teselas AWS terrarium (GMTED2010, ETOPO1; no entra al modelo). Límites: geoBoundaries CRI ADM2, CC0, 2020.${overlays.osm ? " Calles y nombres: © OpenFreeMap © colaboradores de OpenStreetMap." : ""} Punto del modelo${pointName ? ` dentro de ${pointName}` : ""}: ${zona ? `${zona.latitude.toFixed(2)}, ${zona.longitude.toFixed(2)}` : "…"}.`
       : `Imagery: ${basemap === "satellite" ? "Esri, Maxar, Earthstar Geographics (not NASA)" : basemap === "modis" ? "NASA GIBS, MODIS Terra, 12 Mar 2024" : "NASA GIBS, Blue Marble"}. Relief: AWS terrarium tiles (GMTED2010, ETOPO1; not a model input). Boundaries: geoBoundaries CRI ADM2, CC0, 2020.${overlays.osm ? " Roads and names: © OpenFreeMap © OpenStreetMap contributors." : ""} Model point${pointName ? ` inside ${pointName}` : ""}: ${zona ? `${zona.latitude.toFixed(2)}, ${zona.longitude.toFixed(2)}` : "…"}.`;
 
+  const shortCredit = lang === "es"
+    ? `Fuentes · punto ${zona ? `${zona.latitude.toFixed(2)}, ${zona.longitude.toFixed(2)}` : "…"}`
+    : `Sources · point ${zona ? `${zona.latitude.toFixed(2)}, ${zona.longitude.toFixed(2)}` : "…"}`;
+  const tipValue = tip
+    ? tip.outside
+      ? (lang === "es" ? "Sin simulación disponible" : "No simulation available")
+      : tip.value == null
+        ? (lang === "es" ? "sin dato" : "no data")
+        : formatValue(tip.value, metric, lang)
+    : "";
+
   return (
     <div className="map-root" data-hidden={hidden ? "true" : "false"}>
       <div ref={container} className="map-canvas" />
-      <p className="attrib">{credit}</p>
+      {tip ? (
+        <div className="map-tip" style={{ left: tip.x, top: tip.y }} role="status">
+          <strong>{tip.name}</strong>
+          <span>{tipValue}</span>
+          {tip.outside ? null : <em>{lang === "es" ? "fixture sintético" : "synthetic fixture"}</em>}
+        </div>
+      ) : null}
+      <details className="attrib">
+        <summary>{shortCredit}</summary>
+        <p>{credit}</p>
+      </details>
     </div>
   );
 }
