@@ -5,7 +5,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Dialog } from "../components/Dialog";
 import { useComparison } from "../data/queries";
 import { useInstrument } from "../store";
-import { comparisonYears, hasDailyBalance, SEASON_MONTHS } from "../lib/season";
+import { comparisonYears, hasDailyBalance, seasonDates, SEASON_MONTHS } from "../lib/season";
 import type { Lang } from "../lib/types";
 import { useMobileViewport } from "../lib/viewport";
 
@@ -35,57 +35,65 @@ export function MapSeasonPlayer() {
   const mobile = useMobileViewport();
   const compare = useComparison().data?.compare;
   const years = comparisonYears(compare);
-  const date = new Intl.DateTimeFormat(lang === "es" ? "es-CR" : "en-US", {
+  const dates = seasonDates(compare, yearA);
+  const lastDay = dates.length > 1 ? dates.length - 1 : SEASON_DAYS;
+  const activeDay = Math.min(day, lastDay);
+  const locale = lang === "es" ? "es-CR" : "en-US";
+  const date = new Intl.DateTimeFormat(locale, {
     day: "numeric", month: "short", timeZone: "UTC",
-  }).format(Date.UTC(2000, 3, day + 1));
+  }).format(dates[activeDay] ? new Date(dates[activeDay]) : Date.UTC(2000, 3, activeDay + 1));
+  const labels = new Intl.DateTimeFormat(locale, { month: "short", timeZone: "UTC" });
+  const months = dates.length
+    ? dates.flatMap((iso, index) => index === 0 || iso.endsWith("-01") ? [[index, labels.format(new Date(iso))] as const] : [])
+    : SEASON_MONTHS.map(([offset, key]) => [offset, translate(lang, key)] as const);
 
   useEffect(() => {
     if (!playing) return;
     const timer = window.setInterval(() => {
       setDay((current) => {
-        if (current >= SEASON_DAYS) {
+        if (current >= lastDay) {
           setPlaying(false);
-          return SEASON_DAYS;
+          return lastDay;
         }
-        return Math.min(SEASON_DAYS, current + 4);
+        return Math.min(lastDay, current + 4);
       });
     }, 160);
     return () => window.clearInterval(timer);
-  }, [playing]);
+  }, [lastDay, playing]);
 
   return (
     <div className="hud bottom-hud">
       <div className="player">
         <button type="button" className="play" aria-pressed={playing} onClick={() => {
-          if (day >= SEASON_DAYS) setDay(0);
+          if (activeDay >= lastDay) setDay(0);
           setPlaying((value) => !value);
         }}>{playing ? <Pause size={16} strokeWidth={1.5} aria-hidden /> : <Play size={16} strokeWidth={1.5} aria-hidden />} {playing ? (translate(lang, "mapSeasonPlayer.pause")) : translate(lang, "mapSeasonPlayer.play")}</button>
         <div className="scrub">
           <div className="scrub-stages" aria-hidden>
-            {STAGES.map((stage) => (
+            {!dates.length && STAGES.map((stage) => (
               <i key={stage.day} style={{ left: `${(stage.day / SEASON_DAYS) * 100}%` }} title={translate(lang, stage.label)} />
             ))}
           </div>
           <input
             type="range"
             min={0}
-            max={SEASON_DAYS}
-            value={day}
-            aria-valuetext={`${date} · ${stageAt(day, lang)}`}
-            aria-label={translate(lang, "mapSeasonPlayer.seasonAprilDecember")}
+            max={lastDay}
+            value={activeDay}
+            aria-valuetext={dates.length ? date : `${date} · ${stageAt(activeDay, lang)}`}
+            aria-label={translate(lang, dates.length ? "mapSeasonPlayer.modeledSeason" : "mapSeasonPlayer.seasonAprilDecember")}
             onChange={(event) => {
               setPlaying(false);
               setDay(Number(event.target.value));
             }}
           />
           <div className="scrub-months" aria-hidden>
-            {SEASON_MONTHS.map(([at, month]) => (
-              <span key={month} style={{ left: `${(at / SEASON_DAYS) * 100}%` }}>{translate(lang, month)}</span>
+            {months.map(([at, month]) => (
+              <span key={at} style={{ left: `${(at / lastDay) * 100}%` }}>{month}</span>
             ))}
           </div>
         </div>
         <p className="player-now">
-          <span>{translate(lang, "season.provisionalCalendar")}</span>
+          <span>{translate(lang, dates.length ? "mapSeasonPlayer.modeledSeason" : "season.provisionalCalendar")}</span>
           <strong>{date}</strong>
         </p>
         <button className="compare-years" type="button" disabled={!compare} aria-expanded={compareOpen && Boolean(compare)} aria-haspopup={mobile ? "dialog" : undefined} aria-controls={compareOpen && compare ? "compare-years" : undefined} onClick={() => setCompareOpen((value) => !value)}>

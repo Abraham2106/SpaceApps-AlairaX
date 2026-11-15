@@ -1,9 +1,8 @@
 /**
- * Puntos de quiebre del instrumento. Los mismos números viven en styles/responsive.css:
- *   móvil   ≤ 767   barra de abajo, hoja inferior con tres alturas
- *   tablet  768–1099  barra lateral solo con íconos, controles en dos filas
- *   ancho   ≥ 1100  barra lateral con nombres
- *   amplio  ≥ 1440  barra superior completa
+ * Puntos de quiebre del instrumento. Los mismos números viven en styles/shell.css y styles/map.css:
+ *   móvil   ≤ 767   barra de abajo; el panel de lectura va debajo del mapa
+ *   tablet  768–1099  rail flotante; panel de lectura más angosto
+ *   ancho   ≥ 1100  rail flotante y panel completo
  */
 export const MOBILE_QUERY = "(max-width: 767px)";
 export const TABLET_QUERY = "(min-width: 768px) and (max-width: 1099px)";

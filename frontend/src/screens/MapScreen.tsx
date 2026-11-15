@@ -6,7 +6,6 @@ import { surfaceColor, surfaceDomain, useSurface } from "../lib/surface";
 import { isCantonBoundaryMessage, useInstrument } from "../store";
 import { MapLayers } from "../map/MapLayers";
 import { MapReading } from "../map/MapReading";
-import { MapSeasonPlayer } from "../map/MapSeasonPlayer";
 import { MapCantonList } from "../map/MapCantonList";
 
 export function MapScreen() {
@@ -53,7 +52,6 @@ export function MapScreen() {
       </form>
       <MapReading />
       <MapLayers />
-      <div className="map-time-overlays">
       {mesh && surface.data ? <div className="map-legend" role="group" aria-label={translate(lang, "map.scale")}>
         <div className="legend-top">
           <span>{formatNumber(min, lang, 0)}</span>
@@ -61,14 +59,12 @@ export function MapScreen() {
           <span>{formatNumber(max, lang, 0)}</span>
         </div>
         <div className="legend">
-          {Array.from({ length: 7 }, (_, index) => (
-            <span key={index} style={{ background: surfaceColor(min + ((max - min) * index) / 6, min, max) }} />
+          {Array.from({ length: 32 }, (_, index) => (
+            <span key={index} style={{ background: surfaceColor(min + ((max - min) * index) / 31, min, max) }} />
           ))}
         </div>
         <p>{translate(lang, "map.grayNoSimulationNotModel")}</p>
       </div> : null}
-      <MapSeasonPlayer />
-      </div>
     </>
   );
 }

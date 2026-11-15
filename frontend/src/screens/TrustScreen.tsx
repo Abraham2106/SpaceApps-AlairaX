@@ -119,8 +119,10 @@ export function TrustScreen() {
               {sources.map(({ name, use, detail }) => (
                 <li key={name}>
                   <h3>{name}</h3>
-                  <p className="source-use">{use}</p>
-                  <p>{detail}</p>
+                  <div>
+                    <p className="source-use">{use}</p>
+                    <p>{detail}</p>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -133,8 +135,9 @@ export function TrustScreen() {
               </ul>
             </details>
           </section>
-          <section className="detail-panel trust-api" aria-labelledby="trust-connect">
-            <h2 id="trust-connect">{translate(lang, "trust.connectApi")}</h2>
+          <details className="detail-panel detail-disclosure trust-api">
+            <summary>{translate(lang, "trust.connectApi")}</summary>
+            <div>
             <p id="api-help" className="detail-lead">
               {translate(lang, "trust.leaveAddressEmptyUseSample")}
             </p>
@@ -146,7 +149,8 @@ export function TrustScreen() {
             </form>
             {connecting ? <p className="detail-footnote" role="status">{translate(lang, "trust.checkingHealth")}</p> : null}
             {note ? <p className={note.error ? "warn" : "detail-footnote"} role={note.error ? "alert" : "status"}>{translate(lang, note.key)}</p> : null}
-          </section>
+            </div>
+          </details>
           {loaded ? (
             <details className="detail-panel detail-disclosure trust-record">
               <summary>{translate(lang, "common.calculationRecord")}</summary>

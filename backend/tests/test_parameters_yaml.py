@@ -24,7 +24,7 @@ def rotations():
 
 
 def test_crops_yaml_loads_expected_ids(crops) -> None:
-    assert set(crops.crops) == {"rice", "melon", "cowpea", "sorghum", "mucuna", "canavalia"}
+    assert set(crops.crops) == {"rice", "melon", "cowpea", "sorghum", "sorghum_forage", "mucuna", "canavalia"}
     assert crops.version == "0.1.0"
     assert all(not crop.verified for crop in crops.crops.values())
 

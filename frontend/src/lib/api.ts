@@ -55,7 +55,7 @@ export function publicUrl(path: string): string {
   return `${base}${path.replace(/^\//, "")}`;
 }
 
-async function fixtureCatalog(signal?: AbortSignal): Promise<Catalog> {
+async function staticCatalog(signal?: AbortSignal): Promise<Catalog> {
   const [scenarioFile, rotationFile] = await Promise.all([
     readJson(publicUrl("data/scenarios.json"), signal),
     readJson(publicUrl("data/rotations.json"), signal),
@@ -72,7 +72,7 @@ async function fixtureCatalog(signal?: AbortSignal): Promise<Catalog> {
         id: item.scenario_id,
         name: item.name,
         k: item.k,
-        status: "fixture",
+        status: scenarios._mock ? "fixture" : item.selection_status,
         reason: null,
         sampleWarning: item.sample_warning,
         resultFile: item.result_file,
@@ -178,23 +178,23 @@ async function postCompare(base: string, zona: Zone, scenario: ScenarioChoice, s
   return compareResponseSchema.parse(body);
 }
 
-export async function loadComparison(apiBase: string, scenarioId: ScenarioId, signal?: AbortSignal): Promise<LoadedComparison> {
-  if (!apiBase) {
-    const catalog = await fixtureCatalog(signal);
-    const choice = catalog.scenarios.find((item) => item.id === scenarioId);
-    if (!choice?.resultFile) {
-      throw new ApiError(404, "El fixture no tiene ese escenario.");
-    }
-    const body = await readJson(publicUrl(`data/${choice.resultFile}`), signal);
-    return {
-      mode: "fixtures",
-      catalog,
-      compare: compareResponseSchema.parse(body),
-      httpStatus: 200,
-      httpDetail: null,
-    };
+async function loadStaticComparison(scenarioId: ScenarioId, signal?: AbortSignal): Promise<LoadedComparison> {
+  const catalog = await staticCatalog(signal);
+  const choice = catalog.scenarios.find((item) => item.id === scenarioId);
+  if (!choice?.resultFile) {
+    throw new ApiError(404, "El catálogo no tiene ese escenario.");
   }
-  const base = apiBase.replace(/\/$/, "");
+  const body = await readJson(publicUrl(`data/${choice.resultFile}`), signal);
+  return {
+    mode: "static",
+    catalog,
+    compare: compareResponseSchema.parse(body),
+    httpStatus: 200,
+    httpDetail: null,
+  };
+}
+
+async function loadLiveComparison(base: string, scenarioId: ScenarioId, signal?: AbortSignal): Promise<LoadedComparison> {
   const catalog = await liveCatalog(base, signal);
   const choice = catalog.scenarios.find((item) => item.id === scenarioId);
   if (!choice) {
@@ -247,4 +247,10 @@ export async function findDroneImages(
     bbox: image.bbox,
     tiles: image.tiles,
   }));
+}
+
+export async function loadComparison(apiBase: string, scenarioId: ScenarioId, signal?: AbortSignal): Promise<LoadedComparison> {
+  return apiBase
+    ? loadLiveComparison(apiBase.replace(/\/$/, ""), scenarioId, signal)
+    : loadStaticComparison(scenarioId, signal);
 }

@@ -39,7 +39,7 @@ const metrics = z
   })
   .strict();
 
-const daily = z
+export const daily = z
   .object({
     date: z.string(),
     crop_water_demand_mm: z.number().nullable(),

@@ -13,7 +13,7 @@ from backend.app.api.main import app, create_app
 from backend.app.api.schemas.contracts import CompareRequest, CompareResponse
 from backend.app.simulation.version import MODEL_VERSION
 from backend.tests.test_kernel import _mock_inputs
-from scripts.export_contracts import ROTATIONS, SCENARIOS, ZONE
+from scripts.export_contracts import ROTATIONS, SCENARIOS, ZONE, export
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -121,8 +121,9 @@ def test_published_data_matrix(scenario):
 
 
 def test_pages_placeholder_artifact(tmp_path):
+    export(tmp_path)
     dist = tmp_path / 'dist'
-    shutil.copytree(ROOT / 'frontend' / 'public', dist)
+    shutil.copytree(tmp_path / 'frontend' / 'public', dist)
     shutil.copyfile(ROOT / '.github' / 'pages-placeholder' / 'index.html', dist / 'index.html')
     (dist / '.nojekyll').touch()
     pages = FastAPI()

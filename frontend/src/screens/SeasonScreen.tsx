@@ -5,7 +5,8 @@ import { useComparison } from "../data/queries";
 import { formatValue } from "../lib/format";
 import { ROTATION_ORDER, readingMetric, rotationName } from "../lib/plain";
 import { QueryState } from "../components/QueryState";
-import { comparisonYears, hasDailyBalance, SEASON_MONTHS } from "../lib/season";
+import { SoilChart } from "../components/Instrument";
+import { comparisonYears, hasDailyBalance, seasonDates, SEASON_MONTHS } from "../lib/season";
 
 const DATES = ["windowStart", "rice", "cowpeaSorghum", "windowEnd", "melon"] as const;
 
@@ -22,6 +23,13 @@ export function SeasonScreen() {
   const years = comparisonYears(compare);
   const activeA = yearA !== null && years.includes(yearA) ? yearA : years[0];
   const activeB = yearB !== null && years.includes(yearB) ? yearB : years.at(-1);
+  const dates = seasonDates(compare, activeA ?? null);
+  const baselineRuns = compare?.rotations.find(({ rotation_id }) => rotation_id === compare.baseline_rotation_id)?.runs ?? [];
+  const baselineRows = ((baselineRuns.find(({ year }) => year === activeA) ?? baselineRuns[0])?.daily_balance ?? [])
+    .map((row) => ({ date: row.date, value: row.soil_water_storage_mm, status: row.water_stress }));
+  const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-CR" : "en-US", {
+    dateStyle: "medium", timeZone: "UTC",
+  });
 
   return (
     <div className="screen">
@@ -32,9 +40,19 @@ export function SeasonScreen() {
         </header>
         <div className="detail-layout">
           <section className="detail-panel" aria-labelledby="season-calendar">
-            <h2 id="season-calendar">{translate(lang, "season.provisionalCalendar")}</h2>
+            <h2 id="season-calendar">{translate(lang, dates.length ? "mapSeasonPlayer.modeledSeason" : "season.provisionalCalendar")}</h2>
+            {dates.length ? (
+              <>
+                <p className="detail-lead">{dateFormat.formatRange(new Date(dates[0]), new Date(dates[dates.length - 1]))}</p>
+                {baselineRows.some(({ value }) => value !== null) ? (
+                  <>
+                    <h3 className="season-chart-title">{lang === "es" ? "Agua en el suelo" : "Water in the soil"} · {rotationName(compare!.baseline_rotation_id, lang, names[compare!.baseline_rotation_id])}</h3>
+                    <SoilChart rows={baselineRows} lang={lang} height={150} />
+                  </>
+                ) : null}
+              </>
+            ) : compare?._mock ? <>
             <div className="detail-notice">
-              <code>verified: false</code>
               <p>{translate(lang, "season.documentedDatesAwaitingValidationWith")}</p>
             </div>
             <div className="season-months" aria-hidden="true">
@@ -52,6 +70,7 @@ export function SeasonScreen() {
                 </li>
               ))}
             </ol>
+            </> : null}
           </section>
           <section className="detail-panel" aria-labelledby="season-years">
             <h2 id="season-years">{translate(lang, "common.compareYears")}</h2>

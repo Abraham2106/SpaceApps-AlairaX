@@ -6,7 +6,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from scripts.build_analogs import build_pipeline, main
+from backend.app.intelligence.analog_pipeline import build_pipeline
+from scripts.build_analogs import main
 
 
 ZONE = {'id': 'test', 'name': 'Synthetic point', 'latitude': 10.55,

@@ -4,6 +4,7 @@ Run from the repository root: python -m scripts.export_contracts
 Every numeric value here is synthetic UI/test data, including analog distances.
 """
 
+import argparse
 from datetime import date, datetime, timedelta, timezone
 from hashlib import sha256
 import json
@@ -111,7 +112,7 @@ def make_mock_response(scenario_id='neutral') -> CompareResponse:
     return response
 
 
-def export(root: Path = ROOT):
+def export(root: Path = ROOT, *, public_fixtures=True):
     contracts_dir = root / 'docs' / 'contracts'
     examples = root / 'datasets' / 'examples'
     public_data = root / 'frontend' / 'public' / 'data'
@@ -122,6 +123,8 @@ def export(root: Path = ROOT):
     write_json(examples / 'simulation-result.mock.json', runs[0])
     write_json(examples / 'compare-request.mock.json', CompareRequest(zona=ZONE, scenario_id='neutral'))
     write_json(examples / 'comparison-setup.mock.json', make_setup_fixture())
+    if not public_fixtures:
+        return
     common = dict(schema_version='0.1.0', _mock=True, generado=GENERATED.isoformat(),
                   zona=ZONE.model_dump(mode='json'), source_refs=['synthetic-fixture-v1'], warnings=[MOCK_WARNING])
     write_json(public_data / 'rotations.json', dict(common, rotations=[
@@ -144,5 +147,10 @@ def export(root: Path = ROOT):
 
 
 if __name__ == '__main__':
-    export()
-    print('Exported schemas, full-season fixture and 4 explicitly marked mock comparison files.')
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--frontend-fixtures', action='store_true',
+                        help='Replace the static frontend comparisons with synthetic QA fixtures')
+    args = parser.parse_args()
+    export(public_fixtures=args.frontend_fixtures)
+    print('Exported schemas and synthetic examples.'
+          + (' Replaced static comparisons with QA fixtures.' if args.frontend_fixtures else ''))

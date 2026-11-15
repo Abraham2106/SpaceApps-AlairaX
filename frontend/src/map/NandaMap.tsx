@@ -1,5 +1,7 @@
 import { translate } from "../lib/i18n";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { Crosshair, MapPin, Minus, Plus } from "lucide-react";
 import maplibregl, { type StyleSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { hexMesh } from "../lib/color";
@@ -9,7 +11,7 @@ import { formatValue } from "../lib/format";
 import { hexHeight, hexPaint, surfaceValue, useSurface } from "../lib/surface";
 import { useInstrument } from "../store";
 import type { Lang, MetricId } from "../lib/types";
-import { isMobile, isTablet } from "../lib/viewport";
+import { isMobile } from "../lib/viewport";
 import {
   ESRI_TILE_URL,
   IMAGERY_SOURCES,
@@ -95,10 +97,10 @@ function buildStyle(imageryDate: string): StyleSpecification {
         type: "raster",
         source: "satellite",
         paint: {
-          "raster-saturation": -0.08,
-          "raster-brightness-max": 0.95,
-          "raster-brightness-min": 0.22,
-          "raster-contrast": 0.06,
+          "raster-saturation": 0.06,
+          "raster-brightness-max": 1,
+          "raster-brightness-min": 0.04,
+          "raster-contrast": 0.08,
           "raster-opacity": 1,
         },
       },
@@ -110,7 +112,7 @@ function buildStyle(imageryDate: string): StyleSpecification {
         type: "hillshade",
         source: "dem",
         paint: {
-          "hillshade-exaggeration": 0.22,
+          "hillshade-exaggeration": 0.14,
           "hillshade-illumination-direction": 315,
           "hillshade-shadow-color": "#1a120c",
           "hillshade-highlight-color": "#fff3d4",
@@ -122,19 +124,29 @@ function buildStyle(imageryDate: string): StyleSpecification {
         type: "fill",
         source: "cantons",
         paint: {
-          "fill-color": "#1c2823",
+          "fill-color": ["case", ["boolean", ["feature-state", "selected"], false], "#46c47c", "#ffffff"],
           "fill-color-transition": { duration: motion, delay: 0 },
           "fill-opacity-transition": { duration: motion, delay: 0 },
           "fill-opacity": [
             "case",
             ["boolean", ["feature-state", "selected"], false],
-            0.34,
+            0.42,
             ["boolean", ["feature-state", "hover"], false],
-            0.26,
+            0.16,
             ["get", "guanacaste"],
-            0.04,
+            0.03,
             0,
           ],
+        },
+      },
+      {
+        id: "canton-dots",
+        type: "fill",
+        source: "cantons",
+        paint: {
+          "fill-pattern": "dots",
+          "fill-opacity-transition": { duration: motion, delay: 0 },
+          "fill-opacity": ["case", ["boolean", ["feature-state", "selected"], false], 0.85, 0],
         },
       },
       {
@@ -195,14 +207,12 @@ function buildStyle(imageryDate: string): StyleSpecification {
             "case",
             ["boolean", ["feature-state", "selected"], false],
             "#ffffff",
-            ["boolean", ["feature-state", "hover"], false],
-            "#d8f3dc",
             ["get", "guanacaste"],
-            "rgba(244,247,242,0.9)",
-            "rgba(244,247,242,0.28)",
+            "rgba(255,255,255,0.82)",
+            "rgba(255,255,255,0.3)",
           ],
-          "line-width": ["case", ["boolean", ["feature-state", "selected"], false], 2.4, ["boolean", ["feature-state", "hover"], false], 2, ["get", "guanacaste"], 1.6, 0.6],
-          "line-opacity": ["case", ["get", "guanacaste"], 0.95, 0.55],
+          "line-width": ["case", ["boolean", ["feature-state", "selected"], false], 2.6, ["boolean", ["feature-state", "hover"], false], 1.8, ["get", "guanacaste"], 1, 0.5],
+          "line-opacity": ["case", ["get", "guanacaste"], 1, 0.6],
         },
       },
       {
@@ -212,14 +222,15 @@ function buildStyle(imageryDate: string): StyleSpecification {
         layout: {
           "text-field": ["get", "name"],
           "text-font": ["Noto Sans Regular"],
-          "text-size": ["interpolate", ["linear"], ["zoom"], 6, 11, 10, 14],
-          "text-letter-spacing": 0.04,
+          "text-size": ["interpolate", ["linear"], ["zoom"], 6, 10.5, 10, 13],
+          "text-letter-spacing": 0.03,
         },
         paint: {
-          "text-color": "#f4f7f2",
-          "text-halo-color": "#06110e",
-          "text-halo-width": 1.8,
-          "text-halo-blur": 0.4,
+          "text-color": "#ffffff",
+          "text-opacity": ["case", ["boolean", ["feature-state", "selected"], false], 0, 1],
+          "text-halo-color": "rgba(10,14,12,0.7)",
+          "text-halo-width": 1.4,
+          "text-halo-blur": 0.8,
         },
       },
       {
@@ -258,10 +269,10 @@ function buildStyle(imageryDate: string): StyleSpecification {
         source: "marks",
         filter: ["==", ["get", "kind"], "model"],
         paint: {
-          "circle-radius": 5,
-          "circle-color": "rgba(0,0,0,0)",
-          "circle-stroke-color": "#e7eef4",
-          "circle-stroke-width": 1.5,
+          "circle-radius": 5.5,
+          "circle-color": "#ffffff",
+          "circle-stroke-color": "#151714",
+          "circle-stroke-width": 2.5,
         },
       },
       {
@@ -289,13 +300,46 @@ function buildStyle(imageryDate: string): StyleSpecification {
           "text-anchor": "top",
         },
         paint: {
-          "text-color": "#f4f7f2",
-          "text-halo-color": "#06110e",
-          "text-halo-width": 1.6,
+          "text-color": "#ffffff",
+          "text-halo-color": "rgba(10,14,12,0.75)",
+          "text-halo-width": 1.4,
         },
       },
     ],
   };
+}
+
+/** A small white dot tile for the selected-canton pattern. */
+function dotTile(): ImageData {
+  const size = 12;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const context = canvas.getContext("2d")!;
+  context.fillStyle = "rgba(255,255,255,0.95)";
+  context.beginPath();
+  context.arc(size / 2, size / 2, 1.3, 0, Math.PI * 2);
+  context.fill();
+  return context.getImageData(0, 0, size, size);
+}
+
+function frameGuanacaste(map: maplibregl.Map, collection: Parameters<typeof guanacasteFeatures>[0]) {
+  const bounds = boundsOf(guanacasteFeatures(collection));
+  if (!bounds) return;
+  map.fitBounds([[bounds[0], bounds[1]], [bounds[2], bounds[3]]], {
+    padding: framePadding(),
+    pitch: 0,
+    bearing: 0,
+    duration: reducedMotion() ? 0 : 900,
+    maxZoom: 8.8,
+  });
+}
+
+/** Room the floating reading panel takes over the map, so framing keeps the subject visible. */
+function framePadding(): maplibregl.PaddingOptions {
+  if (isMobile()) return { top: 60, bottom: 24, left: 16, right: 16 };
+  const panel = document.querySelector(".map-note")?.getBoundingClientRect();
+  return { top: 72, bottom: 56, left: (panel?.right ?? 0) + 32, right: 88 };
 }
 
 function reducedMotion(): boolean {
@@ -336,8 +380,11 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
   const lang = useInstrument((state) => state.lang);
   const location = useInstrument((state) => state.location);
   const toggleCanton = useInstrument((state) => state.toggleCanton);
+  const toggleOverlay = useInstrument((state) => state.toggleOverlay);
   const setLocation = useInstrument((state) => state.setLocation);
   const apiBase = useInstrument((state) => state.apiBase);
+  const [flagElement] = useState(() => document.createElement("div"));
+  const flagMarker = useRef<maplibregl.Marker | null>(null);
   useEffect(() => {
     surfaceRef.current = surface.data;
     metricRef.current = metric;
@@ -357,6 +404,9 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       fadeDuration: reducedMotion() ? 0 : 280,
     });
     mapRef.current = map;
+    map.on("styleimagemissing", (event) => {
+      if (event.id === "dots" && !map.hasImage("dots")) map.addImage("dots", dotTile(), { pixelRatio: 2 });
+    });
     map.on("load", () => {
       ready.current = true;
       map.setTerrain(null);
@@ -447,6 +497,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
           .filter((feature) => feature.properties.guanacaste)
           .map((feature) => ({
             type: "Feature" as const,
+            id: feature.id,
             properties: { name: feature.properties.name },
             geometry: { type: "Point" as const, coordinates: feature.properties.center },
           })),
@@ -454,28 +505,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       (map.getSource("hexCoarse") as maplibregl.GeoJSONSource | undefined)?.setData(hexMesh(collection, 0.22, "coarse"));
       (map.getSource("hexMid") as maplibregl.GeoJSONSource | undefined)?.setData(hexMesh(collection, 0.12, "mid"));
       (map.getSource("hexFine") as maplibregl.GeoJSONSource | undefined)?.setData(hexMesh(collection, 0.065, "fine"));
-      if (useInstrument.getState().selected.length === 0) {
-        const bounds = boundsOf(guanacasteFeatures(collection));
-        if (bounds) {
-          const narrow = isMobile();
-          map.fitBounds(
-            [[bounds[0], bounds[1]], [bounds[2], bounds[3]]],
-            {
-              padding: narrow
-                ? { top: 36, bottom: 150, left: 10, right: 10 }
-                : isTablet() && inset === "panel"
-                  ? { top: 86, bottom: 80, left: 290, right: 24 }
-                  : inset === "panel"
-                  ? { top: 24, bottom: 72, left: 368, right: 96 }
-                  : { top: 36, bottom: 64, left: 120, right: 56 },
-              pitch: 0,
-              bearing: 0,
-              duration: reducedMotion() ? 0 : 900,
-              maxZoom: 8.8,
-            },
-          );
-        }
-      }
+      if (useInstrument.getState().selected.length === 0 && inset === "panel") frameGuanacaste(map, collection);
     };
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
@@ -486,6 +516,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     if (!map) return;
     const apply = () => {
       map.setLayoutProperty("canton-fill", "visibility", overlays.cantons && !overlays.plates ? "visible" : "none");
+      map.setLayoutProperty("canton-dots", "visibility", overlays.cantons && !overlays.plates ? "visible" : "none");
       map.setLayoutProperty("canton-casing", "visibility", overlays.cantons ? "visible" : "none");
       map.setLayoutProperty("canton-edge", "visibility", overlays.cantons ? "visible" : "none");
       map.setLayoutProperty("canton-label", "visibility", overlays.cantons ? "visible" : "none");
@@ -695,11 +726,17 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     if (!map) return;
     const syncSelection = () => {
       for (const feature of cantons.data?.features ?? []) {
-        map.setFeatureState({ source: "cantons", id: feature.id }, { selected: selected.includes(feature.id) });
+        const state = { selected: selected.includes(feature.id) };
+        map.setFeatureState({ source: "cantons", id: feature.id }, state);
+        if (feature.properties.guanacaste) map.setFeatureState({ source: "labels", id: feature.id }, state);
       }
-      if (selected.length !== 1) return;
-      const feature = cantons.data?.features.find((item) => item.id === selected[0]);
-      if (!feature) return;
+      const feature = selected.length === 1 ? cantons.data?.features.find((item) => item.id === selected[0]) : undefined;
+      if (!feature) {
+        flagMarker.current?.remove();
+        return;
+      }
+      flagMarker.current ??= new maplibregl.Marker({ element: flagElement, anchor: "bottom", offset: [0, -6] });
+      flagMarker.current.setLngLat(feature.properties.center).addTo(map);
       map.flyTo({
         center: selectedCenter ?? feature.properties.center,
         zoom: 9.6,
@@ -708,15 +745,13 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
         duration: reducedMotion() ? 0 : 1700,
         curve: 1.35,
         essential: true,
-        padding: isMobile()
-          ? { top: 30, bottom: 200, left: 16, right: 72 }
-          : isTablet() ? { left: 290, right: 24, top: 86, bottom: 80 } : { left: 430, right: 96, top: 24, bottom: 80 },
+        padding: framePadding(),
       });
     };
     if (ready.current) syncSelection();
     else map.once("load", syncSelection);
     return () => { map.off("load", syncSelection); };
-  }, [selected, selectedCenter, cantons.data]);
+  }, [selected, selectedCenter, cantons.data, flagElement]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -799,14 +834,38 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     };
   }, []);
 
+  const es = lang === "es";
+  const flagFeature = selected.length === 1 ? cantons.data?.features.find((item) => item.id === selected[0]) : undefined;
+  const flagHoldsPoint = Boolean(flagFeature && pointName === flagFeature.properties.name);
+
   return (
     <div className="map-root" data-hidden={hidden ? "true" : "false"}>
       <div ref={container} className="map-canvas" />
+      {flagFeature ? createPortal(
+        <div className="canton-flag">
+          <MapPin size={15} strokeWidth={2} aria-hidden />
+          <span>
+            <strong>{flagFeature.properties.name}</strong>
+            <em>{flagHoldsPoint ? (es ? "Punto de simulación" : "Simulation point") : (es ? "Lectura regional" : "Regional reading")}</em>
+          </span>
+        </div>,
+        flagElement,
+      ) : null}
       {tip ? (
         <div className="map-tip" style={{ left: tip.x, top: tip.y }} role="status">
           <strong>{tip.name}</strong>
           {tip.outside || overlays.hex ? <span>{tipValue}</span> : null}
           {overlays.hex && !tip.outside ? <em>{translate(lang, "nandaMap.syntheticFixture")}</em> : null}
+        </div>
+      ) : null}
+      {!hidden ? (
+        <div className="map-controls" role="group" aria-label={es ? "Controles del mapa" : "Map controls"}>
+          <button type="button" aria-label={es ? "Acercar" : "Zoom in"} title={es ? "Acercar" : "Zoom in"} onClick={() => mapRef.current?.zoomIn()}><Plus size={16} strokeWidth={1.8} aria-hidden /></button>
+          <button type="button" aria-label={es ? "Alejar" : "Zoom out"} title={es ? "Alejar" : "Zoom out"} onClick={() => mapRef.current?.zoomOut()}><Minus size={16} strokeWidth={1.8} aria-hidden /></button>
+          <button type="button" aria-label={es ? "Encuadrar Guanacaste" : "Frame Guanacaste"} title={es ? "Encuadrar Guanacaste" : "Frame Guanacaste"}
+            onClick={() => { if (mapRef.current && cantons.data) frameGuanacaste(mapRef.current, cantons.data); }}><Crosshair size={16} strokeWidth={1.8} aria-hidden /></button>
+          <button type="button" className="map-control-3d" aria-pressed={overlays.plates} aria-label={es ? "Vista en relieve" : "Raised view"} title={es ? "Vista en relieve" : "Raised view"}
+            onClick={() => toggleOverlay("plates")}>{overlays.plates ? "3D" : "2D"}</button>
         </div>
       ) : null}
       <div ref={attribBar} className="attrib-bar">

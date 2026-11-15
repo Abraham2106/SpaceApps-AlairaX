@@ -13,9 +13,9 @@ export function Ledger({ loaded, lang }: { loaded: LoadedComparison; lang: Lang 
     <section className="stack" aria-label={translate(lang, "common.calculationRecord")}>
       <p className="kicker">{translate(lang, "ledger.record")}</p>
       <p>
-        {loaded.mode === "fixtures"
-          ? translate(lang, "ledger.thisDescribesFixtureNoBackend")
-          : translate(lang, "ledger.thisDescribesApiResponse")}
+        {loaded.mode === "live"
+          ? translate(lang, "ledger.thisDescribesApiResponse")
+          : translate(lang, loaded.catalog.mock ? "ledger.thisDescribesFixtureNoBackend" : "ledger.staticResult")}
       </p>
       {loaded.httpStatus && loaded.httpStatus !== 200 ? (
         <p className="warn">

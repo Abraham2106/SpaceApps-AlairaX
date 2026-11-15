@@ -2,13 +2,7 @@ import { CalendarDays } from "lucide-react";
 import { translate, type MessageKey } from "../../lib/i18n";
 import { useInstrument } from "../../store";
 import { MODIS_FIRST_DATE, formatGsd, formatImageryDate, isIsoDay, latestImageryDate } from "./catalog";
-import type { HlsStatus, ImageryChoice, S2Status } from "./selectSource";
-
-const HLS_NOTE: Partial<Record<HlsStatus, MessageKey>> = {
-  too_recent: "imagery.hlsTooRecent",
-  before_mission: "imagery.hlsBeforeMission",
-  failed: "imagery.hlsFailed",
-};
+import type { ImageryChoice, S2Status } from "./selectSource";
 
 const S2_NOTE: Partial<Record<S2Status, MessageKey>> = {
   searching: "imagery.s2Searching",
@@ -18,8 +12,7 @@ const S2_NOTE: Partial<Record<S2Status, MessageKey>> = {
 };
 
 /**
- * Ficha de procedencia: siempre dice de quién es la imagen, qué resolución tiene
- * y de qué día es, o que el proveedor no publica la fecha.
+ * Compact source credit. Product details are available through the source panel.
  */
 export function ImageryBadge({ choice }: { choice: ImageryChoice }) {
   const lang = useInstrument((state) => state.lang);
@@ -41,13 +34,8 @@ export function ImageryBadge({ choice }: { choice: ImageryChoice }) {
           : choice.primary === "hls"
             ? choice.layers.includes("modis") ? "imagery.hlsOverModis" : "imagery.hls"
             : "imagery.modis";
-  // El dron tapa lo de debajo: con dron en pantalla no se explican HLS ni Sentinel-2.
-  // Sentinel-2 manda sobre HLS: si se buscó una escena, la nota explica esa búsqueda.
   const droneNote: MessageKey | undefined = choice.oam === "failed" ? "imagery.oamFailed" : undefined;
-  const nasaNote = choice.oam === "active"
-    ? undefined
-    : S2_NOTE[choice.s2] ?? (choice.s2 === "active" ? undefined : HLS_NOTE[choice.hls]);
-  const note = droneNote ?? (nasaDated ? nasaNote : undefined);
+  const note = droneNote ?? (nasaDated && choice.oam !== "active" ? S2_NOTE[choice.s2] : undefined);
   const scene = choice.scene;
   const values = {
     date: formatImageryDate(drone?.date ?? scene?.date ?? imageryDate, lang),

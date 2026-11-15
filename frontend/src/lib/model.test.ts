@@ -54,12 +54,15 @@ describe("cantones", () => {
 });
 
 describe("contrato", () => {
-  it("valida los cuatro fixtures", () => {
+  it("valida las cuatro comparaciones precalculadas del piloto", () => {
     const catalog = fixtureScenarioFileSchema.parse(JSON.parse(readFileSync(new URL("data/scenarios.json", root), "utf8")));
-    expect(catalog._mock).toBe(true);
+    expect(catalog._mock).toBe(false);
+    expect(catalog.scenarios).toHaveLength(4);
     for (const scenario of catalog.scenarios) {
       const compare = compareResponseSchema.parse(JSON.parse(readFileSync(new URL(`data/${scenario.result_file}`, root), "utf8")));
-      expect(compare._mock).toBe(true);
+      expect(compare._mock).toBe(false);
+      expect(compare.zona.validated).toBe(false);
+      expect(compare.rotations.every((rotation) => rotation.runs.every((run) => run.daily_balance.length >= 365))).toBe(true);
       expect(compare.analog_years.some((item) => item.year === 2026)).toBe(false);
       expect(compare.uncertainty_method).toBe("empirical_linear_quantiles_across_analog_years");
     }
@@ -109,7 +112,7 @@ describe("lenguaje llano", () => {
 
   it("separa el fixture de una corrida real", () => {
     expect(leadSentence("es", "Niño fuerte", "modeled_water_deficit_mm", 3, true)).toContain("fixture");
-    expect(leadSentence("es", "Niño fuerte", "modeled_water_deficit_mm", 3, false)).toContain("API");
+    expect(leadSentence("es", "Niño fuerte", "modeled_water_deficit_mm", 3, false)).toContain("FAO");
   });
 
   it("recuerda que 2026 no es análogo", () => {

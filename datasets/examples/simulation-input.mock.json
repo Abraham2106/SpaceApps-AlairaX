@@ -2807,5 +2807,6 @@
       "Crop dates are provisional placeholders pending Ant and Justin.",
       "No agronomic parameters, soil measurements or KNN search were used."
     ]
-  }
+  },
+  "regional_pilot": false
 }

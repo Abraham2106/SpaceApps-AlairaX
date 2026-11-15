@@ -111,7 +111,7 @@ export function leadSentence(lang: Lang, scenarioName: string, metric: MetricId,
     scenarioName,
     count: n,
     noun: metricNoun(metric, lang),
-    source: translate(lang, mock ? "plain.mockSource" : "plain.apiSource"),
+    source: translate(lang, mock ? "plain.mockSource" : "plain.modelSource"),
   });
 }
 

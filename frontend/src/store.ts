@@ -68,16 +68,13 @@ function isMetric(value: string | null): value is MetricId {
   return Boolean(value && (METRIC_IDS as readonly string[]).includes(value));
 }
 
-const storedTheme = typeof localStorage !== "undefined" ? localStorage.getItem("nandaview-theme") : null;
 const storedLang = typeof localStorage !== "undefined" ? localStorage.getItem("nandaview-lang") : null;
-const contrast =
-  typeof window !== "undefined" && window.matchMedia("(prefers-contrast: more)").matches;
 
 export const useInstrument = create<Store>((set, get) => ({
   scenarioId: "strong_el_nino",
   metric: "modeled_water_deficit_mm",
   lang: storedLang === "en" ? "en" : "es",
-  theme: storedTheme === "sun" || storedTheme === "night" ? storedTheme : contrast ? "sun" : "night",
+  theme: "sun",
   basemap: "satellite",
   imageryDate: defaultImageryDate(),
   overlays: { cantons: true, hex: false, terrain: true, plates: false, osm: true },
@@ -123,7 +120,6 @@ export const useInstrument = create<Store>((set, get) => ({
   hydrate: (params) => {
     const scenario = params.get("e");
     const metric = params.get("m");
-    const theme = params.get("t");
     const lang = params.get("l");
     const cantons = params.get("c");
     const yearA = params.get("ya");
@@ -135,7 +131,7 @@ export const useInstrument = create<Store>((set, get) => ({
       imageryDate: isIsoDay(imageryDate) ? clampImageryDate(imageryDate) : get().imageryDate,
       scenarioId: isScenario(scenario) ? scenario : get().scenarioId,
       metric: isMetric(metric) ? metric : get().metric,
-      theme: theme === "sun" || theme === "night" ? theme : get().theme,
+      theme: "sun",
       lang: lang === "en" || lang === "es" ? lang : get().lang,
       selected: cantons ? cantons.split(",").filter(Boolean) : get().selected,
       yearA: yearA && Number.isFinite(Number(yearA)) ? Number(yearA) : get().yearA,

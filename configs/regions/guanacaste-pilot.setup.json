@@ -1,0 +1,1022 @@
+{
+  "schema_version": "0.1.0",
+  "_mock": false,
+  "generado": "2026-11-15T10:41:50.787933Z",
+  "zona": {
+    "id": "provisional-point",
+    "name": "Provisional agricultural point, Guanacaste",
+    "latitude": 10.55,
+    "longitude": -85.5,
+    "validated": false
+  },
+  "source_refs": [
+    "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.5&lat=10.55&property=clay&property=sand&property=silt&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&depth=100-200cm&value=mean",
+    "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.5&lat=10.55&property=wv0010&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&depth=100-200cm&value=mean",
+    "https://docs.isric.org/globaldata/soilgrids/SoilGrids_faqs_01.html",
+    "https://revistas.ucr.ac.cr/index.php/ragrocost/article/download/4598/6831/31237?inline=1",
+    "https://www.mag.go.cr/bibliotecavirtual/F01-8148.pdf",
+    "https://www.mag.go.cr/bibliotecavirtual/A01-1277-p82.pdf",
+    "https://www.mag.go.cr/bibliotecavirtual/P40-2728.pdf",
+    "https://revistas.ucr.ac.cr/index.php/ragromeso/article/download/1932/14544/52672?inline=1",
+    "https://archivo.revistas.ucr.ac.cr/index.php/agromeso/article/download/31612/34044?inline=1",
+    "https://www.fao.org/4/x0490e/x0490e0b.htm"
+  ],
+  "warnings": [
+    "Suelo estimado con SoilGrids: retención media ponderada de 0 a 100 cm a 33 y 1500 kPa.",
+    "Calendario regional modelado a partir del MAG, INTA y FAO-56. Fechas y humedad inicial sin registros de finca.",
+    "El déficit publicado se simula en secano para las tres rotaciones, incluido el melón.",
+    "La lluvia de NASA POWER presenta un sesgo histórico frente a CHIRPS e IMN. Ver docs/rain_bias.md."
+  ],
+  "reviewed_by": "Codex (revisión documental del piloto)",
+  "soil": {
+    "field_capacity_m3_m3": 0.33205,
+    "wilting_point_m3_m3": 0.2004,
+    "rooting_depth_m": 1.0,
+    "source_refs": [
+      "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.5&lat=10.55&property=clay&property=sand&property=silt&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&depth=100-200cm&value=mean",
+      "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.5&lat=10.55&property=wv0010&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&depth=100-200cm&value=mean",
+      "https://docs.isric.org/globaldata/soilgrids/SoilGrids_faqs_01.html",
+      "https://revistas.ucr.ac.cr/index.php/ragrocost/article/download/4598/6831/31237?inline=1"
+    ]
+  },
+  "rotations_by_year": {
+    "1984": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1984-07-01",
+            "harvest_date": "1984-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "1984-12-01",
+            "harvest_date": "1985-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1984-07-01",
+            "harvest_date": "1984-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "1984-11-01",
+            "harvest_date": "1985-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1984-07-01",
+            "harvest_date": "1984-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "1984-11-01",
+            "harvest_date": "1985-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "1987": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1987-07-01",
+            "harvest_date": "1987-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "1987-12-01",
+            "harvest_date": "1988-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1987-07-01",
+            "harvest_date": "1987-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "1987-11-01",
+            "harvest_date": "1988-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1987-07-01",
+            "harvest_date": "1987-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "1987-11-01",
+            "harvest_date": "1988-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "1991": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1991-07-01",
+            "harvest_date": "1991-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "1991-12-01",
+            "harvest_date": "1992-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1991-07-01",
+            "harvest_date": "1991-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "1991-11-01",
+            "harvest_date": "1992-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1991-07-01",
+            "harvest_date": "1991-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "1991-11-01",
+            "harvest_date": "1992-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "1992": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1992-07-01",
+            "harvest_date": "1992-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "1992-12-01",
+            "harvest_date": "1993-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1992-07-01",
+            "harvest_date": "1992-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "1992-11-01",
+            "harvest_date": "1993-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1992-07-01",
+            "harvest_date": "1992-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "1992-11-01",
+            "harvest_date": "1993-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "1993": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1993-07-01",
+            "harvest_date": "1993-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "1993-12-01",
+            "harvest_date": "1994-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1993-07-01",
+            "harvest_date": "1993-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "1993-11-01",
+            "harvest_date": "1994-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1993-07-01",
+            "harvest_date": "1993-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "1993-11-01",
+            "harvest_date": "1994-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "1995": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1995-07-01",
+            "harvest_date": "1995-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "1995-12-01",
+            "harvest_date": "1996-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1995-07-01",
+            "harvest_date": "1995-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "1995-11-01",
+            "harvest_date": "1996-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1995-07-01",
+            "harvest_date": "1995-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "1995-11-01",
+            "harvest_date": "1996-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "1997": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1997-07-01",
+            "harvest_date": "1997-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "1997-12-01",
+            "harvest_date": "1998-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1997-07-01",
+            "harvest_date": "1997-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "1997-11-01",
+            "harvest_date": "1998-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1997-07-01",
+            "harvest_date": "1997-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "1997-11-01",
+            "harvest_date": "1998-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "1999": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1999-07-01",
+            "harvest_date": "1999-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "1999-12-01",
+            "harvest_date": "2000-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1999-07-01",
+            "harvest_date": "1999-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "1999-11-01",
+            "harvest_date": "2000-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "1999-07-01",
+            "harvest_date": "1999-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "1999-11-01",
+            "harvest_date": "2000-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "2010": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2010-07-01",
+            "harvest_date": "2010-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "2010-12-01",
+            "harvest_date": "2011-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2010-07-01",
+            "harvest_date": "2010-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "2010-11-01",
+            "harvest_date": "2011-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2010-07-01",
+            "harvest_date": "2010-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "2010-11-01",
+            "harvest_date": "2011-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "2011": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2011-07-01",
+            "harvest_date": "2011-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "2011-12-01",
+            "harvest_date": "2012-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2011-07-01",
+            "harvest_date": "2011-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "2011-11-01",
+            "harvest_date": "2012-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2011-07-01",
+            "harvest_date": "2011-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "2011-11-01",
+            "harvest_date": "2012-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "2015": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2015-07-01",
+            "harvest_date": "2015-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "2015-12-01",
+            "harvest_date": "2016-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2015-07-01",
+            "harvest_date": "2015-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "2015-11-01",
+            "harvest_date": "2016-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2015-07-01",
+            "harvest_date": "2015-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "2015-11-01",
+            "harvest_date": "2016-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "2016": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2016-07-01",
+            "harvest_date": "2016-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "2016-12-01",
+            "harvest_date": "2017-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2016-07-01",
+            "harvest_date": "2016-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "2016-11-01",
+            "harvest_date": "2017-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2016-07-01",
+            "harvest_date": "2016-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "2016-11-01",
+            "harvest_date": "2017-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "2019": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2019-07-01",
+            "harvest_date": "2019-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "2019-12-01",
+            "harvest_date": "2020-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2019-07-01",
+            "harvest_date": "2019-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "2019-11-01",
+            "harvest_date": "2020-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2019-07-01",
+            "harvest_date": "2019-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "2019-11-01",
+            "harvest_date": "2020-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "2022": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2022-07-01",
+            "harvest_date": "2022-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "2022-12-01",
+            "harvest_date": "2023-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2022-07-01",
+            "harvest_date": "2022-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "2022-11-01",
+            "harvest_date": "2023-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2022-07-01",
+            "harvest_date": "2022-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "2022-11-01",
+            "harvest_date": "2023-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ],
+    "2023": [
+      {
+        "rotation_id": "rice_melon",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2023-07-01",
+            "harvest_date": "2023-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "melon",
+            "sowing_date": "2023-12-01",
+            "harvest_date": "2024-01-29",
+            "parameter_set_id": "melon"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_legume",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2023-07-01",
+            "harvest_date": "2023-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "legume",
+            "sowing_date": "2023-11-01",
+            "harvest_date": "2024-02-08",
+            "parameter_set_id": "cowpea"
+          }
+        ]
+      },
+      {
+        "rotation_id": "rice_sorghum",
+        "calendar_status": "provisional",
+        "cycles": [
+          {
+            "crop_id": "rice",
+            "sowing_date": "2023-07-01",
+            "harvest_date": "2023-10-28",
+            "parameter_set_id": "rice"
+          },
+          {
+            "crop_id": "sorghum",
+            "sowing_date": "2023-11-01",
+            "harvest_date": "2024-01-24",
+            "parameter_set_id": "sorghum_forage"
+          }
+        ]
+      }
+    ]
+  },
+  "assumptions_by_year": {
+    "1984": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "1987": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "1991": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "1992": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "1993": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "1995": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "1997": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "1999": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "2010": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "2011": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "2015": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "2016": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "2019": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "2022": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    },
+    "2023": {
+      "irrigation_mode": "rainfed",
+      "irrigation_mm_by_date": {},
+      "initial_soil_water_fraction": 0.5,
+      "notes": [
+        "Todas las rotaciones se comparan en secano para estimar el déficit.",
+        "El 1 de mayo se supone disponible la mitad del agua útil."
+      ]
+    }
+  },
+  "regional_pilot": true
+}

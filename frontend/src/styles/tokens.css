@@ -1,150 +1,178 @@
-/*
- * Tokens. Noche es la identidad; Sol es el modo de alto contraste para el sol.
- * Los componentes no llevan colores sueltos: leen estas variables.
- * Los valores de Noche reproducen los que ya estaban fijos en cada regla.
- */
+/* Shared design tokens. Component styles consume these variables. See DESIGN.md. */
 :root,
-[data-theme="night"] {
-  color-scheme: dark;
-  --bg: #0c1210;
-  --bg-2: #141c18;
-  --elev: rgba(18, 28, 24, 0.94);
-  --ink: #eef6f1;
-  --muted: #b7c9be;
-  --faint: #8ea898;
-  --line: rgba(190, 220, 200, 0.16);
-  --accent: #3dcc7a;
-  --accent-ink: #06210f;
-  --alarm-bg: #3a2508;
-  --alarm-ink: #ffe7b8;
-  --alarm-line: rgba(255, 214, 140, 0.35);
-  --danger: #ffb4a4;
+[data-theme="sun"] {
+  color-scheme: light;
 
-  /* Marco de la aplicación: barra superior y riel */
-  --chrome: #0e1411;
-  --chrome-rail: #101614;
-  --chrome-edge: rgba(255, 255, 255, 0.06);
-  --chrome-ink: #eef6f1;
-  --chrome-muted: #8ea898;
-  /* Controles agrupados: escenario, métrica, buscador, píldoras */
-  --control: #18211c;
-  --control-line: rgba(190, 220, 200, 0.12);
-  --control-ink: #c5d5cc;
-  /* Estado elegido. Blanco sobre este verde: 5,0:1; contra --control: 3,3:1 */
-  --selected-bg: #1c7f46;
+  /* Surfaces: a warm field-gray canvas, white instruments on top, a tint for inner wells. */
+  --bg: #e9eae6;
+  --bg-2: #ffffff;
+  --well: #f4f4f1;
+  --well-strong: #ecedea;
+  --elev: #ffffff;
+
+  --ink: #151714;
+  --muted: #62665f;
+  --faint: #73776f;
+  --line: #e6e7e2;
+  --line-strong: #d6d8d2;
+
+  --accent: #1f7a4d;
+  --accent-ink: #ffffff;
+  --accent-soft: #e5f2ea;
+  --accent-soft-ink: #175c3a;
+
+  --alarm-bg: #fbf1dc;
+  --alarm-ink: #6d4a0c;
+  --alarm-line: #f0dcb0;
+  --danger: #b4321f;
+
+  --chrome: transparent;
+  --chrome-rail: #ffffff;
+  --chrome-edge: #e6e7e2;
+  --chrome-ink: #151714;
+  --chrome-muted: #62665f;
+
+  --control: #f1f2ee;
+  --control-line: #e2e3de;
+  --control-ink: #2c2f2b;
+
+  --selected-bg: #151714;
   --selected-ink: #ffffff;
-  --selected-soft: rgba(61, 204, 122, 0.16);
-  --selected-soft-ink: #d8ffe6;
-  /* Paneles sobre el mapa */
-  --panel: #101814;
-  --panel-solid: #0a1113;
-  --panel-ink: #eef6f1;
-  --panel-muted: #b7c9be;
-  --panel-line: rgba(190, 220, 200, 0.14);
-  --panel-accent: #8ee0a8;
-  --panel-strong: #f4fff8;
-  --track: rgba(255, 255, 255, 0.1);
-  --track-mark: #f7f4ec;
-  --handle: rgba(255, 255, 255, 0.4);
-  --scrim: rgba(0, 0, 0, 0.46);
-  /* Sobre la fotografía, en los dos temas */
-  --map-scrim: rgba(8, 12, 14, 0.55);
-  --map-scrim-solid: rgba(8, 12, 14, 0.92);
-  --map-scrim-ink: #c5d0d4;
-  /* Marca de la ventana de análogos en la temporada */
-  --mark-window: #e2b15c;
-  /*
-   * Rotaciones. Cada color se separa además por trazo (liso, rayas, puntos),
-   * así que ninguna lectura depende solo del tono. Contraste medido contra --bg y --panel:
-   * melón 8,3:1, leguminosa 9,4:1, sorgo 8,4:1 (el mínimo para gráficos es 3:1).
-   */
-  --rot-melon: #6cb4ff;
-  --rot-legume: #3fd0b8;
-  --rot-sorghum: #e8a33d;
-  /* Contorno de una forma sobre fondo de página (placas de cantón, puntos) */
-  --outline: #f4efe4;
+  --selected-soft: #ffffff;
+  --selected-soft-ink: #151714;
 
-  --sans: "IBM Plex Sans", "Segoe UI", sans-serif;
-  --serif: "Source Serif 4", Georgia, serif;
+  --panel: #ffffff;
+  --panel-solid: #ffffff;
+  --panel-ink: #151714;
+  --panel-muted: #62665f;
+  --panel-line: #e6e7e2;
+  --panel-accent: #1f7a4d;
+  --panel-strong: #151714;
+  --track: #ecedea;
+  --track-mark: #151714;
+  --handle: rgba(21, 23, 20, 0.28);
+  --scrim: rgba(21, 23, 20, 0.36);
+
+  --map-scrim: rgba(255, 255, 255, 0.82);
+  --map-scrim-solid: #ffffff;
+  --map-scrim-ink: #3b3f3a;
+  --glass: rgba(255, 255, 255, 0.86);
+
+  --tip-bg: #1d201c;
+  --tip-ink: #f6f7f3;
+
+  /* Condition scale. Lower water shortfall, demand and stress are better, so green is low. */
+  --cond-1: #2f9e5b;
+  --cond-2: #8fc04f;
+  --cond-3: #e5c03c;
+  --cond-4: #ec8a35;
+  --cond-5: #d4472f;
+  --cond-empty: #dcded8;
+
+  --mark-window: #e5c03c;
+
+  /* Rotation identity. Kept apart from the condition scale so a hue never reads as good or bad. */
+  --rot-melon: #1f7a4d;
+  --rot-legume: #3f6fb0;
+  --rot-sorghum: #b07a2a;
+
+  --outline: #ffffff;
+
+  --sans: "Instrument Sans Variable", "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --serif: var(--sans);
   --mono: "IBM Plex Mono", ui-monospace, monospace;
-  /* Tipografía: el mínimo legible es 12 px (0,75 rem) */
+
+  --fs-2xs: 0.6875rem;
   --fs-xs: 0.75rem;
   --fs-sm: 0.8125rem;
-  --fs-md: 0.95rem;
-  --fs-lg: 1.15rem;
-  --fs-xl: 1.3rem;
-  --fs-display: 3.1rem;
-  /* Esquinas rectas: 2 px en marcas, 4 px en controles, 6 px en paneles */
-  --r-1: 2px;
-  --r-2: 4px;
-  --r-3: 6px;
-  /* Movimiento: respuesta rápida al tocar, un poco más lenta al cambiar de estado */
-  --dur-fast: 120ms;
-  --dur-base: 200ms;
+  --fs-md: 0.9375rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.75rem;
+  --fs-display: 2.75rem;
+
+  --r-1: 6px;
+  --r-2: 10px;
+  --r-3: 16px;
+  --r-4: 22px;
+  --r-pill: 999px;
+
+  --shadow-1: 0 1px 1px rgba(21, 23, 20, 0.04), 0 1px 3px rgba(21, 23, 20, 0.06);
+  --shadow-2: 0 1px 2px rgba(21, 23, 20, 0.05), 0 10px 28px -10px rgba(21, 23, 20, 0.16);
+  --shadow-3: 0 2px 6px rgba(10, 12, 10, 0.08), 0 24px 56px -16px rgba(10, 12, 10, 0.34);
+
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+  --dur-slow: 520ms;
   --ease: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
   --s-1: 4px;
   --s-2: 8px;
   --s-3: 12px;
   --s-4: 16px;
   --s-5: 24px;
-  --pad: 16px;
-  --hit: 44px;
-}
-
-[data-theme="sun"] {
-  color-scheme: light;
-  --bg: #f3f6f8;
-  --bg-2: #ffffff;
-  --elev: #ffffff;
-  --ink: #12171c;
-  --muted: #24303a;
-  --faint: #3d4c58;
-  --line: rgba(18, 23, 28, 0.22);
-  --accent: #0b4f6c;
-  --accent-ink: #f3f6f8;
-  --alarm-bg: #2a1606;
-  --alarm-ink: #ffe7b8;
-  --alarm-line: #2a1606;
-  --danger: #8a2e16;
-
-  --chrome: #ffffff;
-  --chrome-rail: #f3f6f8;
-  --chrome-edge: rgba(18, 23, 28, 0.22);
-  --chrome-ink: #12171c;
-  --chrome-muted: #3d4c58;
-  --control: #e9eef2;
-  --control-line: rgba(18, 23, 28, 0.22);
-  --control-ink: #24303a;
-  /* Blanco sobre este azul: 8,9:1 */
-  --selected-bg: #0b4f6c;
-  --selected-ink: #ffffff;
-  --selected-soft: #dcebf2;
-  --selected-soft-ink: #0b4f6c;
-  /* Sol: paneles opacos, sin desenfoque y sin sombra */
-  --panel: #ffffff;
-  --panel-solid: #ffffff;
-  --panel-ink: #12171c;
-  --panel-muted: #24303a;
-  --panel-line: rgba(18, 23, 28, 0.22);
-  --panel-accent: #0b4f6c;
-  --panel-strong: #12171c;
-  --track: rgba(18, 23, 28, 0.14);
-  --track-mark: #12171c;
-  --handle: rgba(18, 23, 28, 0.4);
-  --scrim: rgba(18, 23, 28, 0.5);
-  /* Sobre --bg y blanco: melón 7,7:1, leguminosa 5,0:1, sorgo 5,1:1 */
-  --rot-melon: #0b4f8a;
-  --rot-legume: #0f766e;
-  --rot-sorghum: #9a5806;
-  --outline: #12171c;
-  --fs-xs: 0.8rem;
-  --fs-sm: 0.875rem;
+  --s-6: 32px;
   --pad: 18px;
-  --hit: 48px;
+  --hit: 44px;
+  --gutter: 12px;
+  --rail-w: 60px;
+  --rail-h: 64px;
+  --heat-zero: #d7ecdd;
+  --heat-empty: var(--cond-empty);
 }
 
-/* Medidas de la estructura. Los puntos de quiebre están en responsive.css y lib/viewport.ts. */
-:root {
-  --rail-w: 208px;
-  --rail-h: 64px;
+/* Night is a secondary theme: near-black field, one amber accent. */
+[data-theme="night"] {
+  color-scheme: dark;
+  --bg: #11120f;
+  --bg-2: #1a1b18;
+  --well: #21221e;
+  --well-strong: #282924;
+  --elev: #1a1b18;
+  --ink: #f1f0ea;
+  --muted: #a9aaa0;
+  --faint: #95968c;
+  --line: #2c2d28;
+  --line-strong: #3a3b35;
+  --accent: #f0a93b;
+  --accent-ink: #1a1408;
+  --accent-soft: #33281a;
+  --accent-soft-ink: #f6c97f;
+  --alarm-bg: #33281a;
+  --alarm-ink: #f6d9a6;
+  --alarm-line: #4a3a22;
+  --danger: #ff9c86;
+  --chrome-rail: #1a1b18;
+  --chrome-edge: #2c2d28;
+  --chrome-ink: #f1f0ea;
+  --chrome-muted: #a9aaa0;
+  --control: #21221e;
+  --control-line: #33342e;
+  --control-ink: #e6e5de;
+  --selected-bg: #f0a93b;
+  --selected-ink: #1a1408;
+  --selected-soft: #2c2d28;
+  --selected-soft-ink: #f1f0ea;
+  --panel: #1a1b18;
+  --panel-solid: #1a1b18;
+  --panel-ink: #f1f0ea;
+  --panel-muted: #a9aaa0;
+  --panel-line: #2c2d28;
+  --panel-accent: #f0a93b;
+  --panel-strong: #f1f0ea;
+  --track: #2c2d28;
+  --track-mark: #f1f0ea;
+  --glass: rgba(26, 27, 24, 0.86);
+  --map-scrim: rgba(17, 18, 15, 0.8);
+  --map-scrim-solid: #1a1b18;
+  --map-scrim-ink: #d6d5cd;
+  --tip-bg: #f1f0ea;
+  --tip-ink: #151714;
+  --rot-melon: #6cc58f;
+  --rot-legume: #7fa6e0;
+  --rot-sorghum: #e0ad5c;
+  --cond-empty: #33342e;
+  --outline: #11120f;
+  --heat-zero: #24432f;
 }

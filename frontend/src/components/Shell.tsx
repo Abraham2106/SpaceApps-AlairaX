@@ -1,7 +1,7 @@
 import { translate } from "../lib/i18n";
 import { NavLink, Outlet, useLocation, useSearchParams } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import { Droplets, Grid2x2, Leaf, Map, Moon, ShieldCheck, Sprout, SunMedium } from "lucide-react";
+import { Droplets, Grid2x2, Languages, Map, ShieldCheck, Sprout } from "lucide-react";
 import { MapViewport } from "../map/MapViewport";
 import { RadioGroup } from "./RadioGroup";
 import { useComparison } from "../data/queries";
@@ -10,18 +10,25 @@ import { SCENARIO_IDS } from "../lib/types";
 import { comparisonError } from "../lib/api";
 
 const LINKS = [
-  { to: "/", label: "common.map", icon: Map },
+  { to: "/", label: "common.rotations", icon: Sprout },
+  { to: "/mapa", label: "common.map", icon: Map },
   { to: "/cantones", label: "common.cantons", icon: Grid2x2 },
-  { to: "/rotaciones", label: "common.rotations", icon: Sprout },
   { to: "/temporada", label: "common.season", icon: Droplets },
   { to: "/confianza", label: "common.trust", icon: ShieldCheck },
 ] as const;
+
+function BrandMark() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 20V4l16 16V4" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 export function Shell() {
   const lang = useInstrument((state) => state.lang);
   const theme = useInstrument((state) => state.theme);
   const setLang = useInstrument((state) => state.setLang);
-  const setTheme = useInstrument((state) => state.setTheme);
   const scenarioId = useInstrument((state) => state.scenarioId);
   const selected = useInstrument((state) => state.selected);
   const yearA = useInstrument((state) => state.yearA);
@@ -38,7 +45,8 @@ export function Shell() {
   const content = useRef<HTMLElement>(null);
   const location = useLocation();
   const [params, setParams] = useSearchParams();
-  const showMap = location.pathname === "/";
+  const isReplay = location.pathname === "/";
+  const showMap = location.pathname === "/mapa";
   const scenarios = SCENARIO_IDS.map((value) => ({ value, label: translate(lang, `scenario.${value}`) }));
 
   useEffect(() => {
@@ -57,86 +65,94 @@ export function Shell() {
     if (next.toString() !== params.toString()) setParams(next, { replace: true });
   }, [scenarioId, metric, theme, lang, selected, yearA, yearB, basemap, imageryDate, params, setParams, toParams]);
 
-  const mock = comparison.data?.compare?._mock ?? comparison.data?.catalog.mock ?? true;
+  const mock = comparison.data?.compare?._mock ?? comparison.data?.catalog.mock ?? false;
+  const currentResult = comparison.data?.compare;
+  const regional = currentResult && !currentResult._mock && !currentResult.zona.validated;
   const liveFailure = comparison.data?.mode === "live" && comparison.data.httpStatus !== 200;
 
   return (
-    <div className="app">
+    <div className={showMap ? "app app-map" : "app"}>
       <a className="skip" href="#contenido" onClick={(event) => {
         event.preventDefault();
         content.current?.focus();
       }}>{translate(lang, "shell.skipContent")}</a>
-      <header className="topbar">
-        <NavLink className="brand" to={{ pathname: "/", search: params.toString() }}>
-          <Leaf size={22} strokeWidth={1.5} aria-hidden />
-          <span className="brand-name">
-            <strong>NandaView</strong>
-            <span>AlairaX</span>
-          </span>
+      <nav className="rail" aria-label={translate(lang, "shell.sections")}>
+        <NavLink className="rail-brand" to={{ pathname: "/", search: params.toString() }} aria-label="NandaView" title="NandaView">
+          <BrandMark />
         </NavLink>
-        <label className="only-mobile">
-          <span className="kicker">{translate(lang, "common.scenario")}</span>
-          <select className="scenario-select" value={scenarioId} onChange={(event) => setScenario(event.target.value as typeof scenarioId)} aria-label={translate(lang, "common.scenario")}>
-            {scenarios.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
-          </select>
-        </label>
-        <RadioGroup
-          className="segment hide-mobile"
-          label={translate(lang, "common.scenario")}
-          value={scenarioId}
-          onChange={setScenario}
-          options={scenarios}
-        />
-        <RadioGroup
-          className="metric-tabs"
-          label={translate(lang, "shell.metric")}
-          value={metric}
-          onChange={setMetric}
-          options={[
-            { value: "modeled_water_deficit_mm", label: translate(lang, "metric.water") },
-            { value: "crop_water_demand_mm", label: translate(lang, "metric.demand") },
-            { value: "water_stress_days", label: translate(lang, "metric.stress") },
-          ]}
-        />
-        <span className="spacer" />
-        {mock && !liveFailure ? (
-          <p className="chip" role="status">
-            <strong>{translate(lang, "shell.sample")}</strong>
-            <span className="chip-note">{translate(lang, "shell.syntheticData")}</span>
-          </p>
-        ) : null}
-        {liveFailure ? (
-          <p className="chip chip-live" role="status">
-            <strong>HTTP {comparison.data?.httpStatus}</strong>
-            <span>{comparisonError(comparison.data, lang)}</span>
-          </p>
-        ) : null}
-        <span className="mode-pill">{apiBase ? "API" : translate(lang, "shell.fixture")}</span>
-        <button onClick={() => setTheme(theme === "night" ? "sun" : "night")} aria-pressed={theme === "sun"}>
-          {theme === "night" ? <Moon size={16} aria-hidden /> : <SunMedium size={16} aria-hidden />}
-          <span className="btn-label">{theme === "night" ? (translate(lang, "shell.night")) : (translate(lang, "shell.sun"))}</span>
+        {LINKS.map(({ to, label, icon: Icon }) => (
+          <NavLink key={to} to={{ pathname: to, search: params.toString() }} title={translate(lang, label)} end
+            aria-current={to === "/" && location.pathname === "/rotaciones" ? "page" : undefined}>
+            <Icon size={18} strokeWidth={1.7} aria-hidden />
+            <span className="rail-label">{translate(lang, label)}</span>
+          </NavLink>
+        ))}
+        <span className="rail-spacer" />
+        <button type="button" className="rail-lang" onClick={() => setLang(lang === "es" ? "en" : "es")} aria-label={translate(lang, "shell.switchLanguageLabel")}>
+          <Languages size={16} strokeWidth={1.7} aria-hidden />
+          <span>{lang === "es" ? "EN" : "ES"}</span>
         </button>
-        <button onClick={() => setLang(lang === "es" ? "en" : "es")} aria-label={translate(lang, "shell.switchLanguageLabel")}>
-          {translate(lang, "shell.switchLanguage")}
-        </button>
-      </header>
-      <div className="workspace">
-        <nav className="rail" aria-label={translate(lang, "shell.sections")}>
-          {LINKS.map((link) => {
-            const Icon = link.icon;
-            return (
-              <NavLink key={link.to} to={{ pathname: link.to, search: params.toString() }} end={link.to === "/"}>
-                <Icon size={18} strokeWidth={1.5} aria-hidden />
-                <span className="rail-label">{translate(lang, link.label)}</span>
-              </NavLink>
-            );
-          })}
-        </nav>
-        <main ref={content} id="contenido" className="stage" tabIndex={-1}>
+      </nav>
+      <main ref={content} id="contenido" className="stage" tabIndex={-1}>
+        {!showMap && (
+          <header className={isReplay ? "topbar topbar-replay" : "topbar"}>
+            <NavLink className="brand" to={{ pathname: "/", search: params.toString() }}>
+              <BrandMark />
+              <strong>NandaView</strong>
+            </NavLink>
+            {!isReplay && <>
+              <label className="only-mobile">
+                <span className="sr-only">{translate(lang, "common.scenario")}</span>
+                <select className="scenario-select" value={scenarioId} onChange={(event) => setScenario(event.target.value as typeof scenarioId)} aria-label={translate(lang, "common.scenario")}>
+                  {scenarios.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
+                </select>
+              </label>
+              <RadioGroup
+                className="segment hide-mobile"
+                label={translate(lang, "common.scenario")}
+                value={scenarioId}
+                onChange={setScenario}
+                options={scenarios}
+              />
+              <RadioGroup
+                className="segment metric-tabs"
+                label={translate(lang, "shell.metric")}
+                value={metric}
+                onChange={setMetric}
+                options={[
+                  { value: "modeled_water_deficit_mm", label: translate(lang, "metric.water") },
+                  { value: "crop_water_demand_mm", label: translate(lang, "metric.demand") },
+                  { value: "water_stress_days", label: translate(lang, "metric.stress") },
+                ]}
+              />
+            </>}
+            <span className="spacer" />
+            {mock && !liveFailure ? (
+              <p className="chip" role="status">
+                <strong>{translate(lang, "shell.sample")}</strong>
+                <span className="chip-note">{translate(lang, "shell.syntheticData")}</span>
+              </p>
+            ) : null}
+            {regional && !isReplay && (
+              <p className="chip chip-regional" role="status">
+                <strong>{translate(lang, "shell.regionalPilot")}</strong>
+                <span className="chip-note">{translate(lang, "shell.validationPending")}</span>
+              </p>
+            )}
+            {liveFailure ? (
+              <p className="chip chip-live" role="status">
+                <strong>HTTP {comparison.data?.httpStatus}</strong>
+                <span>{comparisonError(comparison.data, lang)}</span>
+              </p>
+            ) : null}
+            {apiBase ? <span className="mode-pill">API</span> : null}
+          </header>
+        )}
+        <div className="stage-body">
           <MapViewport visible={showMap} lang={lang} />
           <Outlet />
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }
