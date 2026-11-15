@@ -3,12 +3,12 @@ import type { Lang } from "../../lib/types";
 // Catálogo de las imágenes de fondo del mapa. Cada fuente declara proveedor,
 // producto, resolución y si publica fecha. Ninguna imagen se muestra sin esa ficha.
 
-export type ImagerySourceId = "esri" | "modis" | "hls" | "marble";
+export type ImagerySourceId = "esri" | "modis" | "hls" | "s2" | "marble";
 
 export type ImagerySource = {
   id: ImagerySourceId;
   /** Id de la fuente y de la capa en el estilo de MapLibre. */
-  mapId: "satellite" | "modis" | "hls" | "marble";
+  mapId: "satellite" | "modis" | "hls" | "s2" | "marble";
   provider: string;
   product: string;
   /** Resolución nominal en metros; null cuando el proveedor no la fija por tesela. */
@@ -31,6 +31,12 @@ export const HLS_FIRST_DATE = "2015-11-28";
 export const HLS_LATENCY_DAYS = 7;
 /** Desde este zoom MODIS (250 m) ya se ve pixelado y se superpone HLS (30 m). */
 export const HLS_MIN_ZOOM = 9;
+/** Desde este zoom HLS (30 m) ya se ve pixelado y se pide la escena Sentinel-2 (10 m) al backend. */
+export const S2_MIN_ZOOM = 11;
+/** El backend solo corta teselas Sentinel-2 entre estos zooms. */
+export const S2_TILE_ZOOM = { min: 9, max: 14 } as const;
+/** Zona que el backend acepta para buscar escenas (Guanacaste con margen): oeste, sur, este, norte. */
+export const S2_AREA = [-86.2, 9.4, -84.4, 11.4] as const;
 
 export const IMAGERY_SOURCES: Record<ImagerySourceId, ImagerySource> = {
   esri: {
@@ -60,6 +66,15 @@ export const IMAGERY_SOURCES: Record<ImagerySourceId, ImagerySource> = {
     dated: true,
     maxzoom: 12,
   },
+  s2: {
+    id: "s2",
+    mapId: "s2",
+    provider: "Copernicus Sentinel-2",
+    product: "Sentinel-2 L2A",
+    resolutionM: 10,
+    dated: true,
+    maxzoom: S2_TILE_ZOOM.max,
+  },
   marble: {
     id: "marble",
     mapId: "marble",
@@ -87,6 +102,32 @@ export function gibsTileUrl(layer: string, date: string | null, matrix: string, 
 export function tileUrlFor(id: "modis" | "hls" | "marble", date: string): string {
   const spec = GIBS_LAYERS[id];
   return gibsTileUrl(spec.layer, id === "marble" ? null : date, spec.matrix, spec.ext);
+}
+
+/** Escena Sentinel-2 elegida por el backend para la vista: un solo día y un solo id. */
+export type SentinelScene = {
+  id: string;
+  date: string;
+  datetime: string;
+  cloudCover: number | null;
+  platform: string | null;
+  /** Oeste, sur, este, norte en grados. */
+  bbox: [number, number, number, number];
+  attribution: string;
+};
+
+/** Qué sabe el mapa de la escena Sentinel-2 para la vista actual. */
+export type SentinelLookup =
+  | { state: "loading" }
+  | { state: "ready"; scene: SentinelScene | null; reason: "no_clear_scene" | "outside" | null }
+  | { state: "error" };
+
+export function sentinelTileUrl(apiBase: string, sceneId: string): string {
+  return `${apiBase.replace(/\/$/, "")}/imagery/tiles/${encodeURIComponent(sceneId)}/{z}/{x}/{y}`;
+}
+
+export function insideBox(lon: number, lat: number, box: readonly [number, number, number, number]): boolean {
+  return lon >= box[0] && lon <= box[2] && lat >= box[1] && lat <= box[3];
 }
 
 export const ESRI_TILE_URL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";

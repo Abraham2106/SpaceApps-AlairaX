@@ -173,4 +173,28 @@ export const sourcesSchema = z
   })
   .passthrough();
 
+const isoDay = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
+
+/** Respuesta de GET /imagery/search. La escena es null cuando no hay una despejada. */
+export const sentinelSearchSchema = z
+  .object({
+    provider: z.string(),
+    resolution_m: z.number(),
+    requested_date: isoDay,
+    scene: z
+      .object({
+        id: z.string().regex(/^S2[A-D]_\d{2}[A-Z]{3}_\d{8}_\d+_L2A$/),
+        date: isoDay,
+        datetime: z.string(),
+        cloud_cover: z.number().nullable(),
+        platform: z.string().nullable(),
+        bbox: z.tuple([z.number(), z.number(), z.number(), z.number()]),
+      })
+      .passthrough()
+      .nullable(),
+    reason: z.string().nullable(),
+    attribution: z.string().nullable(),
+  })
+  .passthrough();
+
 export const metricIdSchema = z.enum(METRIC_IDS);

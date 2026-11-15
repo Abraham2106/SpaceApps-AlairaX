@@ -4,7 +4,11 @@ import {
   defaultImageryDate,
   formatImageryDate,
   gibsTileUrl,
+  insideBox,
   isIsoDay,
+  sentinelTileUrl,
+  type SentinelLookup,
+  type SentinelScene,
   tileUrlFor,
   MODIS_FIRST_DATE,
 } from "./catalog";
@@ -88,5 +92,63 @@ describe("selectSource", () => {
 
   it("acota una fecha fuera de rango antes de citarla", () => {
     expect(selectSource({ basemap: "modis", zoom: 6, date: "2099-01-01", now: NOW }).date).toBe("2026-11-14");
+  });
+});
+
+const SCENE: SentinelScene = {
+  id: "S2B_16PFS_20261024_0_L2A",
+  date: "2026-10-24",
+  datetime: "2026-10-24T16:21:40Z",
+  cloudCover: 14.2,
+  platform: "sentinel-2b",
+  bbox: [-86.087966, 9.856993, -85.080838, 10.854112],
+  attribution: "Contains modified Copernicus Sentinel data 2026",
+};
+const READY: SentinelLookup = { state: "ready", scene: SCENE, reason: null };
+const nasa = (zoom: number, sentinel?: SentinelLookup, failed?: Set<"modis" | "hls" | "s2" | "esri" | "marble">) =>
+  selectSource({ basemap: "modis", zoom, date: "2026-11-08", now: NOW, sentinel, failed });
+
+describe("selectSource con Sentinel-2", () => {
+  it("sin backend Sentinel-2 queda apagado y no cambia la vista NASA", () => {
+    expect(nasa(11)).toMatchObject({ layers: ["modis", "hls"], primary: "hls", s2: "off", scene: null });
+  });
+
+  it("Esri nunca pide Sentinel-2", () => {
+    expect(selectSource({ basemap: "satellite", zoom: 12, date: "2026-11-08", now: NOW, sentinel: READY })).toMatchObject({ layers: ["esri"], s2: "off", scene: null });
+  });
+
+  it("bajo zoom 11 no se muestra la escena", () => {
+    expect(nasa(10, READY)).toMatchObject({ s2: "zoom", scene: null, primary: "hls" });
+  });
+
+  it("mientras busca lo dice y no inventa escena", () => {
+    expect(nasa(11, { state: "loading" })).toMatchObject({ s2: "searching", scene: null });
+  });
+
+  it("sin escena despejada o fuera del área lo distingue", () => {
+    expect(nasa(11, { state: "ready", scene: null, reason: "no_clear_scene" })).toMatchObject({ s2: "none", scene: null });
+    expect(nasa(11, { state: "ready", scene: null, reason: "outside" })).toMatchObject({ s2: "outside", scene: null });
+  });
+
+  it("si la búsqueda o las teselas fallan queda la vista NASA", () => {
+    expect(nasa(11, { state: "error" })).toMatchObject({ s2: "failed", scene: null, primary: "hls" });
+    expect(nasa(12, READY, new Set(["s2"]))).toMatchObject({ s2: "failed", scene: null });
+  });
+
+  it("con escena encima de la vista NASA cita el día de la escena", () => {
+    const choice = nasa(11, READY);
+    expect(choice).toMatchObject({ s2: "active", primary: "s2", date: "2026-10-24", scene: SCENE });
+    expect(choice.layers.at(-1)).toBe("s2");
+  });
+});
+
+describe("teselas Sentinel-2", () => {
+  it("arma la URL del backend sin doble barra", () => {
+    expect(sentinelTileUrl("http://127.0.0.1:8000/", SCENE.id)).toBe("http://127.0.0.1:8000/imagery/tiles/S2B_16PFS_20261024_0_L2A/{z}/{x}/{y}");
+  });
+
+  it("sabe si el centro sigue dentro de la escena", () => {
+    expect(insideBox(-85.44, 10.63, SCENE.bbox)).toBe(true);
+    expect(insideBox(-84.9, 10.63, SCENE.bbox)).toBe(false);
   });
 });

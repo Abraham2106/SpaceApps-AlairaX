@@ -5,8 +5,10 @@ import {
   healthSchema,
   liveCatalogSchema,
   liveRotationLibrarySchema,
+  sentinelSearchSchema,
   sourcesSchema,
 } from "./schemas";
+import type { SentinelScene } from "../map/imagery/catalog";
 import { translate } from "./i18n";
 import type { Catalog, CompareResponse, Lang, LoadedComparison, ScenarioChoice, ScenarioId, Zone } from "./types";
 import { SCENARIO_IDS } from "./types";
@@ -128,6 +130,33 @@ export async function probeHealth(base: string, signal?: AbortSignal): Promise<b
   } catch {
     return false;
   }
+}
+
+/**
+ * Pide al backend la escena Sentinel-2 L2A menos nublada de los 15 días previos a `date`
+ * que cubre el punto. Devuelve null si no hay ninguna con nubosidad aceptable.
+ */
+export async function findSentinelScene(
+  base: string,
+  query: { date: string; lon: number; lat: number },
+  signal?: AbortSignal,
+): Promise<SentinelScene | null> {
+  const params = new URLSearchParams({
+    date: query.date,
+    lon: query.lon.toFixed(4),
+    lat: query.lat.toFixed(4),
+  });
+  const body = sentinelSearchSchema.parse(await readJson(`${base.replace(/\/$/, "")}/imagery/search?${params}`, signal));
+  if (!body.scene || !body.attribution) return null;
+  return {
+    id: body.scene.id,
+    date: body.scene.date,
+    datetime: body.scene.datetime,
+    cloudCover: body.scene.cloud_cover,
+    platform: body.scene.platform,
+    bbox: body.scene.bbox,
+    attribution: body.attribution,
+  };
 }
 
 async function postCompare(base: string, zona: Zone, scenario: ScenarioChoice, signal?: AbortSignal): Promise<CompareResponse> {

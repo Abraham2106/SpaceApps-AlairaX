@@ -10,13 +10,30 @@ import { hexHeight, hexPaint, surfaceValue, useSurface } from "../lib/surface";
 import { useInstrument } from "../store";
 import type { Lang, MetricId } from "../lib/types";
 import { isMobile, isTablet } from "../lib/viewport";
-import { ESRI_TILE_URL, IMAGERY_SOURCES, formatImageryDate, tileUrlFor, type ImagerySourceId } from "./imagery/catalog";
+import {
+  ESRI_TILE_URL,
+  IMAGERY_SOURCES,
+  S2_AREA,
+  S2_MIN_ZOOM,
+  S2_TILE_ZOOM,
+  formatImageryDate,
+  insideBox,
+  sentinelTileUrl,
+  tileUrlFor,
+  type ImagerySourceId,
+  type SentinelLookup,
+} from "./imagery/catalog";
+import { findSentinelScene } from "../lib/api";
 import { selectSource, type ImageryChoice } from "./imagery/selectSource";
 import { ImageryBadge } from "./imagery/ImageryBadge";
 
 /** Errores de teselas tolerados antes de dar por caída una fuente con la fecha actual. */
 const TILE_ERROR_LIMIT = 3;
 const IMAGERY_LAYERS = ["satellite", "modis", "hls", "marble"] as const;
+/** Espera tras mover el mapa antes de pedir escena Sentinel-2, para no buscar en cada arrastre. */
+const S2_SEARCH_DELAY_MS = 450;
+
+type SentinelEntry = { key: string; lookup: SentinelLookup };
 
 const EMPTY = { type: "FeatureCollection" as const, features: [] };
 
@@ -292,6 +309,13 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
   const tileErrors = useRef<Record<string, number>>({});
   const [zoom, setZoom] = useState(8.05);
   const [failed, setFailed] = useState<ReadonlySet<ImagerySourceId>>(() => new Set());
+  const [center, setCenter] = useState<[number, number]>([-85.45, 10.45]);
+  const [sentinel, setSentinelState] = useState<SentinelEntry | null>(null);
+  const sentinelRef = useRef<SentinelEntry | null>(null);
+  const setSentinel = (next: SentinelEntry) => {
+    sentinelRef.current = next;
+    setSentinelState(next);
+  };
   const [tip, setTip] = useState<{ x: number; y: number; name: string; value: number | null; outside: boolean } | null>(null);
   const cantons = useCantons();
   const comparison = useComparison();
@@ -306,6 +330,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
   const location = useInstrument((state) => state.location);
   const toggleCanton = useInstrument((state) => state.toggleCanton);
   const setLocation = useInstrument((state) => state.setLocation);
+  const apiBase = useInstrument((state) => state.apiBase);
   useEffect(() => {
     surfaceRef.current = surface.data;
     metricRef.current = metric;
@@ -330,10 +355,14 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       map.setTerrain(null);
     });
     map.on("zoomend", () => setZoom(map.getZoom()));
+    map.on("moveend", () => {
+      const { lng, lat } = map.getCenter();
+      setCenter((current) => (current[0] === lng && current[1] === lat ? current : [lng, lat]));
+    });
     // Una fuente que no carga no se oculta en silencio: la ficha de procedencia lo dice.
     map.on("error", (event) => {
       const sourceId = (event as { sourceId?: string }).sourceId;
-      if (sourceId !== "modis" && sourceId !== "hls") return;
+      if (sourceId !== "modis" && sourceId !== "hls" && sourceId !== "s2") return;
       const count = (tileErrors.current[sourceId] ?? 0) + 1;
       tileErrors.current[sourceId] = count;
       if (count === TILE_ERROR_LIMIT) setFailed((current) => new Set([...current, sourceId]));
@@ -485,7 +514,84 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     };
   }, [overlays, metric, surface.data]);
 
-  const choice: ImageryChoice = selectSource({ basemap, zoom, date: imageryDate, failed });
+  // Sentinel-2 10 m solo existe con backend: en GitHub Pages no hay a quién pedir la escena.
+  const wantsSentinel = Boolean(apiBase) && basemap === "modis";
+  const searchKey = `${imageryDate}|${center[0].toFixed(2)}|${center[1].toFixed(2)}`;
+  // Una escena buscada para otra fecha no se muestra: se espera la búsqueda del día pedido.
+  const sentinelLookup: SentinelLookup | undefined = !wantsSentinel
+    ? undefined
+    : sentinel && sentinel.key.startsWith(`${imageryDate}|`) ? sentinel.lookup : { state: "loading" };
+
+  useEffect(() => {
+    if (!wantsSentinel || zoom < S2_MIN_ZOOM) return;
+    const [lon, lat] = center;
+    // Mientras el centro siga dentro de la escena del mismo día no se vuelve a buscar.
+    const previous = sentinelRef.current;
+    const current = previous?.lookup;
+    if (current?.state === "ready" && current.scene && previous?.key.startsWith(`${imageryDate}|`)
+      && insideBox(lon, lat, current.scene.bbox)) return;
+    if (previous?.key === searchKey) return;
+    if (!insideBox(lon, lat, S2_AREA)) {
+      setSentinel({ key: searchKey, lookup: { state: "ready", scene: null, reason: "outside" } });
+      return;
+    }
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => {
+      setSentinel({ key: searchKey, lookup: { state: "loading" } });
+      findSentinelScene(apiBase, { date: imageryDate, lon, lat }, controller.signal)
+        .then((scene) => setSentinel({ key: searchKey, lookup: { state: "ready", scene, reason: scene ? null : "no_clear_scene" } }))
+        .catch((error: unknown) => {
+          if (!controller.signal.aborted) {
+            console.warn("Sentinel-2 search failed", error);
+            setSentinel({ key: searchKey, lookup: { state: "error" } });
+          }
+        });
+    }, S2_SEARCH_DELAY_MS);
+    return () => {
+      window.clearTimeout(timer);
+      controller.abort();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- setSentinel solo escribe estado y ref
+  }, [wantsSentinel, zoom, center, imageryDate, apiBase, searchKey]);
+
+  const choice: ImageryChoice = selectSource({ basemap, zoom, date: imageryDate, failed, sentinel: sentinelLookup });
+  const sceneId = choice.scene?.id ?? null;
+  const sceneBounds = choice.scene?.bbox.join(",") ?? null;
+
+  // Una escena por vista: la fuente se rehace con el id y el contorno de la escena elegida.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      if (map.getLayer("s2")) map.removeLayer("s2");
+      if (map.getSource("s2")) map.removeSource("s2");
+      tileErrors.current.s2 = 0;
+      if (!sceneId || !sceneBounds) return;
+      map.addSource("s2", {
+        type: "raster",
+        tiles: [sentinelTileUrl(apiBase, sceneId)],
+        tileSize: 256,
+        minzoom: S2_TILE_ZOOM.min,
+        maxzoom: S2_TILE_ZOOM.max,
+        bounds: sceneBounds.split(",").map(Number) as [number, number, number, number],
+      });
+      map.addLayer({ id: "s2", type: "raster", source: "s2", minzoom: S2_TILE_ZOOM.min }, "marble");
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+    return () => { map.off("load", apply); };
+  }, [sceneId, sceneBounds, apiBase]);
+
+  useEffect(() => {
+    // Una escena nueva merece otra oportunidad aunque la anterior haya fallado.
+    setFailed((current) => {
+      if (!current.has("s2")) return current;
+      const next = new Set(current);
+      next.delete("s2");
+      return next;
+    });
+  }, [sentinel?.key]);
+
   const visibleImagery = choice.layers.map((id) => IMAGERY_SOURCES[id].mapId).join(",");
 
   useEffect(() => {
@@ -594,7 +700,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
   const pointName = zona && cantons.data ? cantonAt(zona.longitude, zona.latitude, cantons.data)?.properties.name : null;
   const coordinates = zona ? `${zona.latitude.toFixed(2)}, ${zona.longitude.toFixed(2)}` : "…";
   const credit = translate(lang, "nandaMap.credit", {
-    imagery: imageryCredit(choice, lang),
+    imagery: imageryCredit(choice, imageryDate, lang),
     roads: overlays.osm ? translate(lang, "nandaMap.roadCredit") : "",
     point: pointName ? translate(lang, "nandaMap.pointCredit", { canton: pointName }) : "",
     coordinates,
@@ -644,11 +750,17 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
   );
 }
 
-function imageryCredit(choice: ImageryChoice, lang: Lang): string {
-  const date = choice.date ? formatImageryDate(choice.date, lang) : "";
+function imageryCredit(choice: ImageryChoice, imageryDate: string, lang: Lang): string {
+  // MODIS y HLS son del día pedido; Sentinel-2 cita el día de su escena.
+  const date = formatImageryDate(imageryDate, lang);
   const parts = choice.layers.map((id) => {
     if (id === "esri") return translate(lang, choice.fallback ? "nandaMap.satelliteFallbackCredit" : "nandaMap.satelliteCredit");
     if (id === "marble") return translate(lang, "nandaMap.marbleCredit");
+    if (id === "s2") {
+      return choice.scene
+        ? translate(lang, "nandaMap.s2Credit", { id: choice.scene.id, date: formatImageryDate(choice.scene.date, lang), attribution: choice.scene.attribution })
+        : "";
+    }
     return translate(lang, id === "hls" ? "nandaMap.hlsCredit" : "nandaMap.modisCredit", { date });
   });
   return parts.join("; ");
