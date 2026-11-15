@@ -1,0 +1,131 @@
+{
+  "schema_version": "0.1.0",
+  "_mock": false,
+  "generado": "2026-11-14T20:19:14.450520+00:00",
+  "zona": {
+    "id": "provisional-point",
+    "name": "Provisional POWER grid point",
+    "latitude": 38.55,
+    "longitude": -121.74,
+    "validated": false
+  },
+  "as_of": "2024-04-15",
+  "start_mmdd": "01-01",
+  "end_mmdd": "04-15",
+  "oni_season": "FMA",
+  "heat_threshold_c": 38.0,
+  "k_by_scenario": {
+    "strong_el_nino": 5,
+    "neutral": 5,
+    "la_nina": 5,
+    "like_2026": 5
+  },
+  "source_refs": [
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=38.55&longitude=-121.74&start=20240101&end=20240415&format=JSON&time-standard=LST&units=metric",
+    "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
+  ],
+  "provenance": [
+    {
+      "file": "power_38.55_-121.74_2024-01-01_2024-04-15.json",
+      "sha256": "bb54701d0a0bba0d30388474bdda93ca2a6ebd4b0088af3299c700dcf9fd3216",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=38.55&longitude=-121.74&start=20240101&end=20240415&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=38.55&longitude=-121.74&start=20240101&end=20240415&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T20:10:52.142253+00:00",
+        "sha256": "5c4014d4dbbf3d2a1c53d2c99450abd661d9a873d6e5383a5bf77b0996e4b7a6",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2024-01-01",
+        "observation_end": "2024-04-15",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "et0.json",
+      "sha256": "a0ca0774eac21a841bc352b84ff13309dd025d8803e343b849381032d1f60837",
+      "source_refs": [
+        "Allen et al. (1998) FAO-56, Eq. 6 (G = 0, Eq. 42); https://www.fao.org/3/x0490e/x0490e00.htm",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=38.55&longitude=-121.74&start=20240101&end=20240415&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": null
+    },
+    {
+      "file": "oni.json",
+      "sha256": "9d94e79c78a967411374e7566f0592c9db5e5ce92e088e66a11d13cd34bd74f1",
+      "source_refs": [
+        "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
+      ],
+      "upstream_provenance": {
+        "url": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+        "fetched_at": "2026-11-14T18:34:21.730768+00:00",
+        "sha256": "118c563331335c8649cdc2677e6be7ae89d1259d901345fcddbc2857af280f7f",
+        "status": 200,
+        "content_type": "text/plain; charset=utf-8",
+        "etag": null,
+        "last_modified": "Tue, 03 Nov 2026 19:31:48 GMT"
+      }
+    },
+    {
+      "file": "roni.json",
+      "sha256": "682d5aedfcdff9b0279483f2d75710eb7091e454bc84ae5436a9ec58726b3595",
+      "source_refs": [
+        "https://www.cpc.ncep.noaa.gov/data/indices/RONI.ascii.txt"
+      ],
+      "upstream_provenance": {
+        "url": "https://www.cpc.ncep.noaa.gov/data/indices/RONI.ascii.txt",
+        "fetched_at": "2026-11-14T18:34:22.387417+00:00",
+        "sha256": "1297887f581b6190e459cbbf8bdec9a703ff65c1a229e2de4dd94285254f35c8",
+        "status": 200,
+        "content_type": "text/plain; charset=utf-8",
+        "etag": null,
+        "last_modified": "Tue, 03 Nov 2026 19:31:48 GMT"
+      }
+    }
+  ],
+  "warnings": [
+    "Location is provisional; SoilGrids and farm suitability are not validated.",
+    "ET0 is null until the scientific kernel calculates it.",
+    "No IMN rainfall calibration is applied; bias claims require independent validation.",
+    "Overlapping seasonal indices are not independent monthly observations.",
+    "Latest NOAA historical revisions are not historical publication vintages; do not use for a real-time backtest.",
+    "ONI and RONI remain separate features; no values are substituted between them.",
+    "Historical NOAA revisions are retrospective data, not original publication vintages.",
+    "A completed ONI period does not prove it was already published at the as_of date.",
+    "Climate similarity is not a forecast, causal effect or yield recommendation."
+  ],
+  "features": [],
+  "excluded_years": [
+    {
+      "year": 2024,
+      "reason": "oni must be a finite number; missing data is not imputed"
+    }
+  ],
+  "status": "provisional_et0",
+  "et0_reviewed": false,
+  "et0_model_version": "fao56-kernel-0.1.0"
+}

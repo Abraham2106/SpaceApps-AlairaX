@@ -11,10 +11,12 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from backend.app.infrastructure.cache import write_json
+from backend.app.api.schemas.contracts import ClimateDay
+from backend.app.application.prepare_inputs import ReviewedET0, same_zone_identity
 from backend.app.infrastructure.power import PARAMETERS
 from backend.app.intelligence.features import ONI_SEASONS
 from scripts.build_analogs import (
-    SCENARIOS, _oni_period_end, load_normalized_climate, load_normalized_oni, window_options,
+    SCENARIOS, _oni_period_end, _read, load_normalized_climate, load_normalized_oni, window_options,
 )
 
 
@@ -23,7 +25,7 @@ def _valid_number(value):
 
 
 def inspect_scenarios(climate_files, oni_file, *, start_mmdd, end_mmdd, oni_season,
-                      as_of, k=5, strong_el_nino_k=None):
+                      as_of, k=5, strong_el_nino_k=None, et0_file=None):
     first, last = window_options(start_mmdd, end_mmdd, oni_season, as_of, k)
     if strong_el_nino_k is not None and (isinstance(strong_el_nino_k, bool) or not isinstance(strong_el_nino_k, int) or strong_el_nino_k < 1):
         raise ValueError('strong_el_nino_k must be a positive integer')
@@ -109,7 +111,7 @@ def inspect_scenarios(climate_files, oni_file, *, start_mmdd, end_mmdd, oni_seas
             'warnings': ['This is coverage readiness, not a KNN result or ET0 readiness.'] +
                         (['Small analog sample: quantiles remain descriptive and are not confidence intervals.'] if k_by_scenario[scenario] < 5 else []),
         }
-    return {
+    report = {
         'schema_version': '0.1.0', '_mock': mock, 'generado': datetime.now(timezone.utc).isoformat(),
         'zona': zone, 'start_mmdd': start_mmdd, 'end_mmdd': end_mmdd, 'oni_season': oni_season,
         'as_of': as_of.isoformat(), 'k_by_scenario': k_by_scenario,
@@ -125,12 +127,85 @@ def inspect_scenarios(climate_files, oni_file, *, start_mmdd, end_mmdd, oni_seas
             'Seasonal ONI buckets are product rules, not sustained NOAA ENSO event classifications.',
         ],
     }
+    if et0_file is not None:
+        report['replay_coverage'] = inspect_replay_coverage(report, days, et0_file)
+    return report
+
+
+def inspect_replay_coverage(report, days, et0_file):
+    """Count complete May–April replays, retaining the ET0 review flag."""
+    payload, provenance = _read(et0_file)
+    et0 = ReviewedET0.model_validate(payload)
+    if et0.mock != report['_mock'] or not same_zone_identity(et0.zona, report['zona']):
+        raise ValueError('ET0 must match the climate zone and mock status')
+    if et0.units != 'mm/day':
+        raise ValueError('ET0 requires units=mm/day')
+    complete_climate_days = set()
+    for day, row in days.items():
+        try:
+            climate = ClimateDay.model_validate(row)
+        except ValueError:
+            continue
+        if all(value is not None for value in climate.model_dump(exclude={'et0_mm'}).values()):
+            complete_climate_days.add(day)
+
+    rows = {}
+    cutoff = date.fromisoformat(report['as_of'])
+    for feature in report['years']:
+        year = feature['year']
+        if year == 2026:
+            continue
+        start, end = date(year, 5, 1), date(year + 1, 4, 30)
+        replay_dates = [start + timedelta(days=i) for i in range((end - start).days + 1)]
+        feature_start = date.fromisoformat(feature['start'])
+        feature_end = date.fromisoformat(feature['end'])
+        feature_dates = [feature_start + timedelta(days=i)
+                         for i in range((feature_end - feature_start).days + 1)]
+        missing_climate = [day.isoformat() for day in replay_dates if day not in complete_climate_days]
+        missing_et0 = [day.isoformat() for day in replay_dates if et0.values.get(day) is None]
+        missing_feature_et0 = [day.isoformat() for day in feature_dates if et0.values.get(day) is None]
+        rows[year] = {
+            'year': year, 'replay_start': start.isoformat(), 'replay_end': end.isoformat(),
+            'within_cutoff': end <= cutoff,
+            'feature_et0_complete': not missing_feature_et0,
+            'missing_feature_et0_dates': missing_feature_et0,
+            'missing_replay_climate_dates': missing_climate, 'missing_replay_et0_dates': missing_et0,
+            'feature_and_replay_inputs_complete': feature['climate_oni_eligible_before_et0']
+            and not missing_feature_et0 and not missing_climate and not missing_et0 and end <= cutoff,
+        }
+    tracking = next((row for row in report['years'] if row['year'] == 2026), None)
+    tracking_et0_missing = []
+    if tracking:
+        start, end = date.fromisoformat(tracking['start']), date.fromisoformat(tracking['end'])
+        tracking_et0_missing = [day.isoformat() for day in
+            (start + timedelta(days=i) for i in range((end - start).days + 1))
+            if et0.values.get(day) is None]
+    tracking_inputs_complete = bool(tracking and tracking['climate_oni_eligible_before_et0']
+                                    and not tracking_et0_missing)
+    scenarios = {}
+    for scenario, result in report['scenarios'].items():
+        eligible = [year for year in result['candidate_years_before_et0']
+                    if rows[year]['feature_and_replay_inputs_complete']]
+        scenarios[scenario] = {
+            'candidate_years_with_complete_inputs': eligible,
+            'requested_k': result['requested_k'],
+            'historical_pool_supports_requested_k': len(eligible) >= result['requested_k'],
+            'tracking_required': scenario == 'like_2026',
+        }
+    return {
+        'et0_reviewed': et0.reviewed, 'et0_model_version': et0.model_version,
+        'et0_provenance': provenance, 'knn_has_run': False, 'simulation_run': False,
+        'tracking_feature_inputs_complete': tracking_inputs_complete,
+        'tracking_missing_feature_et0_dates': tracking_et0_missing,
+        'years': list(rows.values()), 'scenarios': scenarios,
+    }
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--climate', type=Path, nargs='+', required=True)
     parser.add_argument('--oni', type=Path, required=True)
+    parser.add_argument('--et0', type=Path, help='Also audit coverage for full May–April replays')
     parser.add_argument('--start-mmdd', required=True)
     parser.add_argument('--end-mmdd', required=True)
     parser.add_argument('--oni-season', choices=ONI_SEASONS, required=True)
@@ -142,13 +217,20 @@ def main(argv=None):
     try:
         report = inspect_scenarios(args.climate, args.oni, start_mmdd=args.start_mmdd,
                     end_mmdd=args.end_mmdd, oni_season=args.oni_season, as_of=args.as_of,
-                    k=args.k, strong_el_nino_k=args.strong_el_nino_k)
+                    k=args.k, strong_el_nino_k=args.strong_el_nino_k, et0_file=args.et0)
     except (ValueError, KeyError, OSError) as error:
         parser.error(str(error))
     write_json(args.output, report)
     print(f'{report["historical_climate_oni_count_before_et0"]} historical climate/ONI years before reviewed ET0')
     for scenario, result in report['scenarios'].items():
         print(f'{scenario}: {result["climate_oni_count_before_et0"]} candidate years before ET0; requested k={result["requested_k"]}; {result["status"]}')
+    if args.et0:
+        replay = report['replay_coverage']
+        print(f'ET0 reviewed: {replay["et0_reviewed"]}')
+        print(f'2026 tracking inputs complete: {replay["tracking_feature_inputs_complete"]}')
+        for scenario, result in replay['scenarios'].items():
+            print(f'{scenario}: {len(result["candidate_years_with_complete_inputs"])} '
+                  f'years with complete feature and replay inputs (k={result["requested_k"]})')
     return 0
 
 

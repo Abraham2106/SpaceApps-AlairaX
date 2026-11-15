@@ -15,7 +15,7 @@ Los xfail corresponden a los casos manuales pendientes ya documentados.
 El smoke local cubre el contenido servido y no ejecuta JavaScript en un
 navegador ni verifica un despliegue público.
 
-El **freeze del demo científico queda pendiente**. Falta revisión de ET₀,
+El **freeze del demo científico queda pendiente**. Falta
 confirmación de zona, calendarios y suelo, preparación de lotes reales y
 QA de las 12 combinaciones con esos lotes. «Como 2026» tiene un hueco de
 radiación documentado en [la revisión de ET₀](et0-review.md).
@@ -45,6 +45,9 @@ python -m scripts.qa_scientific_release
 El comando ejecuta las comparaciones por HTTP y coteja los resultados
 con los JSON que sirve el build en la ruta de GitHub Pages. Devuelve
 un código distinto de cero ante datos incompletos, sintéticos o
-distintos de los publicados. Con los archivos actuales enumera cuatro
+distintos de los publicados. En la primera ejecución enumeró cuatro
 escenarios bloqueados por ET₀ y la ausencia de `frontend/dist`.
+Tras la aprobación del método de ET₀, el catálogo operativo ofrece
+Niño fuerte, Neutro y Niña. Sus lotes científicos requieren un
+`ComparisonSetup` confirmado.
 El smoke en navegador se realiza con la interfaz definitiva.

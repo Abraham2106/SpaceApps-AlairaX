@@ -8,6 +8,7 @@
 !.env.example
 /datasets/raw/
 /outputs/raw/
+/outputs/molab/
 __pycache__/
 *.py[cod]
 .venv/

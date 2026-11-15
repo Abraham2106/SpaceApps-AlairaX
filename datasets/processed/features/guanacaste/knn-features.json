@@ -1,0 +1,2630 @@
+{
+  "schema_version": "0.1.0",
+  "_mock": false,
+  "generado": "2026-11-14T20:19:33.481050+00:00",
+  "zona": {
+    "id": "provisional-point",
+    "name": "Provisional agricultural point, Guanacaste",
+    "latitude": 10.55,
+    "longitude": -85.5,
+    "validated": false
+  },
+  "as_of": "2026-11-14",
+  "start_mmdd": "04-01",
+  "end_mmdd": "10-31",
+  "oni_season": "ASO",
+  "heat_threshold_c": 35.0,
+  "k_by_scenario": {
+    "strong_el_nino": 3,
+    "neutral": 5,
+    "la_nina": 5,
+    "like_2026": 5
+  },
+  "source_refs": [
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19810101&end=19811231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19820101&end=19821231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19830101&end=19831231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19840101&end=19841231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19850101&end=19851231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19860101&end=19861231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19870101&end=19871231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19880101&end=19881231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19890101&end=19891231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19900101&end=19901231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19910101&end=19911231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19920101&end=19921231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19930101&end=19931231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19940101&end=19941231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19950101&end=19951231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19960101&end=19961231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19970101&end=19971231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19980101&end=19981231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19990101&end=19991231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20000101&end=20001231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20010101&end=20011231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20020101&end=20021231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20030101&end=20031231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20040101&end=20041231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20050101&end=20051231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20060101&end=20061231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20070101&end=20071231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20080101&end=20081231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20090101&end=20091231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20100101&end=20101231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20110101&end=20111231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20120101&end=20121231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20130101&end=20131231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20140101&end=20141231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20150101&end=20151231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20160101&end=20161231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20170101&end=20171231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20180101&end=20181231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20190101&end=20191231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20200101&end=20201231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20210101&end=20211231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20220101&end=20221231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20230101&end=20231231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20240101&end=20240105&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20240101&end=20241231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20250101&end=20251231&format=JSON&time-standard=LST&units=metric",
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20260101&end=20261114&format=JSON&time-standard=LST&units=metric",
+    "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
+  ],
+  "provenance": [
+    {
+      "file": "power_10.55_-85.5_1981-01-01_1981-12-31.json",
+      "sha256": "e02a4af412f68108ff8eaaa279f260005ed8fca1101ae97ba48057c7d1789e81",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19810101&end=19811231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19810101&end=19811231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:35:16.085956+00:00",
+        "sha256": "f9d871de7ecf755349156fe6dd4f955615d4f17e193c5be7e995fa3b9d6f254e",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1981-01-01",
+        "observation_end": "1981-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1982-01-01_1982-12-31.json",
+      "sha256": "12ea4c358ba62baf27c08e5f419a12c052b67711b1ad53b56b10e32cd8c05331",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19820101&end=19821231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19820101&end=19821231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:08.477101+00:00",
+        "sha256": "b0b24d469e2c4d7d4baccdf593c017ae0b9519be1cb557ae006bd92f3657d9f2",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1982-01-01",
+        "observation_end": "1982-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1983-01-01_1983-12-31.json",
+      "sha256": "925b8b9b308f6a6e97700d4698cd4d234418ef2caf83801cbd6171880978ad98",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19830101&end=19831231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19830101&end=19831231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:09.206015+00:00",
+        "sha256": "a32c933aeaac391ecee34a670c9ad22d2babe9f4c500bf5a61248a53ffa21321",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1983-01-01",
+        "observation_end": "1983-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1984-01-01_1984-12-31.json",
+      "sha256": "c41583302f319d57a4267951a31371eacd508862f33d2fe4e5a39ca25c17a42e",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19840101&end=19841231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19840101&end=19841231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:10.132048+00:00",
+        "sha256": "b1154227cf0c81b7ad6d381c941ed9a9bff940a3eed382f3cb1a8b138ce2f0df",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1984-01-01",
+        "observation_end": "1984-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1985-01-01_1985-12-31.json",
+      "sha256": "c256b1ab0a94bb3606d10f4cf403cebc1c7f0a7ee24cf2ce75396572323d8131",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19850101&end=19851231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19850101&end=19851231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:10.976148+00:00",
+        "sha256": "176c48709771c5bc0079d15e582af342f7d1cccbb1b8cf3d3b3dd3344eaa33f3",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1985-01-01",
+        "observation_end": "1985-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1986-01-01_1986-12-31.json",
+      "sha256": "a4a6ffabe1f608da592b649da7b726e4a9e69ff54e6af929a6b700ccaa512187",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19860101&end=19861231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19860101&end=19861231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:11.863553+00:00",
+        "sha256": "4cfa9ee4537f5e8d008ca754c6300550b2fec253699a2f2c21c7ae7ec2818778",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1986-01-01",
+        "observation_end": "1986-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1987-01-01_1987-12-31.json",
+      "sha256": "c6707884532dc9a902f2c3b9bd2a40f26f9233467fbd0216264dad43f14288b8",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19870101&end=19871231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19870101&end=19871231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:12.591298+00:00",
+        "sha256": "5b247ccbe93883ed916b988d56f13bea0d40e7aed49c9605ca5c18adcde7303a",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1987-01-01",
+        "observation_end": "1987-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1988-01-01_1988-12-31.json",
+      "sha256": "138a013e6d032b3eb82ef862b4f3d6ae66f17af04c0c4632431997e94f2cca42",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19880101&end=19881231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19880101&end=19881231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:13.345461+00:00",
+        "sha256": "a98576f9fd8769718389920354a8a45bcb7336475935a39e3081fa1dcc005ceb",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1988-01-01",
+        "observation_end": "1988-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1989-01-01_1989-12-31.json",
+      "sha256": "a1fb03ce7a1ce57c97f5718ae100d8e90f58108ed6504b45f8278a5819837257",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19890101&end=19891231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19890101&end=19891231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:14.101356+00:00",
+        "sha256": "c66f4b24a7847cd0931913112d01c91c893e7e041f66938a827be878edebc8c9",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1989-01-01",
+        "observation_end": "1989-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1990-01-01_1990-12-31.json",
+      "sha256": "79f0c94f67cf97cd547918d00584bc96a981670c9e36e0c0e1bb04e931152418",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19900101&end=19901231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19900101&end=19901231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:14.931787+00:00",
+        "sha256": "52092f4e44df87a3c48af421a87c8502b7fb44cdd696bd6bd32f0ea05198c35b",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1990-01-01",
+        "observation_end": "1990-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1991-01-01_1991-12-31.json",
+      "sha256": "3bbe0e970eaa135bc072bbc43081338123975af83d43255139268a106d4c9f06",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19910101&end=19911231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19910101&end=19911231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:15.827339+00:00",
+        "sha256": "816204c8d764e7facb71b3dbb6f200f6e20c3464d4bb6013e16c23c429acd8cb",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1991-01-01",
+        "observation_end": "1991-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1992-01-01_1992-12-31.json",
+      "sha256": "f97d2b9cce55428d2eaf20da253e3dff104b5d3b4b1d56ca9d9bffbf7f962f1d",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19920101&end=19921231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19920101&end=19921231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:16.701261+00:00",
+        "sha256": "1995dd60df62c64846d7604402b76e0be07d190b41c921abc8a8af7e62ba40c5",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1992-01-01",
+        "observation_end": "1992-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1993-01-01_1993-12-31.json",
+      "sha256": "8a149d88cc1e5a0ba508722f7cebe3c3f325eb8cd52579e0bff0329ff7212b29",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19930101&end=19931231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19930101&end=19931231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:17.623278+00:00",
+        "sha256": "fb983064da5e7a5384856190960c11357191622d76ef2eabb6f048476b1b8744",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1993-01-01",
+        "observation_end": "1993-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1994-01-01_1994-12-31.json",
+      "sha256": "2181219d84d21dffc01e6f69a1abe97f3910e72232c2fa8c34fcd17cc21cf4ff",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19940101&end=19941231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19940101&end=19941231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:18.391571+00:00",
+        "sha256": "bb258b9ae8a7651addaee0a30f9b646c852c4799a138c70b6de4094b822de49f",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1994-01-01",
+        "observation_end": "1994-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1995-01-01_1995-12-31.json",
+      "sha256": "a9ec68dcc6d32264da58b9b8b29c8e5762aa8df357f0a93d4c548836062d6642",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19950101&end=19951231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19950101&end=19951231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:19.155067+00:00",
+        "sha256": "aebecbc3e65f58ea26e58b8d56b8746c6e9228f575e922b7fef30cba7591e4a1",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1995-01-01",
+        "observation_end": "1995-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1996-01-01_1996-12-31.json",
+      "sha256": "7cebc091149500bf99cae608eaa45dc3491082ce1bd64ecda6d17583ad313d46",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19960101&end=19961231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19960101&end=19961231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:20.324867+00:00",
+        "sha256": "370ab9b211d247b4536775eb6c05fcd1b57b7382d4f3e7b867f5c24d160812bc",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1996-01-01",
+        "observation_end": "1996-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1997-01-01_1997-12-31.json",
+      "sha256": "0bb3b5551699cf8d32dfc46dc8e9c6886528e7377fd96543f11563fdeebc1590",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19970101&end=19971231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19970101&end=19971231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:21.101446+00:00",
+        "sha256": "a2d904627f8a0f85e6e2f8bc1f5f3053eaefa2c141a1ed18a333e58c52205282",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1997-01-01",
+        "observation_end": "1997-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1998-01-01_1998-12-31.json",
+      "sha256": "9fd3502f93ecd9ca0ef0f5a056848c7da2a64f6e48d6eaeb1ba687def1e5c4ed",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19980101&end=19981231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19980101&end=19981231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:21.861288+00:00",
+        "sha256": "29316b76beac307a9c740c6348d7282ddcab43b35346bcf8cc713d312c9b8abe",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1998-01-01",
+        "observation_end": "1998-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_1999-01-01_1999-12-31.json",
+      "sha256": "6f093c3cc15eb876999e164173c29a1183e44d5b2165efa301ce00a51959a3f5",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19990101&end=19991231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19990101&end=19991231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:22.740309+00:00",
+        "sha256": "c3d305b5b9438ebc8eb97a6428dc652e67d639683e74ba5370458a2fd0fcda6a",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "1999-01-01",
+        "observation_end": "1999-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2000-01-01_2000-12-31.json",
+      "sha256": "c9a87585c5e0b132f1dfa73bec1af9c2ab1bc8affc8d131ae7eab75e273198e4",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20000101&end=20001231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20000101&end=20001231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:23.551747+00:00",
+        "sha256": "d7dd800e1f6af771d5ac55a8a7a849af892717e3af00e065413239ac1e1921ac",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SRB",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2000-01-01",
+        "observation_end": "2000-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2001-01-01_2001-12-31.json",
+      "sha256": "ab79a6f7216468f5c48fdb168abbca03cde46f7a2437e6dfdb39707fac010127",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20010101&end=20011231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20010101&end=20011231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:24.422536+00:00",
+        "sha256": "d3c1d4613e3298a8d0d5bc19d4ad5d9cf1965f97f07421c89c70533d88ccfafe",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2001-01-01",
+        "observation_end": "2001-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2002-01-01_2002-12-31.json",
+      "sha256": "000031f7dad22f95e5348acad981e9b097b0533788284ffc079cccce62b64910",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20020101&end=20021231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20020101&end=20021231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:25.248126+00:00",
+        "sha256": "133d038b0470872bf933820018e4dcbcbea0334d4db1ca468932b2ec59449ce5",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2002-01-01",
+        "observation_end": "2002-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2003-01-01_2003-12-31.json",
+      "sha256": "2525a68223b4fe2795dcf6dc8c45931d3f85f6b4f6cbde3b48436f433886c98f",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20030101&end=20031231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20030101&end=20031231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:26.069484+00:00",
+        "sha256": "00943f36ed2a5c3dcdb17324f48ba80345f342ae01c4e2c35598e5d70a8bc1eb",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2003-01-01",
+        "observation_end": "2003-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2004-01-01_2004-12-31.json",
+      "sha256": "e5fafc0321dac5b3718d943a5a0120ca5fb793591e8b31e10d75c0b2f3175bbc",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20040101&end=20041231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20040101&end=20041231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:27.046248+00:00",
+        "sha256": "10a7e89dd8dc9509f09d09d4c5ae892d0d0db6434bca74c879d8cf918106660f",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2004-01-01",
+        "observation_end": "2004-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2005-01-01_2005-12-31.json",
+      "sha256": "d832e0cc4b5729b4b8a76a80c9359fb62315db574b68400d33f44a02636dd693",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20050101&end=20051231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20050101&end=20051231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:27.872398+00:00",
+        "sha256": "ee40a19d9c5e00e653d6fcdcd1551200fb4cb34f734b4328018982ed501c5b9f",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2005-01-01",
+        "observation_end": "2005-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2006-01-01_2006-12-31.json",
+      "sha256": "a64ae84850358144ef6c218199f63aa699c3d05e7c950a51666b1c89ede10cb7",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20060101&end=20061231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20060101&end=20061231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:28.651526+00:00",
+        "sha256": "6e56fff333815b685dbc4b0e9b507cc7cdb2f90c7882e993f7c9883bb09dc9cc",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2006-01-01",
+        "observation_end": "2006-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2007-01-01_2007-12-31.json",
+      "sha256": "2dc2844f4ac241b6d259b283ad5bd8b291f77727495cacf90c890c5f2816f486",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20070101&end=20071231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20070101&end=20071231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:29.514016+00:00",
+        "sha256": "584142a8d34f2b5af4d5f0aa7425df968cb03f93937394577dda707995f64ef6",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2007-01-01",
+        "observation_end": "2007-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2008-01-01_2008-12-31.json",
+      "sha256": "92f62e7de788c043b17c8472dd98091452427e3cf0859b3084aadb80e027aec2",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20080101&end=20081231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20080101&end=20081231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:30.281628+00:00",
+        "sha256": "081bbf5b92cf2966445153f896c5d42063f5efe1af903395d4944ffc612b9e29",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2008-01-01",
+        "observation_end": "2008-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2009-01-01_2009-12-31.json",
+      "sha256": "5cc945ed15e5dc537b1a11639e7dffa7f039b2dd0c0aee7ab4c1aac38159ade8",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20090101&end=20091231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20090101&end=20091231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:31.099004+00:00",
+        "sha256": "7f2f48f775ceea296fdaa2f985adc1576d230fdd3f137d0816f214e2794b7861",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2009-01-01",
+        "observation_end": "2009-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2010-01-01_2010-12-31.json",
+      "sha256": "18b6233e1ad20f6b9c3e4baf85e3aba0727f06bd8b7e6f6f705b482d24dda562",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20100101&end=20101231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20100101&end=20101231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:31.882679+00:00",
+        "sha256": "aef0d75f0c05225bb05816f94c3666e8d4ff36e496a0d2ac88241d7b80119f07",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2010-01-01",
+        "observation_end": "2010-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2011-01-01_2011-12-31.json",
+      "sha256": "69cbca0e910cb41e3a0c75c7e6d59b111c289abf6d9bf377aa813d8d5bd4d134",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20110101&end=20111231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20110101&end=20111231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:32.638603+00:00",
+        "sha256": "dac7af392e7f81a6d8ac56b36587e3f7a26821b47eb4c40db3a399171ef9225a",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2011-01-01",
+        "observation_end": "2011-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2012-01-01_2012-12-31.json",
+      "sha256": "66b1eb1323280a22997b6265c1f8339bf997ee2403fc6cb732e0ed99278052a7",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20120101&end=20121231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20120101&end=20121231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:33.660063+00:00",
+        "sha256": "f9d405d1a38a03ccbdbfa5d98b697ec199632b17ff0db54e29ff2a1d60516aef",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2012-01-01",
+        "observation_end": "2012-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2013-01-01_2013-12-31.json",
+      "sha256": "19767afa82babe18b9e46e62a532f60a48a966dab804e80076822b554eac60a3",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20130101&end=20131231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20130101&end=20131231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:34.445137+00:00",
+        "sha256": "15a83e30feab9f4c9578447aa5b7dba96bce0b0df5308dadb89b9ae7a1b2d30d",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2013-01-01",
+        "observation_end": "2013-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2014-01-01_2014-12-31.json",
+      "sha256": "f9d45f513440390b77a586245346ccd30ab01092000f36435da50fe72bbab0a8",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20140101&end=20141231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20140101&end=20141231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:35.532952+00:00",
+        "sha256": "45a9ce05b037032ab6f4b9c5dc26503e26fdf6272d6a90ba175f1c2e7039c2e3",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2014-01-01",
+        "observation_end": "2014-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2015-01-01_2015-12-31.json",
+      "sha256": "9a6e0eee5e0ff12ea0360f0dda21bdb029765aaa76ed9788d5ea24e0af90925e",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20150101&end=20151231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20150101&end=20151231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:36.326944+00:00",
+        "sha256": "3172a4497d8ec5fadd03cdf22b260ed5bc0076c73bb1e0d39e884b3b7eff155f",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2015-01-01",
+        "observation_end": "2015-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2016-01-01_2016-12-31.json",
+      "sha256": "b637330e8bafc180007b4e499fb08052d8f7f1f09837c2cc57e9fa6803904497",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20160101&end=20161231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20160101&end=20161231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:37.103315+00:00",
+        "sha256": "b89b359a4e21a275a4479e0cf0a4fe439696883002cd981e231818c89a8f97b3",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2016-01-01",
+        "observation_end": "2016-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2017-01-01_2017-12-31.json",
+      "sha256": "d0767f8a75d06c75ede91aee3a8f58de8eeb1b3a81356fb1343749c7b4aa38de",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20170101&end=20171231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20170101&end=20171231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:37.921996+00:00",
+        "sha256": "232993084d0552bd28fe7ec4f18ba934d1e2538674e412b96f123f5ecf8c99a9",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2017-01-01",
+        "observation_end": "2017-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2018-01-01_2018-12-31.json",
+      "sha256": "19800cb7b06c92673e28693eda1e7a4a0d167504f47d4c439aecb84af0ea436c",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20180101&end=20181231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20180101&end=20181231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:38.691983+00:00",
+        "sha256": "eb96be6cfca4cd0e2e768153f471db2d0b677a46407e844f9bc9165e940e2f36",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2018-01-01",
+        "observation_end": "2018-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2019-01-01_2019-12-31.json",
+      "sha256": "8cce609c4739d936cd3b64036aa8ccdb1ab33d8149d2907f440c40cd9c104d8e",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20190101&end=20191231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20190101&end=20191231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:39.477324+00:00",
+        "sha256": "2e1943372a3f652d15d7f2e7c237134a056b5ebec3dd66d16121749659849a5f",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2019-01-01",
+        "observation_end": "2019-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2020-01-01_2020-12-31.json",
+      "sha256": "1113e140880f132eb3e8bc6524e4f37a6dc70af6c8c8441aed94b404f6035b31",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20200101&end=20201231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20200101&end=20201231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:40.503231+00:00",
+        "sha256": "342edc0a21ca5b25bf82b6e7f24b599b9543656c519b4c127b4b6338a6a2eeac",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2020-01-01",
+        "observation_end": "2020-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2021-01-01_2021-12-31.json",
+      "sha256": "e9188f633eb9d46ecdac8844324b17c6c66c1c819cad86a3d09146f77691bfe1",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20210101&end=20211231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20210101&end=20211231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:41.279516+00:00",
+        "sha256": "af755a2accea82d53c446a338a1ceec05f02cfb9b8c94209824c2706ed2d0a90",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2021-01-01",
+        "observation_end": "2021-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2022-01-01_2022-12-31.json",
+      "sha256": "6480abae51f3f1ca7a44d1789bfaf08c27ab89de1f6a1461961142505f226396",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20220101&end=20221231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20220101&end=20221231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:42.020004+00:00",
+        "sha256": "efe1af92fd3fb11cfcc6472cd39f1cb8769c5fded9acf7b6c7409b8f25abe395",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2022-01-01",
+        "observation_end": "2022-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2023-01-01_2023-12-31.json",
+      "sha256": "463f2546537e463b85a6941b984d538c874bff159f05d221e715e3530d97a8ff",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20230101&end=20231231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20230101&end=20231231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:43.227834+00:00",
+        "sha256": "e6c6bf83ac05cd0efea105b10381ad6731836ed8654195ce7cb60753289e1885",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2023-01-01",
+        "observation_end": "2023-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2024-01-01_2024-01-05.json",
+      "sha256": "abd147531d51ef2aeb79d3919c95d74975b102dc704ea154f5a52c0671f39061",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20240101&end=20240105&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20240101&end=20240105&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:34:20.497147+00:00",
+        "sha256": "ee2358938f9ec8844cae330265882ed7a2bdcacc75842f746df850467ed4afd2",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2024-01-01",
+        "observation_end": "2024-01-05",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2024-01-01_2024-12-31.json",
+      "sha256": "28a33a1d979f8f167ac79f671cbbb18c0b4f9b62a963dcca193ae46d4475ec19",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20240101&end=20241231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20240101&end=20241231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:44.304670+00:00",
+        "sha256": "c2607ba60689011d215c9d48ae84c37a0858adf7ced58336898978ee6eaf0e32",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2024-01-01",
+        "observation_end": "2024-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2025-01-01_2025-12-31.json",
+      "sha256": "b7bfb456e53fc95960ba3f2d8da966cbcf643f43bfa6b154da809c84b3d2917a",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20250101&end=20251231&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20250101&end=20251231&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:45.152199+00:00",
+        "sha256": "cabfc8e260349b09bbd2735a91b7672759ecbb3f3f29c4dddde1f4a37b277790",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "SYN1DEG",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2025-01-01",
+        "observation_end": "2025-12-31",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "power_10.55_-85.5_2026-01-01_2026-11-14.json",
+      "sha256": "c142532edb68b2f5ec4ddd0a8465c501872b100245e90dcf2a4016f578133426",
+      "source_refs": [
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20260101&end=20261114&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": {
+        "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20260101&end=20261114&format=JSON&time-standard=LST&units=metric",
+        "fetched_at": "2026-11-14T18:36:45.973575+00:00",
+        "sha256": "253de318e537904ea5169c4c0a088ac1ce35f2c460522d1363594e25701cef84",
+        "status": 200,
+        "content_type": "application/json",
+        "etag": null,
+        "last_modified": null
+      },
+      "product": {
+        "provider": "NASA POWER",
+        "api": {
+          "version": "v2.10.3",
+          "name": "POWER Daily API"
+        },
+        "source_products": [
+          "MERRA2",
+          "GEOSIT",
+          "SYN1DEG",
+          "FLASHFLUX",
+          "POWER"
+        ],
+        "time_standard": "LST",
+        "observation_start": "2026-01-01",
+        "observation_end": "2026-11-14",
+        "normalized_units": {
+          "precipitation_mm": "mm/day",
+          "tmin_c": "C",
+          "tmax_c": "C",
+          "relative_humidity_pct": "%",
+          "wind_speed_2m_m_s": "m/s",
+          "solar_radiation_mj_m2_day": "MJ/m^2/day",
+          "et0_mm": "mm/day"
+        }
+      }
+    },
+    {
+      "file": "et0_10.55_-85.5.json",
+      "sha256": "b82718134bf7986df24414fd19ed4b2b05179bb742cdddab4869454ec8d042d1",
+      "source_refs": [
+        "Allen et al. (1998) FAO-56, Eq. 6 (G = 0, Eq. 42); https://www.fao.org/3/x0490e/x0490e00.htm",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19810101&end=19811231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19820101&end=19821231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19830101&end=19831231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19840101&end=19841231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19850101&end=19851231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19860101&end=19861231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19870101&end=19871231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19880101&end=19881231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19890101&end=19891231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19900101&end=19901231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19910101&end=19911231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19920101&end=19921231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19930101&end=19931231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19940101&end=19941231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19950101&end=19951231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19960101&end=19961231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19970101&end=19971231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19980101&end=19981231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19990101&end=19991231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20000101&end=20001231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20010101&end=20011231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20020101&end=20021231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20030101&end=20031231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20040101&end=20041231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20050101&end=20051231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20060101&end=20061231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20070101&end=20071231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20080101&end=20081231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20090101&end=20091231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20100101&end=20101231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20110101&end=20111231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20120101&end=20121231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20130101&end=20131231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20140101&end=20141231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20150101&end=20151231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20160101&end=20161231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20170101&end=20171231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20180101&end=20181231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20190101&end=20191231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20200101&end=20201231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20210101&end=20211231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20220101&end=20221231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20230101&end=20231231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20240101&end=20240105&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20240101&end=20241231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20250101&end=20251231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20260101&end=20261114&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": null
+    },
+    {
+      "file": "oni.json",
+      "sha256": "9d94e79c78a967411374e7566f0592c9db5e5ce92e088e66a11d13cd34bd74f1",
+      "source_refs": [
+        "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
+      ],
+      "upstream_provenance": {
+        "url": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+        "fetched_at": "2026-11-14T18:34:21.730768+00:00",
+        "sha256": "118c563331335c8649cdc2677e6be7ae89d1259d901345fcddbc2857af280f7f",
+        "status": 200,
+        "content_type": "text/plain; charset=utf-8",
+        "etag": null,
+        "last_modified": "Tue, 03 Nov 2026 19:31:48 GMT"
+      }
+    },
+    {
+      "file": "roni.json",
+      "sha256": "682d5aedfcdff9b0279483f2d75710eb7091e454bc84ae5436a9ec58726b3595",
+      "source_refs": [
+        "https://www.cpc.ncep.noaa.gov/data/indices/RONI.ascii.txt"
+      ],
+      "upstream_provenance": {
+        "url": "https://www.cpc.ncep.noaa.gov/data/indices/RONI.ascii.txt",
+        "fetched_at": "2026-11-14T18:34:22.387417+00:00",
+        "sha256": "1297887f581b6190e459cbbf8bdec9a703ff65c1a229e2de4dd94285254f35c8",
+        "status": 200,
+        "content_type": "text/plain; charset=utf-8",
+        "etag": null,
+        "last_modified": "Tue, 03 Nov 2026 19:31:48 GMT"
+      }
+    },
+    {
+      "file": "soil_readiness_10.55_-85.5.json",
+      "sha256": "d2113b849deb59bb410e87a93616dccf95d95d10e18e123d8fc1f875408be61f",
+      "source_refs": [
+        "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.5&lat=10.55&property=clay&property=sand&property=silt&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&depth=100-200cm&value=mean",
+        "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.5&lat=10.55&property=wv0010&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&depth=100-200cm&value=mean"
+      ],
+      "upstream_provenance": null
+    }
+  ],
+  "warnings": [
+    "Location is provisional; SoilGrids and farm suitability are not validated.",
+    "ET0 is null until the scientific kernel calculates it.",
+    "No IMN rainfall calibration is applied; bias claims require independent validation.",
+    "Overlapping seasonal indices are not independent monthly observations.",
+    "Latest NOAA historical revisions are not historical publication vintages; do not use for a real-time backtest.",
+    "ONI and RONI remain separate features; no values are substituted between them.",
+    "Historical NOAA revisions are retrospective data, not original publication vintages.",
+    "A completed ONI period does not prove it was already published at the as_of date.",
+    "Climate similarity is not a forecast, causal effect or yield recommendation."
+  ],
+  "features": [
+    {
+      "year": 1984,
+      "start": "1984-04-01",
+      "end": "1984-10-31",
+      "precipitation_mm": 860.04,
+      "et0_mm": 950.328,
+      "tmax_mean_c": 31.821495327102806,
+      "heat_days": 34,
+      "oni": -0.32,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1985,
+      "start": "1985-04-01",
+      "end": "1985-10-31",
+      "precipitation_mm": 470.86,
+      "et0_mm": 1030.59,
+      "tmax_mean_c": 32.70626168224299,
+      "heat_days": 38,
+      "oni": -0.31,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1986,
+      "start": "1986-04-01",
+      "end": "1986-10-31",
+      "precipitation_mm": 1050.13,
+      "et0_mm": 987.155,
+      "tmax_mean_c": 31.53140186915888,
+      "heat_days": 39,
+      "oni": 0.64,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1987,
+      "start": "1987-04-01",
+      "end": "1987-10-31",
+      "precipitation_mm": 394.02,
+      "et0_mm": 1094.907,
+      "tmax_mean_c": 33.50943925233645,
+      "heat_days": 43,
+      "oni": 1.49,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1988,
+      "start": "1988-04-01",
+      "end": "1988-10-31",
+      "precipitation_mm": 564.69,
+      "et0_mm": 933.565,
+      "tmax_mean_c": 31.447616822429907,
+      "heat_days": 42,
+      "oni": -1.27,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1989,
+      "start": "1989-04-01",
+      "end": "1989-10-31",
+      "precipitation_mm": 440.64,
+      "et0_mm": 1079.2259999999999,
+      "tmax_mean_c": 32.7742523364486,
+      "heat_days": 51,
+      "oni": -0.33,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1990,
+      "start": "1990-04-01",
+      "end": "1990-10-31",
+      "precipitation_mm": 610.21,
+      "et0_mm": 1054.964,
+      "tmax_mean_c": 32.783457943925235,
+      "heat_days": 48,
+      "oni": 0.31,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1991,
+      "start": "1991-04-01",
+      "end": "1991-10-31",
+      "precipitation_mm": 617.64,
+      "et0_mm": 1044.006,
+      "tmax_mean_c": 32.311962616822434,
+      "heat_days": 36,
+      "oni": 0.72,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1992,
+      "start": "1992-04-01",
+      "end": "1992-10-31",
+      "precipitation_mm": 773.05,
+      "et0_mm": 1004.295,
+      "tmax_mean_c": 31.71514018691589,
+      "heat_days": 39,
+      "oni": -0.15,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1993,
+      "start": "1993-04-01",
+      "end": "1993-10-31",
+      "precipitation_mm": 660.83,
+      "et0_mm": 965.754,
+      "tmax_mean_c": 31.496121495327102,
+      "heat_days": 28,
+      "oni": 0.2,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1994,
+      "start": "1994-04-01",
+      "end": "1994-10-31",
+      "precipitation_mm": 278.25,
+      "et0_mm": 1112.944,
+      "tmax_mean_c": 33.37602803738318,
+      "heat_days": 57,
+      "oni": 0.47,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1995,
+      "start": "1995-04-01",
+      "end": "1995-10-31",
+      "precipitation_mm": 910.42,
+      "et0_mm": 889.434,
+      "tmax_mean_c": 30.55308411214953,
+      "heat_days": 21,
+      "oni": -0.81,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1996,
+      "start": "1996-04-01",
+      "end": "1996-10-31",
+      "precipitation_mm": 468.7,
+      "et0_mm": 979.584,
+      "tmax_mean_c": 31.99504672897196,
+      "heat_days": 32,
+      "oni": -0.3,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1997,
+      "start": "1997-04-01",
+      "end": "1997-10-31",
+      "precipitation_mm": 592.9,
+      "et0_mm": 1118.766,
+      "tmax_mean_c": 32.92593457943925,
+      "heat_days": 55,
+      "oni": 2.04,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1998,
+      "start": "1998-04-01",
+      "end": "1998-10-31",
+      "precipitation_mm": 803.51,
+      "et0_mm": 1010.831,
+      "tmax_mean_c": 31.89523364485981,
+      "heat_days": 48,
+      "oni": -1.02,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 1999,
+      "start": "1999-04-01",
+      "end": "1999-10-31",
+      "precipitation_mm": 986.37,
+      "et0_mm": 894.0,
+      "tmax_mean_c": 30.297943925233646,
+      "heat_days": 20,
+      "oni": -1.0,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2000,
+      "start": "2000-04-01",
+      "end": "2000-10-31",
+      "precipitation_mm": 811.11,
+      "et0_mm": 963.51,
+      "tmax_mean_c": 31.405607476635513,
+      "heat_days": 25,
+      "oni": -0.42,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2001,
+      "start": "2001-04-01",
+      "end": "2001-10-31",
+      "precipitation_mm": 984.52,
+      "et0_mm": 1024.549,
+      "tmax_mean_c": 31.883317757009344,
+      "heat_days": 43,
+      "oni": -0.15,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2002,
+      "start": "2002-04-01",
+      "end": "2002-10-31",
+      "precipitation_mm": 1175.27,
+      "et0_mm": 1013.766,
+      "tmax_mean_c": 31.36504672897196,
+      "heat_days": 41,
+      "oni": 0.78,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2003,
+      "start": "2003-04-01",
+      "end": "2003-10-31",
+      "precipitation_mm": 794.34,
+      "et0_mm": 949.731,
+      "tmax_mean_c": 31.913971962616824,
+      "heat_days": 25,
+      "oni": 0.23,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2004,
+      "start": "2004-04-01",
+      "end": "2004-10-31",
+      "precipitation_mm": 943.9399999999999,
+      "et0_mm": 995.822,
+      "tmax_mean_c": 32.04995327102804,
+      "heat_days": 33,
+      "oni": 0.58,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2005,
+      "start": "2005-04-01",
+      "end": "2005-10-31",
+      "precipitation_mm": 2119.59,
+      "et0_mm": 862.695,
+      "tmax_mean_c": 30.366495327102804,
+      "heat_days": 35,
+      "oni": -0.11,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2006,
+      "start": "2006-04-01",
+      "end": "2006-10-31",
+      "precipitation_mm": 1192.03,
+      "et0_mm": 964.421,
+      "tmax_mean_c": 31.672102803738316,
+      "heat_days": 35,
+      "oni": 0.54,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2007,
+      "start": "2007-04-01",
+      "end": "2007-10-31",
+      "precipitation_mm": 2329.93,
+      "et0_mm": 857.13,
+      "tmax_mean_c": 30.114205607476634,
+      "heat_days": 19,
+      "oni": -1.05,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2008,
+      "start": "2008-04-01",
+      "end": "2008-10-31",
+      "precipitation_mm": 2537.05,
+      "et0_mm": 867.003,
+      "tmax_mean_c": 30.033971962616825,
+      "heat_days": 27,
+      "oni": -0.25,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2009,
+      "start": "2009-04-01",
+      "end": "2009-10-31",
+      "precipitation_mm": 1035.91,
+      "et0_mm": 998.72,
+      "tmax_mean_c": 32.13934579439252,
+      "heat_days": 36,
+      "oni": 0.66,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2010,
+      "start": "2010-04-01",
+      "end": "2010-10-31",
+      "precipitation_mm": 1964.55,
+      "et0_mm": 847.619,
+      "tmax_mean_c": 30.18551401869159,
+      "heat_days": 28,
+      "oni": -1.43,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2011,
+      "start": "2011-04-01",
+      "end": "2011-10-31",
+      "precipitation_mm": 1901.89,
+      "et0_mm": 887.622,
+      "tmax_mean_c": 30.484392523364484,
+      "heat_days": 32,
+      "oni": -0.76,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2012,
+      "start": "2012-04-01",
+      "end": "2012-10-31",
+      "precipitation_mm": 1211.97,
+      "et0_mm": 935.982,
+      "tmax_mean_c": 31.40285046728972,
+      "heat_days": 20,
+      "oni": 0.37,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2013,
+      "start": "2013-04-01",
+      "end": "2013-10-31",
+      "precipitation_mm": 1816.65,
+      "et0_mm": 892.716,
+      "tmax_mean_c": 30.735607476635515,
+      "heat_days": 33,
+      "oni": -0.32,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2014,
+      "start": "2014-04-01",
+      "end": "2014-10-31",
+      "precipitation_mm": 1452.39,
+      "et0_mm": 1020.823,
+      "tmax_mean_c": 32.30700934579439,
+      "heat_days": 36,
+      "oni": 0.24,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2015,
+      "start": "2015-04-01",
+      "end": "2015-10-31",
+      "precipitation_mm": 735.45,
+      "et0_mm": 1089.775,
+      "tmax_mean_c": 33.136401869158874,
+      "heat_days": 53,
+      "oni": 2.02,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2016,
+      "start": "2016-04-01",
+      "end": "2016-10-31",
+      "precipitation_mm": 1471.95,
+      "et0_mm": 912.789,
+      "tmax_mean_c": 31.213691588785046,
+      "heat_days": 36,
+      "oni": -0.42,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2017,
+      "start": "2017-04-01",
+      "end": "2017-10-31",
+      "precipitation_mm": 2216.09,
+      "et0_mm": 841.717,
+      "tmax_mean_c": 30.28158878504673,
+      "heat_days": 21,
+      "oni": -0.23,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2018,
+      "start": "2018-04-01",
+      "end": "2018-10-31",
+      "precipitation_mm": 1289.87,
+      "et0_mm": 900.966,
+      "tmax_mean_c": 31.094252336448598,
+      "heat_days": 32,
+      "oni": 0.52,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2019,
+      "start": "2019-04-01",
+      "end": "2019-10-31",
+      "precipitation_mm": 1438.6200000000001,
+      "et0_mm": 930.182,
+      "tmax_mean_c": 31.542523364485984,
+      "heat_days": 38,
+      "oni": 0.31,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2020,
+      "start": "2020-04-01",
+      "end": "2020-10-31",
+      "precipitation_mm": 2200.2,
+      "et0_mm": 897.14,
+      "tmax_mean_c": 30.901028037383178,
+      "heat_days": 35,
+      "oni": -0.77,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2021,
+      "start": "2021-04-01",
+      "end": "2021-10-31",
+      "precipitation_mm": 2286.29,
+      "et0_mm": 905.055,
+      "tmax_mean_c": 30.698317757009345,
+      "heat_days": 9,
+      "oni": -0.64,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2022,
+      "start": "2022-04-01",
+      "end": "2022-10-31",
+      "precipitation_mm": 1357.36,
+      "et0_mm": 849.054,
+      "tmax_mean_c": 30.35042056074766,
+      "heat_days": 19,
+      "oni": -0.87,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2023,
+      "start": "2023-04-01",
+      "end": "2023-10-31",
+      "precipitation_mm": 1019.13,
+      "et0_mm": 1025.929,
+      "tmax_mean_c": 33.00532710280374,
+      "heat_days": 52,
+      "oni": 1.5,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2024,
+      "start": "2024-04-01",
+      "end": "2024-10-31",
+      "precipitation_mm": 2843.67,
+      "et0_mm": 888.99,
+      "tmax_mean_c": 31.442056074766356,
+      "heat_days": 42,
+      "oni": -0.12,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    },
+    {
+      "year": 2025,
+      "start": "2025-04-01",
+      "end": "2025-10-31",
+      "precipitation_mm": 2063.18,
+      "et0_mm": 901.112,
+      "tmax_mean_c": 31.095233644859814,
+      "heat_days": 23,
+      "oni": -0.43,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    }
+  ],
+  "excluded_years": [
+    {
+      "year": 1981,
+      "reason": "1981-04-01.et0_mm must be a finite number; missing data is not imputed"
+    },
+    {
+      "year": 1982,
+      "reason": "1982-04-01.et0_mm must be a finite number; missing data is not imputed"
+    },
+    {
+      "year": 1983,
+      "reason": "1983-04-01.et0_mm must be a finite number; missing data is not imputed"
+    },
+    {
+      "year": 2026,
+      "reason": "2026-09-07.et0_mm must be a finite number; missing data is not imputed"
+    }
+  ],
+  "status": "provisional_et0",
+  "et0_reviewed": false,
+  "et0_model_version": "fao56-kernel-0.1.0"
+}
