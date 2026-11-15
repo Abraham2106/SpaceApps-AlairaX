@@ -70,11 +70,12 @@ function isMetric(value: string | null): value is MetricId {
 
 const storedLang = typeof localStorage !== "undefined" ? localStorage.getItem("nandaview-lang") : null;
 
-/** Dev talks to FastAPI through the Vite proxy. Production stays on static JSON unless VITE_API_URL is set. */
+/** Dev uses the Vite proxy. A Vercel build talks to FastAPI at /api. Any other production build stays on static JSON unless VITE_API_URL is set. */
 export function initialApiBase(): string {
   const configured = (import.meta.env.VITE_API_URL ?? "").trim();
   if (configured) return configured;
-  return import.meta.env.DEV ? "/api" : "";
+  if (import.meta.env.DEV) return "/api";
+  return __API_BASE_DEFAULT__;
 }
 
 export const useInstrument = create<Store>((set, get) => ({
