@@ -116,4 +116,5 @@ export type LoadedComparison = {
   compare: CompareResponse | null;
   httpStatus: number | null;
   httpDetail: string | null;
+  httpDetailKey?: "api.scenarioMissing" | "api.noErrorDetail";
 };

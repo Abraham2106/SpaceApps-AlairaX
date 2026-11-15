@@ -1,3 +1,5 @@
+import { translate } from "../lib/i18n";
+import { comparisonError } from "../lib/api";
 import type { LoadedComparison } from "../lib/types";
 import type { Lang } from "../lib/types";
 
@@ -8,39 +10,35 @@ export function Ledger({ loaded, lang }: { loaded: LoadedComparison; lang: Lang 
     : [];
   const assumptions = compare?.rotations[0]?.runs[0]?.assumptions ?? [];
   return (
-    <section className="stack" aria-label={lang === "es" ? "Registro del cálculo" : "Calculation record"}>
-      <p className="kicker">{lang === "es" ? "Registro" : "Record"}</p>
+    <section className="stack" aria-label={translate(lang, "common.calculationRecord")}>
+      <p className="kicker">{translate(lang, "ledger.record")}</p>
       <p>
         {loaded.mode === "fixtures"
-          ? lang === "es"
-            ? "Esto describe un fixture. No hubo una corrida del backend detrás de estos números."
-            : "This describes a fixture. No backend run produced these numbers."
-          : lang === "es"
-            ? "Esto describe la respuesta de la API."
-            : "This describes the API response."}
+          ? translate(lang, "ledger.thisDescribesFixtureNoBackend")
+          : translate(lang, "ledger.thisDescribesApiResponse")}
       </p>
       {loaded.httpStatus && loaded.httpStatus !== 200 ? (
         <p className="warn">
-          HTTP {loaded.httpStatus}. {loaded.httpDetail}
+          HTTP {loaded.httpStatus}. {comparisonError(loaded, lang)}
         </p>
       ) : null}
       {compare ? (
         <>
           <p>
-            {lang === "es" ? "Escenario" : "Scenario"}: {compare.scenario_id}. {lang === "es" ? "Años y distancia" : "Years and distance"}:{" "}
+            {translate(lang, "common.scenario")}: {compare.scenario_id}. {translate(lang, "ledger.yearsDistance")}:{" "}
             {compare.analog_years.map((item) => `${item.year} (${item.distance})`).join(", ")}.
           </p>
           <p>
-            {lang === "es" ? "Zona" : "Zone"}: {compare.zona.name} ({compare.zona.latitude}, {compare.zona.longitude}).{" "}
+            {translate(lang, "ledger.zone")}: {compare.zona.name} ({compare.zona.latitude}, {compare.zona.longitude}).{" "}
             {compare.zona.validated
-              ? lang === "es" ? "Marcada como validada." : "Marked validated."
-              : lang === "es" ? "No está validada." : "It is not validated."}
+              ? translate(lang, "ledger.markedValidated")
+              : translate(lang, "ledger.itNotValidated")}
           </p>
           <p>
-            {lang === "es" ? "Versión del modelo en las corridas" : "Model version on the runs"}: {versions.join(", ") || (lang === "es" ? "sin dato" : "no data")}.
+            {translate(lang, "ledger.modelVersionOnRuns")}: {versions.join(", ") || (translate(lang, "common.noData"))}.
           </p>
           <p>
-            {lang === "es" ? "Método de incertidumbre" : "Uncertainty method"}: {compare.uncertainty_method}.
+            {translate(lang, "ledger.uncertaintyMethod")}: {compare.uncertainty_method}.
           </p>
           <ul>
             {compare.warnings.map((warning) => <li key={warning}>{warning}</li>)}
@@ -48,11 +46,11 @@ export function Ledger({ loaded, lang }: { loaded: LoadedComparison; lang: Lang 
             {assumptions.map((warning) => <li key={warning}>{warning}</li>)}
           </ul>
           <p className="faint">
-            {lang === "es" ? "Referencias del archivo" : "File references"}: {compare.source_refs.join(", ") || (lang === "es" ? "ninguna" : "none")}.
+            {translate(lang, "ledger.fileReferences")}: {compare.source_refs.join(", ") || (translate(lang, "ledger.none"))}.
           </p>
         </>
       ) : (
-        <p>{lang === "es" ? "No hay comparación que registrar." : "There is no comparison to record."}</p>
+        <p>{translate(lang, "ledger.thereNoComparisonRecord")}</p>
       )}
     </section>
   );

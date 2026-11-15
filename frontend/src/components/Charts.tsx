@@ -1,176 +1,258 @@
-import type { CompareResponse, Lang, MetricId, RotationId } from "../lib/types";
-import { formatSigned, formatValue } from "../lib/format";
-import { ROTATION_ORDER, ROTATION_STYLE, metricNoun, rotationName } from "../lib/plain";
+import { translate } from "../lib/i18n";
+import { useEffect, useId, useState } from "react";
+import type { CompareResponse, Lang, MetricId, RotationComparison, RotationId } from "../lib/types";
+import { formatNumber, formatSigned, formatValue, metricUnit } from "../lib/format";
+import { ROTATION_ORDER, ROTATION_STYLE, rotationName } from "../lib/plain";
+import { RadioGroup } from "./RadioGroup";
 
-function extent(compare: CompareResponse, metric: MetricId): number {
-  let max = 1;
-  for (const rotation of compare.rotations) {
-    const summary = rotation.metrics[metric];
-    for (const value of [summary.p10, summary.p50, summary.p90]) {
-      if (value !== null) max = Math.max(max, value);
-    }
-    for (const run of rotation.runs) {
-      const value = run.metrics[metric];
-      if (value !== null) max = Math.max(max, value);
-    }
+export type ComparisonView = "chart" | "table";
+type Summary = RotationComparison["metrics"][MetricId];
+type AnnualReading = { year: number; value: number | null };
+type Reading = {
+  id: RotationId;
+  name: string;
+  summary: Summary;
+  annual: AnnualReading[];
+};
+type ValueFormat = (value: number | null) => string;
+
+function RotationPlot({ rows, difference, metric, lang, format }: {
+  rows: Reading[];
+  difference: boolean;
+  metric: MetricId;
+  lang: Lang;
+  format: ValueFormat;
+}) {
+  const chartId = useId();
+  const [active, setActive] = useState<RotationId | null>(null);
+  const values = rows.flatMap(({ summary, annual }) => [
+    summary.p10, summary.p50, summary.p90, ...annual.map(({ value }) => value),
+  ]).filter((value) => value !== null);
+  const extent = Math.max(1, ...values.map(Math.abs)) * 1.08;
+  const step = 10 ** Math.floor(Math.log10(extent / 5));
+  const max = Math.ceil(extent / step) * step;
+  const min = difference ? -max : 0;
+  const position = (value: number) => ((value - min) / (max - min)) * 100;
+  const ticks = [min, (min + max) / 2, max];
+
+  useEffect(() => {
+    if (active === null) return;
+    const dismiss = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActive(null);
+    };
+    document.addEventListener("keydown", dismiss);
+    return () => document.removeEventListener("keydown", dismiss);
+  }, [active]);
+
+  if (values.length === 0) {
+    return <p className="chart-empty">{translate(lang, "charts.noDataThisMetric")}</p>;
   }
-  return max * 1.08;
-}
 
-export function LevelChart({ compare, metric, lang, names }: { compare: CompareResponse; metric: MetricId; lang: Lang; names: Record<string, string> }) {
-  const width = 640;
-  const height = 210;
-  const left = 168;
-  const right = 16;
-  const max = extent(compare, metric);
-  const xOf = (value: number) => left + ((width - left - right) * value) / max;
   return (
-    <div className="chart-wrap">
-      <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby="level-title level-desc">
-        <title id="level-title">{lang === "es" ? "Nivel modelado, escala desde cero" : "Modeled level, scale from zero"}</title>
-        <desc id="level-desc">
-          {lang === "es"
-            ? "Cada fila es una rotación. La banda va de p10 a p90. La raya es p50. Cada punto es un año análogo."
-            : "Each row is a rotation. The band runs from p10 to p90. The tick is p50. Each dot is an analog year."}
-        </desc>
-        {[0, 0.5, 1].map((step) => {
-          const value = max * step;
-          const x = xOf(value);
+    <>
+      <ul className="chart-rows">
+        {rows.map(({ id, name, summary: { p10, p50, p90, n }, annual }) => {
+          const tooltipId = `${chartId}-${id}`;
+          const close = () => setActive((current) => current === id ? null : current);
           return (
-            <g key={step}>
-              <line x1={x} x2={x} y1={18} y2={height - 16} stroke="currentColor" opacity="0.15" />
-              <text x={x} y={height - 2} textAnchor="middle" fill="currentColor" fontSize="11">
-                {Math.round(value)}
-              </text>
-            </g>
+            <li
+              className="chart-row"
+              key={id}
+              data-rot={id}
+              onPointerEnter={(event) => { if (event.pointerType === "mouse") setActive(id); }}
+              onPointerLeave={(event) => { if (!event.currentTarget.contains(document.activeElement)) close(); }}
+            >
+              <button
+                type="button"
+                className="chart-reading"
+                aria-describedby={tooltipId}
+                onFocus={() => setActive(id)}
+                onBlur={close}
+                onClick={(event) => { event.currentTarget.focus(); setActive(id); }}
+              >
+                <span className="chart-reading-header">
+                  <span className="chart-rotation">
+                    <span className="chart-swatch" style={{ borderTopStyle: ROTATION_STYLE[id].swatch }} aria-hidden />
+                    <span>{name}</span>
+                  </span>
+                  <strong>{format(p50)}</strong>
+                </span>
+                <span className="chart-track" aria-hidden>
+                  <span className="chart-gridline" style={{ left: `${position(0)}%` }} />
+                  {p10 !== null && p90 !== null && p10 !== p90 ? (
+                    <span className="chart-band" style={{
+                      left: `${position(p10)}%`,
+                      width: `${position(p90) - position(p10)}%`,
+                      borderTopStyle: ROTATION_STYLE[id].swatch,
+                    }} />
+                  ) : null}
+                  {annual.map(({ year, value }) => value === null ? null : (
+                    <span key={year} className="chart-dot" style={{ left: `${position(value)}%` }} />
+                  ))}
+                  {p50 !== null ? <span className="chart-median" style={{ left: `${position(p50)}%` }} /> : null}
+                </span>
+              </button>
+              <div className="chart-tooltip" role="tooltip" id={tooltipId} hidden={active !== id}>
+                <dl>
+                  <div><dt>p10</dt><dd>{format(p10)}</dd></div>
+                  <div><dt>{translate(lang, "charts.medianP50")}</dt><dd>{format(p50)}</dd></div>
+                  <div><dt>p90</dt><dd>{format(p90)}</dd></div>
+                  <div><dt>{translate(lang, "common.sampleYears")}</dt><dd>{n}</dd></div>
+                </dl>
+                {annual.length > 0 ? (
+                  <p>{translate(lang, "common.byYear")} · {annual.map(({ year, value }) => `${year} · ${format(value)}`).join(" / ")}</p>
+                ) : null}
+              </div>
+            </li>
           );
         })}
-        {ROTATION_ORDER.map((id, index) => {
-          const rotation = compare.rotations.find((item) => item.rotation_id === id);
-          const y = 42 + index * 52;
-          if (!rotation) return null;
-          const summary = rotation.metrics[metric];
-          const style = ROTATION_STYLE[id];
-          return (
-            <g key={id}>
-              <text x={8} y={y + 4} fill="currentColor" fontSize="13">
-                {rotationName(id, lang, names[id])}
-              </text>
-              {summary.p10 !== null && summary.p90 !== null ? (
-                <line x1={xOf(summary.p10)} x2={xOf(summary.p90)} y1={y} y2={y} stroke={style.color} strokeWidth="8" strokeDasharray={style.dash === "none" ? undefined : style.dash} />
-              ) : null}
-              {summary.p50 !== null ? <line x1={xOf(summary.p50)} x2={xOf(summary.p50)} y1={y - 10} y2={y + 10} stroke="currentColor" strokeWidth="2" /> : null}
-              {rotation.runs.map((run) => {
-                const value = run.metrics[metric];
-                if (value === null) return null;
-                return <circle key={run.year} cx={xOf(value)} cy={y} r="4" fill={style.color} stroke="#f4efe4" strokeWidth="1" />;
-              })}
-            </g>
-          );
-        })}
-      </svg>
-    </div>
-  );
-}
-
-export function DeltaChart({ compare, metric, lang, names }: { compare: CompareResponse; metric: MetricId; lang: Lang; names: Record<string, string> }) {
-  const width = 640;
-  const height = 180;
-  const left = 168;
-  let span = 1;
-  for (const rotation of compare.rotations) {
-    const summary = rotation.delta_vs_baseline[metric];
-    for (const value of [summary.p10, summary.p50, summary.p90]) {
-      if (value !== null) span = Math.max(span, Math.abs(value));
-    }
-  }
-  span *= 1.25;
-  const mid = left + (width - left - 16) / 2;
-  const xOf = (value: number) => mid + ((width - left - 16) / 2) * (value / span);
-  return (
-    <div className="chart-wrap">
-      <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby="delta-title delta-desc">
-        <title id="delta-title">{lang === "es" ? "Delta contra arroz y melón" : "Delta against rice and melon"}</title>
-        <desc id="delta-desc">
-          {lang === "es"
-            ? "Cero es la referencia. La banda es p10 a p90 del delta que ya trae el contrato. Un valor negativo es un número modelado más bajo, no un ahorro."
-            : "Zero is the reference. The band is the contract delta from p10 to p90. A negative value is a lower modeled number, not savings."}
-        </desc>
-        <line x1={mid} x2={mid} y1={16} y2={height - 22} stroke="currentColor" />
-        {[-span, 0, span].map((value) => (
-          <text key={value} x={xOf(value)} y={height - 4} textAnchor="middle" fill="currentColor" fontSize="11">
-            {value > 0 ? `+${Math.round(value)}` : Math.round(value)}
-          </text>
+      </ul>
+      <div className="chart-axis" aria-hidden>
+        {ticks.map((value) => (
+          <span key={value}>{value > 0 && difference ? "+" : ""}{formatNumber(value, lang, 2)}</span>
         ))}
-        {ROTATION_ORDER.map((id, index) => {
-          const rotation = compare.rotations.find((item) => item.rotation_id === id);
-          const y = 36 + index * 44;
-          if (!rotation) return null;
-          const summary = rotation.delta_vs_baseline[metric];
-          const style = ROTATION_STYLE[id];
-          const flat = summary.p10 !== null && summary.p90 !== null && summary.p10 === summary.p90;
-          return (
-            <g key={id}>
-              <text x={8} y={y + 4} fill="currentColor" fontSize="13">{rotationName(id, lang, names[id])}</text>
-              {summary.p10 !== null && summary.p90 !== null && !flat ? (
-                <line x1={xOf(summary.p10)} x2={xOf(summary.p90)} y1={y} y2={y} stroke={style.color} strokeWidth="8" />
-              ) : null}
-              {summary.p50 !== null ? (
-                <>
-                  <circle cx={xOf(summary.p50)} cy={y} r="5" fill={style.color} />
-                  <text x={xOf(summary.p50) + 10} y={y + 4} fill="currentColor" fontSize="12">
-                    {formatSigned(summary.p50, metric, lang)}
-                  </text>
-                </>
-              ) : (
-                <text x={left} y={y + 4} fill="currentColor" fontSize="12">{lang === "es" ? "sin dato" : "no data"}</text>
-              )}
-            </g>
-          );
-        })}
-      </svg>
-      <p className="faint">
-        {metricNoun(metric, lang)}.{" "}
-        {lang === "es"
-          ? "Escala simétrica alrededor de cero. Si p10 y p90 coinciden, no hay banda: los años análogos dieron el mismo delta."
-          : "Symmetric scale around zero. If p10 and p90 match, there is no band: the analog years produced the same delta."}
-      </p>
-    </div>
+        <span className="chart-axis-unit">{metricUnit(metric, lang)}</span>
+      </div>
+    </>
   );
 }
 
-export function ComparisonTable({ compare, metric, lang, names }: { compare: CompareResponse; metric: MetricId; lang: Lang; names: Record<string, string> }) {
+function RotationTable({ rows, title, lang, format }: {
+  rows: Reading[];
+  title: string;
+  lang: Lang;
+  format: ValueFormat;
+}) {
   return (
-    <table>
-      <caption>{lang === "es" ? "Tabla de la comparación" : "Comparison table"}</caption>
+    <table className="rotation-table">
+      <caption>{title}</caption>
       <thead>
         <tr>
-          <th>{lang === "es" ? "Rotación" : "Rotation"}</th>
-          <th>p10</th>
-          <th>p50</th>
-          <th>p90</th>
-          <th>n</th>
-          <th>{lang === "es" ? "Delta p50" : "Delta p50"}</th>
+          <th scope="col">{translate(lang, "common.rotation")}</th>
+          <th scope="col">p10</th>
+          <th scope="col">p50</th>
+          <th scope="col">p90</th>
         </tr>
       </thead>
       <tbody>
-        {ROTATION_ORDER.map((id) => {
-          const rotation = compare.rotations.find((item) => item.rotation_id === id);
-          if (!rotation) return null;
-          const summary = rotation.metrics[metric];
-          const delta = rotation.delta_vs_baseline[metric];
-          return (
-            <tr key={id}>
-              <th scope="row">{rotationName(id as RotationId, lang, names[id])}</th>
-              <td>{formatValue(summary.p10, metric, lang)}</td>
-              <td>{formatValue(summary.p50, metric, lang)}</td>
-              <td>{formatValue(summary.p90, metric, lang)}</td>
-              <td>{summary.n}</td>
-              <td>{formatSigned(delta.p50, metric, lang)}</td>
-            </tr>
-          );
-        })}
+        {rows.map(({ id, name, summary }) => (
+          <tr key={id}>
+            <th scope="row">
+              {name}
+              <small>{translate(lang, "common.sampleYears")} · {summary.n}</small>
+            </th>
+            <td>{format(summary.p10)}</td>
+            <td>{format(summary.p50)}</td>
+            <td>{format(summary.p90)}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
+  );
+}
+
+export function ComparisonViewPicker({ view, onChange, lang }: {
+  view: ComparisonView;
+  onChange: (value: ComparisonView) => void;
+  lang: Lang;
+}) {
+  return <RadioGroup label={translate(lang, "charts.dataView")} value={view} onChange={onChange}
+    className="comparison-picker"
+    options={[
+      { value: "chart", label: translate(lang, "charts.chart") },
+      { value: "table", label: translate(lang, "charts.table") },
+    ]}
+  />;
+}
+
+export function ComparisonResults({ compare, metric, lang, names, view }: {
+  compare: CompareResponse;
+  metric: MetricId;
+  lang: Lang;
+  names: Record<string, string>;
+  view: ComparisonView;
+}) {
+  const sectionId = useId();
+  const baseline = rotationName(compare.baseline_rotation_id, lang, names[compare.baseline_rotation_id]);
+  const rotations = ROTATION_ORDER.flatMap((id) => {
+    const rotation = compare.rotations.find((item) => item.rotation_id === id);
+    return rotation ? [rotation] : [];
+  });
+  const annual = rotations.flatMap((rotation) => rotation.runs.map((run) => ({
+    id: rotation.rotation_id,
+    year: run.year,
+    value: run.metrics[metric],
+  })));
+
+  if (rotations.length === 0) {
+    return <p className="chart-empty">{translate(lang, "charts.noDataThisComparison")}</p>;
+  }
+
+  return (
+    <div className="comparison-results" data-view={view}>
+      {[true, false].map((difference) => {
+        const id = `${sectionId}-${difference ? "difference" : "level"}`;
+        const title = difference
+          ? (translate(lang, "charts.differenceFrom", { baseline }))
+          : (translate(lang, "charts.modeledValuesRotation"));
+        const rows = rotations.map((rotation) => ({
+          id: rotation.rotation_id,
+          name: rotationName(rotation.rotation_id, lang, names[rotation.rotation_id]),
+          summary: (difference ? rotation.delta_vs_baseline : rotation.metrics)[metric],
+          annual: difference ? [] : annual.filter((reading) => reading.id === rotation.rotation_id),
+        }));
+        const format = (value: number | null) => difference ? formatSigned(value, metric, lang) : formatValue(value, metric, lang);
+
+        return view === "table" ? (
+          <RotationTable key={id} rows={rows} title={title} lang={lang} format={format} />
+        ) : (
+          <section key={id} className="chart-panel" aria-labelledby={id}>
+            <h2 id={id}>{title}</h2>
+            <p className="chart-guide">
+              {difference
+                ? (translate(lang, "charts.zeroMarksReferenceNegativeValue"))
+                : (translate(lang, "charts.scaleStartsZeroDotsShow"))}
+              {difference && rows.every(({ summary }) => summary.p10 !== null && summary.p10 === summary.p90)
+                ? " " + translate(lang, "charts.equalRange") : ""}
+            </p>
+            <RotationPlot rows={rows} difference={difference} metric={metric} lang={lang} format={format} />
+          </section>
+        );
+      })}
+      {view === "table" && annual.length > 0 ? (
+        <table className="rotation-table">
+          <caption>{translate(lang, "charts.modeledValuesYear")}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{translate(lang, "common.rotation")}</th>
+              <th scope="col">{translate(lang, "charts.year")}</th>
+              <th scope="col">{translate(lang, "charts.value")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {annual.map(({ id, year, value }) => (
+              <tr key={`${id}-${year}`}>
+                <th scope="row">{rotationName(id, lang, names[id])}</th>
+                <td>{year}</td>
+                <td>{formatValue(value, metric, lang)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : null}
+    </div>
+  );
+}
+
+export function ComparisonSkeleton({ view }: { view: ComparisonView }) {
+  return (
+    <div className={`comparison-skeleton ${view === "table" ? "comparison-skeleton-table" : ""}`} aria-hidden>
+      {[0, 1].map((panel) => (
+        <div key={panel} className="chart-skeleton">
+          <div className="chart-skeleton-title" />
+          {[0, 1, 2].map((row) => <div key={row} className="chart-skeleton-row"><span /><span /></div>)}
+        </div>
+      ))}
+    </div>
   );
 }

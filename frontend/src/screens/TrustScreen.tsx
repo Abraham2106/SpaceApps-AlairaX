@@ -1,111 +1,159 @@
-import { useState } from "react";
+import { translate, type MessageKey } from "../lib/i18n";
+import { useState, type FormEvent } from "react";
 import { Ledger } from "../components/Ledger";
 import { QueryState } from "../components/QueryState";
 import { useComparison } from "../data/queries";
-import { probeHealth } from "../lib/api";
+import { comparisonError, probeHealth } from "../lib/api";
 import { useInstrument } from "../store";
 
 export function TrustScreen() {
   const lang = useInstrument((state) => state.lang);
-  const spanish = lang === "es";
   const apiBase = useInstrument((state) => state.apiBase);
   const setApiBase = useInstrument((state) => state.setApiBase);
   const [draft, setDraft] = useState(apiBase);
-  const [note, setNote] = useState<string | null>(null);
+  const [connecting, setConnecting] = useState(false);
+  const [note, setNote] = useState<{ key: MessageKey; error: boolean } | null>(null);
   const comparison = useComparison();
   const loaded = comparison.data;
   const compare = loaded?.compare;
   const zona = compare?.zona ?? loaded?.catalog.zona;
+  const missing = translate(lang, "common.noData");
+  const failure = comparisonError(loaded, lang);
 
-  async function connect() {
+  const sources = [
+    {
+      name: "NASA POWER",
+      use: translate(lang, "trust.climateInputApiRuns"),
+      detail: translate(lang, "trust.dailyRainTemperaturesHumidityWind"),
+    },
+    {
+      name: "NOAA ONI / RONI",
+      use: translate(lang, "trust.selectionSimilarYears"),
+      detail: translate(lang, "trust.identifiesClimatePhaseUsedBuild"),
+    },
+    {
+      name: translate(lang, "trust.soilSources"),
+      use: translate(lang, "trust.soilRainfallCrossCheckMethod"),
+      detail: translate(lang, "trust.fao56SuppliesWaterBalance"),
+    },
+    {
+      name: "NASA GIBS",
+      use: translate(lang, "trust.mapImagery"),
+      detail: translate(lang, "trust.modisTerra12March2024"),
+    },
+    {
+      name: "Esri / Maxar",
+      use: translate(lang, "trust.referencePhotography"),
+      detail: translate(lang, "trust.defaultSatellitePhotographyOnMap"),
+    },
+    {
+      name: translate(lang, "trust.awsRelief"),
+      use: translate(lang, "trust.terrainLighting"),
+      detail: translate(lang, "trust.regionalTilesCiteGmted2010Etopo1"),
+    },
+  ];
+
+  async function connect(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (connecting) return;
     const value = draft.trim();
     if (!value) {
       setApiBase("");
-      setNote(spanish ? "Se vuelve a los fixtures." : "Back to the fixtures.");
+      setNote({ key: "trust.sampleDataActive", error: false });
       return;
     }
     if (!/^https?:\/\//.test(value)) {
-      setNote(spanish ? "La dirección tiene que empezar por http:// o https://." : "The address must start with http:// or https://.");
+      setNote({ key: "trust.addressMustStartWithHttp", error: true });
       return;
     }
-    const ok = await probeHealth(value);
-    if (!ok) {
-      setNote(spanish ? "Esa dirección no respondió en /health. No se cambia la fuente." : "That address did not answer /health. The source stays as it was.");
-      return;
+    setConnecting(true);
+    setNote(null);
+    try {
+      const ok = await probeHealth(value);
+      if (ok) {
+        setApiBase(value);
+        setNote({ key: "trust.apiRespondedScenarioBeingRequested", error: false });
+      } else {
+        setNote({ key: "trust.thatAddressDidNotAnswer", error: true });
+      }
+    } finally {
+      setConnecting(false);
     }
-    setApiBase(value);
-    setNote(spanish ? "API conectada. Si un escenario no está disponible, se muestra el motivo y no se rellena con el fixture." : "API connected. If a scenario is unavailable, the reason is shown and the fixture is not used to fill it.");
   }
 
   return (
     <div className="screen">
-      <article className="section stack">
-        <p className="kicker">{spanish ? "Qué se puede creer" : "What can be believed"}</p>
-        <h1>{spanish ? "Confianza y procedencia" : "Trust and provenance"}</h1>
-        <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
-        <div className="status-block">
-          <p>{zona?.validated ? (spanish ? "La zona viene marcada como validada." : "The zone is marked validated.") : (spanish ? "La zona no está validada. El punto es provisional." : "The zone is not validated. The point is provisional.")}</p>
-          <p>{spanish ? "La documentación del proyecto tiene la ET0 con reviewed: false y el perfil hidráulico sin aprobar. Esta respuesta no trae esos campos. No se dan por aprobados." : "The project documentation has ET0 reviewed: false and the hydraulic profile unapproved. This response does not carry those fields. They are not treated as approved."}</p>
-          <p>{spanish ? "2026 es seguimiento. No se usa como año análogo." : "2026 is monitoring. It is not used as an analog year."}</p>
-          <p>{compare ? (spanish ? `Muestra de esta respuesta: ${compare.analog_years.length}.` : `Sample in this response: ${compare.analog_years.length}.`) : null}</p>
+      <article className="detail-page">
+        <header className="detail-header">
+          <h1>{translate(lang, "trust.trustProvenance")}</h1>
+          <p>{translate(lang, "trust.whatHasBeenValidatedWhat")}</p>
+        </header>
+        <div className="detail-layout trust-layout">
+          <section className="detail-panel trust-overview" aria-labelledby="trust-validation">
+            <h2 id="trust-validation">{translate(lang, "trust.validationStatus")}</h2>
+            <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
+            {failure ? <p className="warn" role="alert">{failure}</p> : null}
+            <dl className="trust-facts">
+              <div>
+                <dt>{translate(lang, "cantons.modelPoint")}</dt>
+                <dd>{zona ? (zona.validated ? (translate(lang, "trust.markedAsValidated")) : (translate(lang, "trust.provisional"))) : missing}</dd>
+              </div>
+              <div>
+                <dt>{translate(lang, "common.sampleYears")}</dt>
+                <dd>{compare?.analog_years.length ?? missing}</dd>
+              </div>
+              <div>
+                <dt>{translate(lang, "trust.et0Documentation")}</dt>
+                <dd>{translate(lang, "trust.et0MethodReviewed")}</dd>
+              </div>
+              <div>
+                <dt>{translate(lang, "trust.hydraulicProfile")}</dt>
+                <dd>{translate(lang, "trust.approvalPending")}</dd>
+              </div>
+            </dl>
+            <p className="detail-footnote">{translate(lang, "trust.et0ProfileReviewStatusComes")}</p>
+          </section>
+          <section className="detail-panel trust-sources" aria-labelledby="trust-sources">
+            <h2 id="trust-sources">{translate(lang, "trust.sourcesTheirRole")}</h2>
+            <ul className="source-list">
+              {sources.map(({ name, use, detail }) => (
+                <li key={name}>
+                  <h3>{name}</h3>
+                  <p className="source-use">{use}</p>
+                  <p>{detail}</p>
+                </li>
+              ))}
+            </ul>
+            <details className="detail-disclosure">
+              <summary>{translate(lang, "trust.nasaDataOutsideBalance")}</summary>
+              <ul>
+                <li><strong>GPM IMERG.</strong> {translate(lang, "trust.teamPlanLeftItOut")}</li>
+                <li><strong>SMAP.</strong> {translate(lang, "trust.measuresSoilMoistureCoarseResolution")}</li>
+                <li><strong>HLS.</strong> {translate(lang, "trust.30MResolutionCouldHelp")}</li>
+              </ul>
+            </details>
+          </section>
+          <section className="detail-panel trust-api" aria-labelledby="trust-connect">
+            <h2 id="trust-connect">{translate(lang, "trust.connectApi")}</h2>
+            <p id="api-help" className="detail-lead">
+              {translate(lang, "trust.leaveAddressEmptyUseSample")}
+            </p>
+            <form className="trust-form" onSubmit={connect}>
+              <label className="detail-field">{translate(lang, "trust.apiAddress")}
+                <input className="search" type="text" inputMode="url" spellCheck={false} autoComplete="off" aria-describedby="api-help" value={draft} onChange={(event) => setDraft(event.target.value)} placeholder="http://127.0.0.1:8000" disabled={connecting} />
+              </label>
+              <button type="submit" disabled={connecting}>{connecting ? (translate(lang, "trust.checking")) : (translate(lang, "trust.connect"))}</button>
+            </form>
+            {connecting ? <p className="detail-footnote" role="status">{translate(lang, "trust.checkingHealth")}</p> : null}
+            {note ? <p className={note.error ? "warn" : "detail-footnote"} role={note.error ? "alert" : "status"}>{translate(lang, note.key)}</p> : null}
+          </section>
+          {loaded ? (
+            <details className="detail-panel detail-disclosure trust-record">
+              <summary>{translate(lang, "common.calculationRecord")}</summary>
+              <Ledger loaded={loaded} lang={lang} />
+            </details>
+          ) : null}
         </div>
-        {loaded ? <Ledger loaded={loaded} lang={lang} /> : null}
-        <h2>{spanish ? "Datos de la NASA, separados de las cifras" : "NASA data, kept apart from the numbers"}</h2>
-        <table>
-          <caption>{spanish ? "Qué es NASA y qué no" : "What is NASA and what is not"}</caption>
-          <thead>
-            <tr>
-              <th>{spanish ? "Fuente" : "Source"}</th>
-              <th>{spanish ? "Dónde está" : "Where it is"}</th>
-              <th>{spanish ? "Entra al balance" : "Enters the balance"}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">NASA POWER</th>
-              <td>{spanish ? "Clima diario del pipeline real: lluvia, temperaturas, humedad, viento a 2 m, radiación. Comunidad AG." : "Daily climate of the real pipeline: rain, temperatures, humidity, 2 m wind, radiation. AG community."}</td>
-              <td>{spanish ? "Sí, cuando hay una corrida real. No en un fixture." : "Yes, when there is a real run. Not in a fixture."}</td>
-            </tr>
-            <tr>
-              <th scope="row">NASA GIBS</th>
-              <td>{spanish ? "MODIS Terra del 12 de marzo de 2024 y Blue Marble, en el mapa." : "MODIS Terra for 12 March 2024 and Blue Marble, on the map."}</td>
-              <td>{spanish ? "No. Es imagen." : "No. It is imagery."}</td>
-            </tr>
-            <tr>
-              <th scope="row">{spanish ? "Relieve AWS" : "AWS relief"}</th>
-              <td>{spanish ? "Iluminación del terreno. La tesela regional cita GMTED2010 y ETOPO1." : "Terrain lighting. The regional tile cites GMTED2010 and ETOPO1."}</td>
-              <td>{spanish ? "No." : "No."}</td>
-            </tr>
-            <tr>
-              <th scope="row">Esri / Maxar</th>
-              <td>{spanish ? "Fotografía nítida de referencia." : "Sharp reference photography."}</td>
-              <td>{spanish ? "No. Y no es NASA." : "No. And it is not NASA."}</td>
-            </tr>
-            <tr>
-              <th scope="row">NOAA ONI / RONI</th>
-              <td>{spanish ? "Fase del escenario en el pipeline." : "Scenario phase in the pipeline."}</td>
-              <td>{spanish ? "Como rasgo del análogo, no como mapa." : "As an analog feature, not as a map."}</td>
-            </tr>
-            <tr>
-              <th scope="row">SoilGrids, CHIRPS, FAO-56</th>
-              <td>{spanish ? "Suelo, contraste de lluvia y método del balance. No son NASA." : "Soil, rain contrast, and the balance method. Not NASA."}</td>
-              <td>{spanish ? "El método sí. CHIRPS es contraste, no la serie del kernel." : "The method, yes. CHIRPS is a contrast, not the kernel series."}</td>
-            </tr>
-          </tbody>
-        </table>
-        <h2>{spanish ? "Datos NASA que todavía no entran" : "NASA data that still stays out"}</h2>
-        <ul>
-          <li>{spanish ? "GPM IMERG podría afinar la lluvia. El plan del equipo lo dejó fuera por la licencia. No se pinta una lluvia que el contrato no entrega." : "GPM IMERG could refine rainfall. The team plan left it out because of the license. Rain the contract does not deliver is not painted."}</li>
-          <li>{spanish ? "SMAP mide humedad de suelo a escala gruesa. No reemplaza el perfil hidráulico pendiente." : "SMAP measures coarse soil moisture. It does not replace the pending hydraulic profile."}</li>
-          <li>{spanish ? "HLS, a 30 m, podría ayudar a ubicar una parcela. La nota de procedencia dice que no entra al balance." : "HLS, at 30 m, could help place a field. The provenance note says it does not enter the balance."}</li>
-        </ul>
-        <h2>{spanish ? "Conectar la API" : "Connect the API"}</h2>
-        <p>{spanish ? "Vacío usa los fixtures. Una URL viva usa /health, /scenarios, /rotations, /sources y POST /compare. Un 409 o un 503 se muestran con su motivo." : "Empty uses the fixtures. A live URL uses /health, /scenarios, /rotations, /sources and POST /compare. A 409 or 503 is shown with its reason."}</p>
-        <div className="row">
-          <input className="search" value={draft} onChange={(event) => setDraft(event.target.value)} aria-label={spanish ? "Dirección de la API" : "API address"} placeholder="http://127.0.0.1:8000" />
-          <button onClick={connect}>{spanish ? "Conectar" : "Connect"}</button>
-        </div>
-        {note ? <p role="status">{note}</p> : null}
       </article>
     </div>
   );

@@ -1,10 +1,5 @@
+import { translate } from "./i18n";
 import type { Lang, MetricId } from "./types";
-
-const UNITS: Record<MetricId, { es: string; en: string }> = {
-  modeled_water_deficit_mm: { es: "mm", en: "mm" },
-  crop_water_demand_mm: { es: "mm", en: "mm" },
-  water_stress_days: { es: "días", en: "days" },
-};
 
 export function formatNumber(value: number, lang: Lang, digits = 1): string {
   return new Intl.NumberFormat(lang === "es" ? "es-CR" : "en-US", {
@@ -14,18 +9,17 @@ export function formatNumber(value: number, lang: Lang, digits = 1): string {
 }
 
 export function formatValue(value: number | null, metric: MetricId, lang: Lang): string {
-  if (value === null) return lang === "es" ? "sin dato" : "no data";
-  const digits = metric === "water_stress_days" ? 1 : 1;
-  return `${formatNumber(value, lang, digits)} ${UNITS[metric][lang]}`;
+  if (value === null) return translate(lang, "common.noData");
+  return `${formatNumber(value, lang)} ${metricUnit(metric, lang)}`;
 }
 
 export function formatSigned(value: number | null, metric: MetricId, lang: Lang): string {
-  if (value === null) return lang === "es" ? "sin dato" : "no data";
+  if (value === null) return translate(lang, "common.noData");
   const sign = value > 0 ? "+" : value < 0 ? "−" : "";
   const body = formatNumber(Math.abs(value), lang, 1);
-  return `${sign}${body} ${UNITS[metric][lang]}`;
+  return `${sign}${body} ${metricUnit(metric, lang)}`;
 }
 
 export function metricUnit(metric: MetricId, lang: Lang): string {
-  return UNITS[metric][lang];
+  return metric === "water_stress_days" ? translate(lang, "format.days") : "mm";
 }

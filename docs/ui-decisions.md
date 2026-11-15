@@ -6,15 +6,25 @@ Cada decisión sale de `docs/ui-research.md` o del contrato. Si una crítica obl
 
 Instrumento de campo sobre una fotografía del territorio, no un tablero. Esquinas rectas, borde de 1 px, sin sombra blanda, sin gradiente morado, sin emoji. Tipografía: Source Serif 4 para el nombre y los cantones, IBM Plex Sans para la interfaz, IBM Plex Mono para las cifras. Las tres son OFL y se sirven desde el paquete, no desde una CDN en tiempo de ejecución.
 
-Tema Noche: la identidad del instrumento, texto claro sobre tinta verde muy oscura, paneles casi opacos para que el satélite no compita con la lectura. Tema Sol: el modo de alto contraste para el celular al sol; paneles crema opacos, sin desenfoque, texto más grande. `prefers-contrast: more` abre en Sol. `prefers-reduced-motion: reduce` corta transiciones y pone el vuelo de cámara en duración cero.
+Tema Noche: la identidad del instrumento, texto claro sobre tinta verde muy oscura, paneles opacos para que el satélite no compita con la lectura. Tema Sol: el modo de alto contraste para el celular al sol; paneles crema opacos, texto más grande. En los dos temas el panel es opaco, con borde de 1px y sin sombra ni desenfoque: la profundidad la da el borde, no el vidrio. `prefers-contrast: more` abre en Sol. `prefers-reduced-motion: reduce` corta transiciones y pone el vuelo de cámara en duración cero.
 
 Rotaciones, fijas en todos los gráficos:
 
-- Arroz → melón, `#143d66`, trazo continuo (la referencia).
-- Arroz → leguminosa, `#1f7a6b`, trazo discontinuo.
-- Arroz → sorgo, `#c9842a`, trazo punteado.
+- Arroz → melón, `--rot-melon`, trazo continuo (la referencia).
+- Arroz → leguminosa, `--rot-legume`, trazo discontinuo.
+- Arroz → sorgo, `--rot-sorghum`, trazo punteado.
+
+El color vive en tokens por tema (`styles/tokens.css`), no en el componente. Noche: `#6cb4ff`, `#3fd0b8`, `#e8a33d`. Sol: `#0b4f8a`, `#0f766e`, `#9a5806`. El azul oscuro anterior (`#143d66`) no leía sobre tinta oscura; por eso hay un valor por tema. Un elemento toma el color con `data-rot="rice_*"` más `.rot-bg` o `.rot-dot`; los gráficos usan `var(--rot-*)`. El trazo (continuo, `7 4`, `1.5 4`) se mantiene en los dos temas: el color nunca es la única señal. Excepción: MapLibre y las paletas `color.ts` / `surface.ts` siguen en hex, porque el mapa es oscuro en ambos temas y MapLibre no lee variables CSS.
+
+Forma: identidad rectangular. Radios de 2, 4 y 6px (`--r-1/2/3`), sin píldoras. Texto: mínimo 12px, escala `--fs-*`. Movimiento: `--dur-fast`, `--dur-base` y `--ease`; `prefers-reduced-motion` los corta.
 
 La luminancia baja, media y alta los separa en grises. La métrica activa usa una escala cividis de un solo valor en toda la malla.
+
+## Estructura
+
+CSS grid: `.app` (barra superior y área de trabajo) y `.workspace` (barra lateral y escenario). Cuatro anchos: ≤767 móvil, 768–1099 tablet, ≥1100 ancho, ≥1440 amplio (`styles/responsive.css`, `lib/viewport.ts`). La barra lateral no se superpone al mapa en ningún ancho; en móvil es una barra inferior de 64 px. Debajo de 1440 el aviso de modo se oculta y los botones de tema e idioma van solo con ícono; el aviso PRUEBA se queda siempre. Ningún ancho produce scroll horizontal.
+
+La hoja inferior del mapa en móvil tiene tres alturas (corta, media, alta). Se cambia con un toque, Enter, Espacio, flechas o arrastrando; nunca depende solo de arrastrar.
 
 ## Mapa
 
