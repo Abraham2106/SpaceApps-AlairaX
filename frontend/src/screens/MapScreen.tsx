@@ -140,7 +140,7 @@ export function MapScreen() {
       <div className="hud left-hud">
         <section className="panel stack" aria-label={spanish ? "Lectura" : "Reading"}>
           <p className="kicker">{scenarioName || (spanish ? "Escenario" : "Scenario")} · n = {n || "…"}</p>
-          <h1>{spanish ? "Déficit modelado" : "Modeled deficit"}</h1>
+          <h1>{metricNoun(metric, lang)}</h1>
           {comparison.isPending ? <p>{spanish ? "Cargando la comparación…" : "Loading the comparison…"}</p> : null}
           {comparison.isError ? <p className="warn">{spanish ? "No se pudo leer la comparación." : "The comparison could not be read."} {(comparison.error as Error).message}</p> : null}
           {loaded && !compare ? <p className="warn">{loaded.httpDetail}</p> : null}

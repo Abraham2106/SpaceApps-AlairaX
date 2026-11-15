@@ -96,23 +96,35 @@ export function DeltaChart({ compare, metric, lang, names }: { compare: CompareR
             ? "Cero es la referencia. La banda es p10 a p90 del delta que ya trae el contrato. Un valor negativo es un número modelado más bajo, no un ahorro."
             : "Zero is the reference. The band is the contract delta from p10 to p90. A negative value is a lower modeled number, not savings."}
         </desc>
-        <line x1={mid} x2={mid} y1={16} y2={height - 18} stroke="currentColor" />
-        <text x={mid} y={height - 2} textAnchor="middle" fill="currentColor" fontSize="11">0</text>
+        <line x1={mid} x2={mid} y1={16} y2={height - 22} stroke="currentColor" />
+        {[-span, 0, span].map((value) => (
+          <text key={value} x={xOf(value)} y={height - 4} textAnchor="middle" fill="currentColor" fontSize="11">
+            {value > 0 ? `+${Math.round(value)}` : Math.round(value)}
+          </text>
+        ))}
         {ROTATION_ORDER.map((id, index) => {
           const rotation = compare.rotations.find((item) => item.rotation_id === id);
           const y = 36 + index * 44;
           if (!rotation) return null;
           const summary = rotation.delta_vs_baseline[metric];
           const style = ROTATION_STYLE[id];
+          const flat = summary.p10 !== null && summary.p90 !== null && summary.p10 === summary.p90;
           return (
             <g key={id}>
               <text x={8} y={y + 4} fill="currentColor" fontSize="13">{rotationName(id, lang, names[id])}</text>
-              {summary.p10 !== null && summary.p90 !== null ? (
+              {summary.p10 !== null && summary.p90 !== null && !flat ? (
                 <line x1={xOf(summary.p10)} x2={xOf(summary.p90)} y1={y} y2={y} stroke={style.color} strokeWidth="8" />
+              ) : null}
+              {summary.p50 !== null ? (
+                <>
+                  <circle cx={xOf(summary.p50)} cy={y} r="5" fill={style.color} />
+                  <text x={xOf(summary.p50) + 10} y={y + 4} fill="currentColor" fontSize="12">
+                    {formatSigned(summary.p50, metric, lang)}
+                  </text>
+                </>
               ) : (
                 <text x={left} y={y + 4} fill="currentColor" fontSize="12">{lang === "es" ? "sin dato" : "no data"}</text>
               )}
-              {summary.p50 !== null ? <circle cx={xOf(summary.p50)} cy={y} r="4.5" fill="#f4efe4" stroke={style.color} strokeWidth="2" /> : null}
             </g>
           );
         })}

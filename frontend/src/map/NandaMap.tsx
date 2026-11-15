@@ -348,7 +348,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
             [[bounds[0], bounds[1]], [bounds[2], bounds[3]]],
             {
               padding: narrow
-                ? { top: 96, bottom: 210, left: 12, right: 12 }
+                ? { top: 36, bottom: 150, left: 10, right: 10 }
                 : inset === "panel"
                   ? { top: 24, bottom: 72, left: 368, right: 96 }
                   : { top: 36, bottom: 64, left: 120, right: 56 },
