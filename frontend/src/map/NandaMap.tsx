@@ -72,13 +72,15 @@ function buildStyle(): StyleSpecification {
         type: "fill",
         source: "cantons",
         paint: {
-          "fill-color": "#d7e6f0",
+          "fill-color": "#8ec8e8",
           "fill-opacity": [
             "case",
             ["boolean", ["feature-state", "selected"], false],
-            0.16,
+            0.38,
             ["boolean", ["feature-state", "hover"], false],
-            0.08,
+            0.3,
+            ["get", "guanacaste"],
+            0.45,
             0,
           ],
         },
@@ -132,8 +134,9 @@ function buildStyle(): StyleSpecification {
         type: "line",
         source: "cantons",
         paint: {
-          "line-color": ["case", ["boolean", ["feature-state", "selected"], false], "#d7f1ff", ["get", "guanacaste"], "rgba(232,242,248,0.92)", "rgba(232,242,248,0.28)"],
-          "line-width": ["case", ["boolean", ["feature-state", "selected"], false], 1.6, ["get", "guanacaste"], 1.05, 0.4],
+          "line-color": ["case", ["boolean", ["feature-state", "selected"], false], "#142028", "#1c2830"],
+          "line-width": ["case", ["boolean", ["feature-state", "selected"], false], 1.4, ["get", "guanacaste"], 0.7, 0.35],
+          "line-opacity": ["case", ["get", "guanacaste"], 0.85, 0.35],
         },
       },
       {
@@ -147,9 +150,9 @@ function buildStyle(): StyleSpecification {
           "text-letter-spacing": 0.04,
         },
         paint: {
-          "text-color": "#e7eef4",
-          "text-halo-color": "#0c1014",
-          "text-halo-width": 1.1,
+          "text-color": "#142028",
+          "text-halo-color": "#f4f7f5",
+          "text-halo-width": 1.2,
         },
       },
       {
@@ -214,14 +217,14 @@ function buildStyle(): StyleSpecification {
         layout: {
           "text-field": ["get", "label"],
           "text-font": ["Noto Sans Regular"],
-          "text-size": 11,
+          "text-size": 22,
           "text-offset": [0, 1.1],
           "text-anchor": "top",
         },
         paint: {
-          "text-color": "#fff6e0",
-          "text-halo-color": "#1a1208",
-          "text-halo-width": 1.5,
+          "text-color": "#142028",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.6,
         },
       },
     ],
@@ -379,6 +382,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       map.setLayoutProperty("canton-extrude", "visibility", overlays.cantons && overlays.plates ? "visible" : "none");
       map.setLayoutProperty("osm-roads", "visibility", overlays.osm ? "visible" : "none");
       map.setLayoutProperty("osm-places", "visibility", overlays.osm ? "visible" : "none");
+      map.setPaintProperty("canton-fill", "fill-color", color);
       map.setLayoutProperty("hillshade", "visibility", overlays.terrain ? "visible" : "none");
       map.setTerrain(null);
       const zoom = map.getZoom();
@@ -429,7 +433,14 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     if (zona) {
       features.push({
         type: "Feature" as const,
-        properties: { kind: "model", label: `${zona.latitude.toFixed(2)}, ${zona.longitude.toFixed(2)}` },
+        properties: {
+          kind: "model",
+          label: (() => {
+            const baseline = comparison.data?.compare?.rotations.find((item) => item.rotation_id === "rice_melon");
+            const value = baseline?.metrics[metric].p50;
+            return value == null ? "sin dato" : `${Math.round(value)}`;
+          })(),
+        },
         geometry: { type: "Point" as const, coordinates: [zona.longitude, zona.latitude] },
       });
     }
@@ -443,7 +454,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     const apply = () => (map.getSource("marks") as maplibregl.GeoJSONSource | undefined)?.setData({ type: "FeatureCollection", features });
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
-  }, [comparison.data, location]);
+  }, [comparison.data, location, metric]);
 
   useEffect(() => {
     const map = mapRef.current;

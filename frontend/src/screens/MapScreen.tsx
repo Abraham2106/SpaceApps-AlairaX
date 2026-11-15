@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { formatValue } from "../lib/format";
 import { cantonAt } from "../lib/geo";
 import { compactLine, comparisonSentence, leadSentence, metricNoun, rotationName } from "../lib/plain";
 import { ROTATION_ORDER, ROTATION_STYLE } from "../lib/plain";
@@ -139,8 +140,9 @@ export function MapScreen() {
     <>
       <div className="hud left-hud">
         <section className="panel stack" aria-label={spanish ? "Lectura" : "Reading"}>
-          <p className="kicker">{scenarioName || (spanish ? "Escenario" : "Scenario")} · n = {n || "…"}</p>
+          <p className="readout">{compare ? formatValue(compare.rotations.find((item) => item.rotation_id === "rice_melon")?.metrics[metric].p50 ?? null, metric, lang) : "…"}</p>
           <h1>{metricNoun(metric, lang)}</h1>
+          <p className="faint">{scenarioName} · n = {n || "…"} · {spanish ? "un solo valor en toda la provincia, el del punto" : "one value across the province, the point’s"}</p>
           {comparison.isPending ? <p>{spanish ? "Cargando la comparación…" : "Loading the comparison…"}</p> : null}
           {comparison.isError ? <p className="warn">{spanish ? "No se pudo leer la comparación." : "The comparison could not be read."} {(comparison.error as Error).message}</p> : null}
           {loaded && !compare ? <p className="warn">{loaded.httpDetail}</p> : null}
