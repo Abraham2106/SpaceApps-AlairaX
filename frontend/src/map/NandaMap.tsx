@@ -8,12 +8,19 @@ import { useCantons, useComparison } from "../data/queries";
 import { formatValue } from "../lib/format";
 import { hexHeight, hexPaint, surfaceValue, useSurface } from "../lib/surface";
 import { useInstrument } from "../store";
-import type { MetricId } from "../lib/types";
+import type { Lang, MetricId } from "../lib/types";
 import { isMobile, isTablet } from "../lib/viewport";
+import { ESRI_TILE_URL, IMAGERY_SOURCES, formatImageryDate, tileUrlFor, type ImagerySourceId } from "./imagery/catalog";
+import { selectSource, type ImageryChoice } from "./imagery/selectSource";
+import { ImageryBadge } from "./imagery/ImageryBadge";
+
+/** Errores de teselas tolerados antes de dar por caída una fuente con la fecha actual. */
+const TILE_ERROR_LIMIT = 3;
+const IMAGERY_LAYERS = ["satellite", "modis", "hls", "marble"] as const;
 
 const EMPTY = { type: "FeatureCollection" as const, features: [] };
 
-function buildStyle(): StyleSpecification {
+function buildStyle(imageryDate: string): StyleSpecification {
   const motion = reducedMotion() ? 0 : 680;
   return {
     version: 8,
@@ -21,25 +28,28 @@ function buildStyle(): StyleSpecification {
     sources: {
       satellite: {
         type: "raster",
-        tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
+        tiles: [ESRI_TILE_URL],
         tileSize: 256,
         maxzoom: 19,
       },
       modis: {
         type: "raster",
-        tiles: [
-          "https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/MODIS_Terra_CorrectedReflectance_TrueColor/default/2024-03-12/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg",
-        ],
+        tiles: [tileUrlFor("modis", imageryDate)],
         tileSize: 256,
-        maxzoom: 9,
+        maxzoom: IMAGERY_SOURCES.modis.maxzoom,
+      },
+      // HLS 30 m: solo hay datos el día de una pasada; el resto es transparente y deja ver MODIS.
+      hls: {
+        type: "raster",
+        tiles: [tileUrlFor("hls", imageryDate)],
+        tileSize: 256,
+        maxzoom: IMAGERY_SOURCES.hls.maxzoom,
       },
       marble: {
         type: "raster",
-        tiles: [
-          "https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_NextGeneration/default/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpeg",
-        ],
+        tiles: [tileUrlFor("marble", imageryDate)],
         tileSize: 256,
-        maxzoom: 8,
+        maxzoom: IMAGERY_SOURCES.marble.maxzoom,
       },
       dem: {
         type: "raster-dem",
@@ -71,6 +81,7 @@ function buildStyle(): StyleSpecification {
         },
       },
       { id: "modis", type: "raster", source: "modis", layout: { visibility: "none" } },
+      { id: "hls", type: "raster", source: "hls", layout: { visibility: "none" } },
       { id: "marble", type: "raster", source: "marble", layout: { visibility: "none" } },
       {
         id: "hillshade",
@@ -271,17 +282,22 @@ function reducedMotion(): boolean {
 
 export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | "open" }) {
   const container = useRef<HTMLDivElement>(null);
+  const attribBar = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const ready = useRef(false);
   const hovered = useRef<string | null>(null);
   const platesWere = useRef(false);
   const surfaceRef = useRef<ReturnType<typeof useSurface>["data"]>(undefined);
   const metricRef = useRef<MetricId>("modeled_water_deficit_mm");
+  const tileErrors = useRef<Record<string, number>>({});
+  const [zoom, setZoom] = useState(8.05);
+  const [failed, setFailed] = useState<ReadonlySet<ImagerySourceId>>(() => new Set());
   const [tip, setTip] = useState<{ x: number; y: number; name: string; value: number | null; outside: boolean } | null>(null);
   const cantons = useCantons();
   const comparison = useComparison();
   const surface = useSurface();
   const basemap = useInstrument((state) => state.basemap);
+  const imageryDate = useInstrument((state) => state.imageryDate);
   const overlays = useInstrument((state) => state.overlays);
   const selected = useInstrument((state) => state.selected);
   const selectedCenter = useInstrument((state) => state.selectedCenter);
@@ -299,7 +315,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     if (!container.current || mapRef.current) return;
     const map = new maplibregl.Map({
       container: container.current,
-      style: buildStyle(),
+      style: buildStyle(useInstrument.getState().imageryDate),
       center: [-85.45, 10.45],
       zoom: 8.05,
       pitch: 0,
@@ -312,6 +328,15 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     map.on("load", () => {
       ready.current = true;
       map.setTerrain(null);
+    });
+    map.on("zoomend", () => setZoom(map.getZoom()));
+    // Una fuente que no carga no se oculta en silencio: la ficha de procedencia lo dice.
+    map.on("error", (event) => {
+      const sourceId = (event as { sourceId?: string }).sourceId;
+      if (sourceId !== "modis" && sourceId !== "hls") return;
+      const count = (tileErrors.current[sourceId] ?? 0) + 1;
+      tileErrors.current[sourceId] = count;
+      if (count === TILE_ERROR_LIMIT) setFailed((current) => new Set([...current, sourceId]));
     });
     const cantonLayers = ["canton-fill", "canton-extrude"];
     map.on("click", cantonLayers, (event) => {
@@ -424,9 +449,6 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     const map = mapRef.current;
     if (!map) return;
     const apply = () => {
-      for (const id of ["satellite", "modis", "marble"] as const) {
-        map.setLayoutProperty(id, "visibility", basemap === id ? "visible" : "none");
-      }
       map.setLayoutProperty("canton-fill", "visibility", overlays.cantons && !overlays.plates ? "visible" : "none");
       map.setLayoutProperty("canton-casing", "visibility", overlays.cantons ? "visible" : "none");
       map.setLayoutProperty("canton-edge", "visibility", overlays.cantons ? "visible" : "none");
@@ -461,7 +483,36 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     return () => {
       map.off("zoomend", apply);
     };
-  }, [basemap, overlays, metric, surface.data]);
+  }, [overlays, metric, surface.data]);
+
+  const choice: ImageryChoice = selectSource({ basemap, zoom, date: imageryDate, failed });
+  const visibleImagery = choice.layers.map((id) => IMAGERY_SOURCES[id].mapId).join(",");
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const shown = visibleImagery.split(",");
+    const apply = () => {
+      for (const id of IMAGERY_LAYERS) map.setLayoutProperty(id, "visibility", shown.includes(id) ? "visible" : "none");
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+    return () => { map.off("load", apply); };
+  }, [visibleImagery]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    tileErrors.current = {};
+    setFailed((current) => (current.size ? new Set() : current));
+    const apply = () => {
+      (map.getSource("modis") as maplibregl.RasterTileSource | undefined)?.setTiles([tileUrlFor("modis", imageryDate)]);
+      (map.getSource("hls") as maplibregl.RasterTileSource | undefined)?.setTiles([tileUrlFor("hls", imageryDate)]);
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+    return () => { map.off("load", apply); };
+  }, [imageryDate]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -543,7 +594,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
   const pointName = zona && cantons.data ? cantonAt(zona.longitude, zona.latitude, cantons.data)?.properties.name : null;
   const coordinates = zona ? `${zona.latitude.toFixed(2)}, ${zona.longitude.toFixed(2)}` : "…";
   const credit = translate(lang, "nandaMap.credit", {
-    imagery: translate(lang, `nandaMap.${basemap}Credit`),
+    imagery: imageryCredit(choice, lang),
     roads: overlays.osm ? translate(lang, "nandaMap.roadCredit") : "",
     point: pointName ? translate(lang, "nandaMap.pointCredit", { canton: pointName }) : "",
     coordinates,
@@ -557,6 +608,21 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
         : formatValue(tip.value, metric, lang)
     : "";
 
+  // La ficha y la nota de HLS pueden ocupar dos líneas: el reproductor sube lo mismo.
+  useEffect(() => {
+    const bar = attribBar.current;
+    if (!bar || typeof ResizeObserver === "undefined") return;
+    const root = document.documentElement;
+    const observer = new ResizeObserver(() => {
+      root.style.setProperty("--attrib-h", `${Math.ceil(bar.getBoundingClientRect().height)}px`);
+    });
+    observer.observe(bar);
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--attrib-h");
+    };
+  }, []);
+
   return (
     <div className="map-root" data-hidden={hidden ? "true" : "false"}>
       <div ref={container} className="map-canvas" />
@@ -567,10 +633,23 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
           {overlays.hex && !tip.outside ? <em>{translate(lang, "nandaMap.syntheticFixture")}</em> : null}
         </div>
       ) : null}
-      <details className="attrib">
-        <summary>{shortCredit}</summary>
-        <p>{credit}</p>
-      </details>
+      <div ref={attribBar} className="attrib-bar">
+        <ImageryBadge choice={choice} />
+        <details className="attrib">
+          <summary>{shortCredit}</summary>
+          <p>{credit}</p>
+        </details>
+      </div>
     </div>
   );
+}
+
+function imageryCredit(choice: ImageryChoice, lang: Lang): string {
+  const date = choice.date ? formatImageryDate(choice.date, lang) : "";
+  const parts = choice.layers.map((id) => {
+    if (id === "esri") return translate(lang, choice.fallback ? "nandaMap.satelliteFallbackCredit" : "nandaMap.satelliteCredit");
+    if (id === "marble") return translate(lang, "nandaMap.marbleCredit");
+    return translate(lang, id === "hls" ? "nandaMap.hlsCredit" : "nandaMap.modisCredit", { date });
+  });
+  return parts.join("; ");
 }

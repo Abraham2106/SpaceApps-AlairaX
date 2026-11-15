@@ -26,6 +26,8 @@ export function Shell() {
   const selected = useInstrument((state) => state.selected);
   const yearA = useInstrument((state) => state.yearA);
   const yearB = useInstrument((state) => state.yearB);
+  const basemap = useInstrument((state) => state.basemap);
+  const imageryDate = useInstrument((state) => state.imageryDate);
   const setScenario = useInstrument((state) => state.setScenario);
   const metric = useInstrument((state) => state.metric);
   const setMetric = useInstrument((state) => state.setMetric);
@@ -53,7 +55,7 @@ export function Shell() {
   useEffect(() => {
     const next = toParams();
     if (next.toString() !== params.toString()) setParams(next, { replace: true });
-  }, [scenarioId, metric, theme, lang, selected, yearA, yearB, params, setParams, toParams]);
+  }, [scenarioId, metric, theme, lang, selected, yearA, yearB, basemap, imageryDate, params, setParams, toParams]);
 
   const mock = comparison.data?.compare?._mock ?? comparison.data?.catalog.mock ?? true;
   const liveFailure = comparison.data?.mode === "live" && comparison.data.httpStatus !== 200;

@@ -358,3 +358,23 @@ for (const [name, path] of views) {
     }
   }
 }
+
+test("la ficha de imagen nombra proveedor, fecha y resolución", async ({ page }) => {
+  await page.goto("/#/");
+  const badge = page.getByRole("group", { name: "Procedencia de la imagen" });
+  await expect(badge).toContainText("Esri World Imagery");
+  await expect(badge).toContainText("fecha no publicada");
+  await expect(badge.getByLabel("Fecha de la imagen NASA")).toHaveCount(0);
+  await expect(page.locator(".attrib")).toBeAttached();
+
+  await page.goto("/#/?s=modis&i=2025-06-01");
+  await expect(badge).toHaveAttribute("data-source", "modis");
+  await expect(badge).toContainText("MODIS Terra · 250 m");
+  const date = badge.getByLabel("Fecha de la imagen NASA");
+  await expect(date).toHaveValue("2025-06-01");
+  await date.fill("2024-03-12");
+  await expect(date).toHaveValue("2024-03-12");
+  await expect(page).toHaveURL(/i=2024-03-12/);
+  await page.locator(".attrib summary").click();
+  await expect(page.locator(".attrib")).toContainText("MODIS Terra Corrected Reflectance");
+});
