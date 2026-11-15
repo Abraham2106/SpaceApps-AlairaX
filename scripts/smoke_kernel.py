@@ -11,8 +11,7 @@ from scripts.export_contracts import ZONE, make_fixture
 from scripts.run_comparison import compare_from_analogs
 
 
-def run_smoke():
-    years = (2014, 2015)
+def smoke_inputs(years):
     inputs = []
     for year in years:
         start, end = date(year, 5, 1), date(year + 1, 4, 30)
@@ -33,6 +32,12 @@ def run_smoke():
             simulation.warnings = ['SYNTHETIC INPUTS AND ANALOGS: real kernel integration test only.',
                                    'Second crop sowing overridden for this test; no scientific calendar approval.']
             inputs.append(simulation)
+    return inputs
+
+
+def run_smoke():
+    years = (2014, 2015)
+    inputs = smoke_inputs(years)
     document = {'_mock': True, 'zona': ZONE.model_dump(mode='json'),
         'source_refs': ['synthetic-analog-fixture'], 'warnings': ['KNN was not run; years selected for testing.'],
         'scenarios': {'neutral': {'status': 'available', '_mock': True, 'k': len(years),

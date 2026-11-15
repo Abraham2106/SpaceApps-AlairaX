@@ -1,0 +1,16 @@
+{
+  "id": "davis",
+  "name": "Davis, California",
+  "aoi": {"latitude": 38.55, "longitude": -121.74, "crs": "EPSG:4326"},
+  "timezone": "America/Los_Angeles",
+  "start": "2024-01-01",
+  "as_of": "2024-04-15",
+  "season_start": "01-01",
+  "season_end": "04-15",
+  "oni_season": "FMA",
+  "heat_threshold_c": 38,
+  "reference_years": [1991, 2020],
+  "wet_months": [11, 12, 1, 2, 3],
+  "crop_catalog": "",
+  "sources": {"climate": "NASA POWER", "enso": "NOAA CPC"}
+}

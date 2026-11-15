@@ -1,0 +1,1140 @@
+{
+  "schema_version": "0.1.0",
+  "_mock": false,
+  "generado": "2026-11-14T20:10:52.142253+00:00",
+  "zona": {
+    "id": "provisional-point",
+    "name": "Provisional POWER grid point",
+    "latitude": 38.55,
+    "longitude": -121.74,
+    "validated": false
+  },
+  "source_refs": [
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=38.55&longitude=-121.74&start=20240101&end=20240415&format=JSON&time-standard=LST&units=metric"
+  ],
+  "provenance": {
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=38.55&longitude=-121.74&start=20240101&end=20240415&format=JSON&time-standard=LST&units=metric",
+    "fetched_at": "2026-11-14T20:10:52.142253+00:00",
+    "sha256": "5c4014d4dbbf3d2a1c53d2c99450abd661d9a873d6e5383a5bf77b0996e4b7a6",
+    "status": 200,
+    "content_type": "application/json",
+    "etag": null,
+    "last_modified": null
+  },
+  "warnings": [
+    "Location is provisional; SoilGrids and farm suitability are not validated.",
+    "ET0 is null until the scientific kernel calculates it.",
+    "No IMN rainfall calibration is applied; bias claims require independent validation."
+  ],
+  "start": "2024-01-01",
+  "end": "2024-04-15",
+  "days": [
+    {
+      "date": "2024-01-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.06,
+      "tmin_c": 6.36,
+      "tmax_c": 15.49,
+      "relative_humidity_pct": 85.01,
+      "wind_speed_2m_m_s": 1.62,
+      "solar_radiation_mj_m2_day": 9.2
+    },
+    {
+      "date": "2024-01-02",
+      "et0_mm": null,
+      "precipitation_mm": 14.19,
+      "tmin_c": 6.01,
+      "tmax_c": 15.89,
+      "relative_humidity_pct": 91.9,
+      "wind_speed_2m_m_s": 1.97,
+      "solar_radiation_mj_m2_day": 3.84
+    },
+    {
+      "date": "2024-01-03",
+      "et0_mm": null,
+      "precipitation_mm": 1.84,
+      "tmin_c": 4.65,
+      "tmax_c": 12.5,
+      "relative_humidity_pct": 91.37,
+      "wind_speed_2m_m_s": 1.67,
+      "solar_radiation_mj_m2_day": 6.25
+    },
+    {
+      "date": "2024-01-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 3.28,
+      "tmax_c": 15.21,
+      "relative_humidity_pct": 85.55,
+      "wind_speed_2m_m_s": 1.73,
+      "solar_radiation_mj_m2_day": 9.96
+    },
+    {
+      "date": "2024-01-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 5.02,
+      "tmax_c": 15.12,
+      "relative_humidity_pct": 85.62,
+      "wind_speed_2m_m_s": 2.22,
+      "solar_radiation_mj_m2_day": 10.39
+    },
+    {
+      "date": "2024-01-06",
+      "et0_mm": null,
+      "precipitation_mm": 4.84,
+      "tmin_c": 2.27,
+      "tmax_c": 11.67,
+      "relative_humidity_pct": 89.77,
+      "wind_speed_2m_m_s": 2.52,
+      "solar_radiation_mj_m2_day": 2.9
+    },
+    {
+      "date": "2024-01-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": -0.12,
+      "tmax_c": 11.97,
+      "relative_humidity_pct": 78.65,
+      "wind_speed_2m_m_s": 2.46,
+      "solar_radiation_mj_m2_day": 10.02
+    },
+    {
+      "date": "2024-01-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.07,
+      "tmin_c": 0.72,
+      "tmax_c": 13.4,
+      "relative_humidity_pct": 71.74,
+      "wind_speed_2m_m_s": 1.15,
+      "solar_radiation_mj_m2_day": 9.51
+    },
+    {
+      "date": "2024-01-09",
+      "et0_mm": null,
+      "precipitation_mm": 2.46,
+      "tmin_c": 3.74,
+      "tmax_c": 14.16,
+      "relative_humidity_pct": 89.43,
+      "wind_speed_2m_m_s": 1.84,
+      "solar_radiation_mj_m2_day": 4.7
+    },
+    {
+      "date": "2024-01-10",
+      "et0_mm": null,
+      "precipitation_mm": 2.69,
+      "tmin_c": 1.76,
+      "tmax_c": 13.47,
+      "relative_humidity_pct": 89.9,
+      "wind_speed_2m_m_s": 3.76,
+      "solar_radiation_mj_m2_day": 3.94
+    },
+    {
+      "date": "2024-01-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 1.38,
+      "tmax_c": 12.45,
+      "relative_humidity_pct": 68.98,
+      "wind_speed_2m_m_s": 2.32,
+      "solar_radiation_mj_m2_day": 8.17
+    },
+    {
+      "date": "2024-01-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.07,
+      "tmin_c": 2.61,
+      "tmax_c": 11.7,
+      "relative_humidity_pct": 86.38,
+      "wind_speed_2m_m_s": 0.95,
+      "solar_radiation_mj_m2_day": 5.69
+    },
+    {
+      "date": "2024-01-13",
+      "et0_mm": null,
+      "precipitation_mm": 22.59,
+      "tmin_c": 5.72,
+      "tmax_c": 12.34,
+      "relative_humidity_pct": 97.04,
+      "wind_speed_2m_m_s": 3.16,
+      "solar_radiation_mj_m2_day": 1.9
+    },
+    {
+      "date": "2024-01-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.39,
+      "tmin_c": 6.52,
+      "tmax_c": 15.17,
+      "relative_humidity_pct": 90.87,
+      "wind_speed_2m_m_s": 1.11,
+      "solar_radiation_mj_m2_day": 6.09
+    },
+    {
+      "date": "2024-01-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 5.39,
+      "tmax_c": 13.44,
+      "relative_humidity_pct": 89.62,
+      "wind_speed_2m_m_s": 1.25,
+      "solar_radiation_mj_m2_day": 7.79
+    },
+    {
+      "date": "2024-01-16",
+      "et0_mm": null,
+      "precipitation_mm": 10.08,
+      "tmin_c": 4.73,
+      "tmax_c": 12.0,
+      "relative_humidity_pct": 93.9,
+      "wind_speed_2m_m_s": 1.32,
+      "solar_radiation_mj_m2_day": 3.7
+    },
+    {
+      "date": "2024-01-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.22,
+      "tmin_c": 6.18,
+      "tmax_c": 16.02,
+      "relative_humidity_pct": 90.97,
+      "wind_speed_2m_m_s": 1.33,
+      "solar_radiation_mj_m2_day": 9.07
+    },
+    {
+      "date": "2024-01-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 5.74,
+      "tmax_c": 12.65,
+      "relative_humidity_pct": 90.8,
+      "wind_speed_2m_m_s": 1.02,
+      "solar_radiation_mj_m2_day": 7.7
+    },
+    {
+      "date": "2024-01-19",
+      "et0_mm": null,
+      "precipitation_mm": 12.14,
+      "tmin_c": 6.38,
+      "tmax_c": 14.18,
+      "relative_humidity_pct": 91.04,
+      "wind_speed_2m_m_s": 1.48,
+      "solar_radiation_mj_m2_day": 5.88
+    },
+    {
+      "date": "2024-01-20",
+      "et0_mm": null,
+      "precipitation_mm": 10.83,
+      "tmin_c": 9.95,
+      "tmax_c": 14.27,
+      "relative_humidity_pct": 94.42,
+      "wind_speed_2m_m_s": 2.44,
+      "solar_radiation_mj_m2_day": 5.75
+    },
+    {
+      "date": "2024-01-21",
+      "et0_mm": null,
+      "precipitation_mm": 35.47,
+      "tmin_c": 10.57,
+      "tmax_c": 16.37,
+      "relative_humidity_pct": 90.23,
+      "wind_speed_2m_m_s": 3.6,
+      "solar_radiation_mj_m2_day": 5.34
+    },
+    {
+      "date": "2024-01-22",
+      "et0_mm": null,
+      "precipitation_mm": 6.94,
+      "tmin_c": 9.24,
+      "tmax_c": 16.44,
+      "relative_humidity_pct": 93.84,
+      "wind_speed_2m_m_s": 1.9,
+      "solar_radiation_mj_m2_day": 4.86
+    },
+    {
+      "date": "2024-01-23",
+      "et0_mm": null,
+      "precipitation_mm": 1.0,
+      "tmin_c": 6.98,
+      "tmax_c": 16.59,
+      "relative_humidity_pct": 91.42,
+      "wind_speed_2m_m_s": 1.19,
+      "solar_radiation_mj_m2_day": 8.23
+    },
+    {
+      "date": "2024-01-24",
+      "et0_mm": null,
+      "precipitation_mm": 10.68,
+      "tmin_c": 8.59,
+      "tmax_c": 12.95,
+      "relative_humidity_pct": 96.12,
+      "wind_speed_2m_m_s": 2.26,
+      "solar_radiation_mj_m2_day": 4.35
+    },
+    {
+      "date": "2024-01-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.06,
+      "tmin_c": 4.83,
+      "tmax_c": 15.97,
+      "relative_humidity_pct": 85.38,
+      "wind_speed_2m_m_s": 1.04,
+      "solar_radiation_mj_m2_day": 10.82
+    },
+    {
+      "date": "2024-01-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 9.13,
+      "tmax_c": 16.6,
+      "relative_humidity_pct": 82.28,
+      "wind_speed_2m_m_s": 0.54,
+      "solar_radiation_mj_m2_day": 5.9
+    },
+    {
+      "date": "2024-01-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 8.7,
+      "tmax_c": 14.64,
+      "relative_humidity_pct": 93.62,
+      "wind_speed_2m_m_s": 1.3,
+      "solar_radiation_mj_m2_day": 7.26
+    },
+    {
+      "date": "2024-01-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 8.79,
+      "tmax_c": 19.85,
+      "relative_humidity_pct": 93.63,
+      "wind_speed_2m_m_s": 1.33,
+      "solar_radiation_mj_m2_day": 11.04
+    },
+    {
+      "date": "2024-01-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 9.83,
+      "tmax_c": 20.07,
+      "relative_humidity_pct": 85.78,
+      "wind_speed_2m_m_s": 0.93,
+      "solar_radiation_mj_m2_day": 11.58
+    },
+    {
+      "date": "2024-01-30",
+      "et0_mm": null,
+      "precipitation_mm": 0.07,
+      "tmin_c": 9.97,
+      "tmax_c": 20.19,
+      "relative_humidity_pct": 88.33,
+      "wind_speed_2m_m_s": 1.2,
+      "solar_radiation_mj_m2_day": 11.59
+    },
+    {
+      "date": "2024-01-31",
+      "et0_mm": null,
+      "precipitation_mm": 39.99,
+      "tmin_c": 7.9,
+      "tmax_c": 14.82,
+      "relative_humidity_pct": 92.73,
+      "wind_speed_2m_m_s": 3.84,
+      "solar_radiation_mj_m2_day": 1.69
+    },
+    {
+      "date": "2024-02-01",
+      "et0_mm": null,
+      "precipitation_mm": 9.25,
+      "tmin_c": 6.79,
+      "tmax_c": 14.27,
+      "relative_humidity_pct": 91.42,
+      "wind_speed_2m_m_s": 1.72,
+      "solar_radiation_mj_m2_day": 9.77
+    },
+    {
+      "date": "2024-02-02",
+      "et0_mm": null,
+      "precipitation_mm": 2.73,
+      "tmin_c": 5.32,
+      "tmax_c": 13.11,
+      "relative_humidity_pct": 89.26,
+      "wind_speed_2m_m_s": 2.14,
+      "solar_radiation_mj_m2_day": 10.01
+    },
+    {
+      "date": "2024-02-03",
+      "et0_mm": null,
+      "precipitation_mm": 6.18,
+      "tmin_c": 5.35,
+      "tmax_c": 11.03,
+      "relative_humidity_pct": 91.33,
+      "wind_speed_2m_m_s": 1.38,
+      "solar_radiation_mj_m2_day": 8.4
+    },
+    {
+      "date": "2024-02-04",
+      "et0_mm": null,
+      "precipitation_mm": 60.95,
+      "tmin_c": 5.78,
+      "tmax_c": 14.65,
+      "relative_humidity_pct": 90.73,
+      "wind_speed_2m_m_s": 6.73,
+      "solar_radiation_mj_m2_day": 5.49
+    },
+    {
+      "date": "2024-02-05",
+      "et0_mm": null,
+      "precipitation_mm": 4.83,
+      "tmin_c": 6.84,
+      "tmax_c": 13.96,
+      "relative_humidity_pct": 89.12,
+      "wind_speed_2m_m_s": 3.09,
+      "solar_radiation_mj_m2_day": 8.11
+    },
+    {
+      "date": "2024-02-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.1,
+      "tmin_c": 5.32,
+      "tmax_c": 12.99,
+      "relative_humidity_pct": 89.34,
+      "wind_speed_2m_m_s": 1.44,
+      "solar_radiation_mj_m2_day": 9.14
+    },
+    {
+      "date": "2024-02-07",
+      "et0_mm": null,
+      "precipitation_mm": 8.09,
+      "tmin_c": 4.1,
+      "tmax_c": 10.39,
+      "relative_humidity_pct": 92.98,
+      "wind_speed_2m_m_s": 2.22,
+      "solar_radiation_mj_m2_day": 2.81
+    },
+    {
+      "date": "2024-02-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.05,
+      "tmin_c": 3.12,
+      "tmax_c": 11.96,
+      "relative_humidity_pct": 88.33,
+      "wind_speed_2m_m_s": 1.05,
+      "solar_radiation_mj_m2_day": 6.81
+    },
+    {
+      "date": "2024-02-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 2.0,
+      "tmax_c": 13.13,
+      "relative_humidity_pct": 86.34,
+      "wind_speed_2m_m_s": 1.12,
+      "solar_radiation_mj_m2_day": 12.53
+    },
+    {
+      "date": "2024-02-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 2.82,
+      "tmax_c": 14.6,
+      "relative_humidity_pct": 79.36,
+      "wind_speed_2m_m_s": 2.31,
+      "solar_radiation_mj_m2_day": 14.86
+    },
+    {
+      "date": "2024-02-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 3.31,
+      "tmax_c": 14.63,
+      "relative_humidity_pct": 85.77,
+      "wind_speed_2m_m_s": 0.66,
+      "solar_radiation_mj_m2_day": 12.82
+    },
+    {
+      "date": "2024-02-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 5.33,
+      "tmax_c": 14.86,
+      "relative_humidity_pct": 84.39,
+      "wind_speed_2m_m_s": 0.67,
+      "solar_radiation_mj_m2_day": 12.35
+    },
+    {
+      "date": "2024-02-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 5.73,
+      "tmax_c": 15.32,
+      "relative_humidity_pct": 89.09,
+      "wind_speed_2m_m_s": 1.12,
+      "solar_radiation_mj_m2_day": 12.57
+    },
+    {
+      "date": "2024-02-14",
+      "et0_mm": null,
+      "precipitation_mm": 9.32,
+      "tmin_c": 6.42,
+      "tmax_c": 14.42,
+      "relative_humidity_pct": 93.8,
+      "wind_speed_2m_m_s": 2.65,
+      "solar_radiation_mj_m2_day": 5.9
+    },
+    {
+      "date": "2024-02-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.82,
+      "tmin_c": 6.96,
+      "tmax_c": 16.02,
+      "relative_humidity_pct": 88.49,
+      "wind_speed_2m_m_s": 1.43,
+      "solar_radiation_mj_m2_day": 11.48
+    },
+    {
+      "date": "2024-02-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 7.9,
+      "tmax_c": 16.85,
+      "relative_humidity_pct": 86.04,
+      "wind_speed_2m_m_s": 0.98,
+      "solar_radiation_mj_m2_day": 6.39
+    },
+    {
+      "date": "2024-02-17",
+      "et0_mm": null,
+      "precipitation_mm": 24.35,
+      "tmin_c": 8.37,
+      "tmax_c": 14.0,
+      "relative_humidity_pct": 93.52,
+      "wind_speed_2m_m_s": 2.56,
+      "solar_radiation_mj_m2_day": 2.8
+    },
+    {
+      "date": "2024-02-18",
+      "et0_mm": null,
+      "precipitation_mm": 26.45,
+      "tmin_c": 6.07,
+      "tmax_c": 17.87,
+      "relative_humidity_pct": 90.57,
+      "wind_speed_2m_m_s": 3.17,
+      "solar_radiation_mj_m2_day": 10.68
+    },
+    {
+      "date": "2024-02-19",
+      "et0_mm": null,
+      "precipitation_mm": 17.5,
+      "tmin_c": 6.83,
+      "tmax_c": 15.81,
+      "relative_humidity_pct": 90.52,
+      "wind_speed_2m_m_s": 4.06,
+      "solar_radiation_mj_m2_day": 7.85
+    },
+    {
+      "date": "2024-02-20",
+      "et0_mm": null,
+      "precipitation_mm": 11.72,
+      "tmin_c": 6.6,
+      "tmax_c": 14.86,
+      "relative_humidity_pct": 93.02,
+      "wind_speed_2m_m_s": 1.78,
+      "solar_radiation_mj_m2_day": 8.82
+    },
+    {
+      "date": "2024-02-21",
+      "et0_mm": null,
+      "precipitation_mm": 1.69,
+      "tmin_c": 5.42,
+      "tmax_c": 15.29,
+      "relative_humidity_pct": 90.53,
+      "wind_speed_2m_m_s": 1.18,
+      "solar_radiation_mj_m2_day": 13.67
+    },
+    {
+      "date": "2024-02-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.1,
+      "tmin_c": 5.61,
+      "tmax_c": 16.51,
+      "relative_humidity_pct": 85.63,
+      "wind_speed_2m_m_s": 1.02,
+      "solar_radiation_mj_m2_day": 14.97
+    },
+    {
+      "date": "2024-02-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 4.3,
+      "tmax_c": 15.92,
+      "relative_humidity_pct": 83.72,
+      "wind_speed_2m_m_s": 1.46,
+      "solar_radiation_mj_m2_day": 13.59
+    },
+    {
+      "date": "2024-02-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 7.82,
+      "tmax_c": 19.4,
+      "relative_humidity_pct": 75.38,
+      "wind_speed_2m_m_s": 1.11,
+      "solar_radiation_mj_m2_day": 16.11
+    },
+    {
+      "date": "2024-02-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 7.32,
+      "tmax_c": 19.51,
+      "relative_humidity_pct": 81.92,
+      "wind_speed_2m_m_s": 1.58,
+      "solar_radiation_mj_m2_day": 15.58
+    },
+    {
+      "date": "2024-02-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 6.95,
+      "tmax_c": 17.43,
+      "relative_humidity_pct": 87.93,
+      "wind_speed_2m_m_s": 2.39,
+      "solar_radiation_mj_m2_day": 13.67
+    },
+    {
+      "date": "2024-02-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 3.16,
+      "tmax_c": 15.63,
+      "relative_humidity_pct": 74.93,
+      "wind_speed_2m_m_s": 2.94,
+      "solar_radiation_mj_m2_day": 17.61
+    },
+    {
+      "date": "2024-02-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 7.21,
+      "tmax_c": 18.58,
+      "relative_humidity_pct": 78.34,
+      "wind_speed_2m_m_s": 1.01,
+      "solar_radiation_mj_m2_day": 17.12
+    },
+    {
+      "date": "2024-02-29",
+      "et0_mm": null,
+      "precipitation_mm": 8.67,
+      "tmin_c": 7.07,
+      "tmax_c": 14.24,
+      "relative_humidity_pct": 92.95,
+      "wind_speed_2m_m_s": 3.7,
+      "solar_radiation_mj_m2_day": 7.82
+    },
+    {
+      "date": "2024-03-01",
+      "et0_mm": null,
+      "precipitation_mm": 20.11,
+      "tmin_c": 6.84,
+      "tmax_c": 12.23,
+      "relative_humidity_pct": 91.51,
+      "wind_speed_2m_m_s": 4.49,
+      "solar_radiation_mj_m2_day": 8.87
+    },
+    {
+      "date": "2024-03-02",
+      "et0_mm": null,
+      "precipitation_mm": 10.26,
+      "tmin_c": 5.61,
+      "tmax_c": 9.96,
+      "relative_humidity_pct": 86.25,
+      "wind_speed_2m_m_s": 4.43,
+      "solar_radiation_mj_m2_day": 11.02
+    },
+    {
+      "date": "2024-03-03",
+      "et0_mm": null,
+      "precipitation_mm": 4.53,
+      "tmin_c": 3.85,
+      "tmax_c": 11.83,
+      "relative_humidity_pct": 87.21,
+      "wind_speed_2m_m_s": 2.69,
+      "solar_radiation_mj_m2_day": 12.25
+    },
+    {
+      "date": "2024-03-04",
+      "et0_mm": null,
+      "precipitation_mm": 2.02,
+      "tmin_c": 2.94,
+      "tmax_c": 13.16,
+      "relative_humidity_pct": 86.55,
+      "wind_speed_2m_m_s": 1.51,
+      "solar_radiation_mj_m2_day": 9.15
+    },
+    {
+      "date": "2024-03-05",
+      "et0_mm": null,
+      "precipitation_mm": 2.99,
+      "tmin_c": 7.54,
+      "tmax_c": 14.65,
+      "relative_humidity_pct": 92.93,
+      "wind_speed_2m_m_s": 2.23,
+      "solar_radiation_mj_m2_day": 10.32
+    },
+    {
+      "date": "2024-03-06",
+      "et0_mm": null,
+      "precipitation_mm": 1.74,
+      "tmin_c": 7.49,
+      "tmax_c": 14.38,
+      "relative_humidity_pct": 91.61,
+      "wind_speed_2m_m_s": 0.93,
+      "solar_radiation_mj_m2_day": 11.98
+    },
+    {
+      "date": "2024-03-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.22,
+      "tmin_c": 6.43,
+      "tmax_c": 16.15,
+      "relative_humidity_pct": 82.52,
+      "wind_speed_2m_m_s": 2.34,
+      "solar_radiation_mj_m2_day": 18.44
+    },
+    {
+      "date": "2024-03-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.1,
+      "tmin_c": 2.74,
+      "tmax_c": 18.38,
+      "relative_humidity_pct": 75.92,
+      "wind_speed_2m_m_s": 1.07,
+      "solar_radiation_mj_m2_day": 19.67
+    },
+    {
+      "date": "2024-03-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.36,
+      "tmin_c": 5.27,
+      "tmax_c": 14.78,
+      "relative_humidity_pct": 90.69,
+      "wind_speed_2m_m_s": 1.89,
+      "solar_radiation_mj_m2_day": 12.67
+    },
+    {
+      "date": "2024-03-10",
+      "et0_mm": null,
+      "precipitation_mm": 6.4,
+      "tmin_c": 5.46,
+      "tmax_c": 15.47,
+      "relative_humidity_pct": 86.09,
+      "wind_speed_2m_m_s": 1.82,
+      "solar_radiation_mj_m2_day": 14.43
+    },
+    {
+      "date": "2024-03-11",
+      "et0_mm": null,
+      "precipitation_mm": 1.49,
+      "tmin_c": 5.52,
+      "tmax_c": 15.82,
+      "relative_humidity_pct": 84.14,
+      "wind_speed_2m_m_s": 1.72,
+      "solar_radiation_mj_m2_day": 14.76
+    },
+    {
+      "date": "2024-03-12",
+      "et0_mm": null,
+      "precipitation_mm": 2.13,
+      "tmin_c": 7.51,
+      "tmax_c": 16.3,
+      "relative_humidity_pct": 87.35,
+      "wind_speed_2m_m_s": 2.34,
+      "solar_radiation_mj_m2_day": 11.72
+    },
+    {
+      "date": "2024-03-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 5.73,
+      "tmax_c": 16.76,
+      "relative_humidity_pct": 76.62,
+      "wind_speed_2m_m_s": 4.27,
+      "solar_radiation_mj_m2_day": 18.95
+    },
+    {
+      "date": "2024-03-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 6.37,
+      "tmax_c": 18.59,
+      "relative_humidity_pct": 71.82,
+      "wind_speed_2m_m_s": 4.66,
+      "solar_radiation_mj_m2_day": 21.86
+    },
+    {
+      "date": "2024-03-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 7.16,
+      "tmax_c": 21.6,
+      "relative_humidity_pct": 67.75,
+      "wind_speed_2m_m_s": 3.24,
+      "solar_radiation_mj_m2_day": 21.54
+    },
+    {
+      "date": "2024-03-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 7.27,
+      "tmax_c": 20.93,
+      "relative_humidity_pct": 81.42,
+      "wind_speed_2m_m_s": 1.51,
+      "solar_radiation_mj_m2_day": 20.75
+    },
+    {
+      "date": "2024-03-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 7.96,
+      "tmax_c": 21.35,
+      "relative_humidity_pct": 81.41,
+      "wind_speed_2m_m_s": 1.43,
+      "solar_radiation_mj_m2_day": 20.73
+    },
+    {
+      "date": "2024-03-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 7.67,
+      "tmax_c": 22.68,
+      "relative_humidity_pct": 79.11,
+      "wind_speed_2m_m_s": 0.87,
+      "solar_radiation_mj_m2_day": 20.24
+    },
+    {
+      "date": "2024-03-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 7.52,
+      "tmax_c": 21.68,
+      "relative_humidity_pct": 86.48,
+      "wind_speed_2m_m_s": 1.99,
+      "solar_radiation_mj_m2_day": 21.19
+    },
+    {
+      "date": "2024-03-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 5.63,
+      "tmax_c": 20.91,
+      "relative_humidity_pct": 81.32,
+      "wind_speed_2m_m_s": 2.3,
+      "solar_radiation_mj_m2_day": 21.19
+    },
+    {
+      "date": "2024-03-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 7.17,
+      "tmax_c": 19.66,
+      "relative_humidity_pct": 85.32,
+      "wind_speed_2m_m_s": 1.73,
+      "solar_radiation_mj_m2_day": 20.45
+    },
+    {
+      "date": "2024-03-22",
+      "et0_mm": null,
+      "precipitation_mm": 13.3,
+      "tmin_c": 7.47,
+      "tmax_c": 18.55,
+      "relative_humidity_pct": 88.27,
+      "wind_speed_2m_m_s": 2.65,
+      "solar_radiation_mj_m2_day": 12.53
+    },
+    {
+      "date": "2024-03-23",
+      "et0_mm": null,
+      "precipitation_mm": 7.74,
+      "tmin_c": 6.39,
+      "tmax_c": 12.86,
+      "relative_humidity_pct": 90.18,
+      "wind_speed_2m_m_s": 2.71,
+      "solar_radiation_mj_m2_day": 14.55
+    },
+    {
+      "date": "2024-03-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.78,
+      "tmin_c": 5.99,
+      "tmax_c": 16.49,
+      "relative_humidity_pct": 82.2,
+      "wind_speed_2m_m_s": 1.83,
+      "solar_radiation_mj_m2_day": 20.45
+    },
+    {
+      "date": "2024-03-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 5.52,
+      "tmax_c": 17.91,
+      "relative_humidity_pct": 84.96,
+      "wind_speed_2m_m_s": 1.88,
+      "solar_radiation_mj_m2_day": 18.73
+    },
+    {
+      "date": "2024-03-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 6.33,
+      "tmax_c": 18.68,
+      "relative_humidity_pct": 84.55,
+      "wind_speed_2m_m_s": 1.4,
+      "solar_radiation_mj_m2_day": 20.49
+    },
+    {
+      "date": "2024-03-27",
+      "et0_mm": null,
+      "precipitation_mm": 8.75,
+      "tmin_c": 5.61,
+      "tmax_c": 14.15,
+      "relative_humidity_pct": 93.02,
+      "wind_speed_2m_m_s": 2.57,
+      "solar_radiation_mj_m2_day": 5.86
+    },
+    {
+      "date": "2024-03-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.43,
+      "tmin_c": 6.09,
+      "tmax_c": 15.35,
+      "relative_humidity_pct": 83.94,
+      "wind_speed_2m_m_s": 2.01,
+      "solar_radiation_mj_m2_day": 18.19
+    },
+    {
+      "date": "2024-03-29",
+      "et0_mm": null,
+      "precipitation_mm": 16.2,
+      "tmin_c": 7.17,
+      "tmax_c": 13.01,
+      "relative_humidity_pct": 90.82,
+      "wind_speed_2m_m_s": 3.38,
+      "solar_radiation_mj_m2_day": 7.14
+    },
+    {
+      "date": "2024-03-30",
+      "et0_mm": null,
+      "precipitation_mm": 1.63,
+      "tmin_c": 6.72,
+      "tmax_c": 15.4,
+      "relative_humidity_pct": 79.28,
+      "wind_speed_2m_m_s": 1.63,
+      "solar_radiation_mj_m2_day": 16.94
+    },
+    {
+      "date": "2024-03-31",
+      "et0_mm": null,
+      "precipitation_mm": 0.79,
+      "tmin_c": 8.17,
+      "tmax_c": 18.15,
+      "relative_humidity_pct": 80.12,
+      "wind_speed_2m_m_s": 1.12,
+      "solar_radiation_mj_m2_day": 20.22
+    },
+    {
+      "date": "2024-04-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 5.29,
+      "tmax_c": 20.72,
+      "relative_humidity_pct": 76.16,
+      "wind_speed_2m_m_s": 2.14,
+      "solar_radiation_mj_m2_day": 24.01
+    },
+    {
+      "date": "2024-04-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 6.84,
+      "tmax_c": 22.4,
+      "relative_humidity_pct": 81.23,
+      "wind_speed_2m_m_s": 1.44,
+      "solar_radiation_mj_m2_day": 23.85
+    },
+    {
+      "date": "2024-04-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 5.44,
+      "tmax_c": 19.18,
+      "relative_humidity_pct": 84.39,
+      "wind_speed_2m_m_s": 3.27,
+      "solar_radiation_mj_m2_day": 22.17
+    },
+    {
+      "date": "2024-04-04",
+      "et0_mm": null,
+      "precipitation_mm": 10.32,
+      "tmin_c": 4.67,
+      "tmax_c": 9.81,
+      "relative_humidity_pct": 87.15,
+      "wind_speed_2m_m_s": 2.27,
+      "solar_radiation_mj_m2_day": 8.37
+    },
+    {
+      "date": "2024-04-05",
+      "et0_mm": null,
+      "precipitation_mm": 1.64,
+      "tmin_c": 4.33,
+      "tmax_c": 12.57,
+      "relative_humidity_pct": 77.44,
+      "wind_speed_2m_m_s": 0.73,
+      "solar_radiation_mj_m2_day": 15.7
+    },
+    {
+      "date": "2024-04-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 3.03,
+      "tmax_c": 16.01,
+      "relative_humidity_pct": 80.8,
+      "wind_speed_2m_m_s": 1.78,
+      "solar_radiation_mj_m2_day": 22.81
+    },
+    {
+      "date": "2024-04-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 3.0,
+      "tmax_c": 16.37,
+      "relative_humidity_pct": 78.26,
+      "wind_speed_2m_m_s": 1.79,
+      "solar_radiation_mj_m2_day": 23.86
+    },
+    {
+      "date": "2024-04-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 5.14,
+      "tmax_c": 20.65,
+      "relative_humidity_pct": 72.7,
+      "wind_speed_2m_m_s": 2.41,
+      "solar_radiation_mj_m2_day": 25.35
+    },
+    {
+      "date": "2024-04-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 9.25,
+      "tmax_c": 23.79,
+      "relative_humidity_pct": 71.44,
+      "wind_speed_2m_m_s": 0.89,
+      "solar_radiation_mj_m2_day": 24.99
+    },
+    {
+      "date": "2024-04-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 9.73,
+      "tmax_c": 25.26,
+      "relative_humidity_pct": 72.82,
+      "wind_speed_2m_m_s": 0.94,
+      "solar_radiation_mj_m2_day": 22.78
+    },
+    {
+      "date": "2024-04-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 11.32,
+      "tmax_c": 26.31,
+      "relative_humidity_pct": 74.45,
+      "wind_speed_2m_m_s": 1.4,
+      "solar_radiation_mj_m2_day": 25.49
+    },
+    {
+      "date": "2024-04-12",
+      "et0_mm": null,
+      "precipitation_mm": 2.02,
+      "tmin_c": 8.98,
+      "tmax_c": 17.62,
+      "relative_humidity_pct": 82.41,
+      "wind_speed_2m_m_s": 2.8,
+      "solar_radiation_mj_m2_day": 21.42
+    },
+    {
+      "date": "2024-04-13",
+      "et0_mm": null,
+      "precipitation_mm": 14.85,
+      "tmin_c": 5.24,
+      "tmax_c": 12.73,
+      "relative_humidity_pct": 86.31,
+      "wind_speed_2m_m_s": 2.49,
+      "solar_radiation_mj_m2_day": 4.34
+    },
+    {
+      "date": "2024-04-14",
+      "et0_mm": null,
+      "precipitation_mm": 1.12,
+      "tmin_c": 4.71,
+      "tmax_c": 15.09,
+      "relative_humidity_pct": 83.22,
+      "wind_speed_2m_m_s": 1.03,
+      "solar_radiation_mj_m2_day": 13.6
+    },
+    {
+      "date": "2024-04-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 5.34,
+      "tmax_c": 20.4,
+      "relative_humidity_pct": 80.93,
+      "wind_speed_2m_m_s": 1.14,
+      "solar_radiation_mj_m2_day": 23.97
+    }
+  ],
+  "units": {
+    "precipitation_mm": "mm/day",
+    "tmin_c": "C",
+    "tmax_c": "C",
+    "relative_humidity_pct": "%",
+    "wind_speed_2m_m_s": "m/s",
+    "solar_radiation_mj_m2_day": "MJ/m^2/day",
+    "et0_mm": "mm/day"
+  },
+  "quality_control": {
+    "issues": [],
+    "rain_warning_mm": 500,
+    "rain_policy": "flag_only_no_clipping",
+    "bias_correction": null
+  },
+  "provider_header": {
+    "title": "NASA/POWER Source Native Resolution Daily Data",
+    "api": {
+      "version": "v2.10.3",
+      "name": "POWER Daily API"
+    },
+    "sources": [
+      "MERRA2",
+      "SYN1DEG",
+      "POWER"
+    ],
+    "fill_value": -999.0,
+    "time_standard": "LST",
+    "start": "20240101",
+    "end": "20240415"
+  },
+  "provider_units": {
+    "PRECTOTCORR": "mm/day",
+    "T2M_MIN": "C",
+    "T2M_MAX": "C",
+    "RH2M": "%",
+    "WS2M": "m/s",
+    "ALLSKY_SFC_SW_DWN": "MJ/m^2/day"
+  },
+  "provider_geometry": {
+    "type": "Point",
+    "coordinates": [
+      -121.74,
+      38.55,
+      67.69
+    ]
+  }
+}

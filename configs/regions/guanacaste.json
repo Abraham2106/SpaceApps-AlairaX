@@ -1,0 +1,17 @@
+{
+  "id": "guanacaste",
+  "name": "Guanacaste, Costa Rica",
+  "aoi": {"latitude": 10.55, "longitude": -85.5, "crs": "EPSG:4326"},
+  "timezone": "America/Costa_Rica",
+  "start": "1981-01-01",
+  "as_of": "2026-11-14",
+  "season_start": "04-01",
+  "season_end": "10-31",
+  "oni_season": "ASO",
+  "strong_el_nino_k": 3,
+  "heat_threshold_c": 35,
+  "reference_years": [1991, 2020],
+  "wet_months": [5, 6, 7, 8, 9, 10, 11],
+  "crop_catalog": "research/parameters/crops.yaml",
+  "sources": {"climate": "NASA POWER", "enso": "NOAA CPC", "soil": "SoilGrids", "vegetation": "HLS v2"}
+}

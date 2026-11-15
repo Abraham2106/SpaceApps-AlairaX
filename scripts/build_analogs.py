@@ -105,7 +105,7 @@ def window_options(start_mmdd, end_mmdd, oni_season, as_of, k):
 
 def build_pipeline(climate_files, oni_file, *, et0_file=None, start_mmdd,
                    end_mmdd, oni_season, as_of, k=5, weights=None, heat_threshold_c=35.0,
-                   strong_el_nino_k=None):
+                   strong_el_nino_k=None, analysis_start=None):
     """Return (features document, analogs document); never synthesize missing inputs."""
     first, last = window_options(start_mmdd, end_mmdd, oni_season, as_of, k)
     if strong_el_nino_k is not None and (isinstance(strong_el_nino_k, bool) or not isinstance(strong_el_nino_k, int) or strong_el_nino_k < 1):
@@ -133,6 +133,8 @@ def build_pipeline(climate_files, oni_file, *, et0_file=None, start_mmdd,
     for year in available_years:
         start, end = date(year, *first), date(year, *last)
         try:
+            if analysis_start is not None and start < analysis_start:
+                raise ValueError('requested window starts before analysis_start')
             if end > as_of:
                 raise ValueError('requested window extends beyond as_of; no future climate is used')
             if _oni_period_end(year, oni_season) > as_of:

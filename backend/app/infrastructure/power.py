@@ -102,9 +102,11 @@ def ingest_power(cache: RawCache, latitude: float, longitude: float, start: date
     url = power_url(latitude, longitude, start, end)
     body, provenance = cache.get(url, refresh=refresh, offline=offline)
     data = normalize_power(json.loads(body), start, end, rain_warning_mm=rain_warning_mm)
+    zone_name = ('Provisional agricultural point, Guanacaste' if (latitude, longitude) == (10.55, -85.5)
+                 else 'Provisional POWER grid point')
     return {
         'schema_version': '0.1.0', '_mock': False, 'generado': provenance['fetched_at'],
-        'zona': {'id': 'provisional-point', 'name': 'Provisional agricultural point, Guanacaste',
+        'zona': {'id': 'provisional-point', 'name': zone_name,
                  'latitude': latitude, 'longitude': longitude, 'validated': False},
         'source_refs': [url], 'provenance': provenance,
         'warnings': ['Location is provisional; SoilGrids and farm suitability are not validated.',
