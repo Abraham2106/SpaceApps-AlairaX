@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "_mock": false,
-  "generado": "2026-11-14T18:52:15.531755+00:00",
+  "generado": "2026-11-15T01:45:44.981007+00:00",
   "zona": {
     "id": "provisional-point",
     "name": "Provisional agricultural point, Guanacaste",
@@ -21,6 +21,7 @@
     "like_2026": 5
   },
   "source_refs": [
+    "Allen et al. (1998) FAO-56, Eq. 6 (G = 0, Eq. 42); https://www.fao.org/3/x0490e/x0490e00.htm",
     "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19810101&end=19811231&format=JSON&time-standard=LST&units=metric",
     "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19820101&end=19821231&format=JSON&time-standard=LST&units=metric",
     "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19830101&end=19831231&format=JSON&time-standard=LST&units=metric",
@@ -838,6 +839,61 @@
         "etag": null,
         "last_modified": "Tue, 03 Nov 2026 19:31:48 GMT"
       }
+    },
+    {
+      "file": "et0_10.55_-85.5.json",
+      "sha256": "6e0782d51a82a73bf0a1e1c91e9bf9d36579cc89abf5d766216421152640eaf6",
+      "source_refs": [
+        "Allen et al. (1998) FAO-56, Eq. 6 (G = 0, Eq. 42); https://www.fao.org/3/x0490e/x0490e00.htm",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19810101&end=19811231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19820101&end=19821231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19830101&end=19831231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19840101&end=19841231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19850101&end=19851231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19860101&end=19861231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19870101&end=19871231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19880101&end=19881231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19890101&end=19891231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19900101&end=19901231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19910101&end=19911231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19920101&end=19921231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19930101&end=19931231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19940101&end=19941231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19950101&end=19951231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19960101&end=19961231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19970101&end=19971231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19980101&end=19981231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=19990101&end=19991231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20000101&end=20001231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20010101&end=20011231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20020101&end=20021231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20030101&end=20031231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20040101&end=20041231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20050101&end=20051231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20060101&end=20061231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20070101&end=20071231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20080101&end=20081231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20090101&end=20091231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20100101&end=20101231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20110101&end=20111231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20120101&end=20121231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20130101&end=20131231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20140101&end=20141231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20150101&end=20151231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20160101&end=20161231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20170101&end=20171231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20180101&end=20181231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20190101&end=20191231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20200101&end=20201231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20210101&end=20211231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20220101&end=20221231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20230101&end=20231231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20240101&end=20240105&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20240101&end=20241231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20250101&end=20251231&format=JSON&time-standard=LST&units=metric",
+        "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.55&longitude=-85.5&start=20260101&end=20261114&format=JSON&time-standard=LST&units=metric"
+      ],
+      "upstream_provenance": null
     }
   ],
   "warnings": [
@@ -847,195 +903,575 @@
     "Overlapping seasonal indices are not independent monthly observations.",
     "Latest NOAA historical revisions are not historical publication vintages; do not use for a real-time backtest.",
     "ONI and RONI remain separate features; no values are substituted between them.",
+    "1101 day(s) with missing POWER inputs exported as null",
     "Historical NOAA revisions are retrospective data, not original publication vintages.",
     "A completed ONI period does not prove it was already published at the as_of date.",
     "Climate similarity is not a forecast, causal effect or yield recommendation."
   ],
-  "features": [],
-  "excluded_years": [
-    {
-      "year": 1981,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
-    },
-    {
-      "year": 1982,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
-    },
-    {
-      "year": 1983,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
-    },
+  "features": [
     {
       "year": 1984,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1984-04-01",
+      "end": "1984-10-31",
+      "precipitation_mm": 860.04,
+      "et0_mm": 950.328,
+      "tmax_mean_c": 31.821495327102806,
+      "heat_days": 34,
+      "oni": -0.32,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1985,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1985-04-01",
+      "end": "1985-10-31",
+      "precipitation_mm": 470.86,
+      "et0_mm": 1030.59,
+      "tmax_mean_c": 32.70626168224299,
+      "heat_days": 38,
+      "oni": -0.31,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1986,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1986-04-01",
+      "end": "1986-10-31",
+      "precipitation_mm": 1050.13,
+      "et0_mm": 987.155,
+      "tmax_mean_c": 31.53140186915888,
+      "heat_days": 39,
+      "oni": 0.64,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1987,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1987-04-01",
+      "end": "1987-10-31",
+      "precipitation_mm": 394.02,
+      "et0_mm": 1094.907,
+      "tmax_mean_c": 33.50943925233645,
+      "heat_days": 43,
+      "oni": 1.49,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1988,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1988-04-01",
+      "end": "1988-10-31",
+      "precipitation_mm": 564.69,
+      "et0_mm": 933.565,
+      "tmax_mean_c": 31.447616822429907,
+      "heat_days": 42,
+      "oni": -1.27,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1989,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1989-04-01",
+      "end": "1989-10-31",
+      "precipitation_mm": 440.64,
+      "et0_mm": 1079.2259999999999,
+      "tmax_mean_c": 32.7742523364486,
+      "heat_days": 51,
+      "oni": -0.33,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1990,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1990-04-01",
+      "end": "1990-10-31",
+      "precipitation_mm": 610.21,
+      "et0_mm": 1054.964,
+      "tmax_mean_c": 32.783457943925235,
+      "heat_days": 48,
+      "oni": 0.31,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1991,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1991-04-01",
+      "end": "1991-10-31",
+      "precipitation_mm": 617.64,
+      "et0_mm": 1044.006,
+      "tmax_mean_c": 32.311962616822434,
+      "heat_days": 36,
+      "oni": 0.72,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1992,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1992-04-01",
+      "end": "1992-10-31",
+      "precipitation_mm": 773.05,
+      "et0_mm": 1004.295,
+      "tmax_mean_c": 31.71514018691589,
+      "heat_days": 39,
+      "oni": -0.15,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1993,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1993-04-01",
+      "end": "1993-10-31",
+      "precipitation_mm": 660.83,
+      "et0_mm": 965.754,
+      "tmax_mean_c": 31.496121495327102,
+      "heat_days": 28,
+      "oni": 0.2,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1994,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1994-04-01",
+      "end": "1994-10-31",
+      "precipitation_mm": 278.25,
+      "et0_mm": 1112.944,
+      "tmax_mean_c": 33.37602803738318,
+      "heat_days": 57,
+      "oni": 0.47,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1995,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1995-04-01",
+      "end": "1995-10-31",
+      "precipitation_mm": 910.42,
+      "et0_mm": 889.434,
+      "tmax_mean_c": 30.55308411214953,
+      "heat_days": 21,
+      "oni": -0.81,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1996,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1996-04-01",
+      "end": "1996-10-31",
+      "precipitation_mm": 468.7,
+      "et0_mm": 979.584,
+      "tmax_mean_c": 31.99504672897196,
+      "heat_days": 32,
+      "oni": -0.3,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1997,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1997-04-01",
+      "end": "1997-10-31",
+      "precipitation_mm": 592.9,
+      "et0_mm": 1118.766,
+      "tmax_mean_c": 32.92593457943925,
+      "heat_days": 55,
+      "oni": 2.04,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1998,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1998-04-01",
+      "end": "1998-10-31",
+      "precipitation_mm": 803.51,
+      "et0_mm": 1010.831,
+      "tmax_mean_c": 31.89523364485981,
+      "heat_days": 48,
+      "oni": -1.02,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 1999,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "1999-04-01",
+      "end": "1999-10-31",
+      "precipitation_mm": 986.37,
+      "et0_mm": 894.0,
+      "tmax_mean_c": 30.297943925233646,
+      "heat_days": 20,
+      "oni": -1.0,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2000,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2000-04-01",
+      "end": "2000-10-31",
+      "precipitation_mm": 811.11,
+      "et0_mm": 963.51,
+      "tmax_mean_c": 31.405607476635513,
+      "heat_days": 25,
+      "oni": -0.42,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2001,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2001-04-01",
+      "end": "2001-10-31",
+      "precipitation_mm": 984.52,
+      "et0_mm": 1024.549,
+      "tmax_mean_c": 31.883317757009344,
+      "heat_days": 43,
+      "oni": -0.15,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2002,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2002-04-01",
+      "end": "2002-10-31",
+      "precipitation_mm": 1175.27,
+      "et0_mm": 1013.766,
+      "tmax_mean_c": 31.36504672897196,
+      "heat_days": 41,
+      "oni": 0.78,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2003,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2003-04-01",
+      "end": "2003-10-31",
+      "precipitation_mm": 794.34,
+      "et0_mm": 949.731,
+      "tmax_mean_c": 31.913971962616824,
+      "heat_days": 25,
+      "oni": 0.23,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2004,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2004-04-01",
+      "end": "2004-10-31",
+      "precipitation_mm": 943.9399999999999,
+      "et0_mm": 995.822,
+      "tmax_mean_c": 32.04995327102804,
+      "heat_days": 33,
+      "oni": 0.58,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2005,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2005-04-01",
+      "end": "2005-10-31",
+      "precipitation_mm": 2119.59,
+      "et0_mm": 862.695,
+      "tmax_mean_c": 30.366495327102804,
+      "heat_days": 35,
+      "oni": -0.11,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2006,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2006-04-01",
+      "end": "2006-10-31",
+      "precipitation_mm": 1192.03,
+      "et0_mm": 964.421,
+      "tmax_mean_c": 31.672102803738316,
+      "heat_days": 35,
+      "oni": 0.54,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2007,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2007-04-01",
+      "end": "2007-10-31",
+      "precipitation_mm": 2329.93,
+      "et0_mm": 857.13,
+      "tmax_mean_c": 30.114205607476634,
+      "heat_days": 19,
+      "oni": -1.05,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2008,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2008-04-01",
+      "end": "2008-10-31",
+      "precipitation_mm": 2537.05,
+      "et0_mm": 867.003,
+      "tmax_mean_c": 30.033971962616825,
+      "heat_days": 27,
+      "oni": -0.25,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2009,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2009-04-01",
+      "end": "2009-10-31",
+      "precipitation_mm": 1035.91,
+      "et0_mm": 998.72,
+      "tmax_mean_c": 32.13934579439252,
+      "heat_days": 36,
+      "oni": 0.66,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2010,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2010-04-01",
+      "end": "2010-10-31",
+      "precipitation_mm": 1964.55,
+      "et0_mm": 847.619,
+      "tmax_mean_c": 30.18551401869159,
+      "heat_days": 28,
+      "oni": -1.43,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2011,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2011-04-01",
+      "end": "2011-10-31",
+      "precipitation_mm": 1901.89,
+      "et0_mm": 887.622,
+      "tmax_mean_c": 30.484392523364484,
+      "heat_days": 32,
+      "oni": -0.76,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2012,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2012-04-01",
+      "end": "2012-10-31",
+      "precipitation_mm": 1211.97,
+      "et0_mm": 935.982,
+      "tmax_mean_c": 31.40285046728972,
+      "heat_days": 20,
+      "oni": 0.37,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2013,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2013-04-01",
+      "end": "2013-10-31",
+      "precipitation_mm": 1816.65,
+      "et0_mm": 892.716,
+      "tmax_mean_c": 30.735607476635515,
+      "heat_days": 33,
+      "oni": -0.32,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2014,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2014-04-01",
+      "end": "2014-10-31",
+      "precipitation_mm": 1452.39,
+      "et0_mm": 1020.823,
+      "tmax_mean_c": 32.30700934579439,
+      "heat_days": 36,
+      "oni": 0.24,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2015,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2015-04-01",
+      "end": "2015-10-31",
+      "precipitation_mm": 735.45,
+      "et0_mm": 1089.775,
+      "tmax_mean_c": 33.136401869158874,
+      "heat_days": 53,
+      "oni": 2.02,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2016,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2016-04-01",
+      "end": "2016-10-31",
+      "precipitation_mm": 1471.95,
+      "et0_mm": 912.789,
+      "tmax_mean_c": 31.213691588785046,
+      "heat_days": 36,
+      "oni": -0.42,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2017,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2017-04-01",
+      "end": "2017-10-31",
+      "precipitation_mm": 2216.09,
+      "et0_mm": 841.717,
+      "tmax_mean_c": 30.28158878504673,
+      "heat_days": 21,
+      "oni": -0.23,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2018,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2018-04-01",
+      "end": "2018-10-31",
+      "precipitation_mm": 1289.87,
+      "et0_mm": 900.966,
+      "tmax_mean_c": 31.094252336448598,
+      "heat_days": 32,
+      "oni": 0.52,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2019,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2019-04-01",
+      "end": "2019-10-31",
+      "precipitation_mm": 1438.6200000000001,
+      "et0_mm": 930.182,
+      "tmax_mean_c": 31.542523364485984,
+      "heat_days": 38,
+      "oni": 0.31,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2020,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2020-04-01",
+      "end": "2020-10-31",
+      "precipitation_mm": 2200.2,
+      "et0_mm": 897.14,
+      "tmax_mean_c": 30.901028037383178,
+      "heat_days": 35,
+      "oni": -0.77,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2021,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2021-04-01",
+      "end": "2021-10-31",
+      "precipitation_mm": 2286.29,
+      "et0_mm": 905.055,
+      "tmax_mean_c": 30.698317757009345,
+      "heat_days": 9,
+      "oni": -0.64,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2022,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2022-04-01",
+      "end": "2022-10-31",
+      "precipitation_mm": 1357.36,
+      "et0_mm": 849.054,
+      "tmax_mean_c": 30.35042056074766,
+      "heat_days": 19,
+      "oni": -0.87,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2023,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2023-04-01",
+      "end": "2023-10-31",
+      "precipitation_mm": 1019.13,
+      "et0_mm": 1025.929,
+      "tmax_mean_c": 33.00532710280374,
+      "heat_days": 52,
+      "oni": 1.5,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2024,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2024-04-01",
+      "end": "2024-10-31",
+      "precipitation_mm": 2843.67,
+      "et0_mm": 888.99,
+      "tmax_mean_c": 31.442056074766356,
+      "heat_days": 42,
+      "oni": -0.12,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
     },
     {
       "year": 2025,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "start": "2025-04-01",
+      "end": "2025-10-31",
+      "precipitation_mm": 2063.18,
+      "et0_mm": 901.112,
+      "tmax_mean_c": 31.095233644859814,
+      "heat_days": 23,
+      "oni": -0.43,
+      "heat_threshold_c": 35.0,
+      "oni_season": "ASO",
+      "mock": false
+    }
+  ],
+  "excluded_years": [
+    {
+      "year": 1981,
+      "reason": "1981-04-01.et0_mm must be a finite number; missing data is not imputed"
+    },
+    {
+      "year": 1982,
+      "reason": "1982-04-01.et0_mm must be a finite number; missing data is not imputed"
+    },
+    {
+      "year": 1983,
+      "reason": "1983-04-01.et0_mm must be a finite number; missing data is not imputed"
     },
     {
       "year": 2026,
-      "reason": "reviewed external ET0 file unavailable; Justin must provide it"
+      "reason": "2026-09-07.et0_mm must be a finite number; missing data is not imputed"
     }
   ]
 }

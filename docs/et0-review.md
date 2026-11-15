@@ -18,11 +18,18 @@ Penman–Monteith FAO‑56 y la elevación de cuadrícula POWER de 94,64 m.
 - En la ventana de consulta abril–octubre de 2026 falta ET₀ el **7 de
   septiembre**. El insumo POWER de radiación solar de ese día es nulo.
 
-El archivo evaluado es
+El archivo evaluado antes de registrar la aprobación es
 `datasets/processed/et0/et0_10.55_-85.5.json`
 (SHA-256 `b82718134bf7986df24414fd19ed4b2b05179bb742cdddab4869454ec8d042d1`).
-El recálculo demuestra reproducibilidad. Queda pendiente la aprobación de
-Justin, quien debe confirmar el método y registrar `reviewed: true` y su nombre
-en `reviewed_by` antes de regenerar el catálogo de análogos. El escenario
-«Como 2026» requiere además recuperar la radiación faltante o acordar y documentar
-una ventana distinta.
+El recálculo demuestra reproducibilidad. El 14 de noviembre de 2026,
+Abraham confirmó el método para este artefacto. Se registró
+`reviewed: true` y `reviewed_by: "Abraham2106"`. El SHA-256 con esos dos
+campos actualizados es
+`6e0782d51a82a73bf0a1e1c91e9bf9d36579cc89abf5d766216421152640eaf6`.
+La aprobación cubre el método. El contraste con observaciones de una
+estación local sigue pendiente.
+
+El catálogo operativo se regeneró para abril–octubre con ONI ASO.
+Quedaron disponibles Niño fuerte, Neutro y Niña. «Como 2026» requiere
+recuperar la radiación del 7 de septiembre o acordar y documentar una
+ventana distinta.
