@@ -43,3 +43,7 @@ Defectos que se corrigen ahora, porque son reales y no piden inventar una rotaci
 - Cada cantón repetía «Guanacaste». El buscador parecía un lugar ya elegido.
 
 No se corrige el pedido de declarar una rotación ganadora, un rendimiento o una recomendación de riego. El contrato no lo permite.
+
+## Medición del 14 de noviembre de 2026, noche
+
+No es una ronda de cinco críticos ni cierra el umbral de 9/10. Lighthouse móvil, solo accesibilidad, sobre el preview de esta rama: primero 97, con un fallo de contraste en el enlace activo del menú. El fondo activo pasó a `#0c5a30` con texto blanco y la segunda medición dio 100. Vitest: 11/11. El guion del productor recorrió mapa, Liberia, «Leer más», Confianza y compartir sin errores de consola. Faltan las capturas de 360/768/escritorio en Sol y tres rondas de ojos frescos sin un defecto real.

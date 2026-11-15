@@ -225,7 +225,7 @@ img, svg { max-width: 100%; }
   text-align: left;
   color: #c5d5cc;
 }
-.rail a[aria-current="page"] { color: #f4fff6; background: #1f8a4c; }
+.rail a[aria-current="page"] { color: #ffffff; background: #0c5a30; }
 .stage { position: relative; flex: 1; min-width: 0; min-height: 0; }
 .map-root {
   position: absolute;
