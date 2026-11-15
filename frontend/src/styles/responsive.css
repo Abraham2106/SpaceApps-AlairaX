@@ -55,7 +55,9 @@
   .map-legend { left: 300px; top: calc(24px + var(--hit)); bottom: auto; width: min(240px, calc(100% - 404px)); }
   .legend-top > :nth-child(2) { text-align: center; }
   .bottom-hud { left: 16px; right: 16px; }
-  .attrib { left: 4px; right: 4px; }
+  .attrib-bar { left: 4px; right: 4px; }
+  .imagery-badge { flex: 1 1 auto; max-width: none; }
+  .attrib-bar .attrib { flex: 0 1 auto; }
   .year-pop {
     position: absolute;
     bottom: calc(100% + 8px);
@@ -162,7 +164,9 @@
     top: 8px;
     right: 8px;
   }
-  .attrib { left: 8px; right: 8px; top: 60px; bottom: auto; }
+  .attrib-bar { left: 8px; right: 8px; top: 60px; bottom: auto; flex-wrap: wrap; }
+  .imagery-badge { max-width: 100%; }
+  .attrib-bar .attrib { flex-basis: 100%; }
   .screen { padding: 16px 16px 24px; }
   .split { grid-template-columns: 1fr; }
 }

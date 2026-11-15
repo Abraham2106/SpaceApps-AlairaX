@@ -2,6 +2,7 @@ import { create } from "zustand";
 import type { BasemapId, Lang, MetricId, ScenarioId, ThemeName } from "./lib/types";
 import { METRIC_IDS, SCENARIO_IDS } from "./lib/types";
 import type { LocalizedMessage } from "./lib/i18n";
+import { clampImageryDate, defaultImageryDate, isIsoDay } from "./map/imagery/catalog";
 
 export function isCantonBoundaryMessage(message: LocalizedMessage | null): message is LocalizedMessage & {
   key: "mapReading.noSimulationAvailable" | "nandaMap.noSimulationAvailableModelStays";
@@ -31,6 +32,8 @@ type Store = {
   lang: Lang;
   theme: ThemeName;
   basemap: BasemapId;
+  /** Día de las imágenes NASA (MODIS y HLS), AAAA-MM-DD. Independiente del reproductor de temporada. */
+  imageryDate: string;
   overlays: Overlays;
   selected: string[];
   selectedCenter: [number, number] | null;
@@ -45,6 +48,7 @@ type Store = {
   setLang: (lang: Lang) => void;
   setTheme: (theme: ThemeName) => void;
   setBasemap: (id: BasemapId) => void;
+  setImageryDate: (value: string) => void;
   toggleOverlay: (key: keyof Overlays) => void;
   toggleCanton: (id: string, extend: boolean) => void;
   selectOnly: (id: string, center?: [number, number]) => void;
@@ -75,6 +79,7 @@ export const useInstrument = create<Store>((set, get) => ({
   lang: storedLang === "en" ? "en" : "es",
   theme: storedTheme === "sun" || storedTheme === "night" ? storedTheme : contrast ? "sun" : "night",
   basemap: "satellite",
+  imageryDate: defaultImageryDate(),
   overlays: { cantons: true, hex: false, terrain: true, plates: false, osm: true },
   selected: [],
   selectedCenter: null,
@@ -95,6 +100,7 @@ export const useInstrument = create<Store>((set, get) => ({
     set({ theme });
   },
   setBasemap: (basemap) => set({ basemap }),
+  setImageryDate: (value) => set({ imageryDate: clampImageryDate(value) }),
   toggleOverlay: (key) => set({ overlays: { ...get().overlays, [key]: !get().overlays[key] } }),
   toggleCanton: (id, extend) => {
     const current = get().selected;
@@ -122,7 +128,11 @@ export const useInstrument = create<Store>((set, get) => ({
     const cantons = params.get("c");
     const yearA = params.get("ya");
     const yearB = params.get("yb");
+    const basemap = params.get("s");
+    const imageryDate = params.get("i");
     set({
+      basemap: basemap === "satellite" || basemap === "modis" || basemap === "marble" ? basemap : get().basemap,
+      imageryDate: isIsoDay(imageryDate) ? clampImageryDate(imageryDate) : get().imageryDate,
       scenarioId: isScenario(scenario) ? scenario : get().scenarioId,
       metric: isMetric(metric) ? metric : get().metric,
       theme: theme === "sun" || theme === "night" ? theme : get().theme,
@@ -142,6 +152,8 @@ export const useInstrument = create<Store>((set, get) => ({
     if (state.selected.length) params.set("c", state.selected.join(","));
     if (state.yearA) params.set("ya", String(state.yearA));
     if (state.yearB) params.set("yb", String(state.yearB));
+    if (state.basemap !== "satellite") params.set("s", state.basemap);
+    if (state.basemap === "modis" && state.imageryDate !== defaultImageryDate()) params.set("i", state.imageryDate);
     return params;
   },
 }));
