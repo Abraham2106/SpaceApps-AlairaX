@@ -1,0 +1,75 @@
+{
+  "_mock": true,
+  "purpose": "Fixture sintético solo para diseñar el mapa. No es una salida del modelo ni una interpolación. Reemplazable por un archivo real por cantón.",
+  "warnings": [
+    "SYNTHETIC SPATIAL FIXTURE: invented per-canton spread for interface demonstration. Not FAO-56, not NASA, not a field measurement."
+  ],
+  "cantons": {
+    "la-cruz": {
+      "_mock": true,
+      "modeled_water_deficit_mm": { "rice_melon": 168, "rice_legume": 154, "rice_sorghum": 142, "delta_legume": -14, "delta_sorghum": -26 },
+      "crop_water_demand_mm": { "rice_melon": 820, "rice_legume": 840, "rice_sorghum": 860, "delta_legume": 20, "delta_sorghum": 40 },
+      "water_stress_days": { "rice_melon": 18, "rice_legume": 16, "rice_sorghum": 15, "delta_legume": -2, "delta_sorghum": -3 }
+    },
+    "liberia": {
+      "_mock": true,
+      "modeled_water_deficit_mm": { "rice_melon": 140, "rice_legume": 130, "rice_sorghum": 120, "delta_legume": -10, "delta_sorghum": -20 },
+      "crop_water_demand_mm": { "rice_melon": 740, "rice_legume": 760, "rice_sorghum": 780, "delta_legume": 20, "delta_sorghum": 40 },
+      "water_stress_days": { "rice_melon": 11, "rice_legume": 12, "rice_sorghum": 13, "delta_legume": 1, "delta_sorghum": 2 }
+    },
+    "bagaces": {
+      "_mock": true,
+      "modeled_water_deficit_mm": { "rice_melon": 156, "rice_legume": 144, "rice_sorghum": 134, "delta_legume": -12, "delta_sorghum": -22 },
+      "crop_water_demand_mm": { "rice_melon": 790, "rice_legume": 808, "rice_sorghum": 826, "delta_legume": 18, "delta_sorghum": 36 },
+      "water_stress_days": { "rice_melon": 15, "rice_legume": 14, "rice_sorghum": 13, "delta_legume": -1, "delta_sorghum": -2 }
+    },
+    "carrillo": {
+      "_mock": true,
+      "modeled_water_deficit_mm": { "rice_melon": 128, "rice_legume": 118, "rice_sorghum": 110, "delta_legume": -10, "delta_sorghum": -18 },
+      "crop_water_demand_mm": { "rice_melon": 730, "rice_legume": 748, "rice_sorghum": 766, "delta_legume": 18, "delta_sorghum": 36 },
+      "water_stress_days": { "rice_melon": 10, "rice_legume": 11, "rice_sorghum": 12, "delta_legume": 1, "delta_sorghum": 2 }
+    },
+    "canas": {
+      "_mock": true,
+      "modeled_water_deficit_mm": { "rice_melon": 134, "rice_legume": 124, "rice_sorghum": 116, "delta_legume": -10, "delta_sorghum": -18 },
+      "crop_water_demand_mm": { "rice_melon": 750, "rice_legume": 768, "rice_sorghum": 786, "delta_legume": 18, "delta_sorghum": 36 },
+      "water_stress_days": { "rice_melon": 12, "rice_legume": 12, "rice_sorghum": 13, "delta_legume": 0, "delta_sorghum": 1 }
+    },
+    "tilaran": {
+      "_mock": true,
+      "modeled_water_deficit_mm": { "rice_melon": 96, "rice_legume": 90, "rice_sorghum": 86, "delta_legume": -6, "delta_sorghum": -10 },
+      "crop_water_demand_mm": { "rice_melon": 700, "rice_legume": 716, "rice_sorghum": 732, "delta_legume": 16, "delta_sorghum": 32 },
+      "water_stress_days": { "rice_melon": 7, "rice_legume": 7, "rice_sorghum": 8, "delta_legume": 0, "delta_sorghum": 1 }
+    },
+    "abangares": {
+      "_mock": true,
+      "modeled_water_deficit_mm": { "rice_melon": 118, "rice_legume": 110, "rice_sorghum": 104, "delta_legume": -8, "delta_sorghum": -14 },
+      "crop_water_demand_mm": { "rice_melon": 724, "rice_legume": 740, "rice_sorghum": 756, "delta_legume": 16, "delta_sorghum": 32 },
+      "water_stress_days": { "rice_melon": 9, "rice_legume": 10, "rice_sorghum": 11, "delta_legume": 1, "delta_sorghum": 2 }
+    },
+    "nicoya": {
+      "_mock": true,
+      "modeled_water_deficit_mm": { "rice_melon": 146, "rice_legume": 136, "rice_sorghum": 128, "delta_legume": -10, "delta_sorghum": -18 },
+      "crop_water_demand_mm": { "rice_melon": 770, "rice_legume": 788, "rice_sorghum": 806, "delta_legume": 18, "delta_sorghum": 36 },
+      "water_stress_days": { "rice_melon": 13, "rice_legume": 13, "rice_sorghum": 14, "delta_legume": 0, "delta_sorghum": 1 }
+    },
+    "santa-cruz": {
+      "_mock": true,
+      "modeled_water_deficit_mm": { "rice_melon": 152, "rice_legume": 140, "rice_sorghum": 132, "delta_legume": -12, "delta_sorghum": -20 },
+      "crop_water_demand_mm": { "rice_melon": 784, "rice_legume": 802, "rice_sorghum": 820, "delta_legume": 18, "delta_sorghum": 36 },
+      "water_stress_days": { "rice_melon": 14, "rice_legume": 14, "rice_sorghum": 15, "delta_legume": 0, "delta_sorghum": 1 }
+    },
+    "hojancha": {
+      "_mock": true,
+      "modeled_water_deficit_mm": { "rice_melon": 122, "rice_legume": 114, "rice_sorghum": 108, "delta_legume": -8, "delta_sorghum": -14 },
+      "crop_water_demand_mm": { "rice_melon": 736, "rice_legume": 752, "rice_sorghum": 768, "delta_legume": 16, "delta_sorghum": 32 },
+      "water_stress_days": { "rice_melon": 10, "rice_legume": 10, "rice_sorghum": 11, "delta_legume": 0, "delta_sorghum": 1 }
+    },
+    "nandayure": {
+      "_mock": true,
+      "modeled_water_deficit_mm": { "rice_melon": 126, "rice_legume": 116, "rice_sorghum": 110, "delta_legume": -10, "delta_sorghum": -16 },
+      "crop_water_demand_mm": { "rice_melon": 744, "rice_legume": 760, "rice_sorghum": 776, "delta_legume": 16, "delta_sorghum": 32 },
+      "water_stress_days": { "rice_melon": 11, "rice_legume": 11, "rice_sorghum": 12, "delta_legume": 0, "delta_sorghum": 1 }
+    }
+  }
+}

@@ -21,9 +21,15 @@ htmlcov/
 # Salidas locales del kernel
 /outputs/
 
+# Impeccable ships a local detector binary; the skill text stays in the repo.
+.cursor/skills/impeccable/scripts/bin/
+
 # Frontend
 node_modules/
 dist/
+frontend/test-results/
+frontend/playwright-report/
+frontend/blob-report/
 
 # Sistema
 .DS_Store
