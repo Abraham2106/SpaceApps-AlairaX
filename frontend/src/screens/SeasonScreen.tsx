@@ -6,9 +6,10 @@ import { formatValue } from "../lib/format";
 import { ROTATION_ORDER, readingMetric, rotationName } from "../lib/plain";
 import { QueryState } from "../components/QueryState";
 import { SoilChart } from "../components/Instrument";
-import { comparisonYears, hasDailyBalance, seasonDates, SEASON_MONTHS } from "../lib/season";
+import { useRecentSeasons } from "../data/recent";
+import type { MetricId, RotationId } from "../lib/types";
 
-const DATES = ["windowStart", "rice", "cowpeaSorghum", "windowEnd", "melon"] as const;
+
 
 export function SeasonScreen() {
   const lang = useInstrument((state) => state.lang);
@@ -20,73 +21,54 @@ export function SeasonScreen() {
   const loaded = comparison.data;
   const compare = loaded?.compare;
   const names = Object.fromEntries((loaded?.catalog.rotations ?? []).map((item) => [item.id, item.name]));
-  const years = comparisonYears(compare);
+  const recent = useRecentSeasons();
+  const years = recent.data?.seasons.map(({ year }) => year).sort((a, b) => b - a) ?? [];
   const activeA = yearA !== null && years.includes(yearA) ? yearA : years[0];
-  const activeB = yearB !== null && years.includes(yearB) ? yearB : years.at(-1);
-  const dates = seasonDates(compare, activeA ?? null);
-  const baselineRuns = compare?.rotations.find(({ rotation_id }) => rotation_id === compare.baseline_rotation_id)?.runs ?? [];
-  const baselineRows = ((baselineRuns.find(({ year }) => year === activeA) ?? baselineRuns[0])?.daily_balance ?? [])
+  const activeB = yearB !== null && years.includes(yearB) ? yearB : years[1] ?? years[0];
+  const seasonA = recent.data?.seasons.find(({ year }) => year === activeA);
+  const seasonB = recent.data?.seasons.find(({ year }) => year === activeB);
+  const dates = seasonA?.runs[0]?.daily_balance.map(({ date }) => date) ?? [];
+  const baselineId = compare?.baseline_rotation_id ?? "rice_melon";
+  const baselineRows = (seasonA?.runs.find(({ rotation_id }) => rotation_id === baselineId)?.daily_balance ?? [])
     .map((row) => ({ date: row.date, value: row.soil_water_storage_mm, status: row.water_stress }));
+  const cutoff = [seasonA?.end.slice(5), seasonB?.end.slice(5)].filter((value): value is string => Boolean(value)).sort()[0] ?? "12-31";
+  function total(season: typeof seasonA, rotation: RotationId, metric: MetricId): number | null {
+    const days = season?.runs.find(({ rotation_id }) => rotation_id === rotation)?.daily_balance
+      .filter(({ date }) => date.slice(5) <= cutoff);
+    if (!days?.length || days.some((day) => day.crop_water_demand_mm === null || day.modeled_water_deficit_mm === null)) return null;
+    if (metric === "water_stress_days") return days.filter(({ water_stress }) => water_stress === true).length;
+    return days.reduce((sum, day) => sum + (day[metric] ?? 0), 0);
+  }
   const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-CR" : "en-US", {
     dateStyle: "medium", timeZone: "UTC",
   });
 
   return (
-    <div className="screen">
+    <div className="screen texture-waves">
       <article className="detail-page">
         <header className="detail-header">
           <h1>{translate(lang, "common.season")}</h1>
           <p>{translate(lang, "season.referenceDatesYearlyFiguresFrom")}</p>
         </header>
         <div className="detail-layout">
-          <section className="detail-panel" aria-labelledby="season-calendar">
-            <h2 id="season-calendar">{translate(lang, dates.length ? "mapSeasonPlayer.modeledSeason" : "season.provisionalCalendar")}</h2>
-            {dates.length ? (
-              <>
-                <p className="detail-lead">{dateFormat.formatRange(new Date(dates[0]), new Date(dates[dates.length - 1]))}</p>
-                {baselineRows.some(({ value }) => value !== null) ? (
-                  <>
-                    <h3 className="season-chart-title">{lang === "es" ? "Agua en el suelo" : "Water in the soil"} · {rotationName(compare!.baseline_rotation_id, lang, names[compare!.baseline_rotation_id])}</h3>
-                    <SoilChart rows={baselineRows} lang={lang} height={150} />
-                  </>
-                ) : null}
-              </>
-            ) : compare?._mock ? <>
-            <div className="detail-notice">
-              <p>{translate(lang, "season.documentedDatesAwaitingValidationWith")}</p>
-            </div>
-            <div className="season-months" aria-hidden="true">
-              {SEASON_MONTHS.map(([, month]) => <span key={month}>{translate(lang, month)}</span>)}
-              <span className="season-window" />
-            </div>
-            <ol className="season-events">
-              {DATES.map((event) => (
-                <li key={event}>
-                  <span className="season-date">{translate(lang, `calendar.${event}Date`)}</span>
-                  <div>
-                    <h3>{translate(lang, `calendar.${event}`)}</h3>
-                    <p>{translate(lang, `calendar.${event}Detail`)}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            </> : null}
-          </section>
+          {dates.length ? (
+            <section className="detail-panel" aria-labelledby="season-calendar">
+              <h2 id="season-calendar">{translate(lang, "mapSeasonPlayer.modeledSeason")}</h2>
+              <p className="detail-lead">{dateFormat.formatRange(new Date(dates[0]), new Date(dates[dates.length - 1]))}</p>
+              {baselineRows.some(({ value }) => value !== null) ? (
+                <>
+                  <h3 className="season-chart-title">{lang === "es" ? "Agua en el suelo" : "Water in the soil"} · {rotationName(baselineId, lang, names[baselineId])}</h3>
+                  <SoilChart rows={baselineRows} lang={lang} height={150} />
+                </>
+              ) : null}
+            </section>
+          ) : null}
           <section className="detail-panel" aria-labelledby="season-years">
             <h2 id="season-years">{translate(lang, "common.compareYears")}</h2>
-            <p className="detail-lead">{translate(lang, "season.fullCycleFiguresYearsSimilar")}</p>
-            <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
+            <p className="detail-lead">{lang === "es" ? "Compará las tres rotaciones con el clima de cada año." : "Compare the three rotations using each year’s weather."}</p>
+            <QueryState pending={recent.isPending} error={recent.isError} onRetry={() => recent.refetch()} lang={lang} />
             {loaded && !compare ? <p className="warn" role="alert">{comparisonError(loaded, lang)}</p> : null}
-            {compare && !hasDailyBalance(compare) ? (
-              <div className="detail-notice">
-                <strong>{translate(lang, "season.dailyBalanceNoData")}</strong>
-                <p>{translate(lang, "season.tableListsAvailableFiguresCycle")}</p>
-              </div>
-            ) : null}
-            {compare && (activeA === undefined || activeB === undefined) ? (
-              <p className="muted">{translate(lang, "season.yearsSampleNoData")}</p>
-            ) : null}
-            {compare && activeA !== undefined && activeB !== undefined ? (
+            {seasonA && seasonB && activeA !== undefined && activeB !== undefined ? (
               <>
                 <div className="season-year-fields">
                   <div className="detail-field">
@@ -102,6 +84,7 @@ export function SeasonScreen() {
                     </select>
                   </div>
                 </div>
+                <p className="detail-footnote">{lang === "es" ? "Periodo comparado en ambos años" : "Period compared in both years"} · {dateFormat.formatRange(new Date(`${activeA}-01-01`), new Date(`${activeA}-${cutoff}`))}</p>
                 <table className="detail-table">
                   <caption>{readingMetric(metric, lang)}</caption>
                   <thead>
@@ -113,12 +96,11 @@ export function SeasonScreen() {
                   </thead>
                   <tbody>
                     {ROTATION_ORDER.map((id) => {
-                      const runs = compare.rotations.find((rotation) => rotation.rotation_id === id)?.runs ?? [];
                       return (
                         <tr key={id}>
                           <th scope="row">{rotationName(id, lang, names[id])}</th>
-                          <td>{formatValue(runs.find(({ year }) => year === activeA)?.metrics[metric] ?? null, metric, lang)}</td>
-                          <td>{formatValue(runs.find(({ year }) => year === activeB)?.metrics[metric] ?? null, metric, lang)}</td>
+                          <td>{formatValue(total(seasonA, id, metric), metric, lang)}</td>
+                          <td>{formatValue(total(seasonB, id, metric), metric, lang)}</td>
                         </tr>
                       );
                     })}
@@ -126,7 +108,7 @@ export function SeasonScreen() {
                 </table>
               </>
             ) : null}
-            <p className="detail-footnote">{translate(lang, "season.monitoring2026OngoingComparisonUses")}</p>
+
           </section>
         </div>
       </article>

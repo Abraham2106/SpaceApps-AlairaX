@@ -1,0 +1,981 @@
+{
+  "schema_version": "0.1.0",
+  "_mock": false,
+  "generado": "2026-11-15T13:02:45.758211+00:00",
+  "zona": {
+    "id": "provisional-point",
+    "name": "Provisional POWER grid point",
+    "latitude": 10.3197162,
+    "longitude": -85.1120922,
+    "validated": false
+  },
+  "source_refs": [
+    "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.3197162&longitude=-85.1120922&start=20140101&end=20140331&format=JSON&time-standard=LST&units=metric"
+  ],
+  "provenance": {
+    "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR%2CT2M_MIN%2CT2M_MAX%2CRH2M%2CWS2M%2CALLSKY_SFC_SW_DWN&community=AG&latitude=10.3197162&longitude=-85.1120922&start=20140101&end=20140331&format=JSON&time-standard=LST&units=metric",
+    "fetched_at": "2026-11-15T13:02:45.758211+00:00",
+    "sha256": "46b9e7a9a6e56b138c4d360337501f1e7791b7370b523ecb543cbe670b720e49",
+    "status": 200,
+    "content_type": "application/json",
+    "etag": null,
+    "last_modified": null
+  },
+  "warnings": [
+    "Location is provisional; SoilGrids and farm suitability are not validated.",
+    "Este archivo es solo el clima POWER de la estación. La demanda comparable está en datasets/processed/validation/canas-ucr-2014.json y es ET0 menos lluvia. La retención publicada de Cañas (0,4411 y 0,6116) queda registrada ahí y no entra en esa resta. El punto de marchitez no está publicado. No se usó SoilGrids ni el suelo de Liberia para esa demanda.",
+    "ET0 is null until the scientific kernel calculates it.",
+    "No IMN rainfall calibration is applied; bias claims require independent validation."
+  ],
+  "start": "2014-01-01",
+  "end": "2014-03-31",
+  "days": [
+    {
+      "date": "2014-01-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.8,
+      "tmin_c": 21.27,
+      "tmax_c": 27.5,
+      "relative_humidity_pct": 86.02,
+      "wind_speed_2m_m_s": 2.93,
+      "solar_radiation_mj_m2_day": 19.79
+    },
+    {
+      "date": "2014-01-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.35,
+      "tmin_c": 20.06,
+      "tmax_c": 27.36,
+      "relative_humidity_pct": 86.68,
+      "wind_speed_2m_m_s": 2.4,
+      "solar_radiation_mj_m2_day": 20.39
+    },
+    {
+      "date": "2014-01-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.88,
+      "tmax_c": 26.99,
+      "relative_humidity_pct": 86.15,
+      "wind_speed_2m_m_s": 2.65,
+      "solar_radiation_mj_m2_day": 19.08
+    },
+    {
+      "date": "2014-01-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 20.92,
+      "tmax_c": 28.29,
+      "relative_humidity_pct": 86.61,
+      "wind_speed_2m_m_s": 2.21,
+      "solar_radiation_mj_m2_day": 20.65
+    },
+    {
+      "date": "2014-01-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.15,
+      "tmin_c": 21.27,
+      "tmax_c": 28.31,
+      "relative_humidity_pct": 85.99,
+      "wind_speed_2m_m_s": 2.36,
+      "solar_radiation_mj_m2_day": 19.99
+    },
+    {
+      "date": "2014-01-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 20.66,
+      "tmax_c": 27.5,
+      "relative_humidity_pct": 84.46,
+      "wind_speed_2m_m_s": 2.54,
+      "solar_radiation_mj_m2_day": 19.46
+    },
+    {
+      "date": "2014-01-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.17,
+      "tmin_c": 20.0,
+      "tmax_c": 26.71,
+      "relative_humidity_pct": 87.49,
+      "wind_speed_2m_m_s": 2.46,
+      "solar_radiation_mj_m2_day": 13.28
+    },
+    {
+      "date": "2014-01-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 20.96,
+      "tmax_c": 27.64,
+      "relative_humidity_pct": 86.18,
+      "wind_speed_2m_m_s": 2.15,
+      "solar_radiation_mj_m2_day": 17.67
+    },
+    {
+      "date": "2014-01-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.54,
+      "tmin_c": 20.76,
+      "tmax_c": 28.08,
+      "relative_humidity_pct": 85.67,
+      "wind_speed_2m_m_s": 2.63,
+      "solar_radiation_mj_m2_day": 18.21
+    },
+    {
+      "date": "2014-01-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.31,
+      "tmin_c": 20.02,
+      "tmax_c": 27.26,
+      "relative_humidity_pct": 85.11,
+      "wind_speed_2m_m_s": 2.58,
+      "solar_radiation_mj_m2_day": 21.37
+    },
+    {
+      "date": "2014-01-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.28,
+      "tmax_c": 27.92,
+      "relative_humidity_pct": 85.31,
+      "wind_speed_2m_m_s": 1.93,
+      "solar_radiation_mj_m2_day": 20.8
+    },
+    {
+      "date": "2014-01-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.79,
+      "tmax_c": 27.36,
+      "relative_humidity_pct": 83.99,
+      "wind_speed_2m_m_s": 3.04,
+      "solar_radiation_mj_m2_day": 20.15
+    },
+    {
+      "date": "2014-01-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 20.37,
+      "tmax_c": 27.53,
+      "relative_humidity_pct": 83.32,
+      "wind_speed_2m_m_s": 2.48,
+      "solar_radiation_mj_m2_day": 21.32
+    },
+    {
+      "date": "2014-01-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.11,
+      "tmin_c": 19.57,
+      "tmax_c": 27.86,
+      "relative_humidity_pct": 85.39,
+      "wind_speed_2m_m_s": 2.12,
+      "solar_radiation_mj_m2_day": 20.82
+    },
+    {
+      "date": "2014-01-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.31,
+      "tmax_c": 28.05,
+      "relative_humidity_pct": 85.35,
+      "wind_speed_2m_m_s": 2.39,
+      "solar_radiation_mj_m2_day": 21.32
+    },
+    {
+      "date": "2014-01-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.11,
+      "tmin_c": 20.59,
+      "tmax_c": 26.93,
+      "relative_humidity_pct": 84.36,
+      "wind_speed_2m_m_s": 3.03,
+      "solar_radiation_mj_m2_day": 19.46
+    },
+    {
+      "date": "2014-01-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.43,
+      "tmin_c": 20.57,
+      "tmax_c": 27.56,
+      "relative_humidity_pct": 84.53,
+      "wind_speed_2m_m_s": 3.0,
+      "solar_radiation_mj_m2_day": 19.32
+    },
+    {
+      "date": "2014-01-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.97,
+      "tmax_c": 27.65,
+      "relative_humidity_pct": 83.11,
+      "wind_speed_2m_m_s": 3.5,
+      "solar_radiation_mj_m2_day": 18.77
+    },
+    {
+      "date": "2014-01-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.03,
+      "tmin_c": 20.57,
+      "tmax_c": 27.67,
+      "relative_humidity_pct": 82.64,
+      "wind_speed_2m_m_s": 3.16,
+      "solar_radiation_mj_m2_day": 20.92
+    },
+    {
+      "date": "2014-01-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.25,
+      "tmin_c": 21.55,
+      "tmax_c": 28.14,
+      "relative_humidity_pct": 83.68,
+      "wind_speed_2m_m_s": 2.77,
+      "solar_radiation_mj_m2_day": 16.28
+    },
+    {
+      "date": "2014-01-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.46,
+      "tmin_c": 21.3,
+      "tmax_c": 28.67,
+      "relative_humidity_pct": 83.96,
+      "wind_speed_2m_m_s": 2.63,
+      "solar_radiation_mj_m2_day": 18.48
+    },
+    {
+      "date": "2014-01-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.29,
+      "tmin_c": 21.01,
+      "tmax_c": 27.21,
+      "relative_humidity_pct": 82.59,
+      "wind_speed_2m_m_s": 3.55,
+      "solar_radiation_mj_m2_day": 19.49
+    },
+    {
+      "date": "2014-01-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.18,
+      "tmin_c": 20.42,
+      "tmax_c": 27.51,
+      "relative_humidity_pct": 82.22,
+      "wind_speed_2m_m_s": 3.33,
+      "solar_radiation_mj_m2_day": 21.37
+    },
+    {
+      "date": "2014-01-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.15,
+      "tmax_c": 27.71,
+      "relative_humidity_pct": 82.14,
+      "wind_speed_2m_m_s": 3.28,
+      "solar_radiation_mj_m2_day": 21.8
+    },
+    {
+      "date": "2014-01-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.78,
+      "tmax_c": 27.54,
+      "relative_humidity_pct": 82.77,
+      "wind_speed_2m_m_s": 2.8,
+      "solar_radiation_mj_m2_day": 22.14
+    },
+    {
+      "date": "2014-01-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.84,
+      "tmax_c": 28.12,
+      "relative_humidity_pct": 82.91,
+      "wind_speed_2m_m_s": 2.49,
+      "solar_radiation_mj_m2_day": 21.52
+    },
+    {
+      "date": "2014-01-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.2,
+      "tmax_c": 28.02,
+      "relative_humidity_pct": 80.84,
+      "wind_speed_2m_m_s": 2.3,
+      "solar_radiation_mj_m2_day": 21.69
+    },
+    {
+      "date": "2014-01-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 18.58,
+      "tmax_c": 28.64,
+      "relative_humidity_pct": 82.09,
+      "wind_speed_2m_m_s": 2.11,
+      "solar_radiation_mj_m2_day": 22.86
+    },
+    {
+      "date": "2014-01-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.58,
+      "tmax_c": 28.58,
+      "relative_humidity_pct": 81.49,
+      "wind_speed_2m_m_s": 2.26,
+      "solar_radiation_mj_m2_day": 22.18
+    },
+    {
+      "date": "2014-01-30",
+      "et0_mm": null,
+      "precipitation_mm": 0.13,
+      "tmin_c": 20.2,
+      "tmax_c": 28.19,
+      "relative_humidity_pct": 80.67,
+      "wind_speed_2m_m_s": 3.06,
+      "solar_radiation_mj_m2_day": 21.1
+    },
+    {
+      "date": "2014-01-31",
+      "et0_mm": null,
+      "precipitation_mm": 0.25,
+      "tmin_c": 18.38,
+      "tmax_c": 27.47,
+      "relative_humidity_pct": 77.33,
+      "wind_speed_2m_m_s": 2.82,
+      "solar_radiation_mj_m2_day": 22.66
+    },
+    {
+      "date": "2014-02-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.32,
+      "tmin_c": 17.84,
+      "tmax_c": 28.43,
+      "relative_humidity_pct": 82.06,
+      "wind_speed_2m_m_s": 2.38,
+      "solar_radiation_mj_m2_day": 23.83
+    },
+    {
+      "date": "2014-02-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.71,
+      "tmax_c": 29.3,
+      "relative_humidity_pct": 79.26,
+      "wind_speed_2m_m_s": 2.08,
+      "solar_radiation_mj_m2_day": 21.87
+    },
+    {
+      "date": "2014-02-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.11,
+      "tmax_c": 28.83,
+      "relative_humidity_pct": 78.39,
+      "wind_speed_2m_m_s": 2.03,
+      "solar_radiation_mj_m2_day": 20.2
+    },
+    {
+      "date": "2014-02-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.55,
+      "tmax_c": 29.4,
+      "relative_humidity_pct": 79.03,
+      "wind_speed_2m_m_s": 2.15,
+      "solar_radiation_mj_m2_day": 20.91
+    },
+    {
+      "date": "2014-02-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 20.73,
+      "tmax_c": 29.1,
+      "relative_humidity_pct": 78.38,
+      "wind_speed_2m_m_s": 2.45,
+      "solar_radiation_mj_m2_day": 20.45
+    },
+    {
+      "date": "2014-02-06",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.86,
+      "tmax_c": 29.0,
+      "relative_humidity_pct": 77.86,
+      "wind_speed_2m_m_s": 2.68,
+      "solar_radiation_mj_m2_day": 21.53
+    },
+    {
+      "date": "2014-02-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 18.9,
+      "tmax_c": 28.45,
+      "relative_humidity_pct": 75.49,
+      "wind_speed_2m_m_s": 2.65,
+      "solar_radiation_mj_m2_day": 24.16
+    },
+    {
+      "date": "2014-02-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.31,
+      "tmin_c": 20.2,
+      "tmax_c": 27.99,
+      "relative_humidity_pct": 78.96,
+      "wind_speed_2m_m_s": 2.81,
+      "solar_radiation_mj_m2_day": 21.61
+    },
+    {
+      "date": "2014-02-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.23,
+      "tmin_c": 21.21,
+      "tmax_c": 29.62,
+      "relative_humidity_pct": 78.95,
+      "wind_speed_2m_m_s": 3.34,
+      "solar_radiation_mj_m2_day": 19.71
+    },
+    {
+      "date": "2014-02-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.35,
+      "tmin_c": 21.41,
+      "tmax_c": 29.55,
+      "relative_humidity_pct": 77.92,
+      "wind_speed_2m_m_s": 3.13,
+      "solar_radiation_mj_m2_day": 21.29
+    },
+    {
+      "date": "2014-02-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.32,
+      "tmin_c": 21.06,
+      "tmax_c": 30.2,
+      "relative_humidity_pct": 78.14,
+      "wind_speed_2m_m_s": 2.97,
+      "solar_radiation_mj_m2_day": 20.65
+    },
+    {
+      "date": "2014-02-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.08,
+      "tmin_c": 21.55,
+      "tmax_c": 30.9,
+      "relative_humidity_pct": 77.24,
+      "wind_speed_2m_m_s": 2.59,
+      "solar_radiation_mj_m2_day": 22.35
+    },
+    {
+      "date": "2014-02-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.06,
+      "tmin_c": 20.14,
+      "tmax_c": 31.43,
+      "relative_humidity_pct": 76.5,
+      "wind_speed_2m_m_s": 2.24,
+      "solar_radiation_mj_m2_day": 23.42
+    },
+    {
+      "date": "2014-02-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.21,
+      "tmin_c": 21.36,
+      "tmax_c": 30.63,
+      "relative_humidity_pct": 76.14,
+      "wind_speed_2m_m_s": 2.71,
+      "solar_radiation_mj_m2_day": 22.6
+    },
+    {
+      "date": "2014-02-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.47,
+      "tmin_c": 21.02,
+      "tmax_c": 30.0,
+      "relative_humidity_pct": 76.68,
+      "wind_speed_2m_m_s": 3.25,
+      "solar_radiation_mj_m2_day": 23.0
+    },
+    {
+      "date": "2014-02-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.06,
+      "tmin_c": 21.55,
+      "tmax_c": 30.03,
+      "relative_humidity_pct": 74.56,
+      "wind_speed_2m_m_s": 3.74,
+      "solar_radiation_mj_m2_day": 23.0
+    },
+    {
+      "date": "2014-02-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.04,
+      "tmin_c": 20.65,
+      "tmax_c": 29.55,
+      "relative_humidity_pct": 72.33,
+      "wind_speed_2m_m_s": 3.46,
+      "solar_radiation_mj_m2_day": 23.77
+    },
+    {
+      "date": "2014-02-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.44,
+      "tmax_c": 29.86,
+      "relative_humidity_pct": 74.55,
+      "wind_speed_2m_m_s": 3.35,
+      "solar_radiation_mj_m2_day": 22.28
+    },
+    {
+      "date": "2014-02-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.17,
+      "tmax_c": 30.35,
+      "relative_humidity_pct": 72.0,
+      "wind_speed_2m_m_s": 2.87,
+      "solar_radiation_mj_m2_day": 23.89
+    },
+    {
+      "date": "2014-02-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 18.24,
+      "tmax_c": 31.19,
+      "relative_humidity_pct": 71.51,
+      "wind_speed_2m_m_s": 2.39,
+      "solar_radiation_mj_m2_day": 25.51
+    },
+    {
+      "date": "2014-02-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.83,
+      "tmax_c": 30.95,
+      "relative_humidity_pct": 72.35,
+      "wind_speed_2m_m_s": 2.65,
+      "solar_radiation_mj_m2_day": 24.13
+    },
+    {
+      "date": "2014-02-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.16,
+      "tmin_c": 20.21,
+      "tmax_c": 31.16,
+      "relative_humidity_pct": 73.22,
+      "wind_speed_2m_m_s": 2.69,
+      "solar_radiation_mj_m2_day": 21.61
+    },
+    {
+      "date": "2014-02-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.39,
+      "tmin_c": 20.34,
+      "tmax_c": 31.03,
+      "relative_humidity_pct": 72.71,
+      "wind_speed_2m_m_s": 2.92,
+      "solar_radiation_mj_m2_day": 23.96
+    },
+    {
+      "date": "2014-02-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.66,
+      "tmax_c": 31.21,
+      "relative_humidity_pct": 71.05,
+      "wind_speed_2m_m_s": 2.75,
+      "solar_radiation_mj_m2_day": 24.11
+    },
+    {
+      "date": "2014-02-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.13,
+      "tmin_c": 18.96,
+      "tmax_c": 31.23,
+      "relative_humidity_pct": 67.93,
+      "wind_speed_2m_m_s": 2.64,
+      "solar_radiation_mj_m2_day": 25.22
+    },
+    {
+      "date": "2014-02-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.37,
+      "tmax_c": 32.5,
+      "relative_humidity_pct": 65.72,
+      "wind_speed_2m_m_s": 1.49,
+      "solar_radiation_mj_m2_day": 23.9
+    },
+    {
+      "date": "2014-02-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 18.93,
+      "tmax_c": 34.16,
+      "relative_humidity_pct": 63.04,
+      "wind_speed_2m_m_s": 1.18,
+      "solar_radiation_mj_m2_day": 25.42
+    },
+    {
+      "date": "2014-02-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.72,
+      "tmax_c": 33.07,
+      "relative_humidity_pct": 65.55,
+      "wind_speed_2m_m_s": 0.98,
+      "solar_radiation_mj_m2_day": 23.94
+    },
+    {
+      "date": "2014-03-01",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.27,
+      "tmax_c": 32.46,
+      "relative_humidity_pct": 68.4,
+      "wind_speed_2m_m_s": 2.78,
+      "solar_radiation_mj_m2_day": 25.43
+    },
+    {
+      "date": "2014-03-02",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.83,
+      "tmax_c": 31.54,
+      "relative_humidity_pct": 68.93,
+      "wind_speed_2m_m_s": 3.26,
+      "solar_radiation_mj_m2_day": 24.86
+    },
+    {
+      "date": "2014-03-03",
+      "et0_mm": null,
+      "precipitation_mm": 0.06,
+      "tmin_c": 19.92,
+      "tmax_c": 32.28,
+      "relative_humidity_pct": 68.15,
+      "wind_speed_2m_m_s": 2.17,
+      "solar_radiation_mj_m2_day": 23.49
+    },
+    {
+      "date": "2014-03-04",
+      "et0_mm": null,
+      "precipitation_mm": 0.21,
+      "tmin_c": 19.98,
+      "tmax_c": 32.72,
+      "relative_humidity_pct": 65.88,
+      "wind_speed_2m_m_s": 1.52,
+      "solar_radiation_mj_m2_day": 16.94
+    },
+    {
+      "date": "2014-03-05",
+      "et0_mm": null,
+      "precipitation_mm": 0.22,
+      "tmin_c": 21.03,
+      "tmax_c": 33.17,
+      "relative_humidity_pct": 65.6,
+      "wind_speed_2m_m_s": 1.38,
+      "solar_radiation_mj_m2_day": 20.74
+    },
+    {
+      "date": "2014-03-06",
+      "et0_mm": null,
+      "precipitation_mm": 1.31,
+      "tmin_c": 20.7,
+      "tmax_c": 34.03,
+      "relative_humidity_pct": 65.58,
+      "wind_speed_2m_m_s": 1.01,
+      "solar_radiation_mj_m2_day": 21.99
+    },
+    {
+      "date": "2014-03-07",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 20.09,
+      "tmax_c": 33.92,
+      "relative_humidity_pct": 61.43,
+      "wind_speed_2m_m_s": 1.37,
+      "solar_radiation_mj_m2_day": 24.18
+    },
+    {
+      "date": "2014-03-08",
+      "et0_mm": null,
+      "precipitation_mm": 0.28,
+      "tmin_c": 19.82,
+      "tmax_c": 32.0,
+      "relative_humidity_pct": 68.07,
+      "wind_speed_2m_m_s": 1.35,
+      "solar_radiation_mj_m2_day": 22.62
+    },
+    {
+      "date": "2014-03-09",
+      "et0_mm": null,
+      "precipitation_mm": 0.09,
+      "tmin_c": 20.48,
+      "tmax_c": 33.63,
+      "relative_humidity_pct": 67.79,
+      "wind_speed_2m_m_s": 2.0,
+      "solar_radiation_mj_m2_day": 23.01
+    },
+    {
+      "date": "2014-03-10",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.77,
+      "tmax_c": 32.29,
+      "relative_humidity_pct": 67.68,
+      "wind_speed_2m_m_s": 2.6,
+      "solar_radiation_mj_m2_day": 23.27
+    },
+    {
+      "date": "2014-03-11",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.39,
+      "tmax_c": 33.59,
+      "relative_humidity_pct": 63.84,
+      "wind_speed_2m_m_s": 1.66,
+      "solar_radiation_mj_m2_day": 24.79
+    },
+    {
+      "date": "2014-03-12",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.35,
+      "tmax_c": 34.88,
+      "relative_humidity_pct": 60.63,
+      "wind_speed_2m_m_s": 0.91,
+      "solar_radiation_mj_m2_day": 25.04
+    },
+    {
+      "date": "2014-03-13",
+      "et0_mm": null,
+      "precipitation_mm": 0.05,
+      "tmin_c": 19.28,
+      "tmax_c": 34.22,
+      "relative_humidity_pct": 60.79,
+      "wind_speed_2m_m_s": 1.74,
+      "solar_radiation_mj_m2_day": 26.23
+    },
+    {
+      "date": "2014-03-14",
+      "et0_mm": null,
+      "precipitation_mm": 0.21,
+      "tmin_c": 20.52,
+      "tmax_c": 31.81,
+      "relative_humidity_pct": 66.37,
+      "wind_speed_2m_m_s": 3.27,
+      "solar_radiation_mj_m2_day": 25.79
+    },
+    {
+      "date": "2014-03-15",
+      "et0_mm": null,
+      "precipitation_mm": 0.06,
+      "tmin_c": 19.41,
+      "tmax_c": 33.38,
+      "relative_humidity_pct": 65.02,
+      "wind_speed_2m_m_s": 2.57,
+      "solar_radiation_mj_m2_day": 26.56
+    },
+    {
+      "date": "2014-03-16",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 19.98,
+      "tmax_c": 34.38,
+      "relative_humidity_pct": 61.35,
+      "wind_speed_2m_m_s": 1.48,
+      "solar_radiation_mj_m2_day": 24.82
+    },
+    {
+      "date": "2014-03-17",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.31,
+      "tmax_c": 35.12,
+      "relative_humidity_pct": 59.28,
+      "wind_speed_2m_m_s": 0.63,
+      "solar_radiation_mj_m2_day": 22.3
+    },
+    {
+      "date": "2014-03-18",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.61,
+      "tmax_c": 34.37,
+      "relative_humidity_pct": 59.9,
+      "wind_speed_2m_m_s": 1.75,
+      "solar_radiation_mj_m2_day": 25.71
+    },
+    {
+      "date": "2014-03-19",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.45,
+      "tmax_c": 33.86,
+      "relative_humidity_pct": 67.07,
+      "wind_speed_2m_m_s": 2.82,
+      "solar_radiation_mj_m2_day": 23.65
+    },
+    {
+      "date": "2014-03-20",
+      "et0_mm": null,
+      "precipitation_mm": 0.49,
+      "tmin_c": 22.03,
+      "tmax_c": 32.47,
+      "relative_humidity_pct": 70.02,
+      "wind_speed_2m_m_s": 3.41,
+      "solar_radiation_mj_m2_day": 23.87
+    },
+    {
+      "date": "2014-03-21",
+      "et0_mm": null,
+      "precipitation_mm": 0.16,
+      "tmin_c": 21.96,
+      "tmax_c": 32.54,
+      "relative_humidity_pct": 67.33,
+      "wind_speed_2m_m_s": 3.46,
+      "solar_radiation_mj_m2_day": 23.32
+    },
+    {
+      "date": "2014-03-22",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.98,
+      "tmax_c": 33.96,
+      "relative_humidity_pct": 64.31,
+      "wind_speed_2m_m_s": 2.74,
+      "solar_radiation_mj_m2_day": 24.92
+    },
+    {
+      "date": "2014-03-23",
+      "et0_mm": null,
+      "precipitation_mm": 0.2,
+      "tmin_c": 21.88,
+      "tmax_c": 33.8,
+      "relative_humidity_pct": 66.23,
+      "wind_speed_2m_m_s": 2.97,
+      "solar_radiation_mj_m2_day": 23.48
+    },
+    {
+      "date": "2014-03-24",
+      "et0_mm": null,
+      "precipitation_mm": 0.43,
+      "tmin_c": 22.01,
+      "tmax_c": 33.53,
+      "relative_humidity_pct": 69.65,
+      "wind_speed_2m_m_s": 2.74,
+      "solar_radiation_mj_m2_day": 22.2
+    },
+    {
+      "date": "2014-03-25",
+      "et0_mm": null,
+      "precipitation_mm": 0.02,
+      "tmin_c": 21.58,
+      "tmax_c": 34.93,
+      "relative_humidity_pct": 62.33,
+      "wind_speed_2m_m_s": 1.91,
+      "solar_radiation_mj_m2_day": 20.92
+    },
+    {
+      "date": "2014-03-26",
+      "et0_mm": null,
+      "precipitation_mm": 0.15,
+      "tmin_c": 21.69,
+      "tmax_c": 33.11,
+      "relative_humidity_pct": 69.38,
+      "wind_speed_2m_m_s": 3.32,
+      "solar_radiation_mj_m2_day": 21.29
+    },
+    {
+      "date": "2014-03-27",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 22.15,
+      "tmax_c": 32.89,
+      "relative_humidity_pct": 65.92,
+      "wind_speed_2m_m_s": 3.73,
+      "solar_radiation_mj_m2_day": 24.67
+    },
+    {
+      "date": "2014-03-28",
+      "et0_mm": null,
+      "precipitation_mm": 0.01,
+      "tmin_c": 21.36,
+      "tmax_c": 33.77,
+      "relative_humidity_pct": 62.85,
+      "wind_speed_2m_m_s": 3.17,
+      "solar_radiation_mj_m2_day": 25.31
+    },
+    {
+      "date": "2014-03-29",
+      "et0_mm": null,
+      "precipitation_mm": 0.14,
+      "tmin_c": 20.34,
+      "tmax_c": 34.93,
+      "relative_humidity_pct": 63.64,
+      "wind_speed_2m_m_s": 2.53,
+      "solar_radiation_mj_m2_day": 24.57
+    },
+    {
+      "date": "2014-03-30",
+      "et0_mm": null,
+      "precipitation_mm": 0.07,
+      "tmin_c": 20.6,
+      "tmax_c": 34.86,
+      "relative_humidity_pct": 62.54,
+      "wind_speed_2m_m_s": 2.77,
+      "solar_radiation_mj_m2_day": 26.5
+    },
+    {
+      "date": "2014-03-31",
+      "et0_mm": null,
+      "precipitation_mm": 0.0,
+      "tmin_c": 20.01,
+      "tmax_c": 33.47,
+      "relative_humidity_pct": 64.17,
+      "wind_speed_2m_m_s": 3.27,
+      "solar_radiation_mj_m2_day": 27.54
+    }
+  ],
+  "units": {
+    "precipitation_mm": "mm/day",
+    "tmin_c": "C",
+    "tmax_c": "C",
+    "relative_humidity_pct": "%",
+    "wind_speed_2m_m_s": "m/s",
+    "solar_radiation_mj_m2_day": "MJ/m^2/day",
+    "et0_mm": "mm/day"
+  },
+  "quality_control": {
+    "issues": [],
+    "rain_warning_mm": 500,
+    "rain_policy": "flag_only_no_clipping",
+    "bias_correction": null
+  },
+  "provider_header": {
+    "title": "NASA/POWER Source Native Resolution Daily Data",
+    "api": {
+      "version": "v2.10.3",
+      "name": "POWER Daily API"
+    },
+    "sources": [
+      "MERRA2",
+      "SYN1DEG",
+      "POWER"
+    ],
+    "fill_value": -999.0,
+    "time_standard": "LST",
+    "start": "20140101",
+    "end": "20140331"
+  },
+  "provider_units": {
+    "PRECTOTCORR": "mm/day",
+    "T2M_MIN": "C",
+    "T2M_MAX": "C",
+    "RH2M": "%",
+    "WS2M": "m/s",
+    "ALLSKY_SFC_SW_DWN": "MJ/m^2/day"
+  },
+  "provider_geometry": {
+    "type": "Point",
+    "coordinates": [
+      -85.112,
+      10.32,
+      381.42
+    ]
+  }
+}

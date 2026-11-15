@@ -13,6 +13,15 @@ import type { DroneImage, SentinelScene } from "../map/imagery/catalog";
 import { translate } from "./i18n";
 import type { Catalog, CompareResponse, Lang, LoadedComparison, ScenarioChoice, ScenarioId, Zone } from "./types";
 import { SCENARIO_IDS } from "./types";
+import { z } from "zod";
+
+const cantonCatalogSchema = z.object({
+  cantons: z.record(z.string(), z.object({
+    name: z.string(),
+    latitude: z.number().gte(-90).lte(90),
+    longitude: z.number().gte(-180).lte(180),
+  })),
+});
 
 export class ApiError extends Error {
   status: number;
@@ -160,8 +169,9 @@ export async function findSentinelScene(
   };
 }
 
-async function postCompare(base: string, zona: Zone, scenario: ScenarioChoice, signal?: AbortSignal): Promise<CompareResponse> {
-  const response = await fetch(`${base}/compare`, {
+async function postCompare(base: string, zona: Zone, scenario: ScenarioChoice, signal?: AbortSignal, cantonId?: string): Promise<CompareResponse> {
+  const path = cantonId ? `/cantons/${encodeURIComponent(cantonId)}/compare` : "/compare";
+  const response = await fetch(`${base}${path}`, {
     method: "POST",
     signal,
     headers: { "content-type": "application/json" },
@@ -175,27 +185,50 @@ async function postCompare(base: string, zona: Zone, scenario: ScenarioChoice, s
   });
   const body: unknown = await response.json().catch(() => null);
   if (!response.ok) throw new ApiError(response.status, detailOf(body));
-  return compareResponseSchema.parse(body);
+  const compare = compareResponseSchema.parse(body);
+  if (cantonId && (compare.zona.id !== cantonId || compare.zona.latitude !== zona.latitude || compare.zona.longitude !== zona.longitude)) {
+    throw new ApiError(502, "La simulación recibida no corresponde al cantón seleccionado.");
+  }
+  return compare;
 }
 
-async function loadStaticComparison(scenarioId: ScenarioId, signal?: AbortSignal): Promise<LoadedComparison> {
+async function loadStaticComparison(scenarioId: ScenarioId, signal?: AbortSignal, cantonId?: string): Promise<LoadedComparison> {
   const catalog = await staticCatalog(signal);
   const choice = catalog.scenarios.find((item) => item.id === scenarioId);
   if (!choice?.resultFile) {
     throw new ApiError(404, "El catálogo no tiene ese escenario.");
   }
-  const body = await readJson(publicUrl(`data/${choice.resultFile}`), signal);
+  const path = cantonId
+    ? `data/cantons/${encodeURIComponent(cantonId)}/compare-${scenarioId}.json`
+    : `data/${choice.resultFile}`;
+  const compare = compareResponseSchema.parse(await readJson(publicUrl(path), signal));
+  if (cantonId && compare.zona.id !== cantonId) {
+    throw new ApiError(502, "El archivo de simulación no corresponde al cantón seleccionado.");
+  }
   return {
     mode: "static",
-    catalog,
-    compare: compareResponseSchema.parse(body),
+    catalog: cantonId ? comparisonCatalog(catalog, compare) : catalog,
+    compare,
     httpStatus: 200,
     httpDetail: null,
   };
 }
 
-async function loadLiveComparison(base: string, scenarioId: ScenarioId, signal?: AbortSignal): Promise<LoadedComparison> {
-  const catalog = await liveCatalog(base, signal);
+function comparisonCatalog(catalog: Catalog, compare: CompareResponse): Catalog {
+  return { ...catalog, zona: compare.zona, warnings: compare.warnings, sourceRefs: compare.source_refs };
+}
+
+async function loadLiveComparison(base: string, scenarioId: ScenarioId, signal?: AbortSignal, cantonId?: string): Promise<LoadedComparison> {
+  const [regionalCatalog, cantonDocument] = await Promise.all([
+    liveCatalog(base, signal),
+    cantonId ? readJson(`${base}/chat/cantons`, signal) : Promise.resolve(null),
+  ]);
+  let catalog = regionalCatalog;
+  if (cantonId) {
+    const point = cantonCatalogSchema.parse(cantonDocument).cantons[cantonId];
+    if (!point) throw new ApiError(404, "El cantón seleccionado no pertenece al piloto de Guanacaste.");
+    catalog = { ...catalog, zona: { id: cantonId, ...point, validated: false } };
+  }
   const choice = catalog.scenarios.find((item) => item.id === scenarioId);
   if (!choice) {
     return {
@@ -208,8 +241,8 @@ async function loadLiveComparison(base: string, scenarioId: ScenarioId, signal?:
     };
   }
   try {
-    const compare = await postCompare(base, catalog.zona, choice, signal);
-    return { mode: "live", catalog, compare, httpStatus: 200, httpDetail: null };
+    const compare = await postCompare(base, catalog.zona, choice, signal, cantonId);
+    return { mode: "live", catalog: cantonId ? comparisonCatalog(catalog, compare) : catalog, compare, httpStatus: 200, httpDetail: null };
   } catch (error) {
     if (error instanceof ApiError) {
       return {
@@ -249,8 +282,8 @@ export async function findDroneImages(
   }));
 }
 
-export async function loadComparison(apiBase: string, scenarioId: ScenarioId, signal?: AbortSignal): Promise<LoadedComparison> {
+export async function loadComparison(apiBase: string, scenarioId: ScenarioId, signal?: AbortSignal, cantonId?: string): Promise<LoadedComparison> {
   return apiBase
-    ? loadLiveComparison(apiBase.replace(/\/$/, ""), scenarioId, signal)
-    : loadStaticComparison(scenarioId, signal);
+    ? loadLiveComparison(apiBase.replace(/\/$/, ""), scenarioId, signal, cantonId)
+    : loadStaticComparison(scenarioId, signal, cantonId);
 }

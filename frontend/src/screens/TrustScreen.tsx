@@ -16,8 +16,6 @@ export function TrustScreen() {
   const comparison = useComparison();
   const loaded = comparison.data;
   const compare = loaded?.compare;
-  const zona = compare?.zona ?? loaded?.catalog.zona;
-  const missing = translate(lang, "common.noData");
   const failure = comparisonError(loaded, lang);
 
   const sources = [
@@ -62,7 +60,7 @@ export function TrustScreen() {
       setNote({ key: "trust.sampleDataActive", error: false });
       return;
     }
-    if (!/^https?:\/\//.test(value)) {
+    if (!/^https?:\/\//.test(value) && !/^\/(?!\/)/.test(value)) {
       setNote({ key: "trust.addressMustStartWithHttp", error: true });
       return;
     }
@@ -82,7 +80,7 @@ export function TrustScreen() {
   }
 
   return (
-    <div className="screen">
+    <div className="screen texture-ledger">
       <article className="detail-page">
         <header className="detail-header">
           <h1>{translate(lang, "trust.trustProvenance")}</h1>
@@ -94,24 +92,17 @@ export function TrustScreen() {
             <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
             {failure ? <p className="warn" role="alert">{failure}</p> : null}
             <dl className="trust-facts">
-              <div>
-                <dt>{translate(lang, "cantons.modelPoint")}</dt>
-                <dd>{zona ? (zona.validated ? (translate(lang, "trust.markedAsValidated")) : (translate(lang, "trust.provisional"))) : missing}</dd>
-              </div>
-              <div>
-                <dt>{translate(lang, "common.sampleYears")}</dt>
-                <dd>{compare?.analog_years.length ?? missing}</dd>
-              </div>
+              {compare ? (
+                <div>
+                  <dt>{translate(lang, "common.sampleYears")}</dt>
+                  <dd>{compare.analog_years.length}</dd>
+                </div>
+              ) : null}
               <div>
                 <dt>{translate(lang, "trust.et0Documentation")}</dt>
                 <dd>{translate(lang, "trust.et0MethodReviewed")}</dd>
               </div>
-              <div>
-                <dt>{translate(lang, "trust.hydraulicProfile")}</dt>
-                <dd>{translate(lang, "trust.approvalPending")}</dd>
-              </div>
             </dl>
-            <p className="detail-footnote">{translate(lang, "trust.et0ProfileReviewStatusComes")}</p>
           </section>
           <section className="detail-panel trust-sources" aria-labelledby="trust-sources">
             <h2 id="trust-sources">{translate(lang, "trust.sourcesTheirRole")}</h2>
@@ -143,7 +134,7 @@ export function TrustScreen() {
             </p>
             <form className="trust-form" onSubmit={connect}>
               <label className="detail-field">{translate(lang, "trust.apiAddress")}
-                <input className="search" type="text" inputMode="url" spellCheck={false} autoComplete="off" aria-describedby="api-help" value={draft} onChange={(event) => setDraft(event.target.value)} placeholder="http://127.0.0.1:8000" disabled={connecting} />
+                <input className="search" type="text" inputMode="url" spellCheck={false} autoComplete="off" aria-describedby="api-help" value={draft} onChange={(event) => setDraft(event.target.value)} placeholder="/api" disabled={connecting} />
               </label>
               <button type="submit" disabled={connecting}>{connecting ? (translate(lang, "trust.checking")) : (translate(lang, "trust.connect"))}</button>
             </form>

@@ -35,15 +35,57 @@ describe("cantones", () => {
     ).toBe(false);
   });
 
-  it("el fixture espacial cubre los 11 cantones y se declara sintético", () => {
+  it("la superficie de cantones cubre los 11 y no repite una sola demanda", () => {
     const surface = JSON.parse(readFileSync(new URL("data/canton-surface.json", root), "utf8")) as {
       _mock: boolean;
-      cantons: Record<string, { _mock: boolean }>;
+      sowing_dates_observed: boolean;
+      cantons: Record<string, { _mock: boolean; sowing_dates_observed: boolean; water_demand_mm: number; soil: { status: string } }>;
     };
     const ids = collection.features.filter((feature) => feature.properties.guanacaste).map((feature) => feature.id);
-    expect(surface._mock).toBe(true);
+    expect(surface._mock).toBe(false);
     expect(Object.keys(surface.cantons).sort()).toEqual([...ids].sort());
-    expect(Object.values(surface.cantons).every((row) => row._mock)).toBe(true);
+    expect(Object.values(surface.cantons).every((row) => row._mock === false && row.sowing_dates_observed === false && row.soil.status === "map")).toBe(true);
+    const demands = Object.values(surface.cantons).map((row) => row.water_demand_mm);
+    expect(new Set(demands).size).toBe(demands.length);
+    expect(surface.sowing_dates_observed).toBe(false);
+    const canas = surface.cantons.canas as {
+      water_demand_mm: number;
+      soil: { status: string; field_capacity_m3_m3?: number };
+      station_check?: { difference_mm: number; study_mm: number; published_field_capacity_m3_m3: number };
+    };
+    expect(canas.soil.status).toBe("map");
+    expect(canas.soil.field_capacity_m3_m3).not.toBe(0.4411);
+    expect(canas.station_check).toMatchObject({ difference_mm: -7.52, study_mm: 416.53, published_field_capacity_m3_m3: 0.4411 });
+  });
+
+  it("registra la retención publicada de la estación sin usarla en la resta ni marcarla validada", () => {
+    const check = JSON.parse(readFileSync(new URL("../../../datasets/processed/validation/canas-ucr-2014.json", import.meta.url), "utf8")) as {
+      sowing_dates_observed: boolean;
+      station: { latitude: number; longitude: number; elevation_m: number; validated: boolean };
+      station_result: { water_demand_mm: number };
+      difference_mm: number;
+      acceptable: boolean;
+      station_soil: {
+        field_capacity_m3_m3: { rest_of_district_mollisols: number; north_vertisols: number };
+        enters_water_demand: boolean;
+        wilting_point_m3_m3: null;
+        fao56_bucket_claimed: boolean;
+        soilgrids_used_for_station_demand: boolean;
+        liberia_soil_used_for_station_demand: boolean;
+      };
+    };
+    expect(check.sowing_dates_observed).toBe(false);
+    expect(check.station).toMatchObject({ latitude: 10.3197162, longitude: -85.1120922, elevation_m: 45, validated: false });
+    expect(check.station_result.water_demand_mm).toBe(409.01);
+    expect(check.difference_mm).toBe(-7.52);
+    expect(Math.abs(check.difference_mm)).toBeLessThanOrEqual(157.64);
+    expect(check.acceptable).toBe(true);
+    expect(check.station_soil.field_capacity_m3_m3).toEqual({ rest_of_district_mollisols: 0.4411, north_vertisols: 0.6116 });
+    expect(check.station_soil.enters_water_demand).toBe(false);
+    expect(check.station_soil.wilting_point_m3_m3).toBeNull();
+    expect(check.station_soil.fao56_bucket_claimed).toBe(false);
+    expect(check.station_soil.soilgrids_used_for_station_demand).toBe(false);
+    expect(check.station_soil.liberia_soil_used_for_station_demand).toBe(false);
   });
 
   it("dibuja la malla solo dentro de Guanacaste", () => {
@@ -94,7 +136,7 @@ describe("lenguaje llano", () => {
 
   it("no convierte un null en cero", () => {
     const text = comparisonSentence({ ...base, p50: null, deltaP50: null });
-    expect(text).toContain("sin dato");
+    expect(text).toBe("");
     expect(text).not.toMatch(/0 mm/);
   });
 
@@ -110,9 +152,11 @@ describe("lenguaje llano", () => {
     expect(text).toContain("contra ella misma");
   });
 
-  it("separa el fixture de una corrida real", () => {
-    expect(leadSentence("es", "Niño fuerte", "modeled_water_deficit_mm", 3, true)).toContain("fixture");
-    expect(leadSentence("es", "Niño fuerte", "modeled_water_deficit_mm", 3, false)).toContain("FAO");
+  it("la lectura dice las medianas sin anunciar la procedencia", () => {
+    const text = leadSentence("es", "Niño fuerte", "modeled_water_deficit_mm", 3);
+    expect(text).toContain("medianas");
+    expect(text.toLowerCase()).not.toContain("fixture");
+    expect(text.toLowerCase()).not.toContain("estim");
   });
 
   it("recuerda que 2026 no es análogo", () => {

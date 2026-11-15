@@ -44,9 +44,7 @@ function RotationPlot({ rows, difference, metric, lang, format }: {
     return () => document.removeEventListener("keydown", dismiss);
   }, [active]);
 
-  if (values.length === 0) {
-    return <p className="chart-empty">{translate(lang, "charts.noDataThisMetric")}</p>;
-  }
+  if (values.length === 0) return null;
 
   return (
     <>
@@ -94,13 +92,13 @@ function RotationPlot({ rows, difference, metric, lang, format }: {
               </button>
               <div className="chart-tooltip" role="tooltip" id={tooltipId} hidden={active !== id}>
                 <dl>
-                  <div><dt>p10</dt><dd>{format(p10)}</dd></div>
-                  <div><dt>{translate(lang, "charts.medianP50")}</dt><dd>{format(p50)}</dd></div>
-                  <div><dt>p90</dt><dd>{format(p90)}</dd></div>
+                  {p10 !== null ? <div><dt>p10</dt><dd>{format(p10)}</dd></div> : null}
+                  {p50 !== null ? <div><dt>{translate(lang, "charts.medianP50")}</dt><dd>{format(p50)}</dd></div> : null}
+                  {p90 !== null ? <div><dt>p90</dt><dd>{format(p90)}</dd></div> : null}
                   <div><dt>{translate(lang, "common.sampleYears")}</dt><dd>{n}</dd></div>
                 </dl>
-                {annual.length > 0 ? (
-                  <p>{translate(lang, "common.byYear")} · {annual.map(({ year, value }) => `${year} · ${format(value)}`).join(" / ")}</p>
+                {annual.some(({ value }) => value !== null) ? (
+                  <p>{translate(lang, "common.byYear")} · {annual.flatMap(({ year, value }) => value === null ? [] : [`${year} · ${format(value)}`]).join(" / ")}</p>
                 ) : null}
               </div>
             </li>
@@ -184,9 +182,7 @@ export function ComparisonResults({ compare, metric, lang, names, view }: {
     value: run.metrics[metric],
   })));
 
-  if (rotations.length === 0) {
-    return <p className="chart-empty">{translate(lang, "charts.noDataThisComparison")}</p>;
-  }
+  if (rotations.length === 0) return null;
 
   return (
     <div className="comparison-results" data-view={view}>

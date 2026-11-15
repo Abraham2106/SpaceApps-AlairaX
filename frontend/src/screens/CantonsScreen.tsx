@@ -41,11 +41,7 @@ export function CantonsScreen() {
             </div>
             <h2 id="canton-name">{plate.name}</h2>
             {point?.id === plate.id && zona ? (
-              <p className="detail-lead">
-                {zona.validated
-                  ? (translate(lang, "cantons.modelPointFallsInsideThis"))
-                  : (translate(lang, "cantons.provisionalModelPointFallsInside"))}
-              </p>
+              <p className="detail-lead">{translate(lang, "cantons.modelPointFallsInsideThis")}</p>
             ) : null}
           </div>
           <figure className="canton-figure">

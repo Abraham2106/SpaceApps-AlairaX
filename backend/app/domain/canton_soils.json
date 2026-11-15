@@ -1,0 +1,145 @@
+{
+  "tilaran": {
+    "latitude": 10.46871,
+    "longitude": -84.91361,
+    "status": "map",
+    "field_capacity_m3_m3": 0.33245,
+    "wilting_point_m3_m3": 0.2259,
+    "source": "SoilGrids 2.0, media de 0 a 100 cm a 33 y 1500 kPa. Predicción de mapa, no medición de finca.",
+    "rooting_depth_m": 1.0,
+    "source_refs": [
+      "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-84.91361&lat=10.46871&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&value=mean"
+    ],
+    "provenance": "Extracted unchanged from frontend/public/data/canton-surface.json; export_canton_dry_season.py averages SoilGrids volumetric retention over 0-100 cm. Reference root depth is a regional assumption, not an observed crop root depth."
+  },
+  "canas": {
+    "latitude": 10.44154,
+    "longitude": -85.10386,
+    "status": "map",
+    "field_capacity_m3_m3": 0.34825,
+    "wilting_point_m3_m3": 0.22765,
+    "source": "SoilGrids 2.0, media de 0 a 100 cm a 33 y 1500 kPa. Predicción de mapa, no medición de finca.",
+    "rooting_depth_m": 1.0,
+    "source_refs": [
+      "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.10386&lat=10.44154&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&value=mean"
+    ],
+    "provenance": "Extracted unchanged from frontend/public/data/canton-surface.json; export_canton_dry_season.py averages SoilGrids volumetric retention over 0-100 cm. Reference root depth is a regional assumption, not an observed crop root depth."
+  },
+  "bagaces": {
+    "latitude": 10.5303,
+    "longitude": -85.26044,
+    "status": "map",
+    "field_capacity_m3_m3": 0.338,
+    "wilting_point_m3_m3": 0.2225,
+    "source": "SoilGrids 2.0, media de 0 a 100 cm a 33 y 1500 kPa. Predicción de mapa, no medición de finca.",
+    "rooting_depth_m": 1.0,
+    "source_refs": [
+      "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.26044&lat=10.5303&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&value=mean"
+    ],
+    "provenance": "Extracted unchanged from frontend/public/data/canton-surface.json; export_canton_dry_season.py averages SoilGrids volumetric retention over 0-100 cm. Reference root depth is a regional assumption, not an observed crop root depth."
+  },
+  "liberia": {
+    "latitude": 10.69709,
+    "longitude": -85.49076,
+    "status": "map",
+    "field_capacity_m3_m3": 0.333,
+    "wilting_point_m3_m3": 0.1864,
+    "source": "SoilGrids 2.0, media de 0 a 100 cm a 33 y 1500 kPa. Predicción de mapa, no medición de finca.",
+    "rooting_depth_m": 1.0,
+    "source_refs": [
+      "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.49076&lat=10.69709&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&value=mean"
+    ],
+    "provenance": "Extracted unchanged from frontend/public/data/canton-surface.json; export_canton_dry_season.py averages SoilGrids volumetric retention over 0-100 cm. Reference root depth is a regional assumption, not an observed crop root depth."
+  },
+  "la-cruz": {
+    "latitude": 11.00054,
+    "longitude": -85.58395,
+    "status": "map",
+    "field_capacity_m3_m3": 0.32365,
+    "wilting_point_m3_m3": 0.21085,
+    "source": "SoilGrids 2.0, media de 0 a 100 cm a 33 y 1500 kPa. Predicción de mapa, no medición de finca.",
+    "rooting_depth_m": 1.0,
+    "source_refs": [
+      "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.58395&lat=11.00054&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&value=mean"
+    ],
+    "provenance": "Extracted unchanged from frontend/public/data/canton-surface.json; export_canton_dry_season.py averages SoilGrids volumetric retention over 0-100 cm. Reference root depth is a regional assumption, not an observed crop root depth."
+  },
+  "carrillo": {
+    "latitude": 10.46119,
+    "longitude": -85.60345,
+    "status": "map",
+    "field_capacity_m3_m3": 0.3124,
+    "wilting_point_m3_m3": 0.2103,
+    "source": "SoilGrids 2.0, media de 0 a 100 cm a 33 y 1500 kPa. Predicción de mapa, no medición de finca.",
+    "rooting_depth_m": 1.0,
+    "source_refs": [
+      "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.60345&lat=10.46119&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&value=mean"
+    ],
+    "provenance": "Extracted unchanged from frontend/public/data/canton-surface.json; export_canton_dry_season.py averages SoilGrids volumetric retention over 0-100 cm. Reference root depth is a regional assumption, not an observed crop root depth."
+  },
+  "santa-cruz": {
+    "latitude": 10.24338,
+    "longitude": -85.68616,
+    "status": "map",
+    "field_capacity_m3_m3": 0.33255,
+    "wilting_point_m3_m3": 0.21825,
+    "source": "SoilGrids 2.0, media de 0 a 100 cm a 33 y 1500 kPa. Predicción de mapa, no medición de finca.",
+    "rooting_depth_m": 1.0,
+    "source_refs": [
+      "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.68616&lat=10.24338&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&value=mean"
+    ],
+    "provenance": "Extracted unchanged from frontend/public/data/canton-surface.json; export_canton_dry_season.py averages SoilGrids volumetric retention over 0-100 cm. Reference root depth is a regional assumption, not an observed crop root depth."
+  },
+  "nicoya": {
+    "latitude": 10.11534,
+    "longitude": -85.44714,
+    "status": "map",
+    "field_capacity_m3_m3": 0.3148,
+    "wilting_point_m3_m3": 0.21685,
+    "source": "SoilGrids 2.0, media de 0 a 100 cm a 33 y 1500 kPa. Prediccion de mapa, no medicion de finca.",
+    "rooting_depth_m": 1.0,
+    "source_refs": [
+      "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.44714&lat=10.11534&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&value=mean"
+    ],
+    "provenance": "Extracted unchanged from frontend/public/data/canton-surface.json; export_canton_dry_season.py averages SoilGrids volumetric retention over 0-100 cm. Reference root depth is a regional assumption, not an observed crop root depth."
+  },
+  "hojancha": {
+    "latitude": 9.98595,
+    "longitude": -85.41368,
+    "status": "map",
+    "field_capacity_m3_m3": 0.33225,
+    "wilting_point_m3_m3": 0.2218,
+    "source": "SoilGrids 2.0, media de 0 a 100 cm a 33 y 1500 kPa. Predicción de mapa, no medición de finca.",
+    "rooting_depth_m": 1.0,
+    "source_refs": [
+      "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.41368&lat=9.98595&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&value=mean"
+    ],
+    "provenance": "Extracted unchanged from frontend/public/data/canton-surface.json; export_canton_dry_season.py averages SoilGrids volumetric retention over 0-100 cm. Reference root depth is a regional assumption, not an observed crop root depth."
+  },
+  "nandayure": {
+    "latitude": 9.91314,
+    "longitude": -85.28086,
+    "status": "map",
+    "field_capacity_m3_m3": 0.33175,
+    "wilting_point_m3_m3": 0.21865,
+    "source": "SoilGrids 2.0, media de 0 a 100 cm a 33 y 1500 kPa. Prediccion de mapa, no medicion de finca.",
+    "rooting_depth_m": 1.0,
+    "source_refs": [
+      "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.28086&lat=9.91314&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&value=mean"
+    ],
+    "provenance": "Extracted unchanged from frontend/public/data/canton-surface.json; export_canton_dry_season.py averages SoilGrids volumetric retention over 0-100 cm. Reference root depth is a regional assumption, not an observed crop root depth."
+  },
+  "abangares": {
+    "latitude": 10.24755,
+    "longitude": -85.00513,
+    "status": "map",
+    "field_capacity_m3_m3": 0.3277,
+    "wilting_point_m3_m3": 0.21255,
+    "source": "SoilGrids 2.0, media de 0 a 100 cm a 33 y 1500 kPa. Predicción de mapa, no medición de finca.",
+    "rooting_depth_m": 1.0,
+    "source_refs": [
+      "https://rest.isric.org/soilgrids/v2.0/properties/query?lon=-85.00513&lat=10.24755&property=wv0033&property=wv1500&depth=0-5cm&depth=5-15cm&depth=15-30cm&depth=30-60cm&depth=60-100cm&value=mean"
+    ],
+    "provenance": "Extracted unchanged from frontend/public/data/canton-surface.json; export_canton_dry_season.py averages SoilGrids volumetric retention over 0-100 cm. Reference root depth is a regional assumption, not an observed crop root depth."
+  }
+}

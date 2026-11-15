@@ -116,17 +116,18 @@
 .canton-panel { display: grid; gap: 18px; }
 .canton-info h2 { margin-top: 18px; font-size: var(--fs-2xl); letter-spacing: -0.035em; }
 .canton-figure {
+  position: relative;
+  isolation: isolate;
   display: grid;
   place-items: center;
   min-width: 0;
   margin: 0;
   padding: 20px;
   border-radius: var(--r-3);
-  background:
-    radial-gradient(circle, color-mix(in srgb, var(--ink) 14%, transparent) 1px, transparent 1.4px) 0 0 / 14px 14px,
-    var(--well);
+  background: var(--well);
+  overflow: hidden;
 }
-.canton-figure svg { width: min(100%, clamp(185px, 44vw, 340px)); height: auto; filter: drop-shadow(0 10px 18px rgba(21, 23, 20, 0.16)); }
+.canton-figure svg { position: relative; z-index: 1; width: min(100%, clamp(185px, 44vw, 340px)); height: auto; filter: drop-shadow(0 10px 18px rgba(21, 23, 20, 0.16)); }
 .canton-figure path { fill: color-mix(in srgb, var(--cond-1) 72%, var(--bg-2)); stroke: var(--bg-2); stroke-width: 1.2; }
 .canton-meta { margin: 0 0 16px; }
 

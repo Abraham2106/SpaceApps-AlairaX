@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.1.0",
+  "_mock": false,
+  "sowing_dates_observed": false,
+  "station": {
+    "id": "inta-ejn-canas",
+    "name": "INTA Estación Experimental Enrique Jiménez Núñez",
+    "latitude": 10.3197162,
+    "longitude": -85.1120922,
+    "elevation_m": 45.0,
+    "elevation_source": "INTA: 45 msnm en la ficha del centro",
+    "coordinate_source": "OpenStreetMap way 1023338870, centro del polígono nombrado",
+    "validated": false
+  },
+  "period": "2014-01-01/2014-03-31",
+  "definition": "water_demand_mm = ET0 Penman-Monteith FAO-56 menos lluvia POWER. Esa resta es la cantidad comparable con los 416,53 mm (evapotranspiración del cultivo menos lluvia en el estudio). No es el déficit de balde Σ(ETc−ETa). La capacidad de campo publicada se registra como suelo de la estación y no entra en la resta.",
+  "study": {
+    "citation": "Rojas González y Sánchez Chinchilla, UCR, 2014. CIGR Proceedings.",
+    "et_mm": 427.58,
+    "rain_mm": 11.15,
+    "water_demand_mm": 416.53,
+    "sd_mm": 157.64,
+    "flow_m3_s": 5.91,
+    "senara_m3_s": {
+      "january": 5.68,
+      "february": 6.73,
+      "march": 8.61,
+      "mean": 7.0
+    },
+    "published_field_capacity_m3_m3": {
+      "rest_of_district_mollisols": 0.4411,
+      "north_vertisols": 0.6116
+    },
+    "wilting_point": "no publicado en el artículo"
+  },
+  "station_result": {
+    "rain_mm": 11.98,
+    "et0_mm": 420.99,
+    "water_demand_mm": 409.01,
+    "days": 90
+  },
+  "station_soil": {
+    "source": "Sandoval y Mata 2014, citados por Rojas González y Sánchez Chinchilla. Capacidad de campo publicada para Cañas.",
+    "field_capacity_m3_m3": {
+      "rest_of_district_mollisols": 0.4411,
+      "north_vertisols": 0.6116
+    },
+    "recorded_for_station": true,
+    "enters_water_demand": false,
+    "reason_not_in_demand": "La demanda comparable es evapotranspiración menos lluvia. La capacidad de campo no entra en esa resta.",
+    "wilting_point_m3_m3": null,
+    "fao56_bucket_claimed": false,
+    "bucket_note": "El punto de marchitez no está publicado, así que no se afirma un balde FAO-56 completo en la estación.",
+    "soilgrids_used_for_station_demand": false,
+    "liberia_soil_used_for_station_demand": false
+  },
+  "difference_mm": -7.52,
+  "acceptable": true,
+  "acceptance_rule": "aceptable si la diferencia absoluta no supera la desviación publicada del polígono, 157,64 mm"
+}

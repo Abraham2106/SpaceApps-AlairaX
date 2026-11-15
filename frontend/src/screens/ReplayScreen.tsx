@@ -2,7 +2,7 @@ import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { QueryState } from "../components/QueryState";
 import { ProfileCard, RankCard, SoilStorageCard, WeeklyHeatmap } from "../components/RotationInsights";
-import { Figure, METRIC_ICON, StatGrid, StatusPill, TickScale, type Stat } from "../components/Instrument";
+import { Figure, METRIC_ICON, StatGrid, TickScale, type Stat } from "../components/Instrument";
 import { Card, CardContent, CardHeader } from "../components/ui/card";
 import { buttonVariants } from "../components/ui/button";
 import { useComparison } from "../data/queries";
@@ -33,8 +33,12 @@ export function ReplayScreen() {
       label: readingMetric(id, lang),
       icon: METRIC_ICON[id],
       value: <Figure value={baseline.metrics[id].p50} metric={id} lang={lang} />,
-      high: formatValue(baseline.metrics[id].p90, id, lang),
-      low: formatValue(baseline.metrics[id].p10, id, lang),
+      ...(baseline.metrics[id].p90 !== null && baseline.metrics[id].p10 !== null
+        ? {
+            high: formatValue(baseline.metrics[id].p90, id, lang),
+            low: formatValue(baseline.metrics[id].p10, id, lang),
+          }
+        : {}),
       active: id === metric,
     })),
     {
@@ -86,11 +90,8 @@ export function ReplayScreen() {
           <Card className="overview-card">
             <CardHeader>
               <div className="overview-title">
-                <h2>{baseline ? rotationName(baseline.rotation_id, lang) : (es ? "Rotación de referencia" : "Reference rotation")}</h2>
-                {baseline ? <span className="ref-tag">{es ? "Referencia" : "Reference"}</span> : null}
+                <h2>{baseline ? rotationName(baseline.rotation_id, lang) : (es ? "Rotación" : "Rotation")}</h2>
               </div>
-              {result?._mock ? <StatusPill>{translate(lang, "shell.syntheticData")}</StatusPill> : null}
-              {result && !result._mock && !result.zona.validated ? <StatusPill>{translate(lang, "shell.regionalPilot")}</StatusPill> : null}
             </CardHeader>
             <CardContent>
               <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
@@ -132,7 +133,6 @@ export function ReplayScreen() {
         </div>
         {result && (
           <footer className="dash-foot">
-            <p>{es ? "Estimaciones del modelo. Requieren validación en finca." : "Model estimates. On-farm validation is needed."}</p>
             <Link className={buttonVariants.outline} to={{ pathname: "/rotaciones", search: params.toString() }}>
               {es ? "Ver cálculo y rangos" : "View calculations and ranges"} <ArrowRight size={15} aria-hidden />
             </Link>

@@ -19,8 +19,9 @@ venv/
 htmlcov/
 *.egg-info/
 
-# Salidas locales del kernel
-/outputs/
+# Salidas locales del kernel. inputs/ alimenta POST /compare en el deploy.
+/outputs/*
+!/outputs/inputs/
 
 # Impeccable ships a local detector binary; the skill text stays in the repo.
 .cursor/skills/impeccable/scripts/bin/

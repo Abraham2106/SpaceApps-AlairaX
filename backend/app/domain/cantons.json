@@ -1,0 +1,90 @@
+{
+  "tilaran": {
+    "name": "Tilarán",
+    "latitude": 10.46871,
+    "longitude": -84.91361,
+    "coordinate_source": "frontend/public/geo/cantons.geojson; reference center",
+    "elevation_m": 925.0,
+    "elevation_source": "Open-Meteo elevation"
+  },
+  "canas": {
+    "name": "Cañas",
+    "latitude": 10.44154,
+    "longitude": -85.10386,
+    "coordinate_source": "frontend/public/geo/cantons.geojson; reference center",
+    "elevation_m": 61.0,
+    "elevation_source": "Open-Meteo elevation"
+  },
+  "bagaces": {
+    "name": "Bagaces",
+    "latitude": 10.5303,
+    "longitude": -85.26044,
+    "coordinate_source": "frontend/public/geo/cantons.geojson; reference center",
+    "elevation_m": 83.0,
+    "elevation_source": "Open-Meteo elevation"
+  },
+  "liberia": {
+    "name": "Liberia",
+    "latitude": 10.69709,
+    "longitude": -85.49076,
+    "coordinate_source": "frontend/public/geo/cantons.geojson; reference center",
+    "elevation_m": 101.0,
+    "elevation_source": "Open-Meteo elevation"
+  },
+  "la-cruz": {
+    "name": "La Cruz",
+    "latitude": 11.00054,
+    "longitude": -85.58395,
+    "coordinate_source": "frontend/public/geo/cantons.geojson; reference center",
+    "elevation_m": 244.0,
+    "elevation_source": "Open-Meteo elevation"
+  },
+  "carrillo": {
+    "name": "Carrillo",
+    "latitude": 10.46119,
+    "longitude": -85.60345,
+    "coordinate_source": "frontend/public/geo/cantons.geojson; reference center",
+    "elevation_m": 41.0,
+    "elevation_source": "Open-Meteo elevation"
+  },
+  "santa-cruz": {
+    "name": "Santa Cruz",
+    "latitude": 10.24338,
+    "longitude": -85.68616,
+    "coordinate_source": "frontend/public/geo/cantons.geojson; reference center",
+    "elevation_m": 74.0,
+    "elevation_source": "Open-Meteo elevation"
+  },
+  "nicoya": {
+    "name": "Nicoya",
+    "latitude": 10.11534,
+    "longitude": -85.44714,
+    "coordinate_source": "frontend/public/geo/cantons.geojson; reference center",
+    "elevation_m": 123.0,
+    "elevation_source": "Open-Meteo elevation"
+  },
+  "hojancha": {
+    "name": "Hojancha",
+    "latitude": 9.98595,
+    "longitude": -85.41368,
+    "coordinate_source": "frontend/public/geo/cantons.geojson; reference center",
+    "elevation_m": 442.0,
+    "elevation_source": "Open-Meteo elevation"
+  },
+  "nandayure": {
+    "name": "Nandayure",
+    "latitude": 9.91314,
+    "longitude": -85.28086,
+    "coordinate_source": "frontend/public/geo/cantons.geojson; reference center",
+    "elevation_m": 411.0,
+    "elevation_source": "Open-Meteo elevation"
+  },
+  "abangares": {
+    "name": "Abangares",
+    "latitude": 10.24755,
+    "longitude": -85.00513,
+    "coordinate_source": "frontend/public/geo/cantons.geojson; reference center",
+    "elevation_m": 74.0,
+    "elevation_source": "Open-Meteo elevation"
+  }
+}

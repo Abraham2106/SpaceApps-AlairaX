@@ -1,0 +1,7 @@
+pydantic>=2.13,<3
+fastapi>=0.115,<1
+python-dotenv>=1,<2
+pyyaml>=6
+numpy>=1.26
+pandas>=2.1
+rio-tiler>=9.4,<10

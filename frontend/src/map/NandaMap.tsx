@@ -7,8 +7,8 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { hexMesh } from "../lib/color";
 import { boundsOf, cantonAt, guanacasteFeatures } from "../lib/geo";
 import { useCantons, useComparison } from "../data/queries";
-import { formatValue } from "../lib/format";
-import { hexHeight, hexPaint, surfaceValue, useSurface } from "../lib/surface";
+import { formatNumber } from "../lib/format";
+import { hexHeight, hexPaint, surfaceCanton, useSurface } from "../lib/surface";
 import { useInstrument } from "../store";
 import type { Lang, MetricId } from "../lib/types";
 import { isMobile } from "../lib/viewport";
@@ -43,6 +43,14 @@ type SentinelEntry = { key: string; lookup: SentinelLookup };
 type DroneEntry = { base: string; lookup: DroneLookup };
 
 const EMPTY = { type: "FeatureCollection" as const, features: [] };
+
+/** El id que pinta MapLibre sale 0 para todos. El slug vive en properties.id. */
+function cantonSlug(feature: { id?: string | number; properties?: { id?: unknown } | null } | undefined): string | null {
+  const slug = feature?.properties?.id;
+  if (typeof slug === "string" && slug) return slug;
+  if (typeof feature?.id === "string" && feature.id) return feature.id;
+  return null;
+}
 
 function buildStyle(imageryDate: string): StyleSpecification {
   const motion = reducedMotion() ? 0 : 680;
@@ -381,7 +389,6 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
   const location = useInstrument((state) => state.location);
   const toggleCanton = useInstrument((state) => state.toggleCanton);
   const toggleOverlay = useInstrument((state) => state.toggleOverlay);
-  const setLocation = useInstrument((state) => state.setLocation);
   const apiBase = useInstrument((state) => state.apiBase);
   const [flagElement] = useState(() => document.createElement("div"));
   const flagMarker = useRef<maplibregl.Marker | null>(null);
@@ -429,36 +436,29 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       const feature = event.features?.[0];
       if (!feature) return;
       const guanacaste = Boolean(feature.properties.guanacaste);
-      const id = String(feature.id ?? feature.properties.id);
-      if (!guanacaste) {
-        setLocation(useInstrument.getState().location, {
-          key: "nandaMap.noSimulationAvailableModelStays",
-          values: { canton: feature.properties.name },
-        });
-        return;
-      }
+      const id = cantonSlug(feature);
+      if (!guanacaste || !id) return;
       toggleCanton(id, event.originalEvent.shiftKey);
     });
     map.on("mousemove", cantonLayers, (event) => {
       map.getCanvas().style.cursor = "pointer";
-      const id = event.features?.[0]?.id;
-      if (id == null) return;
-      const next = String(id);
+      const feature = event.features?.[0];
+      const next = cantonSlug(feature);
+      if (!next) return;
       if (hovered.current && hovered.current !== next) {
         map.setFeatureState({ source: "cantons", id: hovered.current }, { hover: false });
       }
       hovered.current = next;
       map.setFeatureState({ source: "cantons", id: next }, { hover: true });
-      const feature = event.features?.[0];
       const name = String(feature?.properties.name ?? "");
       const inside = Boolean(feature?.properties.guanacaste);
-      const row = inside ? surfaceValue(surfaceRef.current, next, metricRef.current) : null;
+      const entry = inside ? surfaceCanton(surfaceRef.current, next) : null;
       useInstrument.getState().setHovered(next);
       setTip({
         x: event.point.x,
         y: event.point.y,
         name,
-        value: row ? row.rice_melon : null,
+        value: entry ? entry.water_demand_mm : null,
         outside: !inside,
       });
     });
@@ -477,7 +477,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       mapRef.current = null;
       ready.current = false;
     };
-  }, [setLocation, toggleCanton]);
+  }, [toggleCanton]);
 
   useEffect(() => {
     const canvas = mapRef.current?.getCanvas();
@@ -523,7 +523,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       map.setLayoutProperty("canton-extrude", "visibility", overlays.cantons && overlays.plates ? "visible" : "none");
       map.setLayoutProperty("osm-roads", "visibility", overlays.osm ? "visible" : "none");
       map.setLayoutProperty("osm-places", "visibility", overlays.osm ? "visible" : "none");
-      const mesh = hexPaint(surface.data, metric);
+      const mesh = hexPaint(surface.data);
       map.setLayoutProperty("hillshade", "visibility", overlays.terrain ? "visible" : "none");
       map.setTerrain(null);
       const zoom = map.getZoom();
@@ -534,7 +534,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
         map.setLayoutProperty(`hex-${res}-extrude`, "visibility", show && overlays.plates ? "visible" : "none");
         map.setPaintProperty(`hex-${res}`, "fill-color", mesh);
         map.setPaintProperty(`hex-${res}-extrude`, "fill-extrusion-color", mesh);
-        map.setPaintProperty(`hex-${res}-extrude`, "fill-extrusion-height", hexHeight(surface.data, metric));
+        map.setPaintProperty(`hex-${res}-extrude`, "fill-extrusion-height", hexHeight(surface.data));
       }
       if (overlays.plates && !platesWere.current && map.getPitch() < 24) {
         map.easeTo({ pitch: 42, bearing: -16, duration: reducedMotion() ? 0 : 900 });
@@ -811,14 +811,6 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     coordinates,
   });
   const shortCredit = translate(lang, "nandaMap.sourcesPoint", { value: coordinates });
-  const tipValue = tip
-    ? tip.outside
-      ? (translate(lang, "nandaMap.noSimulationAvailable"))
-      : tip.value == null
-        ? (translate(lang, "common.noData"))
-        : formatValue(tip.value, metric, lang)
-    : "";
-
   // La ficha y la nota de HLS pueden ocupar dos líneas: el reproductor sube lo mismo.
   useEffect(() => {
     const bar = attribBar.current;
@@ -836,6 +828,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
 
   const es = lang === "es";
   const flagFeature = selected.length === 1 ? cantons.data?.features.find((item) => item.id === selected[0]) : undefined;
+  const flagEntry = surfaceCanton(surface.data, flagFeature?.id);
   const flagHoldsPoint = Boolean(flagFeature && pointName === flagFeature.properties.name);
 
   return (
@@ -846,7 +839,16 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
           <MapPin size={15} strokeWidth={2} aria-hidden />
           <span>
             <strong>{flagFeature.properties.name}</strong>
-            <em>{flagHoldsPoint ? (es ? "Punto de simulación" : "Simulation point") : (es ? "Lectura regional" : "Regional reading")}</em>
+            <em>{flagEntry
+              ? [
+                  `${formatNumber(flagEntry.water_demand_mm, lang, 0)} mm`,
+                  flagEntry.station_check
+                    ? (es
+                      ? `Estación INTA: ${formatNumber(flagEntry.station_check.difference_mm, lang, 2)} mm frente al estudio. Retención publicada de la estación ${formatNumber(flagEntry.station_check.published_field_capacity_m3_m3, lang, 4)}`
+                      : `INTA station: ${formatNumber(flagEntry.station_check.difference_mm, lang, 2)} mm versus the study. Published station retention ${formatNumber(flagEntry.station_check.published_field_capacity_m3_m3, lang, 4)}`)
+                    : "",
+                ].filter(Boolean).join(". ")
+              : flagHoldsPoint ? (es ? "Punto de simulación" : "Simulation point") : (es ? "Lectura regional" : "Regional reading")}</em>
           </span>
         </div>,
         flagElement,
@@ -854,8 +856,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       {tip ? (
         <div className="map-tip" style={{ left: tip.x, top: tip.y }} role="status">
           <strong>{tip.name}</strong>
-          {tip.outside || overlays.hex ? <span>{tipValue}</span> : null}
-          {overlays.hex && !tip.outside ? <em>{translate(lang, "nandaMap.syntheticFixture")}</em> : null}
+          {tip.outside || tip.value == null ? null : <span>{formatNumber(tip.value, lang, 0)} mm</span>}
         </div>
       ) : null}
       {!hidden ? (

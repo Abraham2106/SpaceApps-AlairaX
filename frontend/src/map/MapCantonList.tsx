@@ -11,8 +11,6 @@ export function MapCantonList({ query = "", onPick }: { query?: string; onPick?:
   const lang = useInstrument((state) => state.lang);
   const selected = useInstrument((state) => state.selected);
   const toggleCanton = useInstrument((state) => state.toggleCanton);
-  const location = useInstrument((state) => state.location);
-  const setLocation = useInstrument((state) => state.setLocation);
   const [stopId, setStopId] = useState<string | null>(null);
   const cantons = useCantons();
   const needle = searchText(query.trim());
@@ -56,16 +54,12 @@ export function MapCantonList({ query = "", onPick }: { query?: string; onPick?:
           tabIndex={feature.id === tabStop?.id ? 0 : -1}
           onFocus={() => setStopId(feature.id)}
           onClick={(event) => {
-            if (!feature.properties.guanacaste) {
-              setLocation(location, { key: "mapReading.noSimulationAvailable", values: { canton: feature.properties.name } });
-              return;
-            }
+            if (!feature.properties.guanacaste) return;
             toggleCanton(feature.id, event.shiftKey);
             onPick?.();
           }}
         >
           <span>{feature.properties.name}</span>
-          <span className="faint">{feature.properties.guanacaste ? "" : translate(lang, "mapReading.noSimulation")}</span>
         </button>
       ))}
     </div>

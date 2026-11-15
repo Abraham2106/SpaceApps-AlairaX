@@ -1,0 +1,31 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "web": {
+      "root": "frontend",
+      "framework": "vite",
+      "rewrites": [
+        { "source": "/(.*)", "destination": "/index.html" }
+      ]
+    },
+    "backend": {
+      "root": ".",
+      "framework": "fastapi",
+      "entrypoint": "backend.app.api.main:app",
+      "rewrites": [
+        { "source": "/api/:path(.*)?", "destination": "/:path" }
+      ],
+      "functions": {
+        "backend/app/api/main.py": {
+          "maxDuration": 300,
+          "includeFiles": "{backend/app/domain/*.json,configs/regions/guanacaste-pilot.setup.json,datasets/processed/analogs/**,datasets/processed/soil/**,research/parameters/**,outputs/inputs/**}",
+          "excludeFiles": "{.env,.env.*,frontend/**,.venv/**,datasets/raw/**,docs/**,scripts/**,backend/tests/**,.git/**}"
+        }
+      }
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": { "service": "backend" } },
+    { "source": "/(.*)", "destination": { "service": "web" } }
+  ]
+}
