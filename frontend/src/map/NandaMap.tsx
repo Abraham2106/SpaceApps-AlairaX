@@ -438,7 +438,8 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
           label: (() => {
             const baseline = comparison.data?.compare?.rotations.find((item) => item.rotation_id === "rice_melon");
             const value = baseline?.metrics[metric].p50;
-            return value == null ? "sin dato" : `${Math.round(value)}`;
+            const place = cantons.data && zona ? cantonAt(zona.longitude, zona.latitude, cantons.data)?.properties.name : "";
+            return value == null ? "sin dato" : `${Math.round(value)} mm\n${place ?? ""}`;
           })(),
         },
         geometry: { type: "Point" as const, coordinates: [zona.longitude, zona.latitude] },
@@ -454,7 +455,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     const apply = () => (map.getSource("marks") as maplibregl.GeoJSONSource | undefined)?.setData({ type: "FeatureCollection", features });
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
-  }, [comparison.data, location, metric]);
+  }, [comparison.data, location, metric, cantons.data]);
 
   useEffect(() => {
     const map = mapRef.current;

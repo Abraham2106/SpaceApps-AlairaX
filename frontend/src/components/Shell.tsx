@@ -94,11 +94,11 @@ export function Shell() {
       </header>
       {mock && !liveFailure ? (
         <div className="alarm" role="status">
-          <strong>FIXTURE</strong>
+          <strong>{spanish ? "PRUEBA" : "SAMPLE"}</strong>
           <span>
             {spanish
-              ? "Datos sintéticos. No son una medición, ni NASA POWER, ni una corrida FAO-56. El aviso permanece mientras el archivo diga _mock."
-              : "Synthetic data. Not a measurement, not NASA POWER, and not an FAO-56 run. This notice stays while the file says _mock."}
+              ? "Estas cifras son de prueba, no una medición de la finca. El aviso se queda mientras los datos sean de ejemplo."
+              : "These figures are a sample, not a measurement from the farm. The notice stays while the data is an example."}
           </span>
         </div>
       ) : null}

@@ -110,6 +110,27 @@ export function comparisonSentence(input: SentenceInput): string {
     : `${name}, in ${scenarioName}: the median ${noun} is ${formatValue(p50, metric, lang)}. ${direction} The delta was computed year by year before the quantiles.${follow} ${sample} ${watch}`;
 }
 
+export function farmerLine(input: SentenceInput): string {
+  const { lang, rotationName: name, metric, isBaseline, p50, deltaP50, n } = input;
+  const years = lang === "es" ? `${n} años parecidos` : `${n} similar years`;
+  if (p50 === null || (deltaP50 === null && !isBaseline)) {
+    return lang === "es" ? `${name}: sin dato. ${years}.` : `${name}: no data. ${years}.`;
+  }
+  if (isBaseline) {
+    return lang === "es"
+      ? `${name}: ${formatValue(p50, metric, lang)} en el ciclo. Es la rotación con la que se comparan las otras. ${years}.`
+      : `${name}: ${formatValue(p50, metric, lang)} in the cycle. The other rotations are compared with this one. ${years}.`;
+  }
+  const delta = deltaP50 ?? 0;
+  const amount = formatValue(Math.abs(delta), metric, lang);
+  if (lang === "es") {
+    const sense = delta < 0 ? `${amount} menos` : delta > 0 ? `${amount} más` : "lo mismo";
+    return `${name}: ${formatValue(p50, metric, lang)}. ${sense} que arroz → melón. ${years}.`;
+  }
+  const sense = delta < 0 ? `${amount} less` : delta > 0 ? `${amount} more` : "the same";
+  return `${name}: ${formatValue(p50, metric, lang)}. ${sense} than rice → melon. ${years}.`;
+}
+
 export function compactLine(input: SentenceInput): string {
   const { lang, rotationName: name, metric, isBaseline, p50, deltaP50, n } = input;
   if (p50 === null || (deltaP50 === null && !isBaseline)) {

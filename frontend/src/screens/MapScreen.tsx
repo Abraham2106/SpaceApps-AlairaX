@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { formatValue } from "../lib/format";
 import { cantonAt } from "../lib/geo";
-import { compactLine, comparisonSentence, leadSentence, metricNoun, rotationName } from "../lib/plain";
+import { comparisonSentence, farmerLine, leadSentence, metricNoun, rotationName } from "../lib/plain";
 import { ROTATION_ORDER, ROTATION_STYLE } from "../lib/plain";
 import { useCantons, useComparison } from "../data/queries";
 import { useInstrument } from "../store";
@@ -164,7 +164,7 @@ export function MapScreen() {
             return (
               <p key={id} className="prose">
                 <span className="swatch" style={{ background: ROTATION_STYLE[id].color, display: "inline-block", marginRight: 8 }} />
-                {compactLine(sentence)}
+                {farmerLine(sentence)}
               </p>
             );
           }) : null}
@@ -211,7 +211,7 @@ export function MapScreen() {
           {location && !location.inside ? <p className="warn">{spanish ? "Sin extrapolación." : "No extrapolation."}</p> : null}
           <label>
             <span className="kicker">{spanish ? "Buscar cantón" : "Find a canton"}</span>
-            <input className="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={spanish ? "Liberia, Nicoya…" : "Liberia, Nicoya…"} />
+            <input className="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={spanish ? "Nombre del cantón" : "Canton name"} />
           </label>
           <div className="canton-list" role="listbox" aria-multiselectable="true" aria-label={spanish ? "Cantones" : "Cantons"}>
             {visible.slice(0, query ? 12 : 11).map((feature) => (
@@ -228,7 +228,7 @@ export function MapScreen() {
                 }}
               >
                 <span>{feature.properties.name}</span>
-                <span className="faint">{feature.properties.guanacaste ? "Guanacaste" : spanish ? "sin simulación" : "no simulation"}</span>
+                <span className="faint">{feature.properties.guanacaste ? "" : spanish ? "sin simulación" : "no simulation"}</span>
               </button>
             ))}
           </div>
@@ -243,9 +243,9 @@ export function MapScreen() {
       <button className="layers-fab only-mobile" onClick={() => setLayersOpen(true)}>{spanish ? "Capas" : "Layers"}</button>
       <div className="hud right-hud hide-mobile" role="toolbar" aria-label={spanish ? "Capas" : "Layers"}>
         {([
-          ["satellite", spanish ? "Nítida" : "Sharp"],
-          ["modis", "MODIS"],
-          ["marble", "Marble"],
+          ["satellite", spanish ? "Foto" : "Photo"],
+          ["modis", spanish ? "Color NASA" : "NASA color"],
+          ["marble", spanish ? "Mármol" : "Marble"],
         ] as const).map(([id, label]) => (
           <button key={id} className="layer-btn" aria-pressed={basemap === id} onClick={() => setBasemap(id)}>
             <Thumb kind={id} />
@@ -253,11 +253,11 @@ export function MapScreen() {
           </button>
         ))}
         {([
-          ["cantons", spanish ? "Cantones" : "Cantons"],
+          ["cantons", spanish ? "Límites" : "Borders"],
           ["hex", spanish ? "Malla" : "Mesh"],
-          ["terrain", spanish ? "Relieve" : "Relief"],
-          ["plates", "3D"],
-          ["osm", "OSM"],
+          ["terrain", spanish ? "Sombra" : "Shade"],
+          ["plates", spanish ? "Altura" : "Height"],
+          ["osm", spanish ? "Calles" : "Roads"],
         ] as const).map(([id, label]) => (
           <button key={id} className="layer-btn" aria-pressed={overlays[id]} onClick={() => toggleOverlay(id)}>
             <Thumb kind={id} />
@@ -291,20 +291,20 @@ export function MapScreen() {
             <h2 id="layers-title">{spanish ? "Capas" : "Layers"}</h2>
             <div className="cluster" role="radiogroup" aria-label={spanish ? "Imagen de base" : "Base image"}>
               {([
-                ["satellite", spanish ? "Nítida" : "Sharp"],
-                ["modis", "MODIS"],
-                ["marble", "Marble"],
+                ["satellite", spanish ? "Foto" : "Photo"],
+                ["modis", spanish ? "Color NASA" : "NASA color"],
+                ["marble", spanish ? "Mármol" : "Marble"],
               ] as const).map(([id, label]) => (
                 <button key={id} aria-pressed={basemap === id} onClick={() => setBasemap(id)}>{label}</button>
               ))}
             </div>
             <div className="cluster">
               {([
-                ["cantons", spanish ? "Cantones" : "Cantons"],
+                ["cantons", spanish ? "Límites" : "Borders"],
                 ["hex", spanish ? "Malla" : "Mesh"],
-                ["terrain", spanish ? "Relieve" : "Relief"],
-                ["plates", "3D"],
-                ["osm", "OSM"],
+                ["terrain", spanish ? "Sombra" : "Shade"],
+                ["plates", spanish ? "Altura" : "Height"],
+                ["osm", spanish ? "Calles" : "Roads"],
               ] as const).map(([id, label]) => (
                 <button key={id} aria-pressed={overlays[id]} onClick={() => toggleOverlay(id)}>{label}</button>
               ))}

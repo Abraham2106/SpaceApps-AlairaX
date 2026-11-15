@@ -22,6 +22,24 @@ Lo que sigue débil, a ojo, y por eso no se declara un 9:
 - El gráfico cabe, y todavía no tiene la calma editorial de una pieza de Our World in Data.
 - No hay ronda de cinco críticos externos sobre estas capturas.
 
-## Rondas de ojos frescos
+## Ronda 1 · ojos frescos, 14 de noviembre de 2026
 
-Pendientes.
+Cinco críticos vieron una captura de la vista principal, sin el código. Todos encontraron defectos reales. La cuenta de rondas consecutivas en 9 o más vuelve a cero.
+
+| Crítico | Claridad | Jerarquía | Identidad | Mapa | Gráficas | Accesibilidad | Rendimiento | Estados | Honestidad | Móvil |
+|---|---|---|---|---|---|---|---|---|---|---|
+| [Diseño de producto](bc-b98758ac-c49e-5c48-8047-f322a9e6d286) | 2 | 2 | 2 | 3 | no visto | 2 | 4 | no visto | 4 | no visto |
+| [Visualización](bc-ae1c4683-5c99-5c57-be78-925129d1d11e) | 2 | 2 | 2 | no visto | no visto | 3 | no visto | 3 | 3 | no visto |
+| [Accesibilidad](bc-d815477b-d6b2-5975-96b6-00264cd23578) | 2 | 2 | 2 | 3 | no visto | 2 | no visto | 2 | 4 | no visto |
+| [Productor agrícola](bc-33b07f73-3ee3-582e-9c31-0ebadb5c6edf) | 2 | 3 | 2 | no visto | no visto | 2 | no visto | 2 | 3 | no visto |
+| [Cartografía](bc-6efae56c-edf4-5724-a32a-ccb9fcc44513) | 2 | 3 | 2 | no visto | 2 | 3 | no visto | 3 | 4 | no visto |
+
+Defectos que se corrigen ahora, porque son reales y no piden inventar una rotación ganadora:
+
+- La ficha decía «delta» y «n = 3». Pasa a «menos que arroz → melón» y «años parecidos».
+- El aviso decía FIXTURE y `_mock`. Pasa a «PRUEBA» y «cifras de prueba».
+- El punto del mapa mostraba una coordenada ilegible. Muestra el valor y el cantón.
+- Las capas se llamaban Nítida, MODIS, 3D y OSM. Pasan a Foto, Color NASA, Altura y Calles.
+- Cada cantón repetía «Guanacaste». El buscador parecía un lugar ya elegido.
+
+No se corrige el pedido de declarar una rotación ganadora, un rendimiento o una recomendación de riego. El contrato no lo permite.
