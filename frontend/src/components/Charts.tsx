@@ -129,7 +129,12 @@ export function DeltaChart({ compare, metric, lang, names }: { compare: CompareR
           );
         })}
       </svg>
-      <p className="faint">{metricNoun(metric, lang)}. {lang === "es" ? "Escala simétrica alrededor de cero." : "Symmetric scale around zero."}</p>
+      <p className="faint">
+        {metricNoun(metric, lang)}.{" "}
+        {lang === "es"
+          ? "Escala simétrica alrededor de cero. Si p10 y p90 coinciden, no hay banda: los años análogos dieron el mismo delta."
+          : "Symmetric scale around zero. If p10 and p90 match, there is no band: the analog years produced the same delta."}
+      </p>
     </div>
   );
 }

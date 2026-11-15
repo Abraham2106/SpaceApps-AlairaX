@@ -1,7 +1,7 @@
 import { ComparisonTable, DeltaChart, LevelChart } from "../components/Charts";
 import { Ledger } from "../components/Ledger";
 import { useComparison } from "../data/queries";
-import { compactLine, metricNoun, rotationName, ROTATION_ORDER } from "../lib/plain";
+import { metricNoun } from "../lib/plain";
 import { useInstrument } from "../store";
 
 export function RotationsScreen() {
@@ -17,47 +17,33 @@ export function RotationsScreen() {
     <div className="screen">
       <article className="section stack">
         <p className="kicker">{spanish ? "Tres rotaciones, un mismo clima" : "Three rotations, one climate"}</p>
-        <h1>{spanish ? metricNoun(metric, lang) : metricNoun(metric, lang)}</h1>
+        <h1>{metricNoun(metric, lang)}</h1>
         <p>
           {spanish
-            ? "La escala del primer gráfico empieza en cero para no agrandar una diferencia chica. El segundo muestra solo el delta que ya trae el contrato, contra arroz → melón."
-            : "The first chart starts at zero so a small difference is not enlarged. The second shows only the delta the contract already carries, against rice → melon."}
+            ? "p10–p90 es la variación entre los años análogos, no una probabilidad ni un intervalo de confianza. No es rendimiento, ni ahorro, ni una rotación ganadora."
+            : "p10–p90 is the spread across the analog years, not a probability and not a confidence interval. This is not yield, not savings, and not a winning rotation."}
         </p>
         {comparison.isPending ? <p>{spanish ? "Cargando…" : "Loading…"}</p> : null}
-        {comparison.isError ? <p className="warn">{(comparison.error as Error).message}</p> : null}
-        {loaded && !compare ? <p className="warn">{loaded.httpDetail}</p> : null}
-        {compare ? (
-          <>
-            <p>
+        {comparison.isError ? (
+          <div className="stack">
+            <p className="warn">
               {spanish
-                ? "p10–p90 es la variación entre los años análogos, no una probabilidad ni un intervalo de confianza. No es rendimiento, ni ahorro, ni una rotación ganadora."
-                : "p10–p90 is the spread across the analog years, not a probability and not a confidence interval. This is not yield, not savings, and not a winning rotation."}
+                ? "No se pudo leer la comparación. Revisa la conexión e inténtalo de nuevo."
+                : "The comparison could not be loaded. Check the connection and try again."}
             </p>
-            {ROTATION_ORDER.map((id) => {
-              const rotation = compare.rotations.find((item) => item.rotation_id === id);
-              if (!rotation) return null;
-              const scenarioName = loaded?.catalog.scenarios.find((item) => item.id === compare.scenario_id)?.name ?? compare.scenario_id;
-              return (
-                <p key={id}>
-                  {compactLine({
-                    lang,
-                    scenarioName,
-                    metric,
-                    rotationName: rotationName(id, lang, names[id]),
-                    baselineName: rotationName(compare.baseline_rotation_id, lang, names[compare.baseline_rotation_id]),
-                    isBaseline: id === compare.baseline_rotation_id,
-                    p50: rotation.metrics[metric].p50,
-                    deltaP50: rotation.delta_vs_baseline[metric].p50,
-                    n: rotation.metrics[metric].n,
-                    like2026: compare.scenario_id === "like_2026",
-                  })}
-                </p>
-              );
-            })}
-            <LevelChart compare={compare} metric={metric} lang={lang} names={names} />
+            <button onClick={() => comparison.refetch()}>{spanish ? "Reintentar" : "Try again"}</button>
+          </div>
+        ) : null}
+        {loaded && !compare ? <p className="warn">{loaded.httpDetail}</p> : null}
+        {compare && loaded ? (
+          <>
             <DeltaChart compare={compare} metric={metric} lang={lang} names={names} />
             <ComparisonTable compare={compare} metric={metric} lang={lang} names={names} />
-            <Ledger loaded={loaded} lang={lang} />
+            <LevelChart compare={compare} metric={metric} lang={lang} names={names} />
+            <details>
+              <summary>{spanish ? "Registro del cálculo" : "Calculation record"}</summary>
+              <Ledger loaded={loaded} lang={lang} />
+            </details>
           </>
         ) : null}
       </article>
