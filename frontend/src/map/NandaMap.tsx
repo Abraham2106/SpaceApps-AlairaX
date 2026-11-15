@@ -350,7 +350,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
               padding: narrow
                 ? { top: 96, bottom: 210, left: 12, right: 12 }
                 : inset === "panel"
-                  ? { top: 28, bottom: 120, left: 430, right: 96 }
+                  ? { top: 24, bottom: 72, left: 368, right: 96 }
                   : { top: 36, bottom: 64, left: 120, right: 56 },
               pitch: 0,
               bearing: 0,

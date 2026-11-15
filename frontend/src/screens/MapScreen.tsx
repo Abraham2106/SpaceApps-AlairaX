@@ -59,6 +59,7 @@ export function MapScreen() {
   const [query, setQuery] = useState("");
   const [ask, setAsk] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
+  const [layersOpen, setLayersOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const cantons = useCantons();
   const comparison = useComparison();
@@ -139,10 +140,9 @@ export function MapScreen() {
       <div className="hud left-hud">
         <section className="panel stack" aria-label={spanish ? "Lectura" : "Reading"}>
           <p className="kicker">{scenarioName || (spanish ? "Escenario" : "Scenario")} · n = {n || "…"}</p>
-          <h1>{spanish ? "¿Qué dice el modelo del agua?" : "What does the water model say?"}</h1>
+          <h1>{spanish ? "Déficit modelado" : "Modeled deficit"}</h1>
           {comparison.isPending ? <p>{spanish ? "Cargando la comparación…" : "Loading the comparison…"}</p> : null}
           {comparison.isError ? <p className="warn">{spanish ? "No se pudo leer la comparación." : "The comparison could not be read."} {(comparison.error as Error).message}</p> : null}
-          {compare ? <p className="prose">{leadSentence(lang, scenarioName, metric, n, compare._mock)}</p> : null}
           {loaded && !compare ? <p className="warn">{loaded.httpDetail}</p> : null}
           {compare ? ROTATION_ORDER.map((id) => {
             const rotation = compare.rotations.find((item) => item.rotation_id === id);
@@ -169,6 +169,7 @@ export function MapScreen() {
           {compare ? (
             <details>
               <summary>{spanish ? "Leer la frase completa" : "Read the full sentence"}</summary>
+              <p>{leadSentence(lang, scenarioName, metric, n, compare._mock)}</p>
               {ROTATION_ORDER.map((id) => {
                 const rotation = compare.rotations.find((item) => item.rotation_id === id);
                 if (!rotation) return null;
@@ -237,7 +238,8 @@ export function MapScreen() {
           </div>
         </section>
       </div>
-      <div className="hud right-hud" role="toolbar" aria-label={spanish ? "Capas" : "Layers"}>
+      <button className="layers-fab only-mobile" onClick={() => setLayersOpen(true)}>{spanish ? "Capas" : "Layers"}</button>
+      <div className="hud right-hud hide-mobile" role="toolbar" aria-label={spanish ? "Capas" : "Layers"}>
         {([
           ["satellite", spanish ? "Nítida" : "Sharp"],
           ["modis", "MODIS"],
@@ -280,6 +282,35 @@ export function MapScreen() {
             ? "La malla tiene un solo color: el p50 del punto, no un mapa. No hay interpolación."
             : "The mesh has one color: the point’s p50, not a map. There is no interpolation."}
         </p>
+      ) : null}
+      {layersOpen ? (
+        <div className="dialog-back" role="presentation" onClick={() => setLayersOpen(false)}>
+          <div className="dialog" role="dialog" aria-modal="true" aria-labelledby="layers-title" onClick={(event) => event.stopPropagation()}>
+            <h2 id="layers-title">{spanish ? "Capas" : "Layers"}</h2>
+            <div className="cluster" role="radiogroup" aria-label={spanish ? "Imagen de base" : "Base image"}>
+              {([
+                ["satellite", spanish ? "Nítida" : "Sharp"],
+                ["modis", "MODIS"],
+                ["marble", "Marble"],
+              ] as const).map(([id, label]) => (
+                <button key={id} aria-pressed={basemap === id} onClick={() => setBasemap(id)}>{label}</button>
+              ))}
+            </div>
+            <div className="cluster">
+              {([
+                ["cantons", spanish ? "Cantones" : "Cantons"],
+                ["hex", spanish ? "Malla" : "Mesh"],
+                ["terrain", spanish ? "Relieve" : "Relief"],
+                ["plates", "3D"],
+                ["osm", "OSM"],
+              ] as const).map(([id, label]) => (
+                <button key={id} aria-pressed={overlays[id]} onClick={() => toggleOverlay(id)}>{label}</button>
+              ))}
+            </div>
+            <p className="faint">{spanish ? "La malla usa un solo color: el valor del punto, no un mapa interpolado." : "The mesh uses one color: the point value, not an interpolated map."}</p>
+            <button onClick={() => setLayersOpen(false)}>{spanish ? "Cerrar" : "Close"}</button>
+          </div>
+        </div>
       ) : null}
       {ask ? (
         <div className="dialog-back" role="presentation" onClick={() => setAsk(false)}>

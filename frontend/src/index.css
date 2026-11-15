@@ -172,7 +172,14 @@ img, svg { max-width: 100%; }
   padding: 14px;
 }
 [data-theme="sun"] .panel { backdrop-filter: none; }
-.panel h1, .plate h2, .screen h1 {
+.panel h1 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 560;
+  letter-spacing: 0;
+  margin: 0 0 8px;
+}
+.plate h2, .screen h1 {
   font-family: var(--serif);
   font-weight: 560;
   letter-spacing: -0.03em;
@@ -192,20 +199,25 @@ img, svg { max-width: 100%; }
 .faint { color: var(--faint); }
 .warn { color: var(--danger); }
 
-.left-hud { left: 12px; top: 12px; width: min(400px, calc(100% - 24px)); max-height: calc(100% - 24px); overflow: auto; }
-.right-hud { right: 12px; top: 12px; display: flex; flex-direction: column; gap: 8px; }
-.bottom-hud { left: 424px; right: 12px; bottom: 12px; }
+.left-hud { left: 12px; top: 12px; width: min(340px, calc(100% - 24px)); max-height: calc(100% - 48px); overflow: auto; }
+.right-hud { right: 8px; top: 12px; display: flex; flex-direction: column; gap: 2px; }
+.bottom-hud { left: 364px; right: 8px; bottom: 28px; }
 .attrib {
   position: absolute;
-  right: 88px;
-  bottom: 78px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1;
-  max-width: 320px;
-  font-size: 0.68rem;
-  line-height: 1.35;
-  color: #f7f4ec;
-  background: rgba(6, 12, 10, 0.78);
-  padding: 6px 8px;
+  max-width: none;
+  height: 22px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.65rem;
+  line-height: 22px;
+  color: #d5e0e8;
+  background: rgba(12, 16, 20, 0.92);
+  padding: 0 10px;
 }
 .layer-btn { white-space: nowrap; }
 [data-theme="sun"] .attrib { color: #14191c; background: rgba(255, 250, 241, 0.92); }
@@ -255,10 +267,10 @@ img, svg { max-width: 100%; }
 
 .timeline { display: grid; grid-template-columns: repeat(9, 1fr); gap: 4px; }
 .month {
-  min-height: 36px;
-  border: 1px solid var(--line);
-  padding: 4px;
-  font-size: 0.75rem;
+  min-height: 0;
+  border: 0;
+  padding: 2px 0 0;
+  font-size: 0.72rem;
 }
 .month strong { display: block; font-family: var(--mono); font-size: 0.68rem; }
 .mark {
@@ -358,13 +370,13 @@ caption { text-align: left; font-family: var(--serif); font-size: 1.3rem; paddin
   .layers-fab { display: inline-flex; }
   .bottom-hud { display: none; }
   .attrib {
-    top: 8px;
-    bottom: auto;
-    left: 8px;
-    right: 72px;
-    max-width: none;
-    max-height: 2.7em;
-    overflow: hidden;
+    top: auto;
+    bottom: 64px;
+    left: 0;
+    right: 0;
+    height: 22px;
+    max-height: none;
+    white-space: nowrap;
   }
   .left-hud { max-height: 30%; }
   .topbar { gap: 8px; }

@@ -18,7 +18,7 @@ test("un productor resuelve las cinco tareas y la consola queda limpia", async (
 
   await page.goto("/#/");
   await expect(page.getByRole("status").first()).toContainText("FIXTURE");
-  await expect(page.getByRole("heading", { name: "¿Qué dice el modelo del agua?" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Déficit modelado" })).toBeVisible();
   await page.getByRole("button", { name: "Ir al punto del modelo" }).click();
   await expect(page.getByRole("option", { name: /Liberia/ })).toHaveAttribute("aria-selected", "true");
 
