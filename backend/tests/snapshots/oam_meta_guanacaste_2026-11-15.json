@@ -1,0 +1,430 @@
+{
+ "meta": {
+  "provided_by": "OpenAerialMap",
+  "license": "CC-BY 4.0",
+  "website": "http://beta.openaerialmap.org",
+  "page": 1,
+  "limit": 100,
+  "found": 5
+ },
+ "results": [
+  {
+   "_id": "6848b842064c0ea430648e5e",
+   "uuid": "https://oin-hotosm-temp.s3.us-east-1.amazonaws.com/6848b72a064c0ea430648d3e/0/6848b72a064c0ea430648d3f.tif",
+   "meta_uri": "https://oin-hotosm-temp.s3.us-east-1.amazonaws.com/6848b72a064c0ea430648d3e/0/6848b72a064c0ea430648d3f_meta.json",
+   "title": "Filadelfia",
+   "projection": "\nPROJCRS[\"WGS 84 / UTM zone 16N\",\n    BASEGEOGCRS[\"WGS 84\",\n        ENSEMBLE[\"World Geodetic System 1984 ensemble\",\n            MEMBER[\"World Geodetic System 1984 (Transit)\"],\n            MEMBER[\"World Geodetic System 1984 (G730)\"],\n            MEMBER[\"World Geodetic System 1984 (G873)\"],\n            MEMBER[\"World Geodetic System 1984 (G1150)\"],\n            MEMBER[\"World Geodetic System 1984 (G1674)\"],\n            MEMBER[\"World Geodetic System 1984 (G1762)\"],\n            MEMBER[\"World Geodetic System 1984 (G2139)\"],\n            ELLIPSOID[\"WGS 84\",6378137,298.257223563,\n                LENGTHUNIT[\"metre\",1]],\n            ENSEMBLEACCURACY[2.0]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        ID[\"EPSG\",4326]],\n    CONVERSION[\"UTM zone 16N\",\n        METHOD[\"Transverse Mercator\",\n            ID[\"EPSG\",9807]],\n        PARAMETER[\"Latitude of natural origin\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8801]],\n        PARAMETER[\"Longitude of natural origin\",-87,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8802]],\n        PARAMETER[\"Scale factor at natural origin\",0.9996,\n            SCALEUNIT[\"unity\",1],\n            ID[\"EPSG\",8805]],\n        PARAMETER[\"False easting\",500000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8806]],\n        PARAMETER[\"False northing\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8807]]],\n    CS[Cartesian,2],\n        AXIS[\"(E)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1]],\n        AXIS[\"(N)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1]],\n    USAGE[\n        SCOPE[\"Navigation and medium accuracy spatial referencing.\"],\n        AREA[\"Between 90°W and 84°W, northern hemisphere between equator and 84°N, onshore and offshore. Belize. Canada - Manitoba; Nunavut; Ontario. Costa Rica. Cuba. Ecuador - Galapagos. El Salvador. Guatemala. Honduras. Mexico. Nicaragua. United States (USA).\"],\n        BBOX[0,-90,84,-84]],\n    ID[\"EPSG\",32616]]",
+   "bbox": [
+    -85.552686,
+    10.447786,
+    -85.551693,
+    10.448388
+   ],
+   "footprint": "POLYGON ((-85.552686 10.447786, -85.551693 10.447786, -85.551693 10.448388, -85.552686 10.448388, -85.552686 10.447786))",
+   "gsd": 0.02473519905988008,
+   "file_size": 1273819,
+   "acquisition_start": "2025-06-10T06:00:00.000Z",
+   "acquisition_end": "2025-06-10T22:50:14.494Z",
+   "platform": "uav",
+   "provider": "CAOBA REAL ESTATE MEDIA",
+   "geojson": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        -85.552683,
+        10.448388
+       ],
+       [
+        -85.552686,
+        10.447791
+       ],
+       [
+        -85.551695,
+        10.447786
+       ],
+       [
+        -85.551693,
+        10.448383
+       ],
+       [
+        -85.552683,
+        10.448388
+       ]
+      ]
+     ]
+    ],
+    "bbox": [
+     -85.552686,
+     10.447786,
+     -85.551693,
+     10.448388
+    ]
+   },
+   "properties": {
+    "license": "CC-BY 4.0",
+    "sensor": "Hasselblad",
+    "url": "s3://oin-hotosm-temp/6848b72a064c0ea430648d3e/0/6848b72a064c0ea430648d3f.tif",
+    "filename": "6848b72a064c0ea430648d3f.tif",
+    "dimensions": [
+     4385,
+     2670
+    ],
+    "bands": 3,
+    "dtype": "uint8",
+    "crs": "EPSG:32616",
+    "colorinterp": [
+     "red",
+     "green",
+     "blue"
+    ],
+    "resolution": [
+     0.024735199059875316,
+     0.024734492365600148
+    ],
+    "resolution_in_meters": 0.02473519905988008,
+    "thumbnail": "https://oin-hotosm-temp.s3.us-east-1.amazonaws.com/6848b72a064c0ea430648d3e/0/6848b72a064c0ea430648d3f.png",
+    "tms": "https://tiles.openaerialmap.org/6848b72a064c0ea430648d3e/0/6848b72a064c0ea430648d3f/{z}/{x}/{y}",
+    "wmts": "https://tiles.openaerialmap.org/6848b72a064c0ea430648d3e/0/6848b72a064c0ea430648d3f/wmts",
+    "tilejson": "https://tiles.openaerialmap.org/cog/tilejson.json?url=https%3A%2F%2Foin-hotosm-temp.s3.us-east-1.amazonaws.com%2F6848b72a064c0ea430648d3e%2F0%2F6848b72a064c0ea430648d3f.tif"
+   },
+   "uploaded_at": "2025-06-10T22:57:06.083Z",
+   "__v": 0
+  },
+  {
+   "_id": "6848ba3b064c0ea430649060",
+   "uuid": "https://oin-hotosm-temp.s3.us-east-1.amazonaws.com/6848b811064c0ea430648e18/0/6848b811064c0ea430648e19.tif",
+   "meta_uri": "https://oin-hotosm-temp.s3.us-east-1.amazonaws.com/6848b811064c0ea430648e18/0/6848b811064c0ea430648e19_meta.json",
+   "title": "Filadelfia",
+   "projection": "\nPROJCRS[\"WGS 84 / UTM zone 16N\",\n    BASEGEOGCRS[\"WGS 84\",\n        ENSEMBLE[\"World Geodetic System 1984 ensemble\",\n            MEMBER[\"World Geodetic System 1984 (Transit)\"],\n            MEMBER[\"World Geodetic System 1984 (G730)\"],\n            MEMBER[\"World Geodetic System 1984 (G873)\"],\n            MEMBER[\"World Geodetic System 1984 (G1150)\"],\n            MEMBER[\"World Geodetic System 1984 (G1674)\"],\n            MEMBER[\"World Geodetic System 1984 (G1762)\"],\n            MEMBER[\"World Geodetic System 1984 (G2139)\"],\n            ELLIPSOID[\"WGS 84\",6378137,298.257223563,\n                LENGTHUNIT[\"metre\",1]],\n            ENSEMBLEACCURACY[2.0]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        ID[\"EPSG\",4326]],\n    CONVERSION[\"UTM zone 16N\",\n        METHOD[\"Transverse Mercator\",\n            ID[\"EPSG\",9807]],\n        PARAMETER[\"Latitude of natural origin\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8801]],\n        PARAMETER[\"Longitude of natural origin\",-87,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8802]],\n        PARAMETER[\"Scale factor at natural origin\",0.9996,\n            SCALEUNIT[\"unity\",1],\n            ID[\"EPSG\",8805]],\n        PARAMETER[\"False easting\",500000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8806]],\n        PARAMETER[\"False northing\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8807]]],\n    CS[Cartesian,2],\n        AXIS[\"(E)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1]],\n        AXIS[\"(N)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1]],\n    USAGE[\n        SCOPE[\"Navigation and medium accuracy spatial referencing.\"],\n        AREA[\"Between 90°W and 84°W, northern hemisphere between equator and 84°N, onshore and offshore. Belize. Canada - Manitoba; Nunavut; Ontario. Costa Rica. Cuba. Ecuador - Galapagos. El Salvador. Guatemala. Honduras. Mexico. Nicaragua. United States (USA).\"],\n        BBOX[0,-90,84,-84]],\n    ID[\"EPSG\",32616]]",
+   "bbox": [
+    -85.552686,
+    10.447786,
+    -85.551693,
+    10.448388
+   ],
+   "footprint": "POLYGON ((-85.552686 10.447786, -85.551693 10.447786, -85.551693 10.448388, -85.552686 10.448388, -85.552686 10.447786))",
+   "gsd": 0.02473519905988008,
+   "file_size": 1273819,
+   "acquisition_start": "2025-06-10T06:00:00.000Z",
+   "acquisition_end": "2025-06-10T22:50:14.494Z",
+   "platform": "uav",
+   "provider": "CAOBA REAL ESTATE MEDIA",
+   "geojson": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        -85.552683,
+        10.448388
+       ],
+       [
+        -85.552686,
+        10.447791
+       ],
+       [
+        -85.551695,
+        10.447786
+       ],
+       [
+        -85.551693,
+        10.448383
+       ],
+       [
+        -85.552683,
+        10.448388
+       ]
+      ]
+     ]
+    ],
+    "bbox": [
+     -85.552686,
+     10.447786,
+     -85.551693,
+     10.448388
+    ]
+   },
+   "properties": {
+    "license": "CC-BY 4.0",
+    "sensor": "Hasselblad",
+    "url": "s3://oin-hotosm-temp/6848b811064c0ea430648e18/0/6848b811064c0ea430648e19.tif",
+    "filename": "6848b811064c0ea430648e19.tif",
+    "dimensions": [
+     4385,
+     2670
+    ],
+    "bands": 3,
+    "dtype": "uint8",
+    "crs": "EPSG:32616",
+    "colorinterp": [
+     "red",
+     "green",
+     "blue"
+    ],
+    "resolution": [
+     0.024735199059875316,
+     0.024734492365600148
+    ],
+    "resolution_in_meters": 0.02473519905988008,
+    "thumbnail": "https://oin-hotosm-temp.s3.us-east-1.amazonaws.com/6848b811064c0ea430648e18/0/6848b811064c0ea430648e19.png",
+    "tms": "https://tiles.openaerialmap.org/6848b811064c0ea430648e18/0/6848b811064c0ea430648e19/{z}/{x}/{y}",
+    "wmts": "https://tiles.openaerialmap.org/6848b811064c0ea430648e18/0/6848b811064c0ea430648e19/wmts",
+    "tilejson": "https://tiles.openaerialmap.org/cog/tilejson.json?url=https%3A%2F%2Foin-hotosm-temp.s3.us-east-1.amazonaws.com%2F6848b811064c0ea430648e18%2F0%2F6848b811064c0ea430648e19.tif"
+   },
+   "uploaded_at": "2025-06-10T23:05:31.902Z",
+   "__v": 0
+  },
+  {
+   "_id": "6356261fece2330005d703da",
+   "acquisition_end": "2022-07-17T16:27:36.000Z",
+   "acquisition_start": "2022-07-17T15:27:36.000Z",
+   "platform": "uav",
+   "provider": "WebODM",
+   "properties": {
+    "wmts": "https://tiles.openaerialmap.org/635625c1ece2330005d703d8/0/635625c1ece2330005d703d9/wmts",
+    "tms": "https://tiles.openaerialmap.org/635625c1ece2330005d703d8/0/635625c1ece2330005d703d9/{z}/{x}/{y}",
+    "thumbnail": "https://oin-hotosm-temp.s3.amazonaws.com/635625c1ece2330005d703d8/0/635625c1ece2330005d703d9.png",
+    "resolution": [
+     0.04780354375981806,
+     0.04780615340269889
+    ],
+    "colorinterp": [
+     "red",
+     "green",
+     "blue"
+    ],
+    "dtype": "uint8",
+    "filename": "635625c1ece2330005d703d9.tif",
+    "resolution_in_meters": 0.0478061534027,
+    "bands": 3,
+    "url": "s3://oin-hotosm/635625c1ece2330005d703d8/0/635625c1ece2330005d703d9.tif",
+    "dimensions": [
+     8085,
+     7769
+    ],
+    "crs": "EPSG:32616",
+    "sensor": "LShapedProperty",
+    "license": "CC-BY 4.0"
+   },
+   "title": "Vía 927 - 7/17/2022",
+   "uuid": "https://oin-hotosm-temp.s3.amazonaws.com/635625c1ece2330005d703d8/0/635625c1ece2330005d703d9.tif",
+   "geojson": {
+    "bbox": [
+     -85.020876,
+     10.576341,
+     -85.017324,
+     10.579721
+    ],
+    "coordinates": [
+     [
+      [
+       [
+        -85.020855,
+        10.579721
+       ],
+       [
+        -85.020876,
+        10.576364
+       ],
+       [
+        -85.017345,
+        10.576341
+       ],
+       [
+        -85.017324,
+        10.579698
+       ],
+       [
+        -85.020855,
+        10.579721
+       ]
+      ]
+     ]
+    ],
+    "type": "MultiPolygon"
+   },
+   "footprint": "POLYGON ((-85.020876 10.576341, -85.017324 10.576341, -85.017324 10.579721, -85.020876 10.579721, -85.020876 10.576341))",
+   "gsd": 0.0478061534027,
+   "file_size": 8741416,
+   "projection": "PROJCS[\"WGS 84 / UTM zone 16N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-87],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32616\"]]",
+   "meta_uri": "https://oin-hotosm-temp.s3.amazonaws.com/635625c1ece2330005d703d8/0/635625c1ece2330005d703d9_meta.json",
+   "uploaded_at": "2022-10-24T05:43:59.486Z",
+   "bbox": [
+    -85.020876,
+    10.576341,
+    -85.017324,
+    10.579721
+   ],
+   "__v": 0
+  },
+  {
+   "_id": "634eec1471072f000580f85c",
+   "acquisition_end": "2022-07-17T16:27:08.000Z",
+   "acquisition_start": "2022-07-17T15:27:08.000Z",
+   "platform": "uav",
+   "provider": "WebODM",
+   "properties": {
+    "wmts": "https://tiles.openaerialmap.org/634eebb971072f000580f85a/0/634eebb971072f000580f85b/wmts",
+    "tms": "https://tiles.openaerialmap.org/634eebb971072f000580f85a/0/634eebb971072f000580f85b/{z}/{x}/{y}",
+    "thumbnail": "https://oin-hotosm-temp.s3.amazonaws.com/634eebb971072f000580f85a/0/634eebb971072f000580f85b.png",
+    "resolution": [
+     0.049996350815714796,
+     0.0499974172238931
+    ],
+    "colorinterp": [
+     "red",
+     "green",
+     "blue"
+    ],
+    "dtype": "uint8",
+    "filename": "634eebb971072f000580f85b.tif",
+    "resolution_in_meters": 0.0499974172239,
+    "bands": 3,
+    "url": "s3://oin-hotosm/634eebb971072f000580f85a/0/634eebb971072f000580f85b.tif",
+    "dimensions": [
+     8129,
+     8401
+    ],
+    "crs": "EPSG:32616",
+    "sensor": "DJI FC3411",
+    "license": "CC-BY 4.0"
+   },
+   "title": "Vía 927 - 7/17/2022",
+   "uuid": "https://oin-hotosm-temp.s3.amazonaws.com/634eebb971072f000580f85a/0/634eebb971072f000580f85b.tif",
+   "geojson": {
+    "bbox": [
+     -85.021059,
+     10.575903,
+     -85.017322,
+     10.579723
+    ],
+    "coordinates": [
+     [
+      [
+       [
+        -85.021035,
+        10.579723
+       ],
+       [
+        -85.021059,
+        10.575926
+       ],
+       [
+        -85.017346,
+        10.575903
+       ],
+       [
+        -85.017322,
+        10.579699
+       ],
+       [
+        -85.021035,
+        10.579723
+       ]
+      ]
+     ]
+    ],
+    "type": "MultiPolygon"
+   },
+   "footprint": "POLYGON ((-85.021059 10.575903, -85.017322 10.575903, -85.017322 10.579723, -85.021059 10.579723, -85.021059 10.575903))",
+   "gsd": 0.0499974172239,
+   "file_size": 9956334,
+   "projection": "PROJCS[\"WGS 84 / UTM zone 16N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-87],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32616\"]]",
+   "meta_uri": "https://oin-hotosm-temp.s3.amazonaws.com/634eebb971072f000580f85a/0/634eebb971072f000580f85b_meta.json",
+   "uploaded_at": "2022-10-18T18:10:28.303Z",
+   "bbox": [
+    -85.021059,
+    10.575903,
+    -85.017322,
+    10.579723
+   ],
+   "__v": 0
+  },
+  {
+   "_id": "68746bfebef211f37007129f",
+   "uuid": "https://oin-hotosm-temp.s3.us-east-1.amazonaws.com/68746994bef211f370070c6c/0/68746994bef211f370070c6d.tif",
+   "meta_uri": "https://oin-hotosm-temp.s3.us-east-1.amazonaws.com/68746994bef211f370070c6c/0/68746994bef211f370070c6d_meta.json",
+   "title": "kayumari",
+   "projection": "\nPROJCRS[\"WGS 84 / UTM zone 16N\",\n    BASEGEOGCRS[\"WGS 84\",\n        ENSEMBLE[\"World Geodetic System 1984 ensemble\",\n            MEMBER[\"World Geodetic System 1984 (Transit)\"],\n            MEMBER[\"World Geodetic System 1984 (G730)\"],\n            MEMBER[\"World Geodetic System 1984 (G873)\"],\n            MEMBER[\"World Geodetic System 1984 (G1150)\"],\n            MEMBER[\"World Geodetic System 1984 (G1674)\"],\n            MEMBER[\"World Geodetic System 1984 (G1762)\"],\n            MEMBER[\"World Geodetic System 1984 (G2139)\"],\n            ELLIPSOID[\"WGS 84\",6378137,298.257223563,\n                LENGTHUNIT[\"metre\",1]],\n            ENSEMBLEACCURACY[2.0]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        ID[\"EPSG\",4326]],\n    CONVERSION[\"UTM zone 16N\",\n        METHOD[\"Transverse Mercator\",\n            ID[\"EPSG\",9807]],\n        PARAMETER[\"Latitude of natural origin\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8801]],\n        PARAMETER[\"Longitude of natural origin\",-87,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8802]],\n        PARAMETER[\"Scale factor at natural origin\",0.9996,\n            SCALEUNIT[\"unity\",1],\n            ID[\"EPSG\",8805]],\n        PARAMETER[\"False easting\",500000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8806]],\n        PARAMETER[\"False northing\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8807]]],\n    CS[Cartesian,2],\n        AXIS[\"(E)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1]],\n        AXIS[\"(N)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1]],\n    USAGE[\n        SCOPE[\"Navigation and medium accuracy spatial referencing.\"],\n        AREA[\"Between 90°W and 84°W, northern hemisphere between equator and 84°N, onshore and offshore. Belize. Canada - Manitoba; Nunavut; Ontario. Costa Rica. Cuba. Ecuador - Galapagos. El Salvador. Guatemala. Honduras. Mexico. Nicaragua. United States (USA).\"],\n        BBOX[0,-90,84,-84]],\n    ID[\"EPSG\",32616]]",
+   "bbox": [
+    -85.142691,
+    9.635941,
+    -85.141059,
+    9.637549
+   ],
+   "footprint": "POLYGON ((-85.142691 9.635941, -85.141059 9.635941, -85.141059 9.637549, -85.142691 9.637549, -85.142691 9.635941))",
+   "gsd": 0.04999999945975398,
+   "file_size": 2879339,
+   "acquisition_start": "2025-07-13T06:00:00.000Z",
+   "acquisition_end": "2025-07-13T23:21:54.777Z",
+   "platform": "uav",
+   "provider": "mfg paisajismo",
+   "geojson": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        -85.142682,
+        9.637549
+       ],
+       [
+        -85.142691,
+        9.635949
+       ],
+       [
+        -85.141067,
+        9.635941
+       ],
+       [
+        -85.141059,
+        9.637541
+       ],
+       [
+        -85.142682,
+        9.637549
+       ]
+      ]
+     ]
+    ],
+    "bbox": [
+     -85.142691,
+     9.635941,
+     -85.141059,
+     9.637549
+    ]
+   },
+   "properties": {
+    "license": "CC-BY 4.0",
+    "sensor": "dji",
+    "url": "s3://oin-hotosm-temp/68746994bef211f370070c6c/0/68746994bef211f370070c6d.tif",
+    "filename": "68746994bef211f370070c6d.tif",
+    "dimensions": [
+     3564,
+     3540
+    ],
+    "bands": 3,
+    "dtype": "uint8",
+    "crs": "EPSG:32616",
+    "colorinterp": [
+     "red",
+     "green",
+     "blue"
+    ],
+    "resolution": [
+     0.0499973119118023,
+     0.04999999945975398
+    ],
+    "resolution_in_meters": 0.04999999945975398,
+    "thumbnail": "https://oin-hotosm-temp.s3.us-east-1.amazonaws.com/68746994bef211f370070c6c/0/68746994bef211f370070c6d.png",
+    "tms": "https://tiles.openaerialmap.org/68746994bef211f370070c6c/0/68746994bef211f370070c6d/{z}/{x}/{y}",
+    "wmts": "https://tiles.openaerialmap.org/68746994bef211f370070c6c/0/68746994bef211f370070c6d/wmts",
+    "tilejson": "https://tiles.openaerialmap.org/cog/tilejson.json?url=https%3A%2F%2Foin-hotosm-temp.s3.us-east-1.amazonaws.com%2F68746994bef211f370070c6c%2F0%2F68746994bef211f370070c6d.tif"
+   },
+   "uploaded_at": "2025-07-14T02:31:26.591Z",
+   "__v": 0
+  }
+ ]
+}

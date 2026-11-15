@@ -3,12 +3,12 @@ import type { Lang } from "../../lib/types";
 // Catálogo de las imágenes de fondo del mapa. Cada fuente declara proveedor,
 // producto, resolución y si publica fecha. Ninguna imagen se muestra sin esa ficha.
 
-export type ImagerySourceId = "esri" | "modis" | "hls" | "s2" | "marble";
+export type ImagerySourceId = "esri" | "modis" | "hls" | "s2" | "oam" | "marble";
 
 export type ImagerySource = {
   id: ImagerySourceId;
   /** Id de la fuente y de la capa en el estilo de MapLibre. */
-  mapId: "satellite" | "modis" | "hls" | "s2" | "marble";
+  mapId: "satellite" | "modis" | "hls" | "s2" | "oam" | "marble";
   provider: string;
   product: string;
   /** Resolución nominal en metros; null cuando el proveedor no la fija por tesela. */
@@ -35,6 +35,10 @@ export const HLS_MIN_ZOOM = 9;
 export const S2_MIN_ZOOM = 11;
 /** El backend solo corta teselas Sentinel-2 entre estos zooms. */
 export const S2_TILE_ZOOM = { min: 9, max: 14 } as const;
+/** Desde este zoom se ve la imagen de dron de OpenAerialMap si el centro cae en su huella. */
+export const OAM_MIN_ZOOM = 16;
+/** titiler.hotosm.org corta teselas de dron hasta este zoom (≈ 2 cm por píxel). */
+export const OAM_TILE_ZOOM = { min: 14, max: 22 } as const;
 /** Zona que el backend acepta para buscar escenas (Guanacaste con margen): oeste, sur, este, norte. */
 export const S2_AREA = [-86.2, 9.4, -84.4, 11.4] as const;
 
@@ -74,6 +78,16 @@ export const IMAGERY_SOURCES: Record<ImagerySourceId, ImagerySource> = {
     resolutionM: 10,
     dated: true,
     maxzoom: S2_TILE_ZOOM.max,
+  },
+  oam: {
+    id: "oam",
+    mapId: "oam",
+    provider: "OpenAerialMap",
+    product: "Imagen de dron",
+    // Cada imagen trae su propia resolución; la ficha cita la de la imagen visible.
+    resolutionM: null,
+    dated: true,
+    maxzoom: OAM_TILE_ZOOM.max,
   },
   marble: {
     id: "marble",
@@ -115,6 +129,28 @@ export type SentinelScene = {
   bbox: [number, number, number, number];
   attribution: string;
 };
+
+/** Imagen de dron de OpenAerialMap: un autor, un día y una resolución propios. */
+export type DroneImage = {
+  id: string;
+  title: string;
+  date: string;
+  /** Metros por píxel; null si OpenAerialMap no lo publica. */
+  gsdM: number | null;
+  /** Autor o proveedor que la subió; se cita por nombre. */
+  provider: string;
+  license: string;
+  /** Oeste, sur, este, norte en grados. */
+  bbox: [number, number, number, number];
+  /** Plantilla {z}/{x}/{y} de titiler.hotosm.org para esta imagen. */
+  tiles: string;
+};
+
+/** Qué sabe el mapa de las huellas de dron en Guanacaste. */
+export type DroneLookup =
+  | { state: "loading" }
+  | { state: "ready"; images: DroneImage[] }
+  | { state: "error" };
 
 /** Qué sabe el mapa de la escena Sentinel-2 para la vista actual. */
 export type SentinelLookup =
@@ -181,4 +217,11 @@ export function formatImageryDate(iso: string, lang: Lang): string {
     year: "numeric",
     timeZone: "UTC",
   });
+}
+
+/** Resolución de dron legible: en centímetros, con un decimal. */
+export function formatGsd(gsdM: number | null, lang: Lang): string | null {
+  if (gsdM == null || !Number.isFinite(gsdM) || gsdM <= 0) return null;
+  const cm = gsdM * 100;
+  return `${cm.toLocaleString(lang === "es" ? "es-CR" : "en-US", { maximumFractionDigits: 1 })} cm`;
 }

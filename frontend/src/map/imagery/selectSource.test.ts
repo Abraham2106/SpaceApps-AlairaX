@@ -2,11 +2,14 @@ import { describe, expect, it } from "vitest";
 import {
   clampImageryDate,
   defaultImageryDate,
+  formatGsd,
   formatImageryDate,
   gibsTileUrl,
   insideBox,
   isIsoDay,
   sentinelTileUrl,
+  type DroneImage,
+  type DroneLookup,
   type SentinelLookup,
   type SentinelScene,
   tileUrlFor,
@@ -150,5 +153,80 @@ describe("teselas Sentinel-2", () => {
   it("sabe si el centro sigue dentro de la escena", () => {
     expect(insideBox(-85.44, 10.63, SCENE.bbox)).toBe(true);
     expect(insideBox(-84.9, 10.63, SCENE.bbox)).toBe(false);
+  });
+});
+
+// Imagen de dron de Filadelfia tal como la devuelve el backend (snapshot de OAM del 15 nov 2026).
+const FILADELFIA: DroneImage = {
+  id: "6848b842064c0ea430648e5e",
+  title: "Filadelfia",
+  date: "2025-06-10",
+  gsdM: 0.02473519905988008,
+  provider: "CAOBA REAL ESTATE MEDIA",
+  license: "CC-BY 4.0",
+  bbox: [-85.552686, 10.447786, -85.551693, 10.448388],
+  tiles: "https://titiler.hotosm.org/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x.png?url=x",
+};
+const OLDER: DroneImage = { ...FILADELFIA, id: "older", date: "2022-07-17", provider: "WebODM" };
+const DRONES: DroneLookup = { state: "ready", images: [FILADELFIA, OLDER] };
+const IN_FILADELFIA = [-85.55219, 10.448087] as const;
+const LIBERIA = [-85.44, 10.63] as const;
+
+describe("selectSource con imágenes de dron", () => {
+  const nasa = { basemap: "modis" as const, date: "2026-11-08", now: NOW };
+
+  it("sin backend la capa de dron queda apagada", () => {
+    const choice = selectSource({ ...nasa, zoom: 18, center: IN_FILADELFIA });
+    expect(choice.oam).toBe("off");
+    expect(choice.layers).not.toContain("oam");
+  });
+
+  it("en Filadelfia aparece la imagen de dron con su fecha y su autor", () => {
+    const choice = selectSource({ ...nasa, zoom: 18, drones: DRONES, center: IN_FILADELFIA });
+    expect(choice.oam).toBe("active");
+    expect(choice.primary).toBe("oam");
+    expect(choice.date).toBe("2025-06-10");
+    expect(choice.drone?.provider).toBe("CAOBA REAL ESTATE MEDIA");
+    expect(choice.layers.at(-1)).toBe("oam");
+  });
+
+  it("fuera de las huellas no aparece nada", () => {
+    const choice = selectSource({ ...nasa, zoom: 18, drones: DRONES, center: LIBERIA });
+    expect(choice.oam).toBe("none");
+    expect(choice.drone).toBeNull();
+    expect(choice.layers).not.toContain("oam");
+    expect(choice.date).toBe("2026-11-08");
+  });
+
+  it("antes del zoom de detalle no se muestra aunque el centro esté en la huella", () => {
+    const choice = selectSource({ ...nasa, zoom: 15.9, drones: DRONES, center: IN_FILADELFIA });
+    expect(choice.oam).toBe("zoom");
+    expect(choice.primary).not.toBe("oam");
+  });
+
+  it("dice si las huellas se están buscando o fallaron", () => {
+    expect(selectSource({ ...nasa, zoom: 18, drones: { state: "loading" }, center: IN_FILADELFIA }).oam).toBe("searching");
+    expect(selectSource({ ...nasa, zoom: 18, drones: { state: "error" }, center: IN_FILADELFIA }).oam).toBe("failed");
+    expect(selectSource({ ...nasa, zoom: 18, drones: DRONES, center: IN_FILADELFIA, failed: new Set(["oam"]) }).oam).toBe("failed");
+  });
+
+  it("también va sobre Esri, pero nunca sobre Blue Marble", () => {
+    const esri = selectSource({ ...nasa, basemap: "satellite", zoom: 18, drones: DRONES, center: IN_FILADELFIA });
+    expect(esri.layers).toEqual(["esri", "oam"]);
+    expect(esri.date).toBe("2025-06-10");
+    const marble = selectSource({ ...nasa, basemap: "marble", zoom: 18, drones: DRONES, center: IN_FILADELFIA });
+    expect(marble.oam).toBe("off");
+  });
+
+  it("si dos huellas se tocan gana la primera, la más reciente", () => {
+    const choice = selectSource({ ...nasa, zoom: 18, drones: DRONES, center: IN_FILADELFIA });
+    expect(choice.drone?.id).toBe(FILADELFIA.id);
+  });
+
+  it("escribe la resolución de dron en centímetros o dice que no hay dato", () => {
+    expect(formatGsd(0.02473519905988008, "es")).toBe("2,5 cm");
+    expect(formatGsd(0.05, "en")).toBe("5 cm");
+    expect(formatGsd(null, "es")).toBeNull();
+    expect(formatGsd(0, "es")).toBeNull();
   });
 });
