@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import type maplibregl from "maplibre-gl";
 import { z } from "zod";
 import { publicUrl } from "./api";
-import { cividis } from "./color";
 import type { MetricId } from "./types";
 
 const row = z.object({
@@ -54,10 +53,24 @@ export function surfaceDomain(surface: Surface | undefined, metric: MetricId): [
   return min === max ? [min - 1, max + 1] : [min, max];
 }
 
-/** Upper half of cividis: ochre to yellow, one sequence a farmer can read on a night map. */
+const GREEN = ["#d8f3dc", "#95d5b2", "#52b788", "#2d6a4f", "#1b4332"];
+
+function mixHex(from: string, to: string, t: number): string {
+  const channel = (hex: string, index: number) => Number.parseInt(hex.slice(1 + index * 2, 3 + index * 2), 16);
+  const parts = [0, 1, 2].map((index) => {
+    const value = Math.round(channel(from, index) * (1 - t) + channel(to, index) * t);
+    return value.toString(16).padStart(2, "0");
+  });
+  return `#${parts.join("")}`;
+}
+
+/** Light green to deep green. One sequence, readable over a bright satellite. */
 export function surfaceColor(value: number, min: number, max: number): string {
-  const t = (value - min) / (max - min || 1);
-  return cividis(0.5 + Math.min(1, Math.max(0, t)) * 0.5);
+  const t = Math.min(1, Math.max(0, (value - min) / (max - min || 1)));
+  const scaled = t * (GREEN.length - 1);
+  const low = Math.floor(scaled);
+  const high = Math.min(GREEN.length - 1, low + 1);
+  return mixHex(GREEN[low], GREEN[high], scaled - low);
 }
 
 function matchColor(key: "id" | "canton", surface: Surface | undefined, metric: MetricId) {

@@ -1,6 +1,6 @@
 import { NavLink, Outlet, useLocation, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
-import { Droplets, Grid2x2, Map, ShieldCheck, SunMedium, Moon, Sprout } from "lucide-react";
+import { Droplets, Grid2x2, Leaf, Map, Moon, ShieldCheck, Sprout, SunMedium } from "lucide-react";
 import { NandaMap } from "../map/NandaMap";
 import { useComparison } from "../data/queries";
 import { useInstrument } from "../store";
@@ -58,9 +58,13 @@ export function Shell() {
       <a className="skip" href="#contenido">{spanish ? "Saltar al contenido" : "Skip to content"}</a>
       <header className="topbar">
         <NavLink className="brand" to={{ pathname: "/", search: params.toString() }}>
-          <strong>NandaView</strong>
-          <span>AlairaX</span>
+          <Leaf size={22} strokeWidth={1.5} aria-hidden />
+          <span className="brand-name">
+            <strong>NandaView</strong>
+            <span>AlairaX</span>
+          </span>
         </NavLink>
+        <div className="search-slot" />
         <label className="only-mobile">
           <span className="kicker">{spanish ? "Escenario" : "Scenario"}</span>
           <select className="scenario-select" value={scenarioId} onChange={(event) => setScenario(event.target.value as typeof scenarioId)} aria-label={spanish ? "Escenario" : "Scenario"}>
