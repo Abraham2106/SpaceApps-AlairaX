@@ -2,6 +2,7 @@ import { NavLink, Outlet, useLocation, useSearchParams } from "react-router-dom"
 import { useEffect } from "react";
 import { Droplets, Grid2x2, Leaf, Map, Moon, ShieldCheck, Sprout, SunMedium } from "lucide-react";
 import { NandaMap } from "../map/NandaMap";
+import { RadioGroup } from "./RadioGroup";
 import { useComparison } from "../data/queries";
 import { useInstrument } from "../store";
 
@@ -64,7 +65,6 @@ export function Shell() {
             <span>AlairaX</span>
           </span>
         </NavLink>
-        <div className="search-slot" />
         <label className="only-mobile">
           <span className="kicker">{spanish ? "Escenario" : "Scenario"}</span>
           <select className="scenario-select" value={scenarioId} onChange={(event) => setScenario(event.target.value as typeof scenarioId)} aria-label={spanish ? "Escenario" : "Scenario"}>
@@ -74,26 +74,34 @@ export function Shell() {
             <option value="like_2026">{spanish ? "Como 2026" : "Like 2026"}</option>
           </select>
         </label>
-        <div className="segment hide-mobile" role="radiogroup" aria-label={spanish ? "Escenario" : "Scenario"}>
-          {([
-            ["strong_el_nino", "Niño fuerte", "Strong El Niño"],
-            ["neutral", "Neutro", "Neutral"],
-            ["la_nina", "Niña", "La Niña"],
-            ["like_2026", "Como 2026", "Like 2026"],
-          ] as const).map(([id, es, en]) => (
-            <button key={id} aria-pressed={scenarioId === id} onClick={() => setScenario(id)}>{spanish ? es : en}</button>
-          ))}
-        </div>
-        <div className="metric-tabs" role="tablist" aria-label={spanish ? "Métrica" : "Metric"}>
-          <button role="tab" aria-selected={metric === "modeled_water_deficit_mm"} onClick={() => setMetric("modeled_water_deficit_mm")}>{spanish ? "Agua" : "Water"}</button>
-          <button role="tab" aria-selected={metric === "crop_water_demand_mm"} onClick={() => setMetric("crop_water_demand_mm")}>{spanish ? "Demanda" : "Demand"}</button>
-          <button role="tab" aria-selected={metric === "water_stress_days"} onClick={() => setMetric("water_stress_days")}>{spanish ? "Estrés" : "Stress"}</button>
-        </div>
+        <RadioGroup
+          className="segment hide-mobile"
+          label={spanish ? "Escenario" : "Scenario"}
+          value={scenarioId}
+          onChange={setScenario}
+          options={[
+            { value: "strong_el_nino", label: spanish ? "Niño fuerte" : "Strong El Niño" },
+            { value: "neutral", label: spanish ? "Neutro" : "Neutral" },
+            { value: "la_nina", label: spanish ? "Niña" : "La Niña" },
+            { value: "like_2026", label: spanish ? "Como 2026" : "Like 2026" },
+          ]}
+        />
+        <RadioGroup
+          className="metric-tabs"
+          label={spanish ? "Métrica" : "Metric"}
+          value={metric}
+          onChange={setMetric}
+          options={[
+            { value: "modeled_water_deficit_mm", label: spanish ? "Agua" : "Water" },
+            { value: "crop_water_demand_mm", label: spanish ? "Demanda" : "Demand" },
+            { value: "water_stress_days", label: spanish ? "Estrés" : "Stress" },
+          ]}
+        />
         <span className="spacer" />
         {mock && !liveFailure ? (
           <p className="chip" role="status">
             <strong>{spanish ? "PRUEBA" : "SAMPLE"}</strong>
-            <span>{spanish ? "Datos sintéticos" : "Synthetic data"}</span>
+            <span className="chip-note">{spanish ? "Datos sintéticos" : "Synthetic data"}</span>
           </p>
         ) : null}
         {liveFailure ? (
@@ -104,7 +112,8 @@ export function Shell() {
         ) : null}
         <span className="mode-pill">{apiBase ? "API" : spanish ? "Fixture" : "Fixture"}</span>
         <button onClick={() => setTheme(theme === "night" ? "sun" : "night")} aria-pressed={theme === "sun"}>
-          {theme === "night" ? <Moon size={16} aria-hidden /> : <SunMedium size={16} aria-hidden />} {theme === "night" ? (spanish ? "Noche" : "Night") : (spanish ? "Sol" : "Sun")}
+          {theme === "night" ? <Moon size={16} aria-hidden /> : <SunMedium size={16} aria-hidden />}
+          <span className="btn-label">{theme === "night" ? (spanish ? "Noche" : "Night") : (spanish ? "Sol" : "Sun")}</span>
         </button>
         <button onClick={() => setLang(spanish ? "en" : "es")}>{spanish ? "EN" : "ES"}</button>
       </header>
@@ -115,7 +124,7 @@ export function Shell() {
             return (
               <NavLink key={link.to} to={{ pathname: link.to, search: params.toString() }} end={link.to === "/"}>
                 <Icon size={18} strokeWidth={1.5} aria-hidden />
-                {spanish ? link.label[0] : link.label[1]}
+                <span className="rail-label">{spanish ? link.label[0] : link.label[1]}</span>
               </NavLink>
             );
           })}

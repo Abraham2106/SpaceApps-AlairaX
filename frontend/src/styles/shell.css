@@ -1,0 +1,171 @@
+.skip {
+  position: absolute;
+  left: 8px;
+  top: -40px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 8px 12px;
+  z-index: 40;
+}
+.skip:focus { top: 8px; }
+
+.app {
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  background: var(--bg);
+}
+
+.topbar {
+  position: relative;
+  z-index: 6;
+  min-height: 72px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  align-items: center;
+  padding: var(--s-2) var(--s-4);
+  border: 0;
+  border-bottom: 1px solid var(--chrome-edge);
+  background: var(--chrome);
+  color: var(--chrome-ink);
+  pointer-events: auto;
+}
+.topbar > * { pointer-events: auto; }
+.brand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  text-decoration: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--chrome-ink);
+}
+.brand svg { color: var(--accent); }
+.brand-name { display: flex; flex-direction: column; }
+.brand strong { font-family: var(--sans); font-size: var(--fs-lg); font-weight: 640; letter-spacing: -0.03em; }
+.brand-name > span { font-family: var(--mono); font-size: var(--fs-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--chrome-muted); }
+.cluster { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.segment, .metric-tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  background: var(--control);
+  border: 1px solid var(--control-line);
+  box-shadow: none;
+}
+.segment { border-radius: var(--r-2); }
+.metric-tabs { border-radius: var(--r-3); }
+.segment button, .metric-tabs button {
+  border: 0;
+  min-height: 44px;
+  color: var(--control-ink);
+  background: transparent;
+}
+.segment button { border-radius: var(--r-1); padding: 0 12px; white-space: nowrap; }
+.metric-tabs button { border-radius: var(--r-1); padding: 0 14px; }
+.segment button[aria-checked="true"] {
+  background: var(--selected-bg);
+  color: var(--selected-ink);
+}
+.metric-tabs button[aria-checked="true"] {
+  color: var(--selected-soft-ink);
+  font-weight: 600;
+  box-shadow: inset 0 -3px 0 var(--accent);
+}
+.topbar > button, .mode-pill {
+  min-height: var(--hit);
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--s-3);
+  border-radius: var(--r-2);
+  background: var(--control);
+  border: 1px solid var(--control-line);
+  color: var(--chrome-ink);
+}
+.spacer { flex: 1; }
+.only-mobile { display: none; }
+.layers-fab {
+  display: none;
+  position: absolute;
+  z-index: 3;
+  top: 8px;
+  right: 8px;
+  min-height: 44px;
+  background: var(--elev);
+}
+.scenario-select { min-width: 148px; }
+.mode-pill {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--control-ink);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  min-height: 36px;
+  padding: 0 10px;
+  border-radius: var(--r-2);
+  background: var(--alarm-bg);
+  color: var(--alarm-ink);
+  border: 1px solid var(--alarm-line);
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+}
+.chip strong { font-family: var(--mono); letter-spacing: 0.08em; font-size: var(--fs-xs); }
+.chip-live { max-width: 280px; }
+.chip-live span { overflow: hidden; text-overflow: ellipsis; }
+
+.workspace {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-areas: "rail stage";
+}
+.rail {
+  grid-area: rail;
+  position: relative;
+  z-index: 5;
+  border: 0;
+  border-right: 1px solid var(--chrome-edge);
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 10px;
+  background: var(--chrome-rail);
+  overflow: auto;
+}
+.rail a {
+  min-height: 44px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--r-2);
+  text-decoration: none;
+  font-size: var(--fs-md);
+  letter-spacing: 0;
+  text-transform: none;
+  text-align: left;
+  color: var(--control-ink);
+}
+.rail a { transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+.rail a:hover { background: var(--control); }
+.rail a[aria-current="page"] { color: var(--selected-ink); background: var(--selected-bg); font-weight: 600; }
+.stage { grid-area: stage; position: relative; min-width: 0; min-height: 0; }

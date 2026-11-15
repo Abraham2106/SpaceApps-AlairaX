@@ -94,8 +94,58 @@ No cambia ningún texto público sobre el modelo. Siguen sin aparecer ahorro, re
 
 ### Propuestas que piden una decisión humana
 
-1. **Colores de rotación en las gráficas.** No llegan a 3:1 de contraste no textual: melón `#143d66` sobre el fondo de Noche da 1,7:1 y sorgo `#c9842a` sobre el fondo de Sol da 2,8:1. Las líneas se distinguen por el trazo (continuo, rayas, puntos), así que no dependen solo del color. Propuesta: un tono por tema para melón en Noche (por ejemplo `#6f9fd8`) y para sorgo en Sol (por ejemplo `#8a5a12`), o un borde claro. No se cambió porque los colores están fijados por decisión.
-2. **Esquinas y sombra.** `ui-decisions.md` pide esquinas rectas, borde de 1 px y sin sombra blanda. La implementación usa radios de 10 a 20 px y sombra en Noche. Ahora es un solo token (`--r-*`, `--panel-shadow`), y volver a la decisión es cambiar cuatro valores. Hay que decidir cuál de las dos manda.
+1. ~~**Colores de rotación en las gráficas.**~~ Resuelta en la Fase 2: un tono por tema (`--rot-*`), ver abajo.
+2. ~~**Esquinas y sombra.**~~ Resuelta en la Fase 2: manda `ui-decisions.md` (radios de 2 a 6 px, borde de 1 px, sin sombra).
 3. **Acento.** La decisión dice cian de lectura; la implementación usa verde `#3dcc7a` en Noche y azul petróleo `#0b4f6c` en Sol. Hay que decidir si se actualiza la decisión o el token `--accent`.
 4. **Fondo de Sol.** La decisión habla de crema; el token es gris frío `#f3f6f8`. Hay que decidir uno de los dos.
 5. **Rondas.** Hacen falta tres rondas de ojos frescos sobre las capturas nuevas de Sol antes de dar el tema por cerrado.
+
+## Fase 2: tokens y sistema visual
+
+### Cambios
+
+- `frontend/src/index.css` pasa a ser solo una lista de imports. La hoja se partió en `frontend/src/styles/` en este orden de cascada: `tokens.css`, `base.css`, `shell.css`, `map.css`, `content.css`, `responsive.css`.
+- **Colores de rotación por tema** (`--rot-melon`, `--rot-legume`, `--rot-sorghum`):
+  - Noche: `#6cb4ff`, `#3fd0b8`, `#e8a33d`.
+  - Sol: `#0b4f8a`, `#0f766e`, `#9a5806`.
+  - Cierra el pendiente de la Fase 1: el `#143d66` no leía sobre Noche. El trazo (continuo, `7 4`, `1.5 4`) se mantiene como segunda señal.
+  - Mecanismo: `data-rot="rice_*"` fija `--rot`; `.rot-bg` y `.rot-dot` lo consumen. `ROTATION_STYLE` devuelve `var(--rot-*)`, así que los gráficos cambian con el tema.
+- **Identidad rectangular:** radios de 2, 4 y 6 px (`--r-1/2/3`). Paneles opacos con borde de 1 px, sin sombra ni desenfoque (se quitaron `--panel-blur` y `--panel-shadow`).
+- **Escala de letra** `--fs-*` con mínimo de 12 px, y tokens de movimiento `--dur-fast`, `--dur-base`, `--ease`. Los botones tienen transición y estado `:active`; `prefers-reduced-motion` los corta.
+- `--outline` por tema para el borde de marcas y puntos, de modo que se vean sobre cualquier fondo.
+- Los estilos en línea con `color-mix` y hex sueltos de `MapScreen`, `SeasonScreen`, `CantonsScreen` y `Charts` pasaron a clases (`rot-bg`, `rot-dot`, `plate-alt`, `plate-outline`, `mark-window`, `mark-ink`).
+
+### Verificación
+
+- `tsc` y `vite build`: sin errores. `vitest`: 11/11. Playwright: 32/32.
+- `oxlint`: 3 avisos que ya existían (`themeName` sin usar en el e2e y dos lecturas de ref durante el render en `NandaMap.tsx`).
+- Las capturas de esta fase fueron a una carpeta temporal; `docs/screenshots` no se regeneró.
+
+### Lo que no se tocó a propósito
+
+- Los literales de MapLibre, `color.ts`, `surface.ts` y el `circle-stroke-color` de `NandaMap.tsx` siguen en hex: el mapa es oscuro en los dos temas y MapLibre no lee variables CSS.
+- Quedan estilos en línea dinámicos (anchos, posiciones en porcentaje, muestras de `surfaceColor`), porque dependen de los datos.
+- No cambia ningún texto público sobre el modelo.
+
+## Fase 3: estructura y puntos de quiebre
+
+### Problema que se midió
+- La barra superior de escritorio necesitaba 1431 px. Entre 801 y 1439 px el aviso PRUEBA y los botones de tema e idioma se salían de la pantalla y el documento tenía scroll horizontal. En móvil la barra medía 175–227 px.
+
+### Cambios
+- `.app` y `.workspace` pasan a CSS grid. La barra lateral ya no se superpone al mapa: en móvil es una fila propia abajo y el escenario ocupa el resto.
+- Cuatro anchos, definidos en `styles/responsive.css` y `lib/viewport.ts`: ≤767 móvil, 768–1099 tablet, ≥1100 ancho, ≥1440 amplio. `NandaMap.tsx` y `MapScreen.tsx` usan `isMobile()` en vez de `innerWidth < 800`.
+- Debajo de 1440 el aviso de modo se oculta y los botones de tema e idioma quedan solo con ícono (la etiqueta sigue en el nombre accesible). En tablet los controles pasan a una segunda fila; en móvil la barra baja a unos 123 px.
+- Barra lateral: 208 px con nombres, 92 px con el nombre bajo el ícono en tablet, barra inferior de 64 px en móvil.
+- La hoja inferior del mapa tiene tres alturas (corta, media, alta). El asa es un `slider` con `aria-valuetext`; un toque, Enter o Espacio pasan a la siguiente, las flechas suben y bajan, y arrastrar ajusta a la más cercana al soltar. Hay alternativa al arrastre (WCAG 2.5.7).
+- El buscador de cantón salió del flujo de la barra y vive dentro del escenario.
+
+### Verificación
+- `tsc`, `vite build`, `vitest` (11/11) y Playwright (32/32) sin errores. `oxlint`: los mismos 3 avisos de antes.
+- Medido con Playwright a 360, 480, 768, 801, 900, 1024, 1100, 1280 y 1440 px: sin scroll horizontal ni elementos de la barra fuera de pantalla.
+- Hoja a 360 px: 168 → 299 → 429 px por toque; End lleva a la alta.
+
+### Pendiente
+- A 768 px el reproductor de la parte baja queda apretado (el control deslizante es corto y «Comparar años» se parte en dos líneas). Se resuelve con el rediseño del mapa de la Fase 4.
+- Sin revisar con lector de pantalla real ni con pantallas táctiles físicas; los gestos se probaron con toques de Playwright.
+- `docs/screenshots` no se regeneró.

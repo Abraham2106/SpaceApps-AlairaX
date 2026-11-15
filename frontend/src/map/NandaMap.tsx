@@ -8,6 +8,7 @@ import { formatValue } from "../lib/format";
 import { cantonHeight, cantonPaint, hexHeight, hexPaint, useSurface } from "../lib/surface";
 import { useInstrument } from "../store";
 import type { MetricId } from "../lib/types";
+import { isMobile } from "../lib/viewport";
 
 const EMPTY = { type: "FeatureCollection" as const, features: [] };
 
@@ -393,7 +394,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       if (useInstrument.getState().selected.length === 0) {
         const bounds = boundsOf(guanacasteFeatures(collection));
         if (bounds) {
-          const narrow = window.innerWidth < 800;
+          const narrow = isMobile();
           map.fitBounds(
             [[bounds[0], bounds[1]], [bounds[2], bounds[3]]],
             {
@@ -471,7 +472,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     if (selected.length !== 1) return;
     const feature = cantons.data?.features.find((item) => item.id === selected[0]);
     if (!feature) return;
-    const narrow = window.innerWidth < 800;
+    const narrow = isMobile();
     map.flyTo({
       center: feature.properties.center,
       zoom: 9.6,

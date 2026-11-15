@@ -63,7 +63,7 @@ export function LevelChart({ compare, metric, lang, names }: { compare: CompareR
               {rotation.runs.map((run) => {
                 const value = run.metrics[metric];
                 if (value === null) return null;
-                return <circle key={run.year} cx={xOf(value)} cy={y} r="4" fill={style.color} stroke="#f4efe4" strokeWidth="1" />;
+                return <circle key={run.year} cx={xOf(value)} cy={y} r="4" fill={style.color} className="rot-dot" strokeWidth="1" />;
               })}
             </g>
           );

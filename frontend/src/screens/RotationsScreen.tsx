@@ -25,7 +25,7 @@ export function RotationsScreen() {
             : "p10–p90 is the spread across the analog years, not a probability and not a confidence interval. This is not yield, not savings, and not a winning rotation."}
         </p>
         <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
-        {loaded && !compare ? <p className="warn">{loaded.httpDetail}</p> : null}
+        {loaded && !compare ? <p className="warn" role="alert">{loaded.httpDetail}</p> : null}
         {compare && loaded ? (
           <>
             <DeltaChart compare={compare} metric={metric} lang={lang} names={names} />

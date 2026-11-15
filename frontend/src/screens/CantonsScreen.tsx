@@ -39,14 +39,13 @@ export function CantonsScreen() {
       </div>
       {plates.map((plate, index) => (
         <section
-          className="plate"
+          className={index % 2 === 0 ? "plate" : "plate plate-alt"}
           id={plate.id}
           key={plate.id}
-          style={{ background: index % 2 === 0 ? "var(--bg)" : "var(--bg-2)" }}
           aria-current={selected[0] === plate.id ? "true" : undefined}
         >
           <svg viewBox="0 0 100 100" role="img" aria-label={plate.name}>
-            <path d={plate.path} fill={plate.tint} stroke="#f4efe4" strokeWidth="0.6" />
+            <path className="plate-outline" d={plate.path} fill={plate.tint} strokeWidth="0.6" />
           </svg>
           <div>
             <p className="kicker">{spanish ? `Cantón ${index + 1} de 11` : `Canton ${index + 1} of 11`}</p>

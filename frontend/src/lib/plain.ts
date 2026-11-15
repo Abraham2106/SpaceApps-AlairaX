@@ -7,9 +7,10 @@ export const ROTATION_STYLE: Record<
   RotationId,
   { color: string; dash: string; swatch: string }
 > = {
-  rice_melon: { color: "#143d66", dash: "none", swatch: "solid" },
-  rice_legume: { color: "#1f7a6b", dash: "7 4", swatch: "dashed" },
-  rice_sorghum: { color: "#c9842a", dash: "1.5 4", swatch: "dotted" },
+  // El color es una variable de index.css (--rot-*): cambia con el tema. El trazo no.
+  rice_melon: { color: "var(--rot-melon)", dash: "none", swatch: "solid" },
+  rice_legume: { color: "var(--rot-legume)", dash: "7 4", swatch: "dashed" },
+  rice_sorghum: { color: "var(--rot-sorghum)", dash: "1.5 4", swatch: "dotted" },
 };
 
 const FALLBACK_NAME: Record<RotationId, { es: string; en: string }> = {

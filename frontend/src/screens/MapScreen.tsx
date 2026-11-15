@@ -1,13 +1,15 @@
-import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Box, Globe2, Hexagon, Layers, LocateFixed, Mountain, Pause, Pentagon, Play, Route, Satellite, ScanLine, Search, Share2 } from "lucide-react";
 import { formatNumber, formatValue, metricUnit } from "../lib/format";
 import { cantonAt } from "../lib/geo";
-import { ROTATION_ORDER, ROTATION_STYLE, comparisonSentence, leadSentence, metricNoun, rotationName } from "../lib/plain";
+import { ROTATION_ORDER, comparisonSentence, leadSentence, metricNoun, rotationName } from "../lib/plain";
 import { surfaceColor, surfaceDomain, surfaceValue, useSurface } from "../lib/surface";
 import { useCantons, useComparison } from "../data/queries";
 import { useInstrument } from "../store";
 import { QueryState } from "../components/QueryState";
+import { isMobile } from "../lib/viewport";
+import { Dialog } from "../components/Dialog";
 import type { RotationId } from "../lib/types";
 
 const SEASON_DAYS = 274;
@@ -45,6 +47,16 @@ function stageAt(day: number, spanish: boolean) {
   return spanish ? hit.es : hit.en;
 }
 
+const SNAP_NAMES = [["corta", "short"], ["media", "medium"], ["alta", "tall"]] as const;
+
+/** Tres alturas de la hoja inferior, medidas contra el escenario (la hoja no tapa todo el mapa). */
+function snapHeights(sheet: HTMLElement | null): [number, number, number] {
+  const room = (sheet?.offsetParent as HTMLElement | null)?.clientHeight ?? window.innerHeight;
+  const tall = Math.round(room * 0.7);
+  const short = Math.min(168, Math.round(room * 0.3));
+  return [short, Math.round((short + tall) / 2), tall];
+}
+
 export function MapScreen() {
   const lang = useInstrument((state) => state.lang);
   const spanish = lang === "es";
@@ -72,7 +84,9 @@ export function MapScreen() {
   const [day, setDay] = useState(44);
   const [playing, setPlaying] = useState(false);
   const [compareOpen, setCompareOpen] = useState(false);
+  const [listStop, setListStop] = useState<number | null>(null);
   const sheetRef = useRef<HTMLElement>(null);
+  const [snap, setSnap] = useState(0);
   const cantons = useCantons();
   const comparison = useComparison();
   const surface = useSurface();
@@ -188,17 +202,62 @@ export function MapScreen() {
     );
   }
 
+  const cantonRows = visible.slice(0, query ? 12 : 11);
+  const firstSelected = cantonRows.findIndex((feature) => selected.includes(feature.id));
+  const listTabStop = Math.min(listStop ?? (firstSelected >= 0 ? firstSelected : 0), Math.max(0, cantonRows.length - 1));
+
+  function onListKey(event: ReactKeyboardEvent<HTMLDivElement>) {
+    const options = Array.from(event.currentTarget.querySelectorAll<HTMLElement>('[role="option"]'));
+    const at = options.indexOf(document.activeElement as HTMLElement);
+    let next = -1;
+    if (event.key === "ArrowDown") next = Math.min(options.length - 1, at + 1);
+    else if (event.key === "ArrowUp") next = Math.max(0, at - 1);
+    else if (event.key === "Home") next = 0;
+    else if (event.key === "End") next = options.length - 1;
+    if (next < 0 || options.length === 0) return;
+    event.preventDefault();
+    options[next].focus();
+  }
+
+  // La altura de la hoja es una de tres: corta, media o alta. Arrastrar la sigue y al soltar ajusta a la más cercana.
+  useEffect(() => {
+    const apply = () => document.documentElement.style.setProperty("--sheet", `${snapHeights(sheetRef.current)[snap]}px`);
+    apply();
+    window.addEventListener("resize", apply);
+    return () => window.removeEventListener("resize", apply);
+  }, [snap]);
+
+  function onHandleKey(event: ReactKeyboardEvent) {
+    if (event.key === "ArrowUp" || event.key === "ArrowRight") setSnap((value) => Math.min(2, value + 1));
+    else if (event.key === "ArrowDown" || event.key === "ArrowLeft") setSnap((value) => Math.max(0, value - 1));
+    else if (event.key === "Home") setSnap(0);
+    else if (event.key === "End") setSnap(2);
+    else if (event.key === "Enter" || event.key === " ") setSnap((value) => (value + 1) % 3);
+    else return;
+    event.preventDefault();
+  }
+
   function onHandleDown(event: ReactPointerEvent) {
-    if (window.innerWidth >= 800) return;
+    if (!isMobile()) return;
+    const heights = snapHeights(sheetRef.current);
     const startY = event.clientY;
-    const start = sheetRef.current?.getBoundingClientRect().height ?? 280;
+    const start = sheetRef.current?.getBoundingClientRect().height ?? heights[snap];
+    let moved = 0;
+    let current = start;
     const move = (pointer: PointerEvent) => {
-      const next = Math.min(window.innerHeight * 0.74, Math.max(168, start + (startY - pointer.clientY)));
-      document.documentElement.style.setProperty("--sheet", `${next}px`);
+      moved = Math.max(moved, Math.abs(startY - pointer.clientY));
+      current = Math.min(heights[2], Math.max(heights[0], start + (startY - pointer.clientY)));
+      document.documentElement.style.setProperty("--sheet", `${current}px`);
     };
     const up = () => {
       window.removeEventListener("pointermove", move);
       window.removeEventListener("pointerup", up);
+      // Un toque sin arrastre pasa a la altura siguiente: alternativa al gesto para quien no arrastra.
+      const next = moved < 6
+        ? (snap + 1) % 3
+        : heights.reduce((best, height, index) => (Math.abs(height - current) < Math.abs(heights[best] - current) ? index : best), 0);
+      document.documentElement.style.setProperty("--sheet", `${heights[next]}px`);
+      setSnap(next);
     };
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerup", up);
@@ -245,7 +304,19 @@ export function MapScreen() {
       </form>
       <aside ref={sheetRef} className={`left-hud ${open ? "" : "is-collapsed"} ${hovered ? "is-linked" : ""}`}>
         <section className="glass stack" aria-label={spanish ? "Lectura" : "Reading"}>
-          <button className="sheet-handle" type="button" aria-label={spanish ? "Arrastrar la ficha" : "Drag the card"} onPointerDown={onHandleDown} />
+          <div
+            className="sheet-handle"
+            role="slider"
+            tabIndex={0}
+            aria-orientation="vertical"
+            aria-valuemin={0}
+            aria-valuemax={2}
+            aria-valuenow={snap}
+            aria-valuetext={SNAP_NAMES[snap][spanish ? 0 : 1]}
+            aria-label={spanish ? "Alto de la ficha" : "Card height"}
+            onPointerDown={onHandleDown}
+            onKeyDown={onHandleKey}
+          />
           <div className="glass-top">
             <button type="button" className="text-btn" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
               {open ? (spanish ? "Ocultar" : "Hide") : (spanish ? "Lectura" : "Reading")}
@@ -253,11 +324,11 @@ export function MapScreen() {
           </div>
           {open ? (
             <>
+              <h1>{metricNoun(metric, lang)}</h1>
               <p className="readout">
                 {lead.value == null ? (spanish ? "sin dato" : "no data") : formatNumber(lead.value, lang, lead.value % 1 === 0 ? 0 : 1)}
                 {lead.value == null ? null : <small>{metricUnit(metric, lang)}</small>}
               </p>
-              <h1>{metricNoun(metric, lang)}</h1>
               <p className="faint">{scenarioName} · n = {n || "…"} · {spanish ? "años parecidos" : "similar years"}</p>
               <p className="kicker">
                 {outside && focus
@@ -272,15 +343,14 @@ export function MapScreen() {
                   {ROTATION_ORDER.map((id) => {
                     const item = reading(id);
                     const width = item.value == null ? 0 : Math.min(100, (item.value / barMax) * 100);
-                    const color = ROTATION_STYLE[id].color;
                     return (
-                      <div key={id} className="bullet">
+                      <div key={id} className="bullet" data-rot={id}>
                         <div className="bullet-top">
-                          <span><i style={{ background: color }} />{rotationName(id, lang, names[id])}</span>
+                          <span><i className="rot-bg" />{rotationName(id, lang, names[id])}</span>
                           <strong>{item.value == null ? (spanish ? "sin dato" : "no data") : formatValue(item.value, metric, lang)}</strong>
                         </div>
                         <div className="bullet-track" aria-hidden>
-                          {item.value == null ? null : <span className="bullet-bar" style={{ width: `${width}%`, background: `color-mix(in srgb, ${color} 58%, white)` }} />}
+                          {item.value == null ? null : <span className="bullet-bar" style={{ width: `${width}%` }} />}
                           {id !== "rice_melon" && lead.value != null ? <span className="bullet-mark" style={{ left: `${(lead.value / barMax) * 100}%` }} /> : null}
                         </div>
                         <span className="bullet-delta">
@@ -341,13 +411,15 @@ export function MapScreen() {
               </div>
               {locationMessage ? <p className="kicker" role="status">{locationMessage}</p> : null}
               {location && !location.inside ? <p className="warn">{spanish ? "Sin extrapolación." : "No extrapolation."}</p> : null}
-              <div className="canton-list" role="listbox" aria-multiselectable="true" aria-label={spanish ? "Cantones" : "Cantons"}>
-                {visible.slice(0, query ? 12 : 11).map((feature) => (
+              <div className="canton-list" role="listbox" aria-multiselectable="true" aria-label={spanish ? "Cantones" : "Cantons"} onKeyDown={onListKey}>
+                {cantonRows.map((feature, index) => (
                   <button
                     key={feature.id}
                     type="button"
                     role="option"
                     aria-selected={selected.includes(feature.id)}
+                    tabIndex={index === listTabStop ? 0 : -1}
+                    onFocus={() => setListStop(index)}
                     onClick={(event) => {
                       if (!feature.properties.guanacaste) {
                         setLocation(location, spanish ? `${feature.properties.name}: sin simulación disponible.` : `${feature.properties.name}: no simulation available.`);
@@ -444,46 +516,40 @@ export function MapScreen() {
         ) : null}
       </div>
       {layersOpen ? (
-        <div className="dialog-back" role="presentation" onClick={() => setLayersOpen(false)}>
-          <div className="dialog" role="dialog" aria-modal="true" aria-labelledby="layers-title" onClick={(event) => event.stopPropagation()}>
-            <h2 id="layers-title">{spanish ? "Capas" : "Layers"}</h2>
-            <div className="layer-grid">{layerButtons}</div>
-            <p className="faint">{spanish ? "Cada hexágono copia el valor sintético del cantón que lo contiene. No hay interpolación." : "Each hexagon copies the synthetic value of the canton that contains it. There is no interpolation."}</p>
-            <button type="button" onClick={() => setLayersOpen(false)}>{spanish ? "Cerrar" : "Close"}</button>
-          </div>
-        </div>
+        <Dialog labelledBy="layers-title" onClose={() => setLayersOpen(false)}>
+          <h2 id="layers-title">{spanish ? "Capas" : "Layers"}</h2>
+          <div className="layer-grid">{layerButtons}</div>
+          <p className="faint">{spanish ? "Cada hexágono copia el valor sintético del cantón que lo contiene. No hay interpolación." : "Each hexagon copies the synthetic value of the canton that contains it. There is no interpolation."}</p>
+          <button type="button" onClick={() => setLayersOpen(false)}>{spanish ? "Cerrar" : "Close"}</button>
+        </Dialog>
       ) : null}
       {ask ? (
-        <div className="dialog-back" role="presentation" onClick={() => setAsk(false)}>
-          <div className="dialog" role="dialog" aria-modal="true" aria-labelledby="loc-title" onClick={(event) => event.stopPropagation()}>
-            <h2 id="loc-title">{spanish ? "Ubicación de este aparato" : "This device’s location"}</h2>
-            <p>{spanish ? "El navegador va a pedir permiso. La coordenada solo centra el mapa aquí. No se envía a un servidor y no crea una simulación nueva. Si cae fuera de Guanacaste, se dice y no se extrapola." : "The browser will ask permission. The coordinate only recenters the map here. It is not sent to a server and it does not create a new simulation. Outside Guanacaste, the screen says so and does not extrapolate."}</p>
-            <div className="row">
-              <button type="button" onClick={locate}>{spanish ? "Pedir permiso" : "Ask permission"}</button>
-              <button type="button" onClick={() => setAsk(false)}>{spanish ? "Ahora no" : "Not now"}</button>
-            </div>
+        <Dialog labelledBy="loc-title" onClose={() => setAsk(false)}>
+          <h2 id="loc-title">{spanish ? "Ubicación de este aparato" : "This device’s location"}</h2>
+          <p>{spanish ? "El navegador va a pedir permiso. La coordenada solo centra el mapa aquí. No se envía a un servidor y no crea una simulación nueva. Si cae fuera de Guanacaste, se dice y no se extrapola." : "The browser will ask permission. The coordinate only recenters the map here. It is not sent to a server and it does not create a new simulation. Outside Guanacaste, the screen says so and does not extrapolate."}</p>
+          <div className="row">
+            <button type="button" onClick={locate}>{spanish ? "Pedir permiso" : "Ask permission"}</button>
+            <button type="button" onClick={() => setAsk(false)}>{spanish ? "Ahora no" : "Not now"}</button>
           </div>
-        </div>
+        </Dialog>
       ) : null}
       {shareOpen ? (
-        <div className="dialog-back" role="presentation" onClick={() => setShareOpen(false)}>
-          <div className="dialog" role="dialog" aria-modal="true" aria-labelledby="share-title" onClick={(event) => event.stopPropagation()}>
-            <h2 id="share-title">{spanish ? "Compartir esta lectura" : "Share this reading"}</h2>
-            <textarea readOnly value={shareText} />
-            <div className="row">
-              <button type="button" onClick={async () => {
-                try {
-                  await navigator.clipboard.writeText(shareText);
-                  setCopied(true);
-                } catch {
-                  setCopied(false);
-                }
-              }}>{spanish ? "Copiar" : "Copy"}</button>
-              <button type="button" onClick={() => setShareOpen(false)}>{spanish ? "Cerrar" : "Close"}</button>
-            </div>
-            {copied ? <p role="status">{spanish ? "Copiado." : "Copied."}</p> : null}
+        <Dialog labelledBy="share-title" onClose={() => setShareOpen(false)}>
+          <h2 id="share-title">{spanish ? "Compartir esta lectura" : "Share this reading"}</h2>
+          <textarea readOnly value={shareText} aria-label={spanish ? "Texto para compartir" : "Text to share"} />
+          <div className="row">
+            <button type="button" onClick={async () => {
+              try {
+                await navigator.clipboard.writeText(shareText);
+                setCopied(true);
+              } catch {
+                setCopied(false);
+              }
+            }}>{spanish ? "Copiar" : "Copy"}</button>
+            <button type="button" onClick={() => setShareOpen(false)}>{spanish ? "Cerrar" : "Close"}</button>
           </div>
-        </div>
+          {copied ? <p role="status">{spanish ? "Copiado." : "Copied."}</p> : null}
+        </Dialog>
       ) : null}
     </>
   );

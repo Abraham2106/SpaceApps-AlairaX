@@ -1,7 +1,7 @@
 import { useInstrument } from "../store";
 import { useComparison } from "../data/queries";
 import { formatValue } from "../lib/format";
-import { ROTATION_ORDER, ROTATION_STYLE, rotationName } from "../lib/plain";
+import { ROTATION_ORDER, rotationName } from "../lib/plain";
 import { QueryState } from "../components/QueryState";
 
 const MONTHS = [
@@ -46,15 +46,15 @@ export function SeasonScreen() {
             <div key={es} className="month">
               <strong>{spanish ? es : en}</strong>
               {/* Las marcas repiten la lista de abajo; la lista es el texto que cuenta. */}
-              {index === 0 ? <span className="mark" aria-hidden="true" style={{ background: "var(--mark-window)" }} /> : null}
-              {index === 1 ? <span className="mark" aria-hidden="true" style={{ background: "var(--ink)" }} /> : null}
+              {index === 0 ? <span className="mark mark-window" aria-hidden="true" /> : null}
+              {index === 1 ? <span className="mark mark-ink" aria-hidden="true" /> : null}
               {index === 6 ? (
                 <span className="mark mark-split" aria-hidden="true">
-                  <i style={{ background: ROTATION_STYLE.rice_legume.color }} />
-                  <i style={{ background: ROTATION_STYLE.rice_sorghum.color }} />
+                  <i className="rot-bg" data-rot="rice_legume" />
+                  <i className="rot-bg" data-rot="rice_sorghum" />
                 </span>
               ) : null}
-              {index === 8 ? <span className="mark" aria-hidden="true" style={{ background: ROTATION_STYLE.rice_melon.color }} /> : null}
+              {index === 8 ? <span className="mark rot-bg" data-rot="rice_melon" aria-hidden="true" /> : null}
             </div>
           ))}
         </div>
