@@ -5,7 +5,7 @@ export const ROTATION_ORDER: RotationId[] = ["rice_melon", "rice_legume", "rice_
 
 export const ROTATION_STYLE: Record<
   RotationId,
-  { color: string; dash: string; swatch: string }
+  { color: string; dash: string; swatch: "solid" | "dashed" | "dotted" }
 > = {
   // El color es una variable de index.css (--rot-*): cambia con el tema. El trazo no.
   rice_melon: { color: "var(--rot-melon)", dash: "none", swatch: "solid" },
@@ -42,6 +42,16 @@ const METRIC_NOUN: Record<MetricId, { es: string; en: string }> = {
 
 export function metricNoun(metric: MetricId, lang: Lang): string {
   return METRIC_NOUN[metric][lang];
+}
+
+const READING_METRIC: Record<MetricId, Record<Lang, string>> = {
+  modeled_water_deficit_mm: { es: "Agua que faltó", en: "Water shortfall" },
+  crop_water_demand_mm: { es: "Agua que necesitó el cultivo", en: "Water the crop needed" },
+  water_stress_days: { es: "Días con estrés por falta de agua", en: "Days of water stress" },
+};
+
+export function readingMetric(metric: MetricId, lang: Lang): string {
+  return READING_METRIC[metric][lang];
 }
 
 export type SentenceInput = {
@@ -159,4 +169,13 @@ export function leadSentence(lang: Lang, scenarioName: string, metric: MetricId,
     ? "The numbers come from a synthetic fixture, not a field run."
     : "The numbers come from the API response.";
   return `In ${scenarioName} the sample has ${n} years. These are the medians of ${noun}. ${source}`;
+}
+
+export function readingNotes(lang: Lang, like2026: boolean): string {
+  if (lang === "es") {
+    const caveats = "El rango p10–p90 muestra cuánto variaron las cifras entre los años de la muestra. No es una probabilidad ni un intervalo de confianza. Las cifras no indican rendimiento, ahorro ni una rotación ganadora.";
+    return like2026 ? `${caveats} El escenario «Como 2026» usa años parecidos. 2026 sigue en observación.` : caveats;
+  }
+  const caveats = "The p10–p90 range shows how much the figures varied across the years in the sample. It is not a probability or a confidence interval. The figures do not indicate yield, savings, or a winning rotation.";
+  return like2026 ? `${caveats} The “Like 2026” scenario uses similar years. Monitoring for 2026 is ongoing.` : caveats;
 }

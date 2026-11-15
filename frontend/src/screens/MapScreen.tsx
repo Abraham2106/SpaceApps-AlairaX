@@ -3,8 +3,8 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Box, Globe2, Hexagon, Layers, LocateFixed, Mountain, Pause, Pentagon, Play, Route, Satellite, ScanLine, Search, Share2 } from "lucide-react";
 import { formatNumber, formatValue, metricUnit } from "../lib/format";
 import { cantonAt } from "../lib/geo";
-import { ROTATION_ORDER, comparisonSentence, leadSentence, metricNoun, rotationName } from "../lib/plain";
-import { surfaceColor, surfaceDomain, surfaceValue, useSurface } from "../lib/surface";
+import { ROTATION_ORDER, comparisonSentence, leadSentence, readingMetric, readingNotes, rotationName } from "../lib/plain";
+import { surfaceColor, surfaceDomain, useSurface } from "../lib/surface";
 import { useCantons, useComparison } from "../data/queries";
 import { useInstrument } from "../store";
 import { QueryState } from "../components/QueryState";
@@ -53,7 +53,7 @@ const SNAP_NAMES = [["corta", "short"], ["media", "medium"], ["alta", "tall"]] a
 function snapHeights(sheet: HTMLElement | null): [number, number, number] {
   const room = (sheet?.offsetParent as HTMLElement | null)?.clientHeight ?? window.innerHeight;
   const tall = Math.round(room * 0.7);
-  const short = Math.min(168, Math.round(room * 0.3));
+  const short = Math.min(196, Math.round(room * 0.35));
   return [short, Math.round((short + tall) / 2), tall];
 }
 
@@ -66,7 +66,6 @@ export function MapScreen() {
   const overlays = useInstrument((state) => state.overlays);
   const toggleOverlay = useInstrument((state) => state.toggleOverlay);
   const selected = useInstrument((state) => state.selected);
-  const hovered = useInstrument((state) => state.hovered);
   const toggleCanton = useInstrument((state) => state.toggleCanton);
   const location = useInstrument((state) => state.location);
   const locationMessage = useInstrument((state) => state.locationMessage);
@@ -93,9 +92,7 @@ export function MapScreen() {
   const loaded = comparison.data;
   const compare = loaded?.compare ?? null;
   const names = Object.fromEntries((loaded?.catalog.rotations ?? []).map((item) => [item.id, item.name]));
-  const scenarioName = loaded?.catalog.scenarios.find((item) => item.id === loaded.compare?.scenario_id)?.name
-    ?? loaded?.catalog.scenarios.find((item) => item.id === useInstrument.getState().scenarioId)?.name
-    ?? "";
+  const scenarioName = loaded?.catalog.scenarios.find((item) => item.id === compare?.scenario_id)?.name ?? "";
   const [min, max] = surfaceDomain(surface.data, metric);
 
   const visible = useMemo(() => {
@@ -107,19 +104,12 @@ export function MapScreen() {
 
   const n = compare?.analog_years.length ?? 0;
   const modelCanton = compare && cantons.data ? cantonAt(compare.zona.longitude, compare.zona.latitude, cantons.data) : null;
-  const focusId = hovered ?? selected[0] ?? null;
-  const focus = focusId ? cantons.data?.features.find((feature) => feature.id === focusId) ?? null : null;
-  const outside = Boolean(focus && !focus.properties.guanacaste);
-  const synthetic = focus?.properties.guanacaste ? surfaceValue(surface.data, focus.id, metric) : null;
+  const baselineId = compare?.baseline_rotation_id ?? "rice_melon";
+  const baselineName = rotationName(baselineId, lang, names[baselineId]);
   const version = compare?.rotations[0]?.runs[0]?.model_version ?? "";
+  const hasDailyBalance = compare?.rotations.some((rotation) => rotation.runs.some((run) => run.daily_balance.length > 0));
 
   function reading(id: RotationId): { value: number | null; delta: number | null } {
-    if (outside) return { value: null, delta: null };
-    if (synthetic) {
-      if (id === "rice_melon") return { value: synthetic.rice_melon, delta: null };
-      if (id === "rice_legume") return { value: synthetic.rice_legume, delta: synthetic.delta_legume };
-      return { value: synthetic.rice_sorghum, delta: synthetic.delta_sorghum };
-    }
     const rotation = compare?.rotations.find((item) => item.rotation_id === id);
     return {
       value: rotation?.metrics[metric].p50 ?? null,
@@ -127,7 +117,7 @@ export function MapScreen() {
     };
   }
 
-  const lead = reading("rice_melon");
+  const lead = reading(baselineId);
   const barMax = Math.max(
     1,
     ...ROTATION_ORDER.map((id) => reading(id).value ?? 0),
@@ -302,7 +292,7 @@ export function MapScreen() {
         <Search size={16} strokeWidth={1.5} aria-hidden />
         <input className="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={spanish ? "Buscar cantón" : "Find a canton"} aria-label={spanish ? "Buscar cantón" : "Find a canton"} />
       </form>
-      <aside ref={sheetRef} className={`left-hud ${open ? "" : "is-collapsed"} ${hovered ? "is-linked" : ""}`}>
+      <aside ref={sheetRef} className={`left-hud ${open ? "" : "is-collapsed"}`}>
         <section className="glass stack" aria-label={spanish ? "Lectura" : "Reading"}>
           <div
             className="sheet-handle"
@@ -318,87 +308,76 @@ export function MapScreen() {
             onKeyDown={onHandleKey}
           />
           <div className="glass-top">
+            {open ? <h1>{readingMetric(metric, lang)}</h1> : null}
             <button type="button" className="text-btn" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
               {open ? (spanish ? "Ocultar" : "Hide") : (spanish ? "Lectura" : "Reading")}
             </button>
           </div>
           {open ? (
             <>
-              <h1>{metricNoun(metric, lang)}</h1>
-              <p className="readout">
-                {lead.value == null ? (spanish ? "sin dato" : "no data") : formatNumber(lead.value, lang, lead.value % 1 === 0 ? 0 : 1)}
-                {lead.value == null ? null : <small>{metricUnit(metric, lang)}</small>}
-              </p>
-              <p className="faint">{scenarioName} · n = {n || "…"} · {spanish ? "años parecidos" : "similar years"}</p>
-              <p className="kicker">
-                {outside && focus
-                  ? `${focus.properties.name} · ${spanish ? "sin simulación" : "no simulation"}`
-                  : synthetic && focus
-                    ? `${focus.properties.name} · ${spanish ? "cifra de prueba de este cantón" : "sample figure for this canton"}`
-                    : spanish ? "el punto de la simulación" : "the simulation point"}
-              </p>
               <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
-              {outside ? null : (
-                <div className="bullets">
-                  {ROTATION_ORDER.map((id) => {
-                    const item = reading(id);
-                    const width = item.value == null ? 0 : Math.min(100, (item.value / barMax) * 100);
-                    return (
-                      <div key={id} className="bullet" data-rot={id}>
-                        <div className="bullet-top">
-                          <span><i className="rot-bg" />{rotationName(id, lang, names[id])}</span>
-                          <strong>{item.value == null ? (spanish ? "sin dato" : "no data") : formatValue(item.value, metric, lang)}</strong>
-                        </div>
-                        <div className="bullet-track" aria-hidden>
-                          {item.value == null ? null : <span className="bullet-bar" style={{ width: `${width}%` }} />}
-                          {id !== "rice_melon" && lead.value != null ? <span className="bullet-mark" style={{ left: `${(lead.value / barMax) * 100}%` }} /> : null}
-                        </div>
-                        <span className="bullet-delta">
-                          {item.delta == null
-                            ? (spanish ? "referencia" : "reference")
-                            : item.delta === 0
-                              ? (spanish ? "igual que arroz → melón" : "same as rice → melon")
-                              : item.delta < 0
-                                ? `${formatNumber(Math.abs(item.delta), lang, 1)} ${metricUnit(metric, lang)} ${spanish ? "menos que arroz → melón" : "less than rice → melon"}`
-                                : `${formatNumber(item.delta, lang, 1)} ${metricUnit(metric, lang)} ${spanish ? "más que arroz → melón" : "more than rice → melon"}`}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-              {compare ? <p className="meta-line">{compare.warnings.length} {spanish ? "avisos en la lectura" : "warnings in the reading"}</p> : null}
               {compare ? (
-                <details>
+                <div className="reading-lead">
+                  <p className={lead.value == null ? "reading-empty" : "readout"}>
+                    {lead.value == null ? formatValue(null, metric, lang) : (
+                      <>{formatNumber(lead.value, lang)}<small> {metricUnit(metric, lang)}</small></>
+                    )}
+                  </p>
+                  <p>{spanish ? `${baselineName} en el punto del modelo.` : `${baselineName} at the model point.`}</p>
+                </div>
+              ) : null}
+              {compare ? (
+                <details className="reading-details">
                   <summary>{spanish ? "Leer más" : "Read more"}</summary>
-                  <p>{version}</p>
+                  <h2>{spanish ? "Comparación de rotaciones" : "Rotation comparison"}</h2>
+                  <div className="bullets">
+                    {ROTATION_ORDER.map((id) => {
+                      const item = reading(id);
+                      const width = item.value == null ? 0 : Math.min(100, (item.value / barMax) * 100);
+                      return (
+                        <div key={id} className="bullet" data-rot={id}>
+                          <div className="bullet-top">
+                            <span><i className="rot-bg" />{rotationName(id, lang, names[id])}</span>
+                            <strong>{item.value == null ? (spanish ? "sin dato" : "no data") : formatValue(item.value, metric, lang)}</strong>
+                          </div>
+                          <div className="bullet-track" aria-hidden>
+                            {item.value == null ? null : <span className="bullet-bar" style={{ width: `${width}%` }} />}
+                            {id !== baselineId && lead.value != null ? <span className="bullet-mark" style={{ left: `${(lead.value / barMax) * 100}%` }} /> : null}
+                          </div>
+                          <span className="bullet-delta">
+                            {item.delta == null
+                              ? id === baselineId ? (spanish ? "referencia" : "reference") : (spanish ? "diferencia: sin dato" : "difference: no data")
+                              : item.delta === 0
+                                ? `${spanish ? "Igual que" : "Same as"} ${baselineName}`
+                                : item.delta < 0
+                                  ? `${formatValue(Math.abs(item.delta), metric, lang)} ${spanish ? "menos que" : "less than"} ${baselineName}`
+                                  : `${formatValue(item.delta, metric, lang)} ${spanish ? "más que" : "more than"} ${baselineName}`}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <h2>{spanish ? "Cómo leer la comparación" : "How to read the comparison"}</h2>
                   <p>{leadSentence(lang, scenarioName, metric, n, compare._mock)}</p>
-                  {ROTATION_ORDER.map((id) => {
-                    const rotation = compare.rotations.find((item) => item.rotation_id === id);
-                    if (!rotation) return null;
-                    return (
-                      <p key={id}>
-                        {comparisonSentence({
-                          lang,
-                          scenarioName,
-                          metric,
-                          rotationName: rotationName(id, lang, names[id]),
-                          baselineName: rotationName(compare.baseline_rotation_id, lang, names[compare.baseline_rotation_id]),
-                          isBaseline: id === compare.baseline_rotation_id,
-                          p50: rotation.metrics[metric].p50,
-                          deltaP50: rotation.delta_vs_baseline[metric].p50,
-                          n: rotation.metrics[metric].n,
-                          like2026: compare.scenario_id === "like_2026",
-                        })}
-                      </p>
-                    );
-                  })}
-                  <p>{compare.warnings.join(" ")}</p>
+                  <p>{readingNotes(lang, compare.scenario_id === "like_2026")}</p>
+                  {compare.warnings.length > 0 ? (
+                    <>
+                      <h2>{spanish ? "Avisos" : "Warnings"}</h2>
+                      <ul>{compare.warnings.map((warning, index) => <li key={index}>{warning}</li>)}</ul>
+                    </>
+                  ) : null}
+                  {compare.limitations.length > 0 ? (
+                    <>
+                      <h2>{spanish ? "Limitaciones" : "Limitations"}</h2>
+                      <ul>{compare.limitations.map((limitation, index) => <li key={index}>{limitation}</li>)}</ul>
+                    </>
+                  ) : null}
                   <p className="faint">
                     {spanish
-                      ? `Eje: ${metricNoun(metric, lang)}. ${modelCanton ? `El punto del archivo cae en ${modelCanton.properties.name}. ` : ""}Elegir un cantón no cambia la lectura del punto.`
-                      : `Axis: ${metricNoun(metric, lang)}. ${modelCanton ? `The file point falls in ${modelCanton.properties.name}. ` : ""}Choosing a canton does not change the point reading.`}
+                      ? `${modelCanton ? `El punto del modelo está en ${modelCanton.properties.name}. ` : ""}Elegir un cantón sirve para explorar el mapa. La cifra corresponde al mismo punto de la simulación.`
+                      : `${modelCanton ? `The model point is in ${modelCanton.properties.name}. ` : ""}Choose a canton to explore the map. The figure still comes from the same simulation point.`}
                   </p>
+                  {version ? <p className="faint">{spanish ? "Versión del modelo" : "Model version"} <code>{version}</code></p> : null}
                 </details>
               ) : null}
               <div className="row">
@@ -445,10 +424,10 @@ export function MapScreen() {
       <div className="hud right-hud hide-mobile" role="toolbar" aria-label={spanish ? "Capas" : "Layers"}>
         {layerButtons}
       </div>
-      <div className="map-legend" aria-label={spanish ? "Escala" : "Scale"}>
+      {surface.data ? <div className="map-legend" aria-label={spanish ? "Escala" : "Scale"}>
         <div className="legend-top">
           <span>{formatNumber(min, lang, 0)}</span>
-          <span>{spanish ? "fixture sintético · arroz→melón" : "synthetic fixture · rice→melon"}</span>
+          <span>{spanish ? "Cifras de prueba · arroz → melón" : "Sample figures · rice → melon"}</span>
           <span>{formatNumber(max, lang, 0)}</span>
         </div>
         <div className="legend">
@@ -457,13 +436,13 @@ export function MapScreen() {
           ))}
         </div>
         <p>{spanish ? "Gris: sin simulación. No es la salida del modelo." : "Gray: no simulation. Not a model output."}</p>
-      </div>
+      </div> : null}
       <div className="hud bottom-hud">
         <div className="player">
           <button type="button" className="play" aria-pressed={playing} onClick={() => {
             if (day >= SEASON_DAYS) setDay(0);
             setPlaying((value) => !value);
-          }}>{playing ? <Pause size={16} strokeWidth={1.5} aria-hidden /> : <Play size={16} strokeWidth={1.5} aria-hidden />} {playing ? (spanish ? "Pausa" : "Pause") : "Play"}</button>
+          }}>{playing ? <Pause size={16} strokeWidth={1.5} aria-hidden /> : <Play size={16} strokeWidth={1.5} aria-hidden />} {playing ? (spanish ? "Pausa" : "Pause") : spanish ? "Iniciar" : "Play"}</button>
           <div className="scrub">
             <div className="scrub-stages" aria-hidden>
               {STAGES.map((stage) => (
@@ -489,28 +468,28 @@ export function MapScreen() {
             </div>
           </div>
           <p className="player-now">{stageAt(day, spanish)}</p>
-          <button type="button" aria-expanded={compareOpen} onClick={() => setCompareOpen((value) => !value)}>
+          <button className="compare-years" type="button" disabled={!compare} aria-expanded={compareOpen && Boolean(compare)} aria-controls={compareOpen && compare ? "compare-years" : undefined} onClick={() => setCompareOpen((value) => !value)}>
             {spanish ? "Comparar años" : "Compare years"}
           </button>
         </div>
         {compareOpen && compare ? (
-          <div className="year-pop">
+          <div className="year-pop" id="compare-years">
             <label>{spanish ? "Año A" : "Year A"}
               <select value={yearA ?? ""} onChange={(event) => setYears(event.target.value ? Number(event.target.value) : null, yearB)}>
-                <option value="">—</option>
+                <option value="">{spanish ? "Elegir" : "Choose"}</option>
                 {compare.analog_years.map((item) => <option key={item.year} value={item.year}>{item.year}</option>)}
               </select>
             </label>
             <label>{spanish ? "Año B" : "Year B"}
               <select value={yearB ?? ""} onChange={(event) => setYears(yearA, event.target.value ? Number(event.target.value) : null)}>
-                <option value="">—</option>
+                <option value="">{spanish ? "Elegir" : "Choose"}</option>
                 {compare.analog_years.map((item) => <option key={item.year} value={item.year}>{item.year}</option>)}
               </select>
             </label>
-            <p className="kicker">
-              {spanish
-                ? "Años análogos del archivo. Este resultado no trae balance diario, así que no se dibuja una curva."
-                : "Analog years from the file. This result has no daily balance, so no curve is drawn."}
+            <p className="faint">
+              {hasDailyBalance
+                ? (spanish ? "Años parecidos usados en la simulación." : "Similar years used in the simulation.")
+                : (spanish ? "Este resultado trae cifras del ciclo completo. Balance diario: sin dato." : "This result has figures for the full cycle. Daily balance: no data.")}
             </p>
           </div>
         ) : null}

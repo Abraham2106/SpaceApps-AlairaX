@@ -1,20 +1,3 @@
-.plate {
-  min-height: 72vh;
-  scroll-snap-align: start;
-  display: grid;
-  grid-template-columns: minmax(220px, 42%) 1fr;
-  gap: 28px;
-  align-items: center;
-  padding: 48px 7vw;
-  border-top: 1px solid var(--line);
-  background: var(--bg);
-}
-.plate svg { width: 100%; height: auto; }
-.plate-alt { background: var(--bg-2); }
-.plate-outline { stroke: var(--outline); }
-.plate-meta { font-family: var(--mono); font-size: var(--fs-sm); color: var(--muted); }
-
-.chart-wrap { width: 100%; overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: var(--fs-md); }
 th, td { border-bottom: 1px solid var(--line); text-align: right; padding: 8px 6px; vertical-align: top; }
 th:first-child, td:first-child { text-align: left; }
@@ -45,15 +28,12 @@ caption { text-align: left; font-family: var(--serif); font-size: var(--fs-xl); 
   margin: 6px 0;
 }
 .legend span { flex: 1; }
-.status-block { border-left: 3px solid var(--accent); padding-left: 10px; margin: 10px 0; }
 /* Estados de carga y error: misma forma en todas las pantallas. */
 .state { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 8px 0; padding: 6px 0 6px 10px; border-left: 3px solid var(--line); }
 .state p { margin: 0; }
 .state-loading p { color: var(--muted); }
 .state-error { border-left-color: var(--danger); }
 .state-error p { color: var(--danger); }
-.section { padding: 28px 7vw 48px; max-width: 980px; }
-.year-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .dotrow { display: flex; gap: 6px; flex-wrap: wrap; }
 .dot {
   min-width: 44px;

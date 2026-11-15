@@ -32,7 +32,7 @@ export function Shell() {
   const comparison = useComparison();
   const location = useLocation();
   const [params, setParams] = useSearchParams();
-  const showMap = location.pathname === "/" || location.pathname.startsWith("/cantones");
+  const showMap = location.pathname === "/";
   const spanish = lang === "es";
 
   useEffect(() => {
