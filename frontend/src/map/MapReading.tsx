@@ -5,6 +5,7 @@ import { ArrowUpRight, LocateFixed, MapPin, Share2 } from "lucide-react";
 import { TickScale } from "../components/Instrument";
 import { formatNumber, formatValue, metricUnit } from "../lib/format";
 import { cantonAt } from "../lib/geo";
+import { surfaceCanton, surfaceDomain, useSurface } from "../lib/surface";
 import { ROTATION_ORDER, comparisonSentence, leadSentence, readingMetric, rotationName } from "../lib/plain";
 import { useCantons, useComparison } from "../data/queries";
 import { comparisonError } from "../lib/api";
@@ -22,6 +23,7 @@ export function MapReading() {
   const scenarioId = useInstrument((state) => state.scenarioId);
   const setScenario = useInstrument((state) => state.setScenario);
   const selectOnly = useInstrument((state) => state.selectOnly);
+  const selected = useInstrument((state) => state.selected);
   const locationMessage = useInstrument((state) => state.locationMessage);
   const setLocation = useInstrument((state) => state.setLocation);
   const [params] = useSearchParams();
@@ -29,6 +31,7 @@ export function MapReading() {
   const [shareOpen, setShareOpen] = useState(false);
   const [copyStatus, setCopyStatus] = useState<"copied" | "failed" | null>(null);
   const cantons = useCantons();
+  const surface = useSurface();
   const comparison = useComparison();
   const loaded = comparison.data;
   const compare = loaded?.compare ?? null;
@@ -37,6 +40,13 @@ export function MapReading() {
 
   const n = compare?.analog_years.length ?? 0;
   const modelCanton = compare && cantons.data ? cantonAt(compare.zona.longitude, compare.zona.latitude, cantons.data) : null;
+  const selectedId = selected.length === 1 ? selected[0] : null;
+  const cantonEntry = surfaceCanton(surface.data, selectedId ?? undefined);
+  const loadingComparison = comparison.isPending;
+  const readingCanton = Boolean(compare && cantonEntry && selectedId && selectedId !== modelCanton?.id);
+  const cantonDemands = surface.data ? Object.values(surface.data.cantons).map((item) => item.water_demand_mm) : [];
+  const cantonRank = cantonEntry ? [...cantonDemands].sort((a, b) => a - b).indexOf(cantonEntry.water_demand_mm) + 1 : 0;
+  const [cantonMin, cantonMax] = surfaceDomain(surface.data);
   const baselineId = compare?.baseline_rotation_id ?? "rice_melon";
   const baselineName = rotationName(baselineId, lang, names[baselineId]);
   const amount = compare?.rotations.find(({ rotation_id }) => rotation_id === baselineId)?.metrics[metric].p50 ?? null;
@@ -107,12 +117,45 @@ export function MapReading() {
     <>
       <aside className="map-note" aria-label={es ? "Lectura del punto" : "Model location reading"}>
         <div className="note-head">
-          <p className="map-note-site"><MapPin size={13} strokeWidth={1.8} aria-hidden /> {modelCanton?.properties.name ?? "Guanacaste"} · {translate(lang, `scenario.${scenarioId}`)}</p>
+          <p className="map-note-site"><MapPin size={13} strokeWidth={1.8} aria-hidden /> {loadingComparison && cantonEntry ? cantonEntry.name : readingCanton && cantonEntry ? cantonEntry.name : `${modelCanton?.properties.name ?? "Guanacaste"} · ${translate(lang, `scenario.${scenarioId}`)}`}</p>
         </div>
-        <h1>{readingMetric(metric, lang)}</h1>
-        <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
-        {loaded && !compare && <p className="warn" role="alert">{comparisonError(loaded, lang)}</p>}
-        {compare && (
+        <h1>{readingCanton ? translate(lang, "mapReading.cantonDemand") : readingMetric(metric, lang)}</h1>
+        <QueryState pending={false} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
+        {loadingComparison && <div className="map-reading-skeleton" role="status" aria-label={translate(lang, "queryState.loadingComparison")}>
+          <span className="sr-only">{translate(lang, "queryState.loadingComparison")}</span>
+          <div aria-hidden="true">
+            <span className="skeleton-block skeleton-value" />
+            <span className="skeleton-block skeleton-caption" />
+            <div className="skeleton-scale"><span className="skeleton-block skeleton-label" /><span className="skeleton-block skeleton-bar" /><span className="skeleton-block skeleton-caption" /></div>
+            <span className="skeleton-block skeleton-button" />
+            <span className="skeleton-block skeleton-row" />
+            <span className="skeleton-block skeleton-row" />
+            <span className="skeleton-block skeleton-row" />
+          </div>
+        </div>}
+        {loaded && !compare && !readingCanton && <p className="warn" role="alert">{comparisonError(loaded, lang)}</p>}
+        {readingCanton && cantonEntry ? (
+          <>
+            <p className="readout">
+              {formatNumber(cantonEntry.water_demand_mm, lang)}<small> mm</small>
+            </p>
+            <p className="note-ref">{translate(lang, "mapReading.cantonWindow")}</p>
+            <div className="note-scale">
+              <div className="scale-head">
+                <span>{translate(lang, "mapReading.amongCantons")}</span>
+                <strong>{translate(lang, "mapReading.cantonRank", { rank: cantonRank, total: cantonDemands.length })}</strong>
+              </div>
+              <TickScale value={cantonEntry.water_demand_mm} min={cantonMin} max={cantonMax} ticks={44}
+                startLabel={`${formatNumber(cantonMin, lang, 0)} mm`} endLabel={`${formatNumber(cantonMax, lang, 0)} mm`}
+                label={`${cantonEntry.name}: ${formatNumber(cantonEntry.water_demand_mm, lang)} mm`} />
+            </div>
+            <p className="note-ref">{translate(lang, "mapReading.cantonClimate", {
+              rain: formatNumber(cantonEntry.rain_mm, lang),
+              et0: formatNumber(cantonEntry.et0_mm, lang),
+            })}</p>
+          </>
+        ) : null}
+        {compare && !readingCanton && (
           <>
             {amount !== null ? (
               <p className="readout">
@@ -136,7 +179,7 @@ export function MapReading() {
             </Link>
           </>
         )}
-        <div className="map-note-options map-reading-selects">
+        {!loadingComparison && !readingCanton ? <div className="map-note-options map-reading-selects">
           <label>
             {lang === "es" ? "Clima" : "Climate"}
             <select value={scenarioId} onChange={(event) => setScenario(event.target.value as ScenarioId)}>
@@ -149,8 +192,8 @@ export function MapReading() {
               {METRIC_IDS.map((id) => <option value={id} key={id}>{readingMetric(id, lang)}</option>)}
             </select>
           </label>
-        </div>
-        {compare && <RotationInsights compare={compare} metric={metric} lang={lang} />}
+        </div> : null}
+        {compare && !readingCanton ? <RotationInsights compare={compare} metric={metric} lang={lang} /> : null}
         <details className="map-note-more">
           <summary>{lang === "es" ? "Ubicación y compartir" : "Location and sharing"}</summary>
           <div className="map-note-options">

@@ -10,3 +10,5 @@
 @import "./styles/dashboard.css" layer(components);
 @import "./styles/charts.css" layer(components);
 @import "./styles/field-pages.css" layer(components);
+@import "./styles/textures.css" layer(components);
+@import "./styles/agriculture-chat.css" layer(components);

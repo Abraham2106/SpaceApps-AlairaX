@@ -18,10 +18,13 @@ export function useCantons() {
 export function useComparison() {
   const scenarioId = useInstrument((state) => state.scenarioId);
   const apiBase = useInstrument((state) => state.apiBase);
+  // With multiple map selections, the first selected canton drives the detail
+  // panels. The same primary canton is used by recent-season replays.
+  const cantonId = useInstrument((state) => state.selected[0]);
   return useQuery({
-    queryKey: ["comparison", apiBase, scenarioId],
+    queryKey: ["comparison", apiBase, scenarioId, cantonId ?? null],
     staleTime: 30_000,
     retry: false,
-    queryFn: ({ signal }) => loadComparison(apiBase, scenarioId, signal),
+    queryFn: ({ signal }) => loadComparison(apiBase, scenarioId, signal, cantonId),
   });
 }

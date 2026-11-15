@@ -8,6 +8,7 @@ import { useComparison } from "../data/queries";
 import { useInstrument } from "../store";
 import { SCENARIO_IDS } from "../lib/types";
 import { comparisonError } from "../lib/api";
+import { AgricultureChat } from "./AgricultureChat";
 
 const LINKS = [
   { to: "/", label: "common.rotations", icon: Sprout },
@@ -69,6 +70,7 @@ export function Shell() {
 
   return (
     <div className={showMap ? "app app-map" : "app"}>
+      <div className="field-grain" aria-hidden="true" />
       <a className="skip" href="#contenido" onClick={(event) => {
         event.preventDefault();
         content.current?.focus();
@@ -138,6 +140,7 @@ export function Shell() {
           <Outlet />
         </div>
       </main>
+      <AgricultureChat />
     </div>
   );
 }

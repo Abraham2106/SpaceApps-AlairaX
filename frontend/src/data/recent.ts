@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { z } from "zod";
-import { publicUrl } from "../lib/api";
+import { ApiError, publicUrl } from "../lib/api";
 import { daily } from "../lib/schemas";
+import { useInstrument } from "../store";
 
 const recentSchema = z.object({
   _mock: z.literal(false),
+  zona: z.object({ id: z.string() }).optional(),
   seasons: z.array(z.object({
     year: z.number().int(),
     start: z.string(),
@@ -18,13 +20,27 @@ const recentSchema = z.object({
 });
 
 export function useRecentSeasons() {
+  const apiBase = useInstrument((state) => state.apiBase);
+  const cantonId = useInstrument((state) => state.selected[0]);
   return useQuery({
-    queryKey: ["recent-seasons"],
-    staleTime: Infinity,
-    queryFn: async ({ signal }) => {
-      const response = await fetch(publicUrl("data/recent-seasons.json"), { signal });
-      if (!response.ok) throw new Error("Recent seasons could not be loaded");
-      return recentSchema.parse(await response.json());
-    },
+    queryKey: ["recent-seasons", apiBase, cantonId ?? null],
+    staleTime: apiBase && cantonId ? 30_000 : Infinity,
+    retry: false,
+    queryFn: ({ signal }) => loadRecentSeasons(apiBase, cantonId, signal),
   });
+}
+
+export async function loadRecentSeasons(apiBase: string, cantonId?: string, signal?: AbortSignal) {
+  const url = cantonId
+    ? apiBase
+      ? `${apiBase.replace(/\/$/, "")}/cantons/${encodeURIComponent(cantonId)}/recent`
+      : publicUrl(`data/cantons/${encodeURIComponent(cantonId)}/recent-seasons.json`)
+    : publicUrl("data/recent-seasons.json");
+  const response = await fetch(url, { signal });
+  if (!response.ok) throw new ApiError(response.status, "No se pudieron cargar las temporadas del cantón seleccionado.");
+  const recent = recentSchema.parse(await response.json());
+  if (cantonId && recent.zona?.id !== cantonId) {
+    throw new ApiError(502, "Las temporadas recibidas no corresponden al cantón seleccionado.");
+  }
+  return recent;
 }

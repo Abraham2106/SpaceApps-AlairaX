@@ -44,7 +44,7 @@ export function SeasonScreen() {
   });
 
   return (
-    <div className="screen">
+    <div className="screen texture-waves">
       <article className="detail-page">
         <header className="detail-header">
           <h1>{translate(lang, "common.season")}</h1>

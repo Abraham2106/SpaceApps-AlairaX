@@ -4,7 +4,7 @@ import { defineConfig } from "vitest/config";
 
 const apiProxy = {
   "/api": {
-    target: "http://127.0.0.1:8000",
+    target: process.env.ALAIRAX_API_PROXY_TARGET || "http://127.0.0.1:8000",
     changeOrigin: true,
     rewrite: (path: string) => path.replace(/^\/api/, "") || "/",
   },

@@ -1,0 +1,152 @@
+/* Field marks. Each one names the question on that screen and stays out of the type. */
+
+.field-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--ink);
+  opacity: 0.055;
+  -webkit-mask-image: url("../assets/textures/fiduciaries.webp");
+  mask-image: url("../assets/textures/fiduciaries.webp");
+  -webkit-mask-size: 760px auto;
+  mask-size: 760px auto;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  -webkit-mask-position: 36px 20px;
+  mask-position: 36px 20px;
+}
+.app-map .field-grain { display: none; }
+
+.dash-screen::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -40px;
+  right: -90px;
+  width: 440px;
+  height: 440px;
+  pointer-events: none;
+  background-color: var(--ink);
+  opacity: 0.09;
+  -webkit-mask-image: url("../assets/textures/rosette.webp");
+  mask-image: url("../assets/textures/rosette.webp");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.texture-waves::before,
+.texture-ledger::before,
+.canton-figure::before,
+.map-root::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  background-color: var(--ink);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* Season: water lines in the open field under the panels. */
+.texture-waves::before {
+  z-index: -1;
+  left: 4%;
+  bottom: 0;
+  width: min(920px, 82%);
+  height: min(280px, 36vh);
+  opacity: 0.2;
+  -webkit-mask-image:
+    linear-gradient(to top, #000 0%, #000 42%, transparent 100%),
+    url("../assets/textures/waves.webp");
+  mask-image:
+    linear-gradient(to top, #000 0%, #000 42%, transparent 100%),
+    url("../assets/textures/waves.webp");
+  -webkit-mask-size: 100% 100%, cover;
+  mask-size: 100% 100%, cover;
+  -webkit-mask-position: center, center 62%;
+  mask-position: center, center 62%;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+/* Trust: a blurred ledger in the gray under the shorter column. */
+.texture-ledger::before {
+  z-index: -1;
+  left: 0;
+  bottom: 12px;
+  width: min(460px, 42%);
+  height: min(300px, 38vh);
+  opacity: 0.1;
+  filter: blur(10px);
+  -webkit-mask-image:
+    radial-gradient(ellipse at 28% 70%, #000 0%, transparent 72%),
+    url("../assets/textures/ledger.webp");
+  mask-image:
+    radial-gradient(ellipse at 28% 70%, #000 0%, transparent 72%),
+    url("../assets/textures/ledger.webp");
+  -webkit-mask-size: 100% 100%, cover;
+  mask-size: 100% 100%, cover;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+/* Cantons: parcel cells under the outline. */
+.canton-figure::before {
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0.1;
+  -webkit-mask-image: url("../assets/textures/voronoi.webp");
+  mask-image: url("../assets/textures/voronoi.webp");
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+/* Map: one orbital arc over the open water, clear of the reading. */
+.map-root::after {
+  z-index: 1;
+  bottom: 36px;
+  left: calc(var(--note-x) + var(--note-w) - 24px);
+  width: min(420px, 36vw);
+  height: min(280px, 36vh);
+  background-color: #f7f6f2;
+  opacity: 0.72;
+  -webkit-mask-image:
+    radial-gradient(ellipse at 18% 8%, #000 0%, transparent 70%),
+    url("../assets/textures/orbits.webp");
+  mask-image:
+    radial-gradient(ellipse at 18% 8%, #000 0%, transparent 70%),
+    url("../assets/textures/orbits.webp");
+  -webkit-mask-size: 100% 100%, 170% auto;
+  mask-size: 100% 100%, 170% auto;
+  -webkit-mask-position: center, 10% 0;
+  mask-position: center, 10% 0;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+@media (max-width: 1179px) {
+  .dash-screen::after { right: -180px; opacity: 0.08; }
+}
+
+@media (max-width: 767px) {
+  .field-grain { opacity: 0.04; }
+  .texture-waves::before { height: 150px; opacity: 0.08; left: 0; width: 100%; }
+  .texture-ledger::before { width: 72%; height: 160px; opacity: 0.05; bottom: 8px; }
+  .map-root::after {
+    left: auto;
+    right: 0;
+    top: 0;
+    width: min(220px, 56vw);
+    height: 140px;
+    opacity: 0.28;
+  }
+}

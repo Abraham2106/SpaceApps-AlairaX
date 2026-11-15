@@ -80,7 +80,7 @@ export function TrustScreen() {
   }
 
   return (
-    <div className="screen">
+    <div className="screen texture-ledger">
       <article className="detail-page">
         <header className="detail-header">
           <h1>{translate(lang, "trust.trustProvenance")}</h1>

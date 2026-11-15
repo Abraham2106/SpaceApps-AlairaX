@@ -3,11 +3,18 @@
 import json
 import logging
 import os
+import re
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Response
+from dotenv import load_dotenv
 from pydantic import TypeAdapter
 
+from backend.app.api.schemas.chat import ChatRequest, ChatResponse, ChatSelection
+from backend.app.application.chat_context import CantonContext, prompt_context
+from backend.app.application.chat_prompt import PROMPT_VERSION
+from backend.app.application.canton_simulation import CantonSimulator, CantonSimulationError
+from backend.app.infrastructure.gemini import GeminiClient, GeminiError, MODEL as GEMINI_MODEL
 from backend.app.api.schemas.contracts import (
     AnalogYear, CompareRequest, CompareResponse, SimulationInput,
 )
@@ -22,6 +29,7 @@ from backend.app.simulation.parameters import load_rotations
 from backend.app.simulation.version import MODEL_VERSION
 
 ROOT = Path(__file__).resolve().parents[3]
+load_dotenv(ROOT / '.env.local', override=False)
 PROCESSED = ROOT / 'datasets' / 'processed'
 logger = logging.getLogger(__name__)
 input_batch = TypeAdapter(list[SimulationInput])
@@ -42,10 +50,16 @@ def create_app(
     allow_mock: bool = False,
     imagery: SentinelImagery | None = None,
     drones: OamDrones | None = None,
+    chat_context: CantonContext | None = None,
+    gemini: GeminiClient | None = None,
+    canton_simulator: CantonSimulator | None = None,
 ) -> FastAPI:
     app = FastAPI(title='AlairaX', version=MODEL_VERSION)
     sentinel = imagery or SentinelImagery()
     oam = drones or OamDrones()
+    canton_context = chat_context or CantonContext()
+    assistant = gemini or GeminiClient()
+    simulator = canton_simulator or CantonSimulator()
     # Imagery is public data without credentials, so only these routes allow any origin.
     open_cors = {'Access-Control-Allow-Origin': '*'}
 
@@ -67,6 +81,92 @@ def create_app(
     @app.get('/health')
     def health():
         return {'status': 'ok', 'model_version': MODEL_VERSION}
+
+    @app.get('/chat/cantons')
+    def chat_cantons():
+        return {'model_scope': 'regional_pilot', 'cantons': canton_context.catalog()}
+
+    def build_chat_context(selection: ChatSelection):
+        try:
+            context = canton_context.build(selection)
+        except ValueError as error:
+            raise HTTPException(422, detail=str(error)) from None
+        except (OSError, KeyError):
+            raise HTTPException(503, detail='Catálogo de cantones no disponible.') from None
+        if selection.scenario_id is not None:
+            document = catalog()
+            scenario = document['scenarios'].get(selection.scenario_id, {})
+            for canton in context['cantons']:
+                try:
+                    _, zone, _ = simulator.point(canton['id'])
+                    request = CompareRequest(zona=zone, scenario_id=selection.scenario_id,
+                                             k=min(5, scenario.get('k', 5)))
+                    result = simulator.compare(canton['id'], request, document, inputs_dir)
+                    canton['comparison'] = result.model_dump(mode='json', by_alias=True)
+                    for index, ref in enumerate(result.source_refs):
+                        match = re.search(r'https?://\S+', ref)
+                        if match:
+                            context['sources'].append({'id': f'comparison:{canton["id"]}:{index}',
+                                'url': match.group().rstrip(').'), 'provider': 'Fuentes de simulación FAO-56'})
+                except CantonSimulationError as error:
+                    canton['comparison_unavailable'] = str(error)
+                if selection.years:
+                    try:
+                        canton['replays'] = simulator.recent(canton['id'], years=selection.years)
+                        for index, ref in enumerate(canton['replays']['source_refs']):
+                            match = re.search(r'https?://\S+', ref)
+                            if match:
+                                context['sources'].append({'id': f'replay:{canton["id"]}:{index}',
+                                    'url': match.group().rstrip(').'), 'provider': 'Fuentes de reproducción anual'})
+                    except CantonSimulationError as error:
+                        canton['replays_unavailable'] = str(error)
+        return context
+
+    @app.post('/chat/context')
+    def chat_evidence(selection: ChatSelection, response: Response):
+        response.headers['Cache-Control'] = 'no-store'
+        return prompt_context(build_chat_context(selection))
+
+    @app.post('/chat', response_model=ChatResponse)
+    def chat(request: ChatRequest, response: Response):
+        response.headers['Cache-Control'] = 'no-store'
+        context = build_chat_context(request.selection)
+        if all(canton['status'] == 'unavailable' and 'comparison' not in canton
+               and 'replays' not in canton for canton in context['cantons']):
+            answer = ('No hay datos utilizables para los cantones y el período seleccionados. '
+                      'Prueba un período anterior o intenta nuevamente; no puedo concluir qué ocurre sin evidencia.'
+                      if request.language == 'es' else
+                      'No usable data is available for the selected cantons and period. '
+                      'Try an earlier period or retry; I cannot draw conclusions without evidence.')
+        else:
+            try:
+                answer = assistant.generate({
+                    'question': request.question, 'language': request.language,
+                    'history_unverified': [turn.model_dump() for turn in request.history],
+                    'farm_unverified': request.farm.model_dump(),
+                    'context': prompt_context(context), 'prompt_version': PROMPT_VERSION,
+                })
+            except GeminiError as error:
+                raise HTTPException(error.status, detail=str(error)) from None
+        return ChatResponse(answer=answer, model=GEMINI_MODEL, context=prompt_context(context))
+
+    @app.post('/cantons/{canton_id}/compare', response_model=CompareResponse)
+    def canton_compare(canton_id: str, request: CompareRequest, response: Response):
+        try:
+            result = simulator.compare(canton_id, request, catalog(), inputs_dir)
+        except CantonSimulationError as error:
+            raise HTTPException(error.status, detail=str(error)) from None
+        response.headers['Cache-Control'] = 'private, max-age=300'
+        return result
+
+    @app.get('/cantons/{canton_id}/recent')
+    def canton_recent(canton_id: str, response: Response):
+        try:
+            result = simulator.recent(canton_id)
+        except CantonSimulationError as error:
+            raise HTTPException(error.status, detail=str(error)) from None
+        response.headers['Cache-Control'] = 'private, max-age=300'
+        return result
 
     @app.get('/rotations')
     def rotations():

@@ -17,8 +17,9 @@
       ],
       "functions": {
         "backend/app/api/main.py": {
-          "includeFiles": "{datasets/processed/analogs/**,datasets/processed/soil/**,research/parameters/**,outputs/inputs/**}",
-          "excludeFiles": "{frontend/**,.venv/**,datasets/raw/**,docs/**,scripts/**,backend/tests/**,.git/**}"
+          "maxDuration": 300,
+          "includeFiles": "{backend/app/domain/*.json,configs/regions/guanacaste-pilot.setup.json,datasets/processed/analogs/**,datasets/processed/soil/**,research/parameters/**,outputs/inputs/**}",
+          "excludeFiles": "{.env,.env.*,frontend/**,.venv/**,datasets/raw/**,docs/**,scripts/**,backend/tests/**,.git/**}"
         }
       }
     }
