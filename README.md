@@ -1,168 +1,128 @@
 # NandaView · AlairaX
 
-El frontend incluye las cuatro comparaciones precalculadas del [piloto regional de Liberia](docs/guanacaste-pilot.md). El piloto usa clima histórico, suelo estimado y calendarios de referencia. La validación de finca sigue pendiente.
+**Un laboratorio de decisiones agrícolas para Guanacaste, Costa Rica.**
 
-La conexión con el kernel de Justin puede comprobarse con `python -m scripts.smoke_kernel`: genera un ejemplo de tres rotaciones y dos temporadas sintéticas usando el motor real. La [guía de integración](docs/kernel-integration.md) explica la prueba, las temporadas que cruzan año y la auditoría de calendarios.
+NandaView ayuda a explorar cómo distintas rotaciones de cultivo podrían responder a condiciones climáticas históricas. Combina datos públicos, un modelo de balance hídrico y visualizaciones interactivas para que productores y equipos técnicos puedan entender las diferencias entre escenarios y formular mejores preguntas para su finca.
 
-Comparación explicable de tres rotaciones agrícolas de Guanacaste bajo el mismo clima histórico: `rice_melon`, `rice_legume` y `rice_sorghum`.
+El proyecto fue desarrollado por el equipo AlairaX para el reto **Field Shift** de NASA Space Apps Challenge. Es un **piloto regional**, no una recomendación agronómica validada para una finca.
 
-El código de Abe incluye contratos, ingesta con caché, features estacionales, búsqueda KNN, comparación pareada e incertidumbre empírica. El kernel FAO-56 y la interfaz de usuario se integran mediante estos contratos.
+## Qué permite hacer
 
-## Preparación
+- Explorar el mapa y seleccionar uno de los **11 cantones de Guanacaste**.
+- Comparar tres rotaciones: arroz–melón, arroz–leguminosa y arroz–sorgo.
+- Revisar demanda hídrica del cultivo, déficit de agua modelado y días de estrés, con resultados y variación entre temporadas análogas.
+- Explorar series diarias de temporadas y consultar la procedencia y las limitaciones de los datos.
+- Preguntar a **Guaní**, un asistente conectado a Gemini que interpreta el cantón, el escenario y los resultados seleccionados.
 
-Python 3.12 o posterior. Desde la raíz:
+El mapa abre primero al ingresar a la aplicación. La capa de referencia por cantón corresponde a enero–marzo de 2014; no representa condiciones actuales. Guaní puede consultar clima más reciente disponible de NASA POWER, indicando sus fechas y posibles faltantes.
 
-```powershell
+## Cómo funciona
+
+1. **Datos climáticos:** NASA POWER aporta estimaciones diarias de precipitación, temperatura, humedad, viento y radiación para el punto de referencia. Los índices climáticos de NOAA apoyan la selección de escenarios.
+2. **Temporadas análogas:** se identifican años históricos semejantes mediante características climáticas y búsqueda KNN. La selección de años es una señal regional compartida; no se recalcula para cada cantón.
+3. **Simulación:** el modelo usa evapotranspiración de referencia FAO-56 Penman–Monteith, suelo estimado con SoilGrids y supuestos regionales de calendario y manejo para calcular el balance hídrico de cada rotación.
+4. **Comparación:** las rotaciones se evalúan sobre los mismos años análogos. Los percentiles resumen la variación de las simulaciones; no son pronósticos ni intervalos de confianza.
+5. **Interpretación:** Guaní recibe la selección, los resultados disponibles, las fuentes y las advertencias. Si falta evidencia, debe comunicarlo en lugar de inventar datos.
+
+### Alcance y límites
+
+Cada cantón está representado por un **punto de referencia**; no se trata de una medición en cada finca ni del promedio de todo el cantón. Las estimaciones de suelo y clima requieren validación local. Los calendarios, el manejo en secano y las condiciones iniciales son supuestos del piloto.
+
+La disponibilidad reciente de las fuentes puede tener retrasos o faltantes. Cuando faltan entradas necesarias para continuar el balance, los resultados afectados se muestran como desconocidos. El modelo no demuestra ahorro de agua ni predice rendimiento, rentabilidad o una rotación ganadora. Las decisiones de manejo deben contrastarse con observaciones de campo y asesoría técnica.
+
+## Ejecutar localmente
+
+**Requisitos:** Python 3.12+, Node.js 22 y npm. Los comandos se ejecutan desde la raíz del repositorio, salvo indicación contraria.
+
+### 1. Backend
+
+```bash
 python -m venv .venv
-.venv\Scripts\python -m pip install -r requirements.txt
-.venv\Scripts\python -m scripts.export_contracts
-.venv\Scripts\python -m unittest discover -s backend/tests -v
 ```
 
-Si ya tienes Python con Pydantic instalado, puedes usar `python` directamente.
+Activa el entorno virtual (`.venv\Scripts\activate` en PowerShell o `source .venv/bin/activate` en macOS/Linux) y ejecuta:
 
-## Entregas para el equipo
-
-- **Angelina:** `frontend/public/data/scenarios.json` enumera las cuatro comparaciones precalculadas; `rotations.json` contiene los IDs comunes. El mapa por cantón conserva su aviso de datos sintéticos.
-- **Justin:** modelos en `backend/app/api/schemas/contracts.py`, firma y unidades en [el contrato de integración](docs/contract-handoff.md). `execute_comparison()` en `backend/app/application/compare.py` recibe su callback `simulate_rotation(climate=..., soil=..., rotation=..., assumptions=...)`.
-- **Ant:** entregó la revisión de parámetros, matriz de fuentes, procedencia, casos QA y fichas de evidencia en `research/`. Faltan validar el punto de finca, perfil de agua útil del suelo, calendarios y la aprobación científica escrita. Las entradas reales rechazan estos campos pendientes.
-
-Schemas JSON compartidos: `docs/contracts/`. Ejemplo de temporada sintética completa de abril a diciembre: `datasets/examples/simulation-input.mock.json`.
-
-## Datos reales
-
-Las consultas públicas POWER y NOAA no requieren claves. Descarga de prueba:
-
-```powershell
-python -m scripts.ingest_climate --start 2024-01-01 --end 2024-01-05
-```
-
-Descarga completa reanudable por año:
-
-```powershell
-python -m scripts.ingest_climate --start 1981-01-01 --end 2026-11-14
-```
-
-El punto inicial `10.55, -85.50` es provisional. Las respuestas originales y metadatos quedan en `datasets/raw/climate/` (ignorado por Git); los datos normalizados en `datasets/processed/climate/`. `--offline` reutiliza caché y `--refresh` obtiene una nueva versión conservando los originales. ET0 permanece `null` hasta que Justin la calcule. Se registran faltantes y lluvia extrema sin inventar valores ni aplicar una corrección IMN no validada.
-
-Detalles: [ingesta y procedencia](docs/data-ingestion.md), [features y KNN](docs/analog-method.md), [plan del equipo](docs/wbs-field-shift.md).
-
-La selección usa tres análogos en Niño fuerte y cinco en los demás escenarios, según la [decisión explícita del equipo](docs/decisions.md). El tamaño de muestra y las advertencias acompañan los resultados.
-
-La descarga local ya contiene 16.754 días, 1981–14/11/2026, con 42 años completos de las seis variables (1984–2025). POWER no entregó radiación en 1981–1983. Las exclusiones y faltantes se conservan en QC. El catálogo de `datasets/processed/analogs/` tiene los cuatro escenarios del piloto. «Como 2026» usa abril–agosto por el faltante de radiación del 7 de septiembre.
-
-## Comparación y exportación
-
-`compare_runs()` recibe exactamente una ejecución por rotación y año análogo. Comprueba la ubicación, escenario, versión del kernel y hash del clima/suelo/manejo. Calcula diferencias contra `rice_melon` **por año antes** de calcular p10/p50/p90. Si falta una métrica, su resumen queda `null` y se emite una advertencia.
-
-Exportar ejecuciones precalculadas del kernel:
-
-```powershell
-python -m scripts.compare_results --request request.json --analogs analogs.json --runs runs.json --output frontend/public/data/compare-neutral.json
-```
-
-El comando exige `--allow-mock` para exportar ejecuciones sintéticas. `python -m scripts.export_contracts` genera ejemplos y esquemas. Añadir `--frontend-fixtures` reemplaza las comparaciones estáticas con los fixtures de QA.
-
-`python -m scripts.prepare_comparison` arma las entradas del kernel desde el clima, ET0 revisada y una configuración explícita de suelo, calendarios y manejo por año. Guarda un manifiesto SHA-256 de las fuentes y rechaza destinos que sobrescriban entradas. El [formato y los comandos de integración](docs/prepare-inputs.md) incluyen un ejemplo sintético; los valores científicos reales los entrega el equipo.
-
-La [inspección de escenarios](datasets/processed/readiness/scenarios.json) cuenta cobertura de clima y ONI sin afirmar que se ejecutó KNN. La [inspección de suelo](docs/soil-readiness.md) ya obtuvo textura y retención por seis profundidades en SoilGrids; el perfil hidráulico para el kernel sigue pendiente de revisión científica.
-
-Método implementado y revisión científica pendiente: [scientific_method.md](docs/scientific_method.md) y [method-review.md](docs/method-review.md).
-
-## Kernel FAO-56 (Justin)
-
-`backend.app.simulation.kernel:simulate_rotation` es el callback que espera `execute_comparison`. Recibe `climate`, `soil`, `rotation` y `assumptions` del contrato M1 y devuelve `metrics`, `daily_balance` (un registro por fecha de clima), `assumptions`, `source_refs`, `warnings` y `model_version`. Usa ET0 FAO-56 Penman-Monteith (Eq. 6) y el balance de agotamiento (Eq. 82–85) con estas decisiones:
-
-- D1: las métricas salen de una corrida de secano; el requerimiento de riego, de una corrida manejada aparte.
-- D2: arroz de secano, no inundado.
-- D3: escorrentía RO = 0.3·max(0, P − 60).
-- D4: Zr constante por ciclo.
-- D5: barbecho con kc 0.15, Zr 0.15 m, p 0.5.
-- D7: se simula toda la ventana de clima.
-- D8: el contrato de Abe es la única salida.
-
-- Las métricas cuentan solo días de cultivo. El barbecho entra al balance, pero `water_stress` queda `null` en esos días.
-- Huecos de clima de ≤3 días: ET0 interpolada, lluvia 0, con aviso. Si el hueco es mayor, el balance queda `null` desde ese día y las métricas también.
-- `assumptions` solo trae supuestos metodológicos, idénticos entre rotaciones del mismo año, porque `compare_runs` lo exige. Lo específico del calendario va en `warnings`.
-- `simulate_rotation_detailed` agrega `irrigation_requirement_mm` (corrida managed, D1), `heat_stress_days` y `per_crop`. Estos campos están fuera del contrato v0.1.0.
-- `heat_stress_days` cuenta días con `tmax ≥ heat_threshold_c` en la etapa `mid`. Solo el arroz tiene umbral citado; los demás cultivos quedan `null`.
-
-Sensibilidad a Kc, Dr inicial, θfc, θwp y lluvia (±28 %): `python -m scripts.sensitivity`. Resultados preliminares y plantilla de comparación con CROPWAT en [kernel_validation.md](docs/kernel_validation.md).
-
-Validación de los análogos y de la lluvia (Fase 8, preliminar mientras la ET0 tenga `reviewed: false`):
-
-- `python -m scripts.backtest --output-dir docs` compara el kernel con el clima real de 2015 y 2023 contra el ensamble de sus análogos. Resultados en [docs/backtest/](docs/backtest/backtest.md) y lectura en [kernel_validation.md](docs/kernel_validation.md).
-- `python -m scripts.ingest_chirps` baja la lluvia mensual CHIRPS v3 en el punto (unos 10 MB, por rango HTTP), y `python -m scripts.rain_bias --output-dir docs` la compara con POWER y con IMN. La nota está en [rain_bias.md](docs/rain_bias.md): POWER da la mitad de la lluvia antes de 2005.
-- Las gráficas usan `matplotlib`.
-
-ET0 diaria para los análogos:
-
-```powershell
-python -m scripts.export_et0 --climate datasets/processed/climate/power_10.55_-85.5_*.json --output datasets/processed/et0/et0_10.55_-85.5.json
-```
-
-El archivo sale con `reviewed: false`; `build_analogs.py` lo rechaza hasta que Justin lo revise y ponga `reviewed: true` y `reviewed_by`. Ejecutar de punta a punta con el kernel real:
-
-```powershell
-python -m scripts.run_comparison --analogs analogs.json --scenario neutral --inputs inputs.json --kernel backend.app.simulation.kernel:simulate_rotation --output out.json --allow-mock
-```
-
-### API local
-
-```powershell
+```bash
 python -m pip install -r requirements.txt
-python -m uvicorn backend.app.api.main:app
+python -m uvicorn backend.app.api.main:app --host 127.0.0.1 --port 8000
 ```
 
-Abre `http://127.0.0.1:8000/docs` para probar `/health`, `/rotations`,
-`/scenarios`, `/sources` y `POST /compare`.
-`POST /compare` recibe el contrato `CompareRequest`. Usa la zona del
-catálogo, un `k` que no supere el número de análogos disponibles y al menos
-dos rotaciones, incluida la base. La API selecciona los primeros `k`
-análogos en el orden del catálogo y ejecuta el mismo kernel que el CLI.
+La documentación interactiva de la API está disponible en `http://127.0.0.1:8000/docs`.
 
-Por defecto carga `datasets/processed/analogs/analogos.json` y busca
-`outputs/inputs/<scenario_id>.json`, generado con
-`python -m scripts.prepare_comparison`. Se pueden configurar las rutas con
-`ALAIRAX_ANALOGS` y `ALAIRAX_INPUTS_DIR`. Los escenarios no disponibles
-devuelven HTTP 409 con el motivo. Los lotes faltantes devuelven HTTP 503.
-La app de Uvicorn rechaza catálogos e inputs sintéticos.
+### 2. Guaní
 
-### Cómo correr los tests
+Copia `.env.example` a `.env.local` en la raíz y configura la variable del servidor:
 
-Desde la raíz del repo, con el entorno virtual activo:
+```dotenv
+GEMINI_API_KEY=tu_clave_de_gemini
+```
 
-```powershell
+La clave se mantiene en el backend y `.env.local` está excluido de Git. No uses el prefijo `VITE_` para credenciales. Sin la clave, el mapa y la simulación pueden utilizarse, pero Guaní no puede generar respuestas.
+
+### 3. Frontend
+
+En otra terminal:
+
+```bash
+cd frontend
+npm ci
+npm run dev
+```
+
+Abre la dirección local que indique Vite. En desarrollo, `/api` se redirige al backend en `127.0.0.1:8000`. Para usar otro servidor, consulta [frontend/.env.example](frontend/.env.example).
+
+## Pruebas
+
+```bash
+# Backend, desde la raíz
 python -m pytest backend/tests -q
-python -m unittest discover -s backend/tests
-python -m pytest backend/tests -q --cov=backend/app/simulation --cov-report=term-missing
+
+# Frontend
+cd frontend
+npm test
+npm run build
 ```
 
-La cobertura de `backend/app/simulation/` está en 96 %. `test_kernel_qa.py` cubre:
+Las pruebas incluyen contratos, simulación, manejo de datos faltantes, selección de cantón e integración del asistente. Los resultados sintéticos utilizados en pruebas se identifican como tales.
 
-- Cambio de etapa y cambio de cultivo.
-- Huecos de clima.
-- Suelo `null` o poco profundo.
-- Parámetros incompletos.
-- Temporada bisiesta.
-- El snapshot de regresión de 2015 (`backend/tests/snapshots/kernel_metrics_2015.json`). Si un cambio científico es intencional, regenéralo con `UPDATE_SNAPSHOTS=1` y explica el cambio en el PR.
+## Despliegue
 
-Los 3 casos calculados a mano de Ant (`research/qa_cases.md`, tarea 2.4) pasan contra el kernel: sin estrés, estrés con percolación y reescalado de Zr al pasar a barbecho.
+[vercel.json](vercel.json) define los servicios del frontend y del backend. Para habilitar Guaní, configura `GEMINI_API_KEY` como variable de entorno del proyecto en Vercel para **Production** y **Preview**. Las variables nuevas se aplican a despliegues posteriores. La función está configurada con un máximo de 300 segundos; verifica que el plan y la configuración del proyecto admitan esa duración.
 
-## Despliegue y CI
+También se incluye un flujo de GitHub Actions para publicar el frontend estático en GitHub Pages. Guaní y las consultas en vivo requieren un backend accesible; los archivos estáticos incluyen simulaciones precalculadas por cantón.
 
-- `.github/workflows/backend-tests.yml` corre `pytest` con cobertura en cada PR y en cada push a `main`.
-- `.github/workflows/pages.yml` publica en GitHub Pages en cada push a `main`, y también se puede lanzar a mano desde *Actions*:
-  - Si existe `frontend/package.json`, usa Node 22, corre `npm ci` y `npm run build`, y publica `frontend/dist`. Vite debe usar `base: "/SpaceApps-AlairaX/"` y HashRouter.
-  - Si todavía no existe, publica `.github/pages-placeholder/index.html` junto con `frontend/public/data/`. Así se prueba el pipeline antes de que llegue la UI.
-- El dueño del repo debe activar una vez *Settings → Pages → Source: GitHub Actions*. La URL queda en `https://abraham2106.github.io/SpaceApps-AlairaX/`. Pruébala en ventana privada y en el celular.
+## Estructura del repositorio
 
-## Límites
+```text
+backend/app/       API, simulación, inteligencia y fuentes de datos
+frontend/          Aplicación React, mapa y Guaní
+datasets/          Datos procesados, ejemplos y controles de calidad
+outputs/inputs/    Entradas preparadas para las comparaciones
+research/          Parámetros y fuentes de investigación
+scripts/           Ingesta, preparación, exportación y validación
+docs/              Método, contratos y documentación técnica
+```
 
-KNN busca temporadas parecidas; 2026 sirve de seguimiento y nunca entra como análogo. Se comparan ventanas temporales completas y equivalentes. Los cuantiles representan variación entre análogos, no probabilidades de éxito ni intervalos de confianza. Se reportan métricas modeladas; no se infiere rendimiento, rentabilidad, ahorro demostrado ni una rotación ganadora.
+## Documentación y fuentes
 
-El piloto ya integra ET₀, FAO-56, parámetros documentados y el frontend. La aplicación a una finca requiere confirmar suelo, calendario y manejo, y contrastar el modelo con observaciones locales.
+- [Asistente agrícola y API por cantón](docs/chatbot.md)
+- [Ingesta y procedencia de datos](docs/data-ingestion.md)
+- [Selección de análogos](docs/analog-method.md)
+- [Validación del kernel](docs/kernel_validation.md)
+- [Limitaciones de la lluvia](docs/rain_bias.md)
+- [NASA POWER](https://power.larc.nasa.gov/) · [NOAA Climate Prediction Center](https://www.cpc.ncep.noaa.gov/) · [SoilGrids](https://soilgrids.org/) · [FAO-56](https://www.fao.org/4/x0490e/x0490e00.htm)
+
+## Participantes
+
+- Abraham Solano Parrales (Abe)
+- Angelina
+- Justin
+- Antonio (Ant)
 
 ## Uso de IA
 
-Codex y sus subagentes asistieron en la implementación de contratos, ingesta, KNN, comparador, fixtures, documentación y pruebas de Abe. El equipo debe completar la declaración por persona para la entrega del evento.
+Se utilizaron herramientas de asistencia con IA durante el desarrollo. Las salidas del modelo y del asistente requieren revisión humana; la implementación no equivale a validación científica o de campo.
+
+## Licencia
+
+[MIT](LICENSE).
