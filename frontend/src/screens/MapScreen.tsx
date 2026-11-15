@@ -7,6 +7,7 @@ import { ROTATION_ORDER, ROTATION_STYLE, comparisonSentence, leadSentence, metri
 import { surfaceColor, surfaceDomain, surfaceValue, useSurface } from "../lib/surface";
 import { useCantons, useComparison } from "../data/queries";
 import { useInstrument } from "../store";
+import { QueryState } from "../components/QueryState";
 import type { RotationId } from "../lib/types";
 
 const SEASON_DAYS = 274;
@@ -265,8 +266,7 @@ export function MapScreen() {
                     ? `${focus.properties.name} · ${spanish ? "cifra de prueba de este cantón" : "sample figure for this canton"}`
                     : spanish ? "el punto de la simulación" : "the simulation point"}
               </p>
-              {comparison.isPending ? <p className="kicker">{spanish ? "Cargando…" : "Loading…"}</p> : null}
-              {comparison.isError ? <p className="warn">{spanish ? "No se pudo leer la comparación." : "The comparison could not be read."}</p> : null}
+              <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
               {outside ? null : (
                 <div className="bullets">
                   {ROTATION_ORDER.map((id) => {

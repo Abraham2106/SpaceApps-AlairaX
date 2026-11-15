@@ -47,3 +47,55 @@ No se corrige el pedido de declarar una rotación ganadora, un rendimiento o una
 ## Medición del 14 de noviembre de 2026, noche
 
 No es una ronda de cinco críticos ni cierra el umbral de 9/10. Lighthouse móvil, solo accesibilidad, sobre el preview de esta rama: primero 97, con un fallo de contraste en el enlace activo del menú. El fondo activo pasó a `#0c5a30` con texto blanco y la segunda medición dio 100. Vitest: 11/11. El guion del productor recorrió mapa, Liberia, «Leer más», Confianza y compartir sin errores de consola. Faltan las capturas de 360/768/escritorio en Sol y tres rondas de ojos frescos sin un defecto real.
+
+## Auditoría de sistema · 14 de noviembre de 2026, rama `justin/ui-mejoras`
+
+Mirada propia sobre el código y las capturas. No es una ronda de cinco críticos ni cierra el umbral de 9/10. Se mejora dentro de `ui-decisions.md` sin reemplazarlo.
+
+### Hallazgos
+
+- **El tema Sol estaba roto.** Barra superior, menú, paneles de vidrio, buscador, leyenda, botones de capa, reproductor y diálogo de año tenían colores de Noche escritos a mano. Con Sol encendido, el texto oscuro caía sobre el vidrio oscuro (1,0:1) y `--danger` de Sol sobre ese vidrio daba 2,1:1. «FIXTURE» y «ESCENARIO» no se veían. Se nota en `map-sun-360.png` de la ronda anterior.
+- **Botón activo del selector de escenario:** blanco sobre `#1f8a4c` daba 4,27:1, por debajo de AA.
+- **Blancos táctiles:** el resumen de atribución medía 22 px de alto y «Ver la gráfica» no tenía alto mínimo.
+- **Menú móvil a 360 px:** «Rotaciones» y «Temporada» se cortaban («Rotacion», «Temporac») a 0,62 rem.
+- **Estados:** Temporada y Confianza no mostraban carga ni error. El error del mapa no ofrecía reintentar. La carga no se anunciaba a lectores de pantalla.
+- **Letra de 0,62 rem** en el subtítulo de la marca, la leyenda, los botones de capa y los meses del reproductor.
+- **Temporada:** las marcas del eje usaban hex sueltos y no coincidían con la lista. La marca de mayo (arroz) tenía el color de melón y la de diciembre (melón) el de sorgo.
+- **El guion e2e** escribía en `/agent/...` y `/opt/cursor/...`, rutas de otra máquina. En Windows creaba carpetas en la raíz del disco.
+- Movimiento reducido ya se respetaba en el mapa (`reducedMotion()` pone duración 0). El foco visible ya existía.
+
+### Cambios
+
+- `frontend/src/index.css`:
+  - Tokens consolidados para cromo, controles, selección, paneles, pista, asa, velo, escalas de letra, radios y espaciado, con valores para Noche y Sol.
+  - En Noche los valores reproducen los que estaban a mano. Lo visible cambia en tres sitios: el verde activo pasa a `#1c7f46`, la letra mínima a 0,68 rem y el menú móvil.
+  - Sol hace lo que dice la decisión: paneles opacos, sin desenfoque ni sombra, letra mayor y blancos de 48 px.
+  - `.glass`, `.player` y `.year-pop` redefinen `--ink`, `--muted` y `--line`, así que lo que va dentro hereda el contraste del panel.
+- **Contraste del botón activo:** el selector de escenario y el menú comparten `--selected-bg` `#1c7f46`. Blanco encima da 5,0:1, y el botón contra su fondo da 3,3:1 (control) y 3,6:1 (menú). La medición anterior usaba `#0c5a30` para el menú: tenía más contraste de texto, pero el botón apenas se distinguía del fondo (menos de 3:1).
+- **Capa encendida:** borde doble, fondo y peso. No depende solo del color.
+- **Blancos táctiles:**
+  - Atribución: 24 px (WCAG 2.2, 2.5.8).
+  - Enlaces sueltos en `.row`: 44 px.
+  - Buscador del mapa, botones de la barra y «Leer más»: 44 px.
+  - El buscador muestra el anillo de foco en el contenedor.
+- **Menú móvil:** ícono arriba y nombre abajo, sin cortes a 360 px.
+- `frontend/src/components/QueryState.tsx` (nuevo): carga con `role="status"` y error con `role="alert"` más «Reintentar». Lo usan Mapa, Rotaciones, Temporada y Confianza.
+- `frontend/src/screens/SeasonScreen.tsx`:
+  - Marcas con `ROTATION_STYLE` y `--mark-window`, ocultas a lectores porque la lista dice lo mismo.
+  - Colores corregidos: mayo neutro (el arroz es común a las tres rotaciones), octubre leguminosa más sorgo, diciembre melón.
+  - El aviso «sin balance diario» espera a que haya datos.
+- `frontend/e2e/productor.spec.ts`:
+  - Las capturas van a `docs/screenshots` relativo al repo, o a `SCREENSHOT_DIR`.
+  - La copia extra solo se hace si existe `ARTIFACTS_DIR`.
+  - Las carpetas se crean al capturar.
+- **Capturas:** se regeneraron las 30 de `docs/screenshots`, porque Sol cambia por completo y Noche cambia en el menú móvil.
+
+No cambia ningún texto público sobre el modelo. Siguen sin aparecer ahorro, rendimiento ni rotación ganadora.
+
+### Propuestas que piden una decisión humana
+
+1. **Colores de rotación en las gráficas.** No llegan a 3:1 de contraste no textual: melón `#143d66` sobre el fondo de Noche da 1,7:1 y sorgo `#c9842a` sobre el fondo de Sol da 2,8:1. Las líneas se distinguen por el trazo (continuo, rayas, puntos), así que no dependen solo del color. Propuesta: un tono por tema para melón en Noche (por ejemplo `#6f9fd8`) y para sorgo en Sol (por ejemplo `#8a5a12`), o un borde claro. No se cambió porque los colores están fijados por decisión.
+2. **Esquinas y sombra.** `ui-decisions.md` pide esquinas rectas, borde de 1 px y sin sombra blanda. La implementación usa radios de 10 a 20 px y sombra en Noche. Ahora es un solo token (`--r-*`, `--panel-shadow`), y volver a la decisión es cambiar cuatro valores. Hay que decidir cuál de las dos manda.
+3. **Acento.** La decisión dice cian de lectura; la implementación usa verde `#3dcc7a` en Noche y azul petróleo `#0b4f6c` en Sol. Hay que decidir si se actualiza la decisión o el token `--accent`.
+4. **Fondo de Sol.** La decisión habla de crema; el token es gris frío `#f3f6f8`. Hay que decidir uno de los dos.
+5. **Rondas.** Hacen falta tres rondas de ojos frescos sobre las capturas nuevas de Sol antes de dar el tema por cerrado.

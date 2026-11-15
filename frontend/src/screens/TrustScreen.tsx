@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Ledger } from "../components/Ledger";
+import { QueryState } from "../components/QueryState";
 import { useComparison } from "../data/queries";
 import { probeHealth } from "../lib/api";
 import { useInstrument } from "../store";
@@ -41,6 +42,7 @@ export function TrustScreen() {
       <article className="section stack">
         <p className="kicker">{spanish ? "Qué se puede creer" : "What can be believed"}</p>
         <h1>{spanish ? "Confianza y procedencia" : "Trust and provenance"}</h1>
+        <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
         <div className="status-block">
           <p>{zona?.validated ? (spanish ? "La zona viene marcada como validada." : "The zone is marked validated.") : (spanish ? "La zona no está validada. El punto es provisional." : "The zone is not validated. The point is provisional.")}</p>
           <p>{spanish ? "La documentación del proyecto tiene la ET0 con reviewed: false y el perfil hidráulico sin aprobar. Esta respuesta no trae esos campos. No se dan por aprobados." : "The project documentation has ET0 reviewed: false and the hydraulic profile unapproved. This response does not carry those fields. They are not treated as approved."}</p>

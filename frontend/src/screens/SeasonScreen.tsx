@@ -1,7 +1,8 @@
 import { useInstrument } from "../store";
 import { useComparison } from "../data/queries";
 import { formatValue } from "../lib/format";
-import { ROTATION_ORDER, rotationName } from "../lib/plain";
+import { ROTATION_ORDER, ROTATION_STYLE, rotationName } from "../lib/plain";
+import { QueryState } from "../components/QueryState";
 
 const MONTHS = [
   ["Abr", "Apr"],
@@ -44,10 +45,16 @@ export function SeasonScreen() {
           {MONTHS.map(([es, en], index) => (
             <div key={es} className="month">
               <strong>{spanish ? es : en}</strong>
-              {index === 0 ? <span className="mark" style={{ background: "#e2b15c" }} /> : null}
-              {index === 1 ? <span className="mark" style={{ background: "#143d66" }} /> : null}
-              {index === 6 ? <span className="mark" style={{ background: "#1f7a6b" }} /> : null}
-              {index === 8 ? <span className="mark" style={{ background: "#c9842a" }} /> : null}
+              {/* Las marcas repiten la lista de abajo; la lista es el texto que cuenta. */}
+              {index === 0 ? <span className="mark" aria-hidden="true" style={{ background: "var(--mark-window)" }} /> : null}
+              {index === 1 ? <span className="mark" aria-hidden="true" style={{ background: "var(--ink)" }} /> : null}
+              {index === 6 ? (
+                <span className="mark mark-split" aria-hidden="true">
+                  <i style={{ background: ROTATION_STYLE.rice_legume.color }} />
+                  <i style={{ background: ROTATION_STYLE.rice_sorghum.color }} />
+                </span>
+              ) : null}
+              {index === 8 ? <span className="mark" aria-hidden="true" style={{ background: ROTATION_STYLE.rice_melon.color }} /> : null}
             </div>
           ))}
         </div>
@@ -58,7 +65,8 @@ export function SeasonScreen() {
           <li>{spanish ? "31 de octubre: fin de la ventana de análogos." : "31 October: end of the analog window."}</li>
           <li>{spanish ? "1 de diciembre: siembra de referencia del melón, el único tramo con riego en el archivo. El ciclo sigue al año siguiente y no cabe entero en este eje." : "1 December: reference melon sowing, the only irrigated segment in the file. The cycle continues into the next year and does not fit entirely on this axis."}</li>
         </ul>
-        {!daily ? (
+        <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
+        {comparison.data && !daily ? (
           <p className="status-block">
             {spanish
               ? "Este resultado no trae balance diario. No se dibuja una curva inventada."
