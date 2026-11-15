@@ -1,5 +1,6 @@
 import { ComparisonTable, DeltaChart, LevelChart } from "../components/Charts";
 import { Ledger } from "../components/Ledger";
+import { QueryState } from "../components/QueryState";
 import { useComparison } from "../data/queries";
 import { metricNoun } from "../lib/plain";
 import { useInstrument } from "../store";
@@ -23,17 +24,7 @@ export function RotationsScreen() {
             ? "p10–p90 es la variación entre los años análogos, no una probabilidad ni un intervalo de confianza. No es rendimiento, ni ahorro, ni una rotación ganadora."
             : "p10–p90 is the spread across the analog years, not a probability and not a confidence interval. This is not yield, not savings, and not a winning rotation."}
         </p>
-        {comparison.isPending ? <p>{spanish ? "Cargando…" : "Loading…"}</p> : null}
-        {comparison.isError ? (
-          <div className="stack">
-            <p className="warn">
-              {spanish
-                ? "No se pudo leer la comparación. Revisa la conexión e inténtalo de nuevo."
-                : "The comparison could not be loaded. Check the connection and try again."}
-            </p>
-            <button onClick={() => comparison.refetch()}>{spanish ? "Reintentar" : "Try again"}</button>
-          </div>
-        ) : null}
+        <QueryState pending={comparison.isPending} error={comparison.isError} onRetry={() => comparison.refetch()} lang={lang} />
         {loaded && !compare ? <p className="warn">{loaded.httpDetail}</p> : null}
         {compare && loaded ? (
           <>

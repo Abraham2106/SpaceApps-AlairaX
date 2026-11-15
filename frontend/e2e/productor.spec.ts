@@ -1,13 +1,11 @@
 import { expect, test } from "@playwright/test";
 import { mkdirSync } from "node:fs";
+import { resolve } from "node:path";
 
-const shots = "/agent/repos/spaceapps-alairax/docs/screenshots";
-const artifacts = "/opt/cursor/artifacts";
-
-test.beforeAll(() => {
-  mkdirSync(shots, { recursive: true });
-  mkdirSync(artifacts, { recursive: true });
-});
+// Playwright corre desde frontend/. Las capturas van a docs/screenshots del repo,
+// o a SCREENSHOT_DIR si se define. ARTIFACTS_DIR guarda una copia extra solo si existe.
+const shots = process.env.SCREENSHOT_DIR ?? resolve(process.cwd(), "..", "docs", "screenshots");
+const artifacts = process.env.ARTIFACTS_DIR;
 
 test("un productor resuelve las cinco tareas y la consola queda limpia", async ({ page }) => {
   const errors: string[] = [];
@@ -66,8 +64,12 @@ for (const [name, path] of views) {
         if (name === "map" || name === "cantons") await page.getByText("10.55").first().waitFor();
         await page.waitForTimeout(name === "map" || name === "cantons" ? 5000 : 300);
         const file = `${name}-${theme}-${size}.png`;
-        await page.screenshot({ path: `${shots}/${file}` });
-        await page.screenshot({ path: `${artifacts}/${file}` });
+        mkdirSync(shots, { recursive: true });
+        await page.screenshot({ path: resolve(shots, file) });
+        if (artifacts) {
+          mkdirSync(artifacts, { recursive: true });
+          await page.screenshot({ path: resolve(artifacts, file) });
+        }
       });
     }
   }
