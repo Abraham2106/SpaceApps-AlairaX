@@ -13,17 +13,21 @@ import { isMobile, isTablet } from "../lib/viewport";
 import {
   ESRI_TILE_URL,
   IMAGERY_SOURCES,
+  OAM_MIN_ZOOM,
+  OAM_TILE_ZOOM,
   S2_AREA,
   S2_MIN_ZOOM,
   S2_TILE_ZOOM,
+  formatGsd,
   formatImageryDate,
   insideBox,
   sentinelTileUrl,
   tileUrlFor,
+  type DroneLookup,
   type ImagerySourceId,
   type SentinelLookup,
 } from "./imagery/catalog";
-import { findSentinelScene } from "../lib/api";
+import { findDroneImages, findSentinelScene } from "../lib/api";
 import { selectSource, type ImageryChoice } from "./imagery/selectSource";
 import { ImageryBadge } from "./imagery/ImageryBadge";
 
@@ -34,6 +38,7 @@ const IMAGERY_LAYERS = ["satellite", "modis", "hls", "marble"] as const;
 const S2_SEARCH_DELAY_MS = 450;
 
 type SentinelEntry = { key: string; lookup: SentinelLookup };
+type DroneEntry = { base: string; lookup: DroneLookup };
 
 const EMPTY = { type: "FeatureCollection" as const, features: [] };
 
@@ -316,6 +321,8 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     sentinelRef.current = next;
     setSentinelState(next);
   };
+  const [drones, setDrones] = useState<DroneEntry | null>(null);
+  const droneBase = useRef<string | null>(null);
   const [tip, setTip] = useState<{ x: number; y: number; name: string; value: number | null; outside: boolean } | null>(null);
   const cantons = useCantons();
   const comparison = useComparison();
@@ -362,7 +369,7 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     // Una fuente que no carga no se oculta en silencio: la ficha de procedencia lo dice.
     map.on("error", (event) => {
       const sourceId = (event as { sourceId?: string }).sourceId;
-      if (sourceId !== "modis" && sourceId !== "hls" && sourceId !== "s2") return;
+      if (sourceId !== "modis" && sourceId !== "hls" && sourceId !== "s2" && sourceId !== "oam") return;
       const count = (tileErrors.current[sourceId] ?? 0) + 1;
       tileErrors.current[sourceId] = count;
       if (count === TILE_ERROR_LIMIT) setFailed((current) => new Set([...current, sourceId]));
@@ -554,7 +561,40 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
     // eslint-disable-next-line react-hooks/exhaustive-deps -- setSentinel solo escribe estado y ref
   }, [wantsSentinel, zoom, center, imageryDate, apiBase, searchKey]);
 
-  const choice: ImageryChoice = selectSource({ basemap, zoom, date: imageryDate, failed, sentinel: sentinelLookup });
+  // Las huellas de dron también salen del backend: OpenAerialMap no abre CORS a esta página.
+  const wantsDrones = Boolean(apiBase) && basemap !== "marble";
+  const reachedDroneZoom = zoom >= OAM_MIN_ZOOM;
+  const droneLookup: DroneLookup | undefined = !wantsDrones
+    ? undefined
+    : drones && drones.base === apiBase ? drones.lookup : { state: "loading" };
+
+  useEffect(() => {
+    // Guanacaste tiene pocas imágenes de dron: se piden todas una vez, al primer acercamiento.
+    if (!wantsDrones || !reachedDroneZoom || droneBase.current === apiBase) return;
+    droneBase.current = apiBase;
+    const controller = new AbortController();
+    let settled = false;
+    findDroneImages(apiBase, S2_AREA, controller.signal)
+      .then((images) => setDrones({ base: apiBase, lookup: { state: "ready", images } }))
+      .catch((error: unknown) => {
+        if (controller.signal.aborted) return;
+        console.warn("OpenAerialMap footprints failed", error);
+        setDrones({ base: apiBase, lookup: { state: "error" } });
+      })
+      .finally(() => { settled = true; });
+    return () => {
+      if (settled) return;
+      // Cortada a medias: se vuelve a pedir la próxima vez que haga falta.
+      controller.abort();
+      droneBase.current = null;
+    };
+  }, [wantsDrones, reachedDroneZoom, apiBase]);
+
+  const choice: ImageryChoice = selectSource({
+    basemap, zoom, date: imageryDate, failed, sentinel: sentinelLookup, drones: droneLookup, center,
+  });
+  const droneTiles = choice.drone?.tiles ?? null;
+  const droneBounds = choice.drone?.bbox.join(",") ?? null;
   const sceneId = choice.scene?.id ?? null;
   const sceneBounds = choice.scene?.bbox.join(",") ?? null;
 
@@ -591,6 +631,36 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
       return next;
     });
   }, [sentinel?.key]);
+
+  // Una imagen de dron por vista, recortada a su huella y encima de todas las demás imágenes.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      if (map.getLayer("oam")) map.removeLayer("oam");
+      if (map.getSource("oam")) map.removeSource("oam");
+      tileErrors.current.oam = 0;
+      if (!droneTiles || !droneBounds) return;
+      map.addSource("oam", {
+        type: "raster",
+        tiles: [droneTiles],
+        tileSize: 256,
+        minzoom: OAM_TILE_ZOOM.min,
+        maxzoom: OAM_TILE_ZOOM.max,
+        bounds: droneBounds.split(",").map(Number) as [number, number, number, number],
+      });
+      map.addLayer({ id: "oam", type: "raster", source: "oam", minzoom: OAM_MIN_ZOOM }, "hillshade");
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+    setFailed((current) => {
+      if (!current.has("oam")) return current;
+      const next = new Set(current);
+      next.delete("oam");
+      return next;
+    });
+    return () => { map.off("load", apply); };
+  }, [droneTiles, droneBounds]);
 
   const visibleImagery = choice.layers.map((id) => IMAGERY_SOURCES[id].mapId).join(",");
 
@@ -751,11 +821,18 @@ export function NandaMap({ hidden, inset }: { hidden: boolean; inset: "panel" | 
 }
 
 function imageryCredit(choice: ImageryChoice, imageryDate: string, lang: Lang): string {
-  // MODIS y HLS son del día pedido; Sentinel-2 cita el día de su escena.
+  // MODIS y HLS son del día pedido; Sentinel-2 y el dron citan el día de su imagen.
   const date = formatImageryDate(imageryDate, lang);
   const parts = choice.layers.map((id) => {
     if (id === "esri") return translate(lang, choice.fallback ? "nandaMap.satelliteFallbackCredit" : "nandaMap.satelliteCredit");
     if (id === "marble") return translate(lang, "nandaMap.marbleCredit");
+    if (id === "oam") {
+      const drone = choice.drone;
+      if (!drone) return "";
+      const resolution = formatGsd(drone.gsdM, lang);
+      const credit = translate(lang, "nandaMap.oamCredit", { provider: drone.provider, date: formatImageryDate(drone.date, lang), license: drone.license });
+      return resolution ? `${credit} (${resolution})` : credit;
+    }
     if (id === "s2") {
       return choice.scene
         ? translate(lang, "nandaMap.s2Credit", { id: choice.scene.id, date: formatImageryDate(choice.scene.date, lang), attribution: choice.scene.attribution })

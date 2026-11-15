@@ -1,7 +1,7 @@
 import { CalendarDays } from "lucide-react";
 import { translate, type MessageKey } from "../../lib/i18n";
 import { useInstrument } from "../../store";
-import { MODIS_FIRST_DATE, formatImageryDate, isIsoDay, latestImageryDate } from "./catalog";
+import { MODIS_FIRST_DATE, formatGsd, formatImageryDate, isIsoDay, latestImageryDate } from "./catalog";
 import type { HlsStatus, ImageryChoice, S2Status } from "./selectSource";
 
 const HLS_NOTE: Partial<Record<HlsStatus, MessageKey>> = {
@@ -27,7 +27,10 @@ export function ImageryBadge({ choice }: { choice: ImageryChoice }) {
   const imageryDate = useInstrument((state) => state.imageryDate);
   const setImageryDate = useInstrument((state) => state.setImageryDate);
   const nasaDated = basemap === "modis";
-  const summary: MessageKey = choice.primary === "s2"
+  const drone = choice.drone;
+  const summary: MessageKey = choice.primary === "oam" && drone
+    ? "imagery.oam"
+    : choice.primary === "s2"
     ? "imagery.s2"
     : choice.fallback
       ? "imagery.esriFallback"
@@ -38,11 +41,19 @@ export function ImageryBadge({ choice }: { choice: ImageryChoice }) {
           : choice.primary === "hls"
             ? choice.layers.includes("modis") ? "imagery.hlsOverModis" : "imagery.hls"
             : "imagery.modis";
+  // El dron tapa lo de debajo: con dron en pantalla no se explican HLS ni Sentinel-2.
   // Sentinel-2 manda sobre HLS: si se buscó una escena, la nota explica esa búsqueda.
-  const note = S2_NOTE[choice.s2] ?? (choice.s2 === "active" ? undefined : HLS_NOTE[choice.hls]);
+  const droneNote: MessageKey | undefined = choice.oam === "failed" ? "imagery.oamFailed" : undefined;
+  const nasaNote = choice.oam === "active"
+    ? undefined
+    : S2_NOTE[choice.s2] ?? (choice.s2 === "active" ? undefined : HLS_NOTE[choice.hls]);
+  const note = droneNote ?? (nasaDated ? nasaNote : undefined);
   const scene = choice.scene;
   const values = {
-    date: formatImageryDate(scene?.date ?? imageryDate, lang),
+    date: formatImageryDate(drone?.date ?? scene?.date ?? imageryDate, lang),
+    provider: drone?.provider ?? "",
+    resolution: formatGsd(drone?.gsdM ?? null, lang) ?? translate(lang, "imagery.resolutionUnknown"),
+    license: drone?.license ?? "",
     cloud: scene?.cloudCover == null ? translate(lang, "imagery.cloudUnknown") : `${Math.round(scene.cloudCover)} %`,
     id: scene?.id ?? "",
   };
@@ -64,7 +75,7 @@ export function ImageryBadge({ choice }: { choice: ImageryChoice }) {
           />
         </label>
       ) : null}
-      {note && nasaDated ? <span className="imagery-note" role="status">{translate(lang, note)}</span> : null}
+      {note ? <span className="imagery-note" role="status">{translate(lang, note)}</span> : null}
     </div>
   );
 }

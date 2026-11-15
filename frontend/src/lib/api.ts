@@ -6,9 +6,10 @@ import {
   liveCatalogSchema,
   liveRotationLibrarySchema,
   sentinelSearchSchema,
+  droneSearchSchema,
   sourcesSchema,
 } from "./schemas";
-import type { SentinelScene } from "../map/imagery/catalog";
+import type { DroneImage, SentinelScene } from "../map/imagery/catalog";
 import { translate } from "./i18n";
 import type { Catalog, CompareResponse, Lang, LoadedComparison, ScenarioChoice, ScenarioId, Zone } from "./types";
 import { SCENARIO_IDS } from "./types";
@@ -222,4 +223,28 @@ export async function loadComparison(apiBase: string, scenarioId: ScenarioId, si
     }
     throw error;
   }
+}
+
+/**
+ * Pide al backend las huellas de dron de OpenAerialMap que tocan la caja
+ * [oeste, sur, este, norte]. El navegador no puede pedirlas directo: OAM no abre CORS.
+ */
+export async function findDroneImages(
+  base: string,
+  box: readonly [number, number, number, number],
+  signal?: AbortSignal,
+): Promise<DroneImage[]> {
+  const [west, south, east, north] = box;
+  const params = new URLSearchParams({ west: String(west), south: String(south), east: String(east), north: String(north) });
+  const body = droneSearchSchema.parse(await readJson(`${base.replace(/\/$/, "")}/imagery/drones?${params}`, signal));
+  return body.images.map((image) => ({
+    id: image.id,
+    title: image.title,
+    date: image.date,
+    gsdM: image.gsd_m,
+    provider: image.provider,
+    license: image.license || body.license,
+    bbox: image.bbox,
+    tiles: image.tiles,
+  }));
 }

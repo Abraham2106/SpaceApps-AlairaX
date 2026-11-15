@@ -13,6 +13,7 @@ from backend.app.api.schemas.contracts import (
 )
 from backend.app.application.compare import execute_comparison
 from backend.app.application.prepare_inputs import same_zone_identity
+from backend.app.infrastructure.drones import OamDrones
 from backend.app.infrastructure.imagery import (
     ImageryInputError, ImageryUpstreamError, SentinelImagery,
 )
@@ -40,16 +41,18 @@ def create_app(
     *,
     allow_mock: bool = False,
     imagery: SentinelImagery | None = None,
+    drones: OamDrones | None = None,
 ) -> FastAPI:
     app = FastAPI(title='AlairaX', version=MODEL_VERSION)
     sentinel = imagery or SentinelImagery()
+    oam = drones or OamDrones()
     # Imagery is public data without credentials, so only these routes allow any origin.
     open_cors = {'Access-Control-Allow-Origin': '*'}
 
     def imagery_error(error: Exception) -> HTTPException:
         if isinstance(error, ImageryInputError):
             return HTTPException(422, detail=str(error), headers=open_cors)
-        logger.warning('Sentinel-2 imagery unavailable: %s', error)
+        logger.warning('Imagery unavailable: %s', error)
         return HTTPException(502, detail=str(error), headers=open_cors)
 
     def catalog() -> dict:
@@ -154,6 +157,17 @@ def create_app(
     def imagery_search(date: str, lon: float, lat: float, response: Response):
         try:
             result = sentinel.search(date, lon, lat)
+        except (ImageryInputError, ImageryUpstreamError) as error:
+            raise imagery_error(error) from error
+        response.headers.update(open_cors)
+        response.headers['Cache-Control'] = 'public, max-age=3600'
+        return result
+
+    @app.get('/imagery/drones', responses={422: {'description': 'Bad box'},
+                                           502: {'description': 'OpenAerialMap unavailable'}})
+    def imagery_drones(west: float, south: float, east: float, north: float, response: Response):
+        try:
+            result = oam.search(west, south, east, north)
         except (ImageryInputError, ImageryUpstreamError) as error:
             raise imagery_error(error) from error
         response.headers.update(open_cors)
